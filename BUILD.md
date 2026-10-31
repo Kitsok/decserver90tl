@@ -43,6 +43,8 @@ are ignored by this repository.
 
 ```sh
 python3 tools/run_mneng3.py --seconds 1
+# Explicitly enable the provisional ROM alignment-service substitute:
+python3 tools/run_mneng3.py --seconds 60 --rom-alignment-assist --ram-wait-cycles 1
 ```
 
 The wrapper verifies the original MNENG3 hash and uses SDL dummy drivers and
@@ -51,8 +53,17 @@ log is `run/bringup.log`. A fatal unsupported-access report is currently useful
 evidence, rather than proof of a working boot. The wrapper preserves MAME's
 exit status and reports whether the firmware file changed.
 
+The assisted command above completed a 60-second run with the current
+provisional board model. One extra RAM wait cycle per 16-bit transfer avoids
+the observed scheduler idle timeout; this setting is experimental, not a
+measured hardware value. Default wait cycles remain zero. For an independent
+persistent-store experiment, add `--nvram-directory run/nvram-new` using a
+new directory. Neither option establishes a working Local prompt.
+
 ## Explicit experimental choices
 
+- CPU clock inferred as 14,680,064 Hz from SYNCR=0x9b00 and an assumed
+  32,768 Hz reference crystal; actual reference is unconfirmed.
 - Exactly 4 MiB external RAM, tentatively at physical `0x800000..0xbfffff`.
 - Provisional 24-bit program-space decode.
 - Image copied unchanged to RAM offset `0x5000`.
@@ -68,6 +79,13 @@ exit status and reports whether the firmware file changed.
 - Inherited exception vectors target identifiable sentinel loops. The ROM
   fatal-report callback at handoff field `0x078051a2` targets another sentinel
   that prints firmware error code, caller and parameter.
+- Unaligned data transfers stop by default. `--rom-alignment-assist` enables
+  word/longword transfers as a substitute for the inherited ROM exception
+  service; it does not emulate exception frames or timing.
+- A provisional 8,192 Hz board interrupt source drives level 6 while TPU
+  channel 14 has a nonzero priority. Reading the identity base acknowledges it.
+  The ISR divides pulses to approximately 512 guest clock updates per second.
+  The physical clock source and precise timing are still unresolved.
 - SIM/QSM/TPU registers are traced. TPU host requests provisionally complete
   after a scheduled delay; TPU function semantics are not implemented.
 - A provisional 64 KiB configuration-store window at `0x100000` starts erased

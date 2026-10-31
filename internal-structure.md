@@ -360,3 +360,50 @@ The current reproducible error is code 0x543, reached from the storage bounds
 checker at `0x07872602`. Both fresh-FF and zero-filled storage reproduce an
 out-of-range record-22 offset 0x0e00 against declared size 0x0c00. Do not
 expand that record or bypass its check without resolving the mismatch.
+
+## Alignment-service and scheduler-clock follow-up
+
+The related DS90M+ MNBOOT.SYS candidate has a 512-byte wrapper followed
+by a plausible zero-based vector table. Vector 3 points to 0x408, where
+code examines an exception status word and carries out byte-wise operand
+transfers before returning. Additional instruction-handling code starts at
+0x8c0. See `analysis/mnboot-address-error.asm` and `boot-rom-search.md`.
+This establishes a related-model ROM service, not a verified 90TL ROM.
+
+MAME's CPU32 core uses a generic 16-bit memory interface with aligned
+word/longword methods. Without a ROM service or equivalent, odd accesses
+can use neighboring addresses. The opt-in `--rom-alignment-assist` supplies
+unaligned data transfers for both reads and writes, without ROM exception
+frames or timing. This avoids the previously observed record-22 bounds
+failure. Actual exceptions remain a separate fidelity task.
+
+At 0x07944788 the firmware enables TPU channel 14 by setting CPR0 bits
+13:12. It disables that field during earlier initialization. The clock ISR
+at 0x07944a48 reads 0x200000 before software counter processing, eventually
+calling 0x07944aba. The latter adds 1953 microseconds plus a fractional
+correction to internal RAM 0xfffff024. A provisional interrupt source gates
+on the channel priority and acknowledges on a base-window read. At 512 Hz
+its guest time runs roughly sixteen times too slowly; 8192 incoming pulses
+per second produces close-to-real-time guest time through the ISR divider.
+The rate and external wiring remain inferred. The subsequent 0x298 idle
+failure is unresolved; no scheduler bounds checks are bypassed.
+
+The initialization table writes SYNCR=0x9b00: W=1, X=0, Y=27. Assuming a
+32768 Hz reference, the SIM clock formula gives 14,680,064 Hz, replacing
+the earlier provisional 16 MHz. This assumption does not resolve the idle
+failure and is not a measured oscillator frequency. RAM chip-select options
+request external DSACK in several regions; precise memory wait timing is
+not modeled. CPU32 cycle accounting and external wait states remain possible
+timing issues, not established explanations of the idle failure.
+
+Clock/DSACK reference:
+https://www.nxp.com/docs/en/reference-manual/SIMRM.pdf
+
+
+The zero-wait idle loop measured 159295 cycles (10.851 ms). With the explicit
+`--ram-wait-cycles 1` option, both 30- and 60-second assisted runs complete
+without 0x298. The setting charges extra cycles for external RAM instruction
+and data transfers; no firmware checks are bypassed. This is an experiment
+in bus timing, not a measured board wait-state value. The current runtime
+map, including the corrected scaled UART receive addressing, is maintained
+separately in `firmware-organization.md`.

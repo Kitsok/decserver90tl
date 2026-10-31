@@ -1,0 +1,605 @@
+DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0
+DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; no network backend
+DS90 WRITE-INTERNAL pc=0794459e address=fffa00 data=60cf mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa04 data=9b00 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa38 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa44 data=3a56 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa46 data=0155 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa48 data=0005 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa4a data=68b0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa4c data=fffb mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa4e data=6801 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa58 data=1003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa5a data=78f0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa5c data=2003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa5e data=6870 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa60 data=3000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa62 data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa64 data=4000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa66 data=78f0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa68 data=8007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa6a data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa6c data=9007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa6e data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa70 data=a007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa72 data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa74 data=b007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa76 data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa10 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa16 data=00f2 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa14 data=000d mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa1e data=0048 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa1c data=0037 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc00 data=4081 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc14 data=0008 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc16 data=0034 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc08 data=0030 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc0a data=202c mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffb04 data=fff0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe00 data=00c3 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe0c data=9988 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe0e data=8888 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe10 data=8888 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe12 data=8888 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe14 data=0900 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe16 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff00 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff10 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff20 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff30 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff40 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff50 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff60 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff70 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff80 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff90 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffa0 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffb0 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffc0 data=0003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffc4 data=2000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffd0 data=0003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffe0 data=0092 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffe4 data=00e0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffe6 data=01c0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffff0 data=0092 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffff4 data=001d mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffff6 data=003a mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe18 data=a3ff mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe1a data=ffff mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe1c data=f555 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe1e data=aaaa mask=ffff
+DS90 READ-INTERNAL pc=079445a8 address=fffc14 data=0008 mask=00ff
+DS90 READ-INTERNAL pc=079445b0 address=fffa06 data=0080 mask=00ff
+DS90 WRITE-INTERNAL pc=079445e8 address=fffa20 data=00ec mask=ffff
+DS90 WRITE-INTERNAL pc=079445ee address=fffa26 data=0055 mask=ffff
+DS90 WRITE-INTERNAL pc=079445f4 address=fffa26 data=00aa mask=ffff
+DS90 READ-INTERNAL pc=079445fe address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079445fe address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944602 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944602 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944602 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794460e address=ffffd2 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794461e address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794461e address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794462c address=ffffd2 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794461e address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794461e address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794462c address=ffffd2 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794461e address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794461e address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794462c address=ffffd2 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794467a address=fffc16 data=003f mask=ffff
+DS90 WRITE-INTERNAL pc=07944680 address=fffc14 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07944686 address=fffc14 data=0008 mask=ffff
+DS90 WRITE-INTERNAL pc=0794468c address=fffa1e data=00c8 mask=ffff
+DS90 READ-INTERNAL pc=079404c2 address=fffa18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079404c2 address=fffa18 data=0037 mask=ffff
+DS90 READ-INTERNAL pc=079404ca address=fffa10 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079404ca address=fffa10 data=000d mask=ffff
+DS90 CLOCK tick=1 pc=079404ee sr=2600 vector=00001078
+DS90 CLOCK tick=2 pc=079404ee sr=2600 vector=00001078
+DS90 CLOCK tick=3 pc=079404f0 sr=2600 vector=00001078
+DS90 PROGRESS ms=1 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=5 guest_us=00000000
+DS90 PROGRESS ms=2 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=14 guest_us=00000000
+DS90 PROGRESS ms=3 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=22 guest_us=00000000
+DS90 PROGRESS ms=4 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=30 guest_us=00000000
+DS90 PROGRESS ms=5 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=38 guest_us=00000000
+DS90 PROGRESS ms=6 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=46 guest_us=00000000
+DS90 PROGRESS ms=7 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=55 guest_us=00000000
+DS90 PROGRESS ms=8 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=63 guest_us=00000000
+DS90 PROGRESS ms=9 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=71 guest_us=00000000
+DS90 PROGRESS ms=10 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=79 guest_us=00000000
+DS90 WRITE-INTERNAL pc=0794165e address=fffa26 data=0055 mask=ffff
+DS90 WRITE-INTERNAL pc=07941666 address=fffa26 data=00aa mask=ffff
+DS90 WRITE-INTERNAL pc=0794165e address=fffa26 data=0055 mask=ffff
+DS90 WRITE-INTERNAL pc=07941666 address=fffa26 data=00aa mask=ffff
+DS90 PROGRESS ms=100 pc=0786f498 sp=079dbf68 sr=2604 clock_ticks=816 guest_us=00000000
+DS90 WRITE-INTERNAL pc=079446fc address=fffa22 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07944704 address=fffa24 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794470c address=fffe1c data=f555 mask=ffff
+DS90 WRITE-INTERNAL pc=0794470c address=fffe1c data=c555 mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400004 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425be address=400014 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425ce address=40001a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400008 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40000a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400008 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40001e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40000c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40000e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40001c data=00ff mask=ff00
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=feff mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400024 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425be address=400034 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425ce address=40003a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400028 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40002a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400028 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40003e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40002c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40002e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40003c data=00ff mask=ff00
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=feff mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=fdff mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400044 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425be address=400054 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425ce address=40005a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400048 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40004a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400048 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40005e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40004c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40004e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40005c data=00ff mask=ff00
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=fdff mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=fbff mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400064 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425be address=400074 data=9090 mask=ff00
+DS90 WRITE-UART pc=079425ce address=40007a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400068 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40006a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400068 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40007e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40006c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40006e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40007c data=00ff mask=ff00
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=fbff mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=f7ff mask=ffff
+DS90 WRITE-INTERNAL pc=07941e44 address=fffa18 data=0037 mask=ffff
+DS90 WRITE-INTERNAL pc=07941e4c address=fffa10 data=000d mask=ffff
+DS90 WRITE-INTERNAL pc=0794477c address=fffa22 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=07944790 address=fffe1c data=c555 mask=ffff
+DS90 WRITE-INTERNAL pc=07944790 address=fffe1c data=f555 mask=ffff
+DS90 READ-INTERNAL pc=07940c08 address=fffc14 data=0008 mask=ffff
+DS90 WRITE-INTERNAL pc=07940c12 address=fffc14 data=000c mask=ffff
+DS90 WRITE-INTERNAL pc=07940c1e address=fffc14 data=0008 mask=ffff
+DS90 READ-INTERNAL pc=fffff18e address=fffd4c data=0000 mask=ff00
+DS90 WRITE-INTERNAL pc=fffff18e address=fffd4c data=0101 mask=ff00
+DS90 READ-INTERNAL pc=fffff19e address=fffe20 data=f7ff mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd28 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2a data=0100 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2c data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2e data=0014 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd30 data=0780 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd32 data=5000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd34 data=0783 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd36 data=b6ac mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd38 data=0010 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3a data=1000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3c data=0786 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3e data=c234 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd40 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd42 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff360 address=fffe20 data=f8ff mask=ffff
+DS90 READ-UART pc=fffff386 address=40004a data=0008 mask=ff00
+DS90 READ-UART pc=fffff386 address=40002a data=0008 mask=ff00
+DS90 READ-UART pc=fffff386 address=40000a data=0008 mask=ff00
+DS90 READ-INTERNAL pc=fffff392 address=fffd28 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2a data=0100 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2c data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2e data=0014 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd30 data=0780 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd32 data=5000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd34 data=0783 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd36 data=b6ac mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd38 data=0010 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3a data=1000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3c data=0786 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3e data=c234 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd40 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd42 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff18e address=fffd4c data=0100 mask=ff00
+DS90 WRITE-INTERNAL pc=fffff18e address=fffd4c data=0202 mask=ff00
+DS90 READ-INTERNAL pc=fffff19e address=fffe20 data=f8ff mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd28 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2a data=0100 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2c data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2e data=0014 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd30 data=0780 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd32 data=5000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd34 data=0783 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd36 data=b6ac mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd38 data=0010 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3a data=1000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3c data=0786 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3e data=c234 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd40 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd42 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff360 address=fffe20 data=f7ff mask=ffff
+DS90 READ-UART pc=fffff386 address=40006a data=0008 mask=ff00
+DS90 READ-INTERNAL pc=fffff392 address=fffd28 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2a data=0100 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2c data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2e data=0014 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd30 data=0780 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd32 data=5000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd34 data=0783 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd36 data=b6ac mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd38 data=0010 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3a data=1000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3c data=0786 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3e data=c234 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd40 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd42 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff18e address=fffd4c data=0200 mask=ff00
+DS90 WRITE-INTERNAL pc=fffff18e address=fffd4c data=0303 mask=ff00
+DS90 READ-INTERNAL pc=fffff19e address=fffe20 data=f7ff mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd28 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2a data=0100 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2c data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2e data=0014 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd30 data=0780 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd32 data=5000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd34 data=0783 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd36 data=b6ac mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd38 data=0010 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3a data=1000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3c data=0786 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3e data=c234 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd40 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd42 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff360 address=fffe20 data=f8ff mask=ffff
+DS90 READ-UART pc=fffff386 address=40004a data=0008 mask=ff00
+DS90 READ-UART pc=fffff386 address=40002a data=0008 mask=ff00
+DS90 READ-UART pc=fffff386 address=40000a data=0008 mask=ff00
+DS90 READ-INTERNAL pc=fffff392 address=fffd28 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2a data=0100 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2c data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2e data=0014 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd30 data=0780 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd32 data=5000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd34 data=0783 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd36 data=b6ac mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd38 data=0010 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3a data=1000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3c data=0786 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd3e data=c234 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd40 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd42 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff18e address=fffd4c data=0300 mask=ff00
+DS90 WRITE-INTERNAL pc=fffff18e address=fffd4c data=0404 mask=ff00
+DS90 READ-INTERNAL pc=fffff19e address=fffe20 data=f8ff mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd28 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2a data=0100 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2c data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd2e data=0014 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd30 data=0780 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd32 data=5000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd34 data=0783 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd36 data=b6ac mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd38 data=0010 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3a data=1000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3c data=0786 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd3e data=c234 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd40 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff358 address=fffd42 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=fffff360 address=fffe20 data=f7ff mask=ffff
+DS90 READ-UART pc=fffff386 address=40006a data=0008 mask=ff00
+DS90 READ-INTERNAL pc=fffff392 address=fffd28 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2a data=0100 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2c data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd2e data=0014 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd30 data=0780 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd32 data=5000 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd34 data=0783 mask=ffff
+DS90 READ-INTERNAL pc=fffff392 address=fffd36 data=b6ac mask=ffff
+DS90 PROGRESS ms=200 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=1634 guest_us=000007a1
+DS90 PROGRESS ms=300 pc=fffff364 sp=079dbf2a sr=2600 clock_ticks=2454 guest_us=00018cba
+DS90 PROGRESS ms=400 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=3273 guest_us=000311d4
+DS90 PROGRESS ms=500 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=4092 guest_us=000496ee
+DS90 PROGRESS ms=600 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=4911 guest_us=000623a9
+DS90 PROGRESS ms=700 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=5730 guest_us=0007a8c3
+DS90 PROGRESS ms=800 pc=fffff364 sp=079dbf2a sr=2600 clock_ticks=6550 guest_us=00092ddd
+DS90 PROGRESS ms=900 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=7369 guest_us=000ab2f7
+DS90 PROGRESS ms=1000 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=8188 guest_us=000c3811
+DS90 PROGRESS ms=1100 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=9007 guest_us=000dc4cc
+DS90 PROGRESS ms=1200 pc=078725aa sp=079dbf3c sr=2504 clock_ticks=9826 guest_us=000f49e6
+DS90 PROGRESS ms=1300 pc=fffff366 sp=079dbf2a sr=2608 clock_ticks=10646 guest_us=0010ceff
+DS90 PROGRESS ms=1400 pc=07940c2c sp=079dbf34 sr=2500 clock_ticks=11465 guest_us=00125419
+DS90 PROGRESS ms=1500 pc=07940c2c sp=079dbf10 sr=2500 clock_ticks=12284 guest_us=0013d933
+DS90 PROGRESS ms=1600 pc=07940c2c sp=079dbf10 sr=2500 clock_ticks=13103 guest_us=001565ee
+DS90 PROGRESS ms=1700 pc=07940c2c sp=079dbf10 sr=2500 clock_ticks=13922 guest_us=0016eb08
+DS90 PROGRESS ms=1800 pc=fffff366 sp=079dbf06 sr=2608 clock_ticks=14742 guest_us=00187022
+DS90 PROGRESS ms=1900 pc=07940c2c sp=079dbef4 sr=2500 clock_ticks=15561 guest_us=0019f53c
+DS90 ROM-ALIGNMENT-ASSIST write32 pc=078ed000 address=0799f21f
+DS90 ROM-ALIGNMENT-ASSIST write32 pc=078ed004 address=0799f223
+DS90 PROGRESS ms=2000 pc=07945464 sp=079dbf08 sr=2504 clock_ticks=16380 guest_us=001b7a56
+DS90 PROGRESS ms=2100 pc=07945462 sp=079dbf08 sr=2504 clock_ticks=17199 guest_us=001d0711
+DS90 PROGRESS ms=2200 pc=0789eea2 sp=079dbed8 sr=2500 clock_ticks=18018 guest_us=001e8c2a
+DS90 PROGRESS ms=2300 pc=fffff360 sp=079dbdbe sr=2608 clock_ticks=18838 guest_us=00201144
+DS90 PROGRESS ms=2400 pc=07940c2c sp=079dbee0 sr=2500 clock_ticks=19657 guest_us=0021965e
+DS90 PROGRESS ms=2500 pc=07940c2c sp=079dbee0 sr=2500 clock_ticks=20476 guest_us=00231b78
+DS90 PROGRESS ms=2600 pc=07872254 sp=079dbee4 sr=2504 clock_ticks=21295 guest_us=0024a833
+DS90 PROGRESS ms=2700 pc=0787225a sp=079dbee4 sr=2504 clock_ticks=22114 guest_us=00262d4d
+DS90 PROGRESS ms=2800 pc=fffff366 sp=079dbeda sr=2608 clock_ticks=22934 guest_us=0027b267
+DS90 PROGRESS ms=2900 pc=07940c2c sp=079dbee0 sr=2500 clock_ticks=23753 guest_us=00293781
+DS90 PROGRESS ms=3000 pc=0787253c sp=079dbe9c sr=2510 clock_ticks=24572 guest_us=002abc9a
+DS90 PROGRESS ms=3100 pc=078725be sp=079dbe8c sr=2500 clock_ticks=25391 guest_us=002c4955
+DS90 PROGRESS ms=3200 pc=07872542 sp=079dbe9c sr=2510 clock_ticks=26210 guest_us=002dce6f
+DS90 PROGRESS ms=3300 pc=fffff364 sp=079dbe92 sr=2600 clock_ticks=27030 guest_us=002f5389
+DS90 PROGRESS ms=3400 pc=078722e2 sp=079dbee4 sr=2500 clock_ticks=27849 guest_us=0030d8a3
+DS90 PROGRESS ms=3500 pc=07872388 sp=079dbdc8 sr=2504 clock_ticks=28668 guest_us=00325dbd
+DS90 PROGRESS ms=3600 pc=0787253e sp=079dbef8 sr=2510 clock_ticks=29487 guest_us=0033ea78
+DS90 PROGRESS ms=3700 pc=07872556 sp=079dbef8 sr=2510 clock_ticks=30306 guest_us=00356f92
+DS90 PROGRESS ms=3800 pc=fffff366 sp=079dbeee sr=2608 clock_ticks=31126 guest_us=0036f4ac
+DS90 PROGRESS ms=3900 pc=07872542 sp=079dbef8 sr=2500 clock_ticks=31945 guest_us=003879c5
+DS90 PROGRESS ms=4000 pc=07872554 sp=079dbef8 sr=2519 clock_ticks=32764 guest_us=0039fedf
+DS90 PROGRESS ms=4100 pc=0787253e sp=079dbef8 sr=2510 clock_ticks=33583 guest_us=003b8b9a
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=07887040 address=079dbe89
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=07887044 address=079dbe8b
+DS90 PROGRESS ms=4200 pc=07872544 sp=079dbe1c sr=2519 clock_ticks=34402 guest_us=003d10b4
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=0788667c address=079dbed5
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=07886746 address=079dbead
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=0788674a address=079dbeab
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=0788678a address=079dbed5
+DS90 PROGRESS ms=4300 pc=fffff364 sp=079dbe42 sr=2600 clock_ticks=35222 guest_us=003e95ce
+DS90 PROGRESS ms=4400 pc=07872538 sp=079dbe4c sr=2510 clock_ticks=36041 guest_us=00401ae8
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=078858f4 address=079dbd69
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07885be8 address=079dbee5
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=07885d34 address=079dbee5
+DS90 PROGRESS ms=4500 pc=0787253c sp=079dbd6c sr=2510 clock_ticks=36860 guest_us=0041a002
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=0788667c address=079dbed5
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=078866f0 address=079dbebd
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=07886746 address=079dbead
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=0788674a address=079dbeab
+DS90 ROM-ALIGNMENT-ASSIST write16 pc=078867fe address=079dbec9
+DS90 PROGRESS ms=4600 pc=07872538 sp=079dbe4c sr=2510 clock_ticks=37679 guest_us=00432cbd
+DS90 PROGRESS ms=4700 pc=07872554 sp=079dbd6c sr=2519 clock_ticks=38498 guest_us=0044b1d7
+DS90 PROGRESS ms=4800 pc=fffff364 sp=079dbd62 sr=2600 clock_ticks=39318 guest_us=004636f0
+DS90 PROGRESS ms=4900 pc=0787253c sp=079dbe4c sr=2510 clock_ticks=40137 guest_us=0047bc0a
+DS90 PROGRESS ms=5000 pc=07872486 sp=079dbc98 sr=2500 clock_ticks=40956 guest_us=00494124
+DS90 PROGRESS ms=5100 pc=07872554 sp=079dbd6c sr=2519 clock_ticks=41775 guest_us=004acddf
+DS90 PROGRESS ms=5200 pc=07872556 sp=079dbd6c sr=2510 clock_ticks=42594 guest_us=004c52f9
+DS90 PROGRESS ms=5300 pc=fffff364 sp=079dbd62 sr=2600 clock_ticks=43414 guest_us=004dd813
+DS90 PROGRESS ms=5400 pc=07872556 sp=079dbd6c sr=2510 clock_ticks=44233 guest_us=004f5d2d
+DS90 PROGRESS ms=5500 pc=07872554 sp=079dbd6c sr=2519 clock_ticks=45052 guest_us=0050e247
+DS90 PROGRESS ms=5600 pc=07872558 sp=079dbd6c sr=2510 clock_ticks=45871 guest_us=00526f02
+DS90 PROGRESS ms=5700 pc=078867f6 sp=079dbe84 sr=2500 clock_ticks=46690 guest_us=0053f41b
+DS90 PROGRESS ms=5800 pc=fffff364 sp=079dbe42 sr=2600 clock_ticks=47510 guest_us=00557935
+DS90 PROGRESS ms=5900 pc=07872542 sp=079dbe4c sr=2510 clock_ticks=48329 guest_us=0056fe4f
+DS90 PROGRESS ms=6000 pc=07872556 sp=079dbe4c sr=2510 clock_ticks=49148 guest_us=00588369
+DS90 PROGRESS ms=6100 pc=07872554 sp=079dbd6c sr=2519 clock_ticks=49967 guest_us=005a1024
+DS90 PROGRESS ms=6200 pc=07872538 sp=079dbd6c sr=2510 clock_ticks=50786 guest_us=005b953e
+DS90 PROGRESS ms=6300 pc=fffff362 sp=079dbd62 sr=2600 clock_ticks=51606 guest_us=005d1a58
+DS90 PROGRESS ms=6400 pc=07872538 sp=079dbd6c sr=2500 clock_ticks=52425 guest_us=005e9f72
+DS90 PROGRESS ms=6500 pc=0787253c sp=079dbd6c sr=2510 clock_ticks=53244 guest_us=0060248c
+DS90 PROGRESS ms=6600 pc=0787253c sp=079dbd6c sr=2510 clock_ticks=54063 guest_us=0061b147
+DS90 PROGRESS ms=6700 pc=0787254a sp=079dbe4c sr=2500 clock_ticks=54882 guest_us=00633660
+DS90 PROGRESS ms=6800 pc=fffff366 sp=079dbe42 sr=2608 clock_ticks=55702 guest_us=0064bb7a
+DS90 PROGRESS ms=6900 pc=07872492 sp=079dbccc sr=2500 clock_ticks=56521 guest_us=00664094
+DS90 PROGRESS ms=7000 pc=07872556 sp=079dbd6c sr=2500 clock_ticks=57340 guest_us=0067c5ae
+DS90 PROGRESS ms=7100 pc=078725dc sp=079dbd5c sr=2500 clock_ticks=58159 guest_us=00695269
+DS90 PROGRESS ms=7200 pc=07872556 sp=079dbd6c sr=2510 clock_ticks=58978 guest_us=006ad783
+DS90 PROGRESS ms=7300 pc=fffff364 sp=079dbd62 sr=2600 clock_ticks=59798 guest_us=006c5c9d
+DS90 PROGRESS ms=7400 pc=07872554 sp=079dbe4c sr=2519 clock_ticks=60617 guest_us=006de1b7
+DS90 PROGRESS ms=7500 pc=07872554 sp=079dbe4c sr=2519 clock_ticks=61436 guest_us=006f66d0
+DS90 PROGRESS ms=7600 pc=0793f8b4 sp=079dbd78 sr=2500 clock_ticks=62255 guest_us=0070f38b
+DS90 PROGRESS ms=7700 pc=07872544 sp=079dbd6c sr=2519 clock_ticks=63074 guest_us=007278a5
+DS90 PROGRESS ms=7800 pc=fffff364 sp=079dbd62 sr=2600 clock_ticks=63894 guest_us=0073fdbf
+DS90 PROGRESS ms=7900 pc=07872544 sp=079dbd6c sr=2500 clock_ticks=64713 guest_us=007582d9
+DS90 PROGRESS ms=8000 pc=0787250c sp=079dbd6c sr=2504 clock_ticks=65532 guest_us=007707f3
+DS90 PROGRESS ms=8100 pc=07872556 sp=079dbe4c sr=2500 clock_ticks=66351 guest_us=007894ae
+DS90 PROGRESS ms=8200 pc=07872542 sp=079dbe4c sr=2510 clock_ticks=67170 guest_us=007a19c8
+DS90 PROGRESS ms=8300 pc=fffff364 sp=079dbe42 sr=2600 clock_ticks=67990 guest_us=007b9ee2
+DS90 PROGRESS ms=8400 pc=0787253c sp=079dbd6c sr=2500 clock_ticks=68809 guest_us=007d23fb
+DS90 PROGRESS ms=8500 pc=0787253e sp=079dbd6c sr=2500 clock_ticks=69628 guest_us=007ea915
+DS90 PROGRESS ms=8600 pc=0793f506 sp=079dbd64 sr=2514 clock_ticks=70447 guest_us=008035d0
+DS90 PROGRESS ms=8700 pc=07872540 sp=079dbd6c sr=2510 clock_ticks=71266 guest_us=0081baea
+DS90 PROGRESS ms=8800 pc=fffff362 sp=079dbd62 sr=2600 clock_ticks=72086 guest_us=00834004
+DS90 PROGRESS ms=8900 pc=07872542 sp=079dbd6c sr=2500 clock_ticks=72905 guest_us=0084c51e
+DS90 PROGRESS ms=9000 pc=07872538 sp=079dbd6c sr=2510 clock_ticks=73724 guest_us=00864a38
+DS90 PROGRESS ms=9100 pc=07872542 sp=079dbd6c sr=2500 clock_ticks=74543 guest_us=0087d6f3
+DS90 PROGRESS ms=9200 pc=07872556 sp=079dbd6c sr=2500 clock_ticks=75362 guest_us=00895c0d
+DS90 PROGRESS ms=9300 pc=fffff366 sp=079dbd62 sr=2608 clock_ticks=76182 guest_us=008ae126
+DS90 PROGRESS ms=9400 pc=078724d4 sp=079dbe0c sr=2500 clock_ticks=77001 guest_us=008c6640
+DS90 PROGRESS ms=9500 pc=0787253e sp=079dbe4c sr=2510 clock_ticks=77820 guest_us=008deb5a
+DS90 PROGRESS ms=9600 pc=0787251c sp=079dbe4c sr=2500 clock_ticks=78639 guest_us=008f7815
+DS90 PROGRESS ms=9700 pc=07872558 sp=079dbe4c sr=2510 clock_ticks=79458 guest_us=0090fd2f
+DS90 PROGRESS ms=9800 pc=fffff364 sp=079dbe42 sr=2600 clock_ticks=80278 guest_us=00928249
+DS90 PROGRESS ms=9900 pc=07872554 sp=079dbe4c sr=2500 clock_ticks=81097 guest_us=00940763
+DS90 PROGRESS ms=10000 pc=07872544 sp=079dbd6c sr=2500 clock_ticks=81916 guest_us=00958c7d
+DS90 PROGRESS ms=10100 pc=07872546 sp=079dbd6c sr=2500 clock_ticks=82735 guest_us=00971938
+DS90 PROGRESS ms=10200 pc=07872542 sp=079dbd6c sr=2500 clock_ticks=83554 guest_us=00989e51
+DS90 PROGRESS ms=10300 pc=fffff364 sp=079dbd62 sr=2600 clock_ticks=84374 guest_us=009a236b
+DS90 PROGRESS ms=10400 pc=07872542 sp=079dbd6c sr=2500 clock_ticks=85193 guest_us=009ba885
+DS90 PROGRESS ms=10500 pc=0787254a sp=079dbd6c sr=2500 clock_ticks=86012 guest_us=009d2d9f
+DS90 PROGRESS ms=10600 pc=07872554 sp=079dbe4c sr=2500 clock_ticks=86831 guest_us=009eba5a
+DS90 PROGRESS ms=10700 pc=07872556 sp=079dbe4c sr=2510 clock_ticks=87650 guest_us=00a03f74
+DS90 PROGRESS ms=10800 pc=fffff364 sp=079dbe4a sr=2600 clock_ticks=88470 guest_us=00a1c48e
+DS90 PROGRESS ms=10900 pc=0787253c sp=079dbd6c sr=2510 clock_ticks=89289 guest_us=00a349a8
+DS90 PROGRESS ms=11000 pc=07872544 sp=079dbd6c sr=2519 clock_ticks=90108 guest_us=00a4cec1
+DS90 PROGRESS ms=11100 pc=0787253c sp=079dbd6c sr=2510 clock_ticks=90927 guest_us=00a65b7c
+DS90 PROGRESS ms=11200 pc=07872554 sp=079dbd6c sr=2500 clock_ticks=91746 guest_us=00a7e096
+DS90 PROGRESS ms=11300 pc=fffff364 sp=079dbd62 sr=2600 clock_ticks=92566 guest_us=00a965b0
+DS90 PROGRESS ms=11400 pc=07872546 sp=079dbd6c sr=2500 clock_ticks=93385 guest_us=00aaeaca
+DS90 PROGRESS ms=11500 pc=078722c0 sp=079dbf04 sr=2500 clock_ticks=94204 guest_us=00ac6fe4
+DS90 PROGRESS ms=11600 pc=07940c2c sp=079dbf00 sr=2510 clock_ticks=95023 guest_us=00adfc9f
+DS90 PROGRESS ms=11700 pc=07940c2c sp=079dbf00 sr=2500 clock_ticks=95842 guest_us=00af81b9
+DS90 PROGRESS ms=11800 pc=fffff364 sp=079dbef6 sr=2600 clock_ticks=96662 guest_us=00b106d3
+DS90 PROGRESS ms=11900 pc=07940c2c sp=079dbf00 sr=2510 clock_ticks=97481 guest_us=00b28bed
+DS90 PROGRESS ms=12000 pc=07940c2c sp=079dbf00 sr=2510 clock_ticks=98300 guest_us=00b41106
+DS90 PROGRESS ms=12100 pc=07940c2c sp=079dbf00 sr=2510 clock_ticks=99119 guest_us=00b59dc1
+DS90 PROGRESS ms=12200 pc=07872228 sp=079dbf04 sr=2500 clock_ticks=99938 guest_us=00b722db
+DS90 PROGRESS ms=12300 pc=fffff364 sp=079dbef6 sr=2600 clock_ticks=100758 guest_us=00b8a7f5
+DS90 PROGRESS ms=12400 pc=0787253c sp=079dbeec sr=2510 clock_ticks=101577 guest_us=00ba2d0f
+DS90 PROGRESS ms=12500 pc=07872542 sp=079dbeec sr=2500 clock_ticks=102396 guest_us=00bbb229
+DS90 PROGRESS ms=12600 pc=0787253c sp=079dbeec sr=2510 clock_ticks=103215 guest_us=00bd3ee4
+DS90 PROGRESS ms=12700 pc=0787253c sp=079dbeec sr=2500 clock_ticks=104034 guest_us=00bec3fe
+DS90 PROGRESS ms=12800 pc=fffff364 sp=079dbee2 sr=2600 clock_ticks=104854 guest_us=00c04918
+DS90 PROGRESS ms=12900 pc=07872546 sp=079dbeec sr=2500 clock_ticks=105673 guest_us=00c1ce31
+DS90 PROGRESS ms=13000 pc=0787253c sp=079dbeec sr=2510 clock_ticks=106492 guest_us=00c3534b
+DS90 PROGRESS ms=13100 pc=07940c2c sp=079dbf00 sr=2500 clock_ticks=107311 guest_us=00c4e006
+DS90 PROGRESS ms=13200 pc=0787251c sp=079dbeec sr=2500 clock_ticks=108130 guest_us=00c66520
+DS90 PROGRESS ms=13300 pc=fffff364 sp=079dbef6 sr=2600 clock_ticks=108950 guest_us=00c7ea3a
+DS90 PROGRESS ms=13400 pc=0787253c sp=079dbeec sr=2500 clock_ticks=109769 guest_us=00c96f54
+DS90 PROGRESS ms=13500 pc=07940c2c sp=079dbf00 sr=2500 clock_ticks=110588 guest_us=00caf46e
+DS90 PROGRESS ms=13600 pc=07872514 sp=079dbeec sr=2500 clock_ticks=111407 guest_us=00cc8129
+DS90 PROGRESS ms=13700 pc=078725fc sp=079dbed0 sr=2500 clock_ticks=112226 guest_us=00ce0643
+DS90 PROGRESS ms=13800 pc=fffff360 sp=079dbed2 sr=2608 clock_ticks=113046 guest_us=00cf8b5c
+DS90 PROGRESS ms=13900 pc=0793f4b4 sp=079dbef4 sr=2504 clock_ticks=113865 guest_us=00d11076
+DS90 PROGRESS ms=14000 pc=07872454 sp=079dbebc sr=2500 clock_ticks=114684 guest_us=00d29590
+DS90 PROGRESS ms=14100 pc=0789494c sp=079dbec8 sr=250b clock_ticks=115503 guest_us=00d4224b
+DS90 PROGRESS ms=14200 pc=07894976 sp=079dbec8 sr=2500 clock_ticks=116322 guest_us=00d5a765
+DS90 PROGRESS ms=14300 pc=fffff364 sp=079dbebe sr=2600 clock_ticks=117142 guest_us=00d72c7f
+DS90 PROGRESS ms=14400 pc=07894954 sp=079dbec8 sr=250b clock_ticks=117961 guest_us=00d8b199
+DS90 PROGRESS ms=14500 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=118780 guest_us=00da36b3
+DS90 PROGRESS ms=14600 pc=078ecf76 sp=079dbf64 sr=2000 clock_ticks=119599 guest_us=00dbc36e
+DS90 PROGRESS ms=14700 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=120418 guest_us=00dd4887
+DS90 PROGRESS ms=14800 pc=fffff364 sp=079dbf62 sr=2600 clock_ticks=121238 guest_us=00decda1
+DS90 PROGRESS ms=14900 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=122057 guest_us=00e052bb
+DS90 PROGRESS ms=15000 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=122876 guest_us=00e1d7d5
+DS90 PROGRESS ms=15100 pc=07871f48 sp=079dbf14 sr=2000 clock_ticks=123695 guest_us=00e36490
+DS90 PROGRESS ms=15200 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=124514 guest_us=00e4e9aa
+DS90 PROGRESS ms=15300 pc=fffff364 sp=079dbf62 sr=2600 clock_ticks=125334 guest_us=00e66ec4
+DS90 PROGRESS ms=15400 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=126153 guest_us=00e7f3de
+DS90 PROGRESS ms=15500 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=126972 guest_us=00e978f7
+DS90 PROGRESS ms=15600 pc=07871f50 sp=079dbf14 sr=2004 clock_ticks=127791 guest_us=00eb05b2
+DS90 PROGRESS ms=15700 pc=07871f94 sp=079dbf24 sr=2004 clock_ticks=128610 guest_us=00ec8acc
+DS90 PROGRESS ms=15800 pc=fffff364 sp=079dbf62 sr=2600 clock_ticks=129430 guest_us=00ee0fe6
+DS90 PROGRESS ms=15900 pc=07941628 sp=079dbf6c sr=2008 clock_ticks=130249 guest_us=00ef9500
+DS90 PROGRESS ms=16000 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=131068 guest_us=00f11a1a
+DS90 PROGRESS ms=16100 pc=07871f46 sp=079dbf14 sr=2000 clock_ticks=131887 guest_us=00f2a6d5
+DS90 PROGRESS ms=16200 pc=078b2e04 sp=079dbecc sr=2000 clock_ticks=132706 guest_us=00f42bef
+DS90 PROGRESS ms=16300 pc=fffff364 sp=079dbf62 sr=2600 clock_ticks=133526 guest_us=00f5b109
+DS90 PROGRESS ms=16400 pc=0794162e sp=079dbf6c sr=2013 clock_ticks=134345 guest_us=00f73622
+DS90 PROGRESS ms=16500 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=135164 guest_us=00f8bb3c
+DS90 PROGRESS ms=16600 pc=07871f48 sp=079dbf14 sr=2000 clock_ticks=135983 guest_us=00fa47f7
+DS90 PROGRESS ms=16700 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=136802 guest_us=00fbcd11
+DS90 PROGRESS ms=16800 pc=fffff364 sp=079dbf62 sr=2600 clock_ticks=137622 guest_us=00fd522b
+DS90 PROGRESS ms=16900 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=138441 guest_us=00fed745
+DS90 PROGRESS ms=17000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=139260 guest_us=01005c5f
+DS90 PROGRESS ms=17100 pc=07871f46 sp=079dbf14 sr=2004 clock_ticks=140079 guest_us=0101e91a
+DS90 PROGRESS ms=17200 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=140898 guest_us=01036e34
+DS90 PROGRESS ms=17300 pc=fffff362 sp=079dbf62 sr=2600 clock_ticks=141718 guest_us=0104f34e
+DS90 PROGRESS ms=17400 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=142537 guest_us=01067867
+DS90 PROGRESS ms=17500 pc=07941628 sp=079dbf6c sr=2008 clock_ticks=143356 guest_us=0107fd81
+DS90 PROGRESS ms=17600 pc=07871f50 sp=079dbf14 sr=2004 clock_ticks=144175 guest_us=01098a3c
+DS90 PROGRESS ms=17700 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=144994 guest_us=010b0f56
+DS90 PROGRESS ms=17800 pc=fffff364 sp=079dbf62 sr=2600 clock_ticks=145814 guest_us=010c9470
+DS90 PROGRESS ms=17900 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=146633 guest_us=010e198a
+DS90 PROGRESS ms=18000 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=147452 guest_us=010f9ea4
+DS90 STATE pc=00001400 sp=079dbf6c vbr=0783b6ac sr=2000
+DS90 STATE d0=60000078 a0=00001400
+DS90 STATE d1=00000000 a1=079ab6d4
+DS90 STATE d2=00000000 a2=079b69f8
+DS90 STATE d3=079d0800 a3=07805000
+DS90 STATE d4=00000ad6 a4=07bfaa02
+DS90 STATE d5=00000014 a5=00000000
+DS90 STATE d6=003c4040 a6=07b3d2e0
+DS90 STATE d7=0000ffff a7=079dbf6c
+DS90 REPORT-STACK address=079dbf6c data=0786ff62
+DS90 REPORT-STACK address=079dbf70 data=079dbfc0
+DS90 REPORT-STACK address=079dbf74 data=079de3c0
+DS90 REPORT-STACK address=079dbf78 data=00000035
+DS90 REPORT-STACK address=079dbf7c data=07bfffd6
+DS90 REPORT-STACK address=079dbf80 data=07bfff5e
+DS90 REPORT-STACK address=079dbf84 data=07bfff36
+DS90 REPORT-STACK address=079dbf88 data=07bfffd6
+DS90 REPORT-STACK address=079dbf8c data=00000000
+DS90 REPORT-STACK address=079dbf90 data=00000000
+DS90 REPORT-STACK address=079dbf94 data=00000000
+DS90 REPORT-STACK address=079dbf98 data=00002400
+DS90 REPORT-STACK address=079dbf9c data=079dbfc0
+DS90 REPORT-STACK address=079dbfa0 data=07bfff86
+DS90 REPORT-STACK address=079dbfa4 data=079dbfd0
+DS90 REPORT-STACK address=079dbfa8 data=07805000
+DS90 REPORT-STACK address=079dbfac data=078714a4
+DS90 REPORT-STACK address=079dbfb0 data=00000000
+DS90 REPORT-STACK address=079dbfb4 data=078714ac
+DS90 REPORT-STACK address=079dbfb8 data=00000000
+DS90 REPORT-STACK address=079dbfbc data=00000000
+DS90 REPORT-STACK address=079dbfc0 data=00000000
+DS90 REPORT-STACK address=079dbfc4 data=00000000
+DS90 REPORT-STACK address=079dbfc8 data=00000000
+DS90 REPORT-STACK address=079dbfcc data=00000000
+DS90 REPORT-STACK address=079dbfd0 data=079dc05d
+DS90 REPORT-STACK address=079dbfd4 data=00000000
+DS90 REPORT-STACK address=079dbfd8 data=0022402e
+DS90 REPORT-STACK address=079dbfdc data=00000119
+DS90 REPORT-STACK address=079dbfe0 data=000c97ae
+DS90 REPORT-STACK address=079dbfe4 data=00000000
+DS90 REPORT-STACK address=079dbfe8 data=00000000
+DS90 REPORT-STACK address=079dbfec data=079dbfec
+DS90 REPORT-STACK address=079dbff0 data=079dbfec
+DS90 REPORT-STACK address=079dbff4 data=00000068
+DS90 REPORT-STACK address=079dbff8 data=00000000
+DS90 REPORT-STACK address=079dbffc data=00000000
+DS90 REPORT-STACK address=079dc000 data=00000000
+DS90 REPORT-STACK address=079dc004 data=079dbfd0
+DS90 REPORT-STACK address=079dc008 data=079dc008
+DS90 REPORT-STACK address=079dc00c data=079dc008
+DS90 REPORT-STACK address=079dc010 data=000001a3
+DS90 REPORT-STACK address=079dc014 data=00000069
+DS90 REPORT-STACK address=079dc018 data=00000000
+DS90 REPORT-STACK address=079dc01c data=00000000
+DS90 REPORT-STACK address=079dc020 data=079dbfd0
+DS90 REPORT-STACK address=079dc024 data=07b377c6
+DS90 REPORT-STACK address=079dc028 data=07b377c6
+DS90 REPORT-STACK address=079dc02c data=0000068f
+DS90 REPORT-STACK address=079dc030 data=000001a4
+DS90 REPORT-STACK address=079dc034 data=00000001
+DS90 REPORT-STACK address=079dc038 data=00000652
+DS90 REPORT-STACK address=079dc03c data=079dbfd0
+DS90 REPORT-STACK address=079dc040 data=079dc064
+DS90 REPORT-STACK address=079dc044 data=079dc064
+DS90 REPORT-STACK address=079dc048 data=ffffffff
+DS90 REPORT-STACK address=079dc04c data=00000690
+DS90 REPORT-STACK address=079dc050 data=00000001
+DS90 REPORT-STACK address=079dc054 data=0015a22e
+DS90 REPORT-STACK address=079dc058 data=079dbfd0
+DS90 REPORT-STACK address=079dc05c data=07b3628a
+DS90 REPORT-STACK address=079dc060 data=079dbfd0
+DS90 REPORT-STACK address=079dc064 data=079dc040
+DS90 REPORT-STACK address=079dc068 data=079dc040
+DS90 OBJECT address=07bfaa02 data=00000000
+DS90 OBJECT address=07bfaa06 data=00000000
+DS90 OBJECT address=07bfaa0a data=0801079b
+DS90 OBJECT address=07bfaa0e data=5584bbd2
+DS90 OBJECT address=07bfaa12 data=01000800
+DS90 OBJECT address=07bfaa16 data=f6082020
+DS90 OBJECT address=07bfaa1a data=20202020
+DS90 OBJECT address=07bfaa1e data=20202020
+DS90 OBJECT address=07bfaa22 data=20202020
+DS90 OBJECT address=07bfaa26 data=20200020
+DS90 OBJECT address=07bfaa2a data=20202020
+DS90 OBJECT address=07bfaa2e data=20202020
+DS90 OBJECT address=07bfaa32 data=20202020
+DS90 OBJECT address=07bfaa36 data=20202000
+DS90 OBJECT address=07bfaa3a data=20202020
+DS90 OBJECT address=07bfaa3e data=20202020
+Ignoring MAME exception: DS90 firmware fatal code=0298 caller=078ecde8 parameter=00000000 report_sp=00000000
+
+Fatal error: DS90 firmware fatal code=0298 caller=078ecde8 parameter=00000000 report_sp=00000000
+
+Average speed: 122.15% (17 seconds)

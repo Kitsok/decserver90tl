@@ -12,6 +12,10 @@ from build_mame import ROOT
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--seconds', type=int, default=1)
+    parser.add_argument('--ram-wait-cycles', type=int, default=0, choices=range(17),
+                        help='Experimental extra CPU cycles per 16-bit external RAM transfer')
+    parser.add_argument('--rom-alignment-assist', action='store_true',
+                        help='Experimentally substitute unaligned data transfers for ROM exception handling')
     parser.add_argument('--nvram-directory', type=Path,
                         help='Separate persistent store for an isolated boot experiment')
     args = parser.parse_args()
@@ -28,6 +32,8 @@ def main():
     if not image_link.exists():
         image_link.symlink_to(firmware)
     env = os.environ.copy()
+    env['DS90_ROM_ALIGNMENT_ASSIST'] = '1' if args.rom_alignment_assist else '0'
+    env['DS90_RAM_WAIT_CYCLES'] = str(args.ram_wait_cycles)
     env.update(SDL_VIDEODRIVER='dummy', SDL_AUDIODRIVER='dummy')
     command = [str(ROOT/'build/mame-ds90tl'), 'ds90tl', '-noreadconfig',
                '-rompath', str(run/'roms'), '-bench', str(args.seconds),

@@ -8,11 +8,91 @@
 
 #include <algorithm>
 #include <cstdio>
+#include <cstdlib>
 
 class ds90_cpu_device : public fscpu32_device
 {
 public:
 	ds90_cpu_device(const machine_config &config, const char *tag, device_t *owner, u32 clock);
+protected:
+	void device_start() override
+	{
+		fscpu32_device::device_start();
+		const char *assist = std::getenv("DS90_ROM_ALIGNMENT_ASSIST");
+		m_alignment_assist = assist && std::string_view(assist) == "1";
+		const char *wait = std::getenv("DS90_RAM_WAIT_CYCLES");
+		m_ram_wait_cycles = wait ? std::clamp(std::atoi(wait), 0, 16) : 0;
+		std::fprintf(stderr, "DS90 CPU rom_alignment_assist=%u ram_wait_cycles=%u\n",
+			unsigned(m_alignment_assist), m_ram_wait_cycles);
+		auto immediate16 = m_readimm16;
+		m_readimm16 = [this, immediate16](offs_t address) -> u16 {
+			ram_wait(address, 1);
+			return immediate16(address);
+		};
+		auto read8 = m_read8;
+		m_read8 = [this, read8](offs_t address) -> u8 {
+			ram_wait(address, 1);
+			return read8(address);
+		};
+		auto read16 = m_read16;
+		m_read16 = [this, read16](offs_t address) -> u16 {
+			ram_wait(address, (address & 1) ? 2 : 1);
+			if (alignment(address, "read16")) return m_program16.read_word_unaligned(address);
+			return read16(address);
+		};
+		auto read32 = m_read32;
+		m_read32 = [this, read32](offs_t address) -> u32 {
+			ram_wait(address, (address & 1) ? 3 : 2);
+			if (address == 0x079ab718 && u32(pc()) == 0x07941626)
+			{
+				const u32 remaining = state_int(M68K_D1);
+				if (remaining == 0x707) m_idle_first_cycle = total_cycles();
+				if (remaining == 1)
+					std::fprintf(stderr, "DS90 IDLE-BUDGET cycles=%llu cpu_hz=%u elapsed_us=%.3f\n",
+						static_cast<unsigned long long>(total_cycles() - m_idle_first_cycle), clock(),
+						1e6 * double(total_cycles() - m_idle_first_cycle) / clock());
+			}
+			if (alignment(address, "read32")) return m_program16.read_dword_unaligned(address);
+			return read32(address);
+		};
+		auto write16 = m_write16;
+		m_write16 = [this, write16](offs_t address, u16 data) {
+			ram_wait(address, (address & 1) ? 2 : 1);
+			if (alignment(address, "write16")) m_program16.write_word_unaligned(address, data);
+			else write16(address, data);
+		};
+		auto write32 = m_write32;
+		m_write32 = [this, write32](offs_t address, u32 data) {
+			ram_wait(address, (address & 1) ? 3 : 2);
+			if (alignment(address, "write32")) m_program16.write_dword_unaligned(address, data);
+			else write32(address, data);
+		};
+		auto write8 = m_write8;
+		m_write8 = [this, write8](offs_t address, u8 data) {
+			ram_wait(address, 1);
+			write8(address, data);
+		};
+	}
+private:
+	void ram_wait(offs_t address, unsigned transfers)
+	{
+		const u32 physical = address & 0xffffff;
+		if (physical >= 0x800000 && physical <= 0xbfffff)
+			adjust_icount(-int(m_ram_wait_cycles * transfers));
+	}
+	bool alignment(offs_t address, const char *operation)
+	{
+		if (!(address & 1)) return false;
+		if (!m_alignment_assist)
+			fatalerror("DS90 unresolved CPU32 address error: %s pc=%08x address=%08x\n", operation, u32(pc()), u32(address));
+		if (m_alignment_events++ < 16)
+			std::fprintf(stderr, "DS90 ROM-ALIGNMENT-ASSIST %s pc=%08x address=%08x\n", operation, u32(pc()), u32(address));
+		return true;
+	}
+	bool m_alignment_assist = false;
+	u32 m_alignment_events = 0;
+	u64 m_idle_first_cycle = 0;
+	unsigned m_ram_wait_cycles = 0;
 };
 DECLARE_DEVICE_TYPE(DS90_CPU, ds90_cpu_device)
 DEFINE_DEVICE_TYPE(DS90_CPU, ds90_cpu_device, "ds90cpu", "DECserver CPU32 bring-up")
@@ -40,6 +120,9 @@ private:
 	u16 boot_r(offs_t offset) { return m_boot[offset]; }
 	u16 identity_r(offs_t offset)
 	{
+		// Provisional board-clock acknowledge, inferred from the ISR's TST.B.
+		if (offset == 0 && !machine().side_effects_disabled())
+			m_cpu->set_input_line(6, CLEAR_LINE);
 		// Synthetic locally administered Ethernet address 02:90:00:00:00:01.
 		static constexpr u16 words[] = { 0x0290, 0x0000, 0x0001 };
 		return words[offset];
@@ -57,6 +140,7 @@ private:
 	void dump_state();
 	TIMER_CALLBACK_MEMBER(observe);
 	TIMER_CALLBACK_MEMBER(tpu_complete);
+	TIMER_CALLBACK_MEMBER(clock_tick);
 	required_device<ds90_cpu_device> m_cpu;
 	required_device<am7990_device> m_lance;
 	required_device_array<mc68681_device, 4> m_uart;
@@ -65,8 +149,10 @@ private:
 	u16 m_peripheral[0x300]{}; // FFFA00..FFFFFF, includes TPU parameter RAM
 	u32 m_events = 0;
 	u32 m_ticks = 0;
+	u32 m_clock_ticks = 0;
 	emu_timer *m_observer = nullptr;
 	emu_timer *m_tpu_timer = nullptr;
+	emu_timer *m_clock_timer = nullptr;
 };
 
 void ds90tl_state::dump_state()
@@ -122,6 +208,30 @@ void ds90tl_state::peripheral_w(offs_t offset, u16 data, u16 mask)
 	m_peripheral[offset] = (m_peripheral[offset] & ~mask) | (data & mask);
 	if (address == 0xfffe18 || address == 0xfffe1a)
 		m_tpu_timer->adjust(attotime::from_usec(2));
+	if (address == 0xfffe1c)
+	{
+		// Channel 14 priority gates the recovered board-clock path. The
+		// firmware ISR divides the incoming pulses by approximately 16 before
+		// adding 1953 + fractional microseconds (512 guest ticks/second).
+		// The 8192 Hz pulse rate is inferred, not measured from hardware.
+		// This substitutes the observable clock, not TPU microcode execution.
+		if (m_peripheral[offset] & 0x3000)
+			m_clock_timer->adjust(attotime::from_hz(8192), 0, attotime::from_hz(8192));
+		else
+		{
+			m_clock_timer->adjust(attotime::never);
+			m_cpu->set_input_line(6, CLEAR_LINE);
+		}
+	}
+}
+
+TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
+{
+	if (++m_clock_ticks <= 3)
+		std::fprintf(stderr, "DS90 CLOCK tick=%u pc=%08x sr=%04x vector=%08x\n", m_clock_ticks,
+			u32(m_cpu->pc()), u16(m_cpu->state_int(M68K_SR)),
+			m_cpu->space(AS_PROGRAM).read_dword(m_cpu->state_int(M68K_VBR) + 0x78));
+	m_cpu->set_input_line(6, ASSERT_LINE);
 }
 
 TIMER_CALLBACK_MEMBER(ds90tl_state::tpu_complete)
@@ -192,11 +302,14 @@ void ds90tl_state::machine_start()
 {
 	m_observer = timer_alloc(FUNC(ds90tl_state::observe), this);
 	m_tpu_timer = timer_alloc(FUNC(ds90tl_state::tpu_complete), this);
+	m_clock_timer = timer_alloc(FUNC(ds90tl_state::clock_tick), this);
 }
 
 void ds90tl_state::machine_reset()
 {
 	auto &space = m_cpu->space(AS_PROGRAM);
+	m_clock_timer->adjust(attotime::never);
+	m_cpu->set_input_line(6, CLEAR_LINE);
 	std::fill_n(&m_ram[0], 0x400000 / 2, 0);
 	std::fill(std::begin(m_peripheral), std::end(m_peripheral), 0);
 	std::fill(std::begin(m_boot), std::end(m_boot), 0);
@@ -226,7 +339,7 @@ void ds90tl_state::machine_reset()
 	// Preserve its report fields and stop, rather than jumping through zero.
 	m_boot[0x1400 / 2] = 0x60fe;
 	space.write_dword(0x8051a2, 0x1400);
-	m_events = m_ticks = 0;
+	m_events = m_ticks = m_clock_ticks = 0;
 	std::fprintf(stderr, "DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0\n"
 		"DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; no network backend\n");
 	m_observer->adjust(attotime::from_msec(1), 0, attotime::from_msec(1));
@@ -240,6 +353,17 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::observe)
 	{
 		auto &space = m_cpu->space(AS_PROGRAM);
 		dump_state();
+		for (unsigned i = 0; i < 64; ++i)
+			std::fprintf(stderr, "DS90 REPORT-STACK address=%08x data=%08x\n", sp + i * 4,
+				space.read_dword(sp + i * 4));
+		for (unsigned reg : { M68K_A4, M68K_A5 })
+		{
+			const u32 base = m_cpu->state_int(reg);
+			if ((base & 0xffffff) < 0x800000 || (base & 0xffffff) > 0xbfffc0) continue;
+			for (unsigned i = 0; i < 16; ++i)
+				std::fprintf(stderr, "DS90 OBJECT address=%08x data=%08x\n", base + i * 4,
+					space.read_dword(base + i * 4));
+		}
 		fatalerror("DS90 firmware fatal code=%04x caller=%08x parameter=%08x report_sp=%08x\n",
 			space.read_word(0x805036), space.read_dword(0x805028),
 			space.read_dword(0x805032), space.read_dword(0x80502c));
@@ -254,13 +378,16 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::observe)
 			(pc - 0x1000) / 4, pc, sp, m_cpu->space(AS_PROGRAM).read_dword(sp + 2));
 	}
 	if (++m_ticks <= 10 || m_ticks % 100 == 0)
-		std::fprintf(stderr, "DS90 PROGRESS ms=%u pc=%08x sp=%08x sr=%04x\n",
-			m_ticks, pc, sp, u16(m_cpu->state_int(M68K_SR)));
+		std::fprintf(stderr, "DS90 PROGRESS ms=%u pc=%08x sp=%08x sr=%04x clock_ticks=%u guest_us=%08x\n",
+			m_ticks, pc, sp, u16(m_cpu->state_int(M68K_SR)), m_clock_ticks,
+			m_cpu->space(AS_PROGRAM).read_dword(0xfff024));
 }
 
 void ds90tl_state::ds90tl(machine_config &config)
 {
-	DS90_CPU(config, m_cpu, 16'000'000); // provisional clock, not measured
+	// SYNCR=0x9b00 selects W=1, X=0, Y=27. With a provisional
+	// 32768 Hz reference: 32768 * 4 * (27+1) * 2^(2*1+0).
+	DS90_CPU(config, m_cpu, 14'680'064); // reference crystal not measured
 	m_cpu->set_addrmap(AS_PROGRAM, &ds90tl_state::memory_map);
 	AM7990(config, m_lance, 20'000'000);
 	// File-backed approximation only; physical storage and write protocol

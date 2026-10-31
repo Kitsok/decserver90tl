@@ -11,7 +11,10 @@ Investigation started 2026-10-31. MNENG3 now executes in an experimental CPU32 s
 - [First-look findings](first-look.md).
 - [Proposed internal structure and register-level evidence](internal-structure.md).
 - [Ethernet controller identification and DMA interface](ethernet-controller.md).
+- [Firmware organization and runtime map](firmware-organization.md).
 - [Simulator implementation concept](simulator-concept.md).
+- [MAC-window access findings](mac-window.md).
+- [Boot-ROM requirements and search results](boot-rom-search.md).
 - [Build instructions](BUILD.md).
 - [Implementation status](implementation-status.md).
 
