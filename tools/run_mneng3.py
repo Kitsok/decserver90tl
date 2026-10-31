@@ -17,6 +17,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--interactive', action='store_true', help='Expose eight PTYs and run until Ctrl-C')
     parser.add_argument('--serial-control', type=Path, help='Interactive modem control socket (default: run/serial-control.sock)')
+    parser.add_argument('--serialsim', action='append', default=[], metavar='PORT=DEVICE',
+                        help='Use an existing serialsim pipe TTY for this port; repeatable, independent of --interactive')
     parser.add_argument('--ethernet-pcap', type=Path, help='Capture TAP packets (default: logfile with .pcap suffix)')
     parser.add_argument('--tap', help='Attach LANCE to this existing, bridged Linux TAP (default: offline)')
     parser.add_argument('--seconds', type=int, default=None)
@@ -37,6 +39,14 @@ def main():
     parser.add_argument('--nvram-directory', type=Path,
                         help='Separate persistent store for an isolated boot experiment')
     args = parser.parse_args()
+    serialsim = {}
+    for assignment in args.serialsim:
+        port, separator, path = assignment.partition('=')
+        if not separator or port not in map(str, range(1, 9)) or not path or int(port) in serialsim:
+            parser.error('--serialsim requires a distinct PORT=DEVICE with port 1..8')
+        serialsim[int(port)] = str(Path(path).resolve())
+    if len(set(serialsim.values())) != len(serialsim):
+        parser.error('Each serialsim port must use a distinct device')
     if args.ethernet_pcap and not args.tap:
         parser.error('--ethernet-pcap requires --tap')
     if args.tap:
@@ -45,14 +55,14 @@ def main():
         except (OSError, ValueError) as error:
             parser.error(str(error))
     if args.seconds is None:
-        args.seconds = 0 if args.interactive else 1
+        args.seconds = 0 if args.interactive or serialsim else 1
     try:
         probe_data = bytes.fromhex(args.uart_probe_hex)
     except ValueError:
         parser.error('--uart-probe-hex must contain hexadecimal byte pairs')
     if not 1 <= len(probe_data) <= 128:
         parser.error('--uart-probe-hex must encode between 1 and 128 bytes')
-    if not (args.interactive and args.seconds == 0) and not 1 <= args.seconds <= 60:
+    if not ((args.interactive or serialsim) and args.seconds == 0) and not 1 <= args.seconds <= 60:
         raise SystemExit('--seconds must be between 1 and 60')
     firmware = ROOT/'firmware/MNENG3.SYS'
     digest = hashlib.sha256(firmware.read_bytes()).hexdigest()
@@ -65,6 +75,10 @@ def main():
     if not image_link.exists():
         image_link.symlink_to(firmware)
     env = os.environ.copy()
+    for port in range(1, 9):
+        env.pop(f'DS90_SERIALSIM_{port}', None)
+    for port, path in serialsim.items():
+        env[f'DS90_SERIALSIM_{port}'] = path
     env['DS90_ROM_ALIGNMENT_ASSIST'] = '1' if args.rom_alignment_assist else '0'
     env['DS90_RAM_WAIT_CYCLES'] = str(args.ram_wait_cycles)
     env['DS90_UART_PROBE_PORT'] = str(args.uart_probe_port)
@@ -82,7 +96,7 @@ def main():
                '-skip_gameinfo', '-cfg_directory', str(run/'cfg'),
                '-networkprovider', 'taptun' if args.tap else 'none',
                '-nvram_directory', str((args.nvram_directory or run/'nvram').resolve())]
-    if args.interactive or args.tap:
+    if args.interactive or args.tap or serialsim:
         index = command.index('-bench')
         command[index:index + 2] = ['-video', 'none', '-sound', 'none', '-throttle', '-seconds_to_run', str(args.seconds)]
     log_path = (args.log_file or run/'bringup.log').resolve()
@@ -94,7 +108,9 @@ def main():
         pcap_path.parent.mkdir(parents=True, exist_ok=True)
         env['DS90_TAP_PCAP'] = str(pcap_path)
     console = ConsoleOutput('unlimited' if not args.seconds else args.seconds, args.verbose)
-    console.say('Starting MNENG3 / 4 MiB; eight interactive PTYs; Ctrl-C to stop' if args.interactive else f'Starting MNENG3 / 4 MiB; limit {args.seconds} simulated seconds, 120 seconds host time')
+    console.say(f'Starting MNENG3 / 4 MiB; {"unlimited" if not args.seconds else str(args.seconds) + " simulated seconds"}; Ctrl-C to stop')
+    for port, path in serialsim.items():
+        console.say(f'Serial port {port}: serialsim {path} (DTR/DSR through TTY ioctls)')
     console.say(f'Configuration store: {(args.nvram_directory or run/"nvram").resolve()}')
     console.say(f'Full live trace: {log_path}')
     console.say(f'Ethernet: TAP {args.tap}, bridge {bridge}; capture: {pcap_path}' if args.tap else 'Ethernet: offline')
@@ -103,7 +119,7 @@ def main():
         # Guest settings remain in the selected persistent NVRAM directory.
         with tempfile.TemporaryDirectory(prefix='cfg-', dir=run) as cfg:
             command[command.index('-cfg_directory') + 1] = cfg
-            status = stream_process(command, run, env, log_path, console, timeout=None if args.interactive else 120)
+            status = stream_process(command, run, env, log_path, console, timeout=None if not args.seconds else 120)
     except subprocess.TimeoutExpired:
         raise SystemExit(f'Host timeout; simulator stopped. Inspect {log_path}')
     except KeyboardInterrupt:

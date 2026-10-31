@@ -1,0 +1,15 @@
+{
+  "scope": "Courier Python transport against nanovax's real serialsim driver",
+  "driver_revision": "60c0f40d884d92b80442857ed1b659f60294d9fb",
+  "kernel": "6.1.63 aarch64",
+  "pair": ["/dev/ttyPipeA0", "/dev/ttyPipeB0"],
+  "all_256_byte_values_both_directions": true,
+  "remote_dtr_assertion_and_deassertion": true,
+  "dsr_asserted_while_endpoint_open": true,
+  "dsr_deasserted_on_normal_close": true,
+  "dsr_policy": "endpoint-ready; firmware ASIC output not yet decoded",
+  "mame_rebuilt_locally": true,
+  "ini_reader_pty_and_serialsim_selection": true,
+  "full_firmware_to_firmware_session_tested": false,
+  "emulator_built_on_nanovax": false
+}

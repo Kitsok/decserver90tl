@@ -82,6 +82,11 @@ are not implemented by this change.
 
 ## Host interface
 
+An optional [serialsim backend](serialsim.md) carries bytes and modem signals
+through a kernel pipe TTY instead of the PTY/control-socket combination below.
+Select it per port with `--serialsim PORT=DEVICE`; it is independent of
+interactive mode. Unmapped ports keep their existing behavior.
+
 `./run.sh --interactive` exposes the eight data PTYs and prints the modem control
 socket path. The default is `run/serial-control.sock`, with filesystem mode 0600.
 It is a local Unix datagram socket. Normal shutdown removes it. An existing path

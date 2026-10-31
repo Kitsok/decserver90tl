@@ -19,6 +19,8 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <sys/file.h>
 #include <sstream>
 
 class ds90_cpu_device : public fscpu32_device
@@ -175,6 +177,8 @@ private:
 	u8 m_output_pins[4] = {0xff,0xff,0xff,0xff};
 	int m_pty[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
 	int m_pty_slave[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+	bool m_serialsim[8] = {};
+	int m_host_dtr[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
 	std::deque<u8> m_serial_output[8];
 	emu_timer *m_serial_timer = nullptr;
 	required_device<ds90_cpu_device> m_cpu;
@@ -293,7 +297,7 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
 	m_cpu->set_input_line(6, ASSERT_LINE);
 }
 
-// Host byte transport with explicit DTR/DSR sideband; serial framing is assisted.
+// Host byte transport: PTYs plus sideband, or serialsim TTY modem ioctls.
 ds90tl_state::~ds90tl_state()
 {
 	if (m_modem_socket >= 0)
@@ -303,6 +307,11 @@ ds90tl_state::~ds90tl_state()
 	}
 	for (unsigned port = 0; port < 8; ++port)
 	{
+		if (m_serialsim[port] && m_pty[port] >= 0)
+		{
+			int bit = TIOCM_DTR;
+			::ioctl(m_pty[port], TIOCMBIC, &bit);
+		}
 		if (m_pty[port] >= 0) ::close(m_pty[port]);
 		if (m_pty_slave[port] >= 0) ::close(m_pty_slave[port]);
 		m_pty[port] = m_pty_slave[port] = -1;
@@ -380,6 +389,13 @@ void ds90tl_state::modem_poll()
 			{
 				if ((input >> signal >> value) && signal == "DSR" && (value == 0 || value == 1) && !(input >> trailing))
 				{
+					if (m_serialsim[port - 1])
+					{
+						reply = "{\"error\":\"DSR is owned by the serialsim device\"}\n";
+						::sendto(m_modem_socket, reply.data(), reply.size(), MSG_NOSIGNAL,
+							reinterpret_cast<sockaddr *>(&peer), peer_size);
+						continue;
+					}
 					m_dsr[port - 1] = value != 0;
 					modem_inputs((port - 1) / 2);
 					std::fprintf(stderr, "DS90 MODEM port=%u DSR=%d\n", port, value);
@@ -400,6 +416,21 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::serial_poll)
 	for (unsigned port = 0; port < 8; ++port)
 	{
 		if (m_pty[port] < 0) continue;
+		if (m_serialsim[port])
+		{
+			const int dtr = modem_dtr(port);
+			int bit = TIOCM_DTR, status = 0;
+			if (dtr != m_host_dtr[port])
+			{
+				if (::ioctl(m_pty[port], dtr ? TIOCMBIS : TIOCMBIC, &bit))
+					fatalerror("Cannot publish serialsim DTR on port %u: %s\n", port + 1, std::strerror(errno));
+				m_host_dtr[port] = dtr;
+			}
+			if (::ioctl(m_pty[port], TIOCMGET, &status))
+				fatalerror("Cannot read serialsim DSR on port %u: %s\n", port + 1, std::strerror(errno));
+			const bool dsr = (status & TIOCM_DSR) != 0;
+			if (dsr != m_dsr[port]) { m_dsr[port] = dsr; modem_inputs(port / 2); }
+		}
 		auto &pending = m_serial_output[port];
 		while (!pending.empty())
 		{
@@ -527,29 +558,60 @@ void ds90tl_state::machine_start()
 {
 	m_serial_timer = timer_alloc(FUNC(ds90tl_state::serial_poll), this);
 	const char *serial = std::getenv("DS90_SERIAL_PTY");
-	if (serial && std::string_view(serial) == "1")
+	const bool use_pty = serial && std::string_view(serial) == "1";
+	bool use_serialsim = false;
+	for (unsigned port = 1; port <= 8; ++port)
+	{
+		const char *path = std::getenv(("DS90_SERIALSIM_" + std::to_string(port)).c_str());
+		use_serialsim |= path && *path;
+	}
+	if (use_pty || use_serialsim)
 	{
 		serial_stop_requested = 0;
 		std::signal(SIGINT, serial_stop);
 		std::signal(SIGTERM, serial_stop);
-		const char *control = std::getenv("DS90_SERIAL_CONTROL");
-		if (!control || !*control) fatalerror("Missing serial control socket path\n");
-		m_modem_path = control;
-		sockaddr_un address{};
-		address.sun_family = AF_UNIX;
-		if (m_modem_path.size() >= sizeof(address.sun_path)) fatalerror("Serial control socket path too long\n");
-		std::strcpy(address.sun_path, m_modem_path.c_str());
-		m_modem_socket = ::socket(AF_UNIX, SOCK_DGRAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
-		if (m_modem_socket < 0) fatalerror("Cannot create serial control socket\n");
-		if (::bind(m_modem_socket, reinterpret_cast<sockaddr *>(&address), sizeof(address)))
+		if (use_pty)
 		{
-			::close(m_modem_socket); m_modem_socket = -1;
-			fatalerror("Cannot bind serial control socket %s: %s\n", control, std::strerror(errno));
+			const char *control = std::getenv("DS90_SERIAL_CONTROL");
+			if (!control || !*control) fatalerror("Missing serial control socket path\n");
+			m_modem_path = control;
+			sockaddr_un address{};
+			address.sun_family = AF_UNIX;
+			if (m_modem_path.size() >= sizeof(address.sun_path)) fatalerror("Serial control socket path too long\n");
+			std::strcpy(address.sun_path, m_modem_path.c_str());
+			m_modem_socket = ::socket(AF_UNIX, SOCK_DGRAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
+			if (m_modem_socket < 0) fatalerror("Cannot create serial control socket\n");
+			if (::bind(m_modem_socket, reinterpret_cast<sockaddr *>(&address), sizeof(address)))
+			{
+				::close(m_modem_socket); m_modem_socket = -1;
+				fatalerror("Cannot bind serial control socket %s: %s\n", control, std::strerror(errno));
+			}
+			if (::chmod(control, 0600)) fatalerror("Cannot restrict serial control socket permissions\n");
+			std::fprintf(stderr, "DS90 SERIAL control=%s (DTR/DSR; terminal defaults DSR=1)\n", control);
 		}
-		if (::chmod(control, 0600)) fatalerror("Cannot restrict serial control socket permissions\n");
-		std::fprintf(stderr, "DS90 SERIAL control=%s (DTR/DSR; terminal defaults DSR=1)\n", control);
 		for (unsigned port = 0; port < 8; ++port)
 		{
+			const std::string key = "DS90_SERIALSIM_" + std::to_string(port + 1);
+			const char *external = std::getenv(key.c_str());
+			if (external && *external)
+			{
+				m_pty[port] = ::open(external, O_RDWR | O_NOCTTY | O_NONBLOCK | O_CLOEXEC);
+				if (m_pty[port] < 0 || ::flock(m_pty[port], LOCK_EX | LOCK_NB))
+					fatalerror("Cannot open/lock serialsim port %u at %s: %s\n", port + 1, external, std::strerror(errno));
+				unsigned remote = 0;
+				if (::ioctl(m_pty[port], _IOR('T', 0xe9, unsigned int), &remote))
+					fatalerror("Not a serialsim pipe: %s\n", external);
+				termios settings{};
+				if (::tcgetattr(m_pty[port], &settings)) fatalerror("Cannot read serialsim termios\n");
+				::cfmakeraw(&settings);
+				settings.c_cflag |= CLOCAL | CREAD | HUPCL;
+				::cfsetispeed(&settings, B115200); ::cfsetospeed(&settings, B115200);
+				if (::tcsetattr(m_pty[port], TCSANOW, &settings)) fatalerror("Cannot set serialsim raw mode\n");
+				m_serialsim[port] = true;
+				std::fprintf(stderr, "DS90 SERIAL port=%u path=%s backend=serialsim\n", port + 1, external);
+				continue;
+			}
+			if (!use_pty) continue;
 			m_pty[port] = ::posix_openpt(O_RDWR | O_NOCTTY | O_NONBLOCK);
 			if (m_pty[port] < 0 || ::grantpt(m_pty[port]) || ::unlockpt(m_pty[port]))
 				fatalerror("Cannot allocate serial PTY: %s\n", std::strerror(errno));

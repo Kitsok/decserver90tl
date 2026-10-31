@@ -5,23 +5,28 @@ set -euo pipefail
 repo_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 
 usage() {
-    printf 'Usage: %s [--verbose] [--interactive] [--tap NAME] [nvram-directory]\n' "$0"
+    printf 'Usage: %s [--verbose] [--interactive] [--tap NAME] [--serialsim PORT=DEVICE] [nvram-directory]\n' "$0"
     printf 'Runs 60 seconds of initialization, then a 50-second diagnostic login.\n'
     printf 'Default store: run/my-decserver. Relative paths are relative to the repository.\n'
     printf 'Use --tap NAME to attach an existing bridged TAP; default is offline.\n'
     printf 'Use --interactive for eight serial PTYs, running until Ctrl-C.\n'
+    printf 'Use --serialsim PORT=DEVICE to replace a port with a serialsim pipe TTY; repeatable.\n'
     printf 'Console: live progress and serial text. Logfiles: full raw trace.\n'
     printf 'Use --verbose to also show the full trace on console.\n'
 }
 
 interactive=false
 network_args=()
+serial_args=()
 console_args=()
 positional=()
 while (( $# )); do
     case $1 in
         -h|--help) usage; exit 0 ;;
         --interactive) interactive=true ;;
+        --serialsim)
+            if (( $# < 2 )); then printf '%s\n' '--serialsim requires PORT=DEVICE' >&2; exit 2; fi
+            serial_args+=(--serialsim "$2"); shift ;;
         --tap)
             if (( $# < 2 )); then printf '%s\n' '--tap requires an interface name' >&2; exit 2; fi
             network_args=(--tap "$2"); shift ;;
@@ -44,7 +49,7 @@ if [[ ! -x build/mame-ds90tl ]]; then
 fi
 
 nvram_dir=${positional[0]:-run/my-decserver}
-common_args=(--rom-alignment-assist --ram-wait-cycles 1 --nvram-directory "$nvram_dir" "${console_args[@]}" "${network_args[@]}")
+common_args=(--rom-alignment-assist --ram-wait-cycles 1 --nvram-directory "$nvram_dir" "${console_args[@]}" "${network_args[@]}" "${serial_args[@]}")
 
 run_stage() {
     local label=$1 log_path=$2
