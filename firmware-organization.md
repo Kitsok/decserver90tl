@@ -75,7 +75,8 @@ Observed startup sequence:
 | Linked handoff field | Consumer/meaning | Current supplied value |
 |---|---|---|
 | 0x07805016, long | Validity/default flags; bits 19..21 select three metadata defaults at 0x07940696 onward | OR with 0x00380000; provisional substitute for ROM validation |
-| 0x0780501e, word | Port-presence mask, consumed at 0x078714d6 and 0x07871520 | 0x00ff; disk value 0x1c00 selects unsupported port indices |
+| 0x0780500e, long | Accumulated port diagnostic/inhibit status, copied to 0x0798faaa | 0: healthy synthetic ports |
+| 0x0780501e, word | Transient diagnostic/recovery port mask, consumed at 0x078714d6 and 0x07871520 | 0; disk 0x1c00 selects invalid indices; earlier 0x00ff setting inhibited all ports |
 | 0x07805027, byte | Board/profile discriminator | Firmware initialization behavior, not an independently verified hardware ID |
 | 0x078051a2, long | Inherited ROM fatal-report callback | 0x1400 diagnostic sentinel |
 | 0x078051b6, long | External RAM size consumed at 0x07940578 | 0x00400000 |
@@ -174,8 +175,8 @@ maintenance at 0x078ecef8. Their entire call trees are not yet mapped.
 |---|---|---|
 | LANCE | VBR+0x6c, vector 27, level-3 autovector candidate; handler 0x07874cd0 | AM7990 model connected to CPU level 3; network backend absent |
 | Board clock/serial aggregate | VBR+0x78, vector 30, level-6 autovector; installed target 0xfffff184 | Provisional external interrupt source |
-| TPU low-byte status | Fast receive handling for eight ports | Routing to actual DUART outputs not yet implemented |
-| TPU status bits 8..11 | Four DUART combined interrupt paths | Firmware dispatcher identified; board routing unresolved |
+| TPU low-byte status | Fast receive handling for eight ports | Functional receive-ready mapping implemented; electrical routing unresolved |
+| TPU status bits 8..11 | Four DUART combined interrupt paths | Functional combined-IRQ mapping implemented; board routing unresolved |
 
 The level-6 implementation includes code/stubs copied into MCU internal RAM.
 The clock entry at 0x07944a48 reads physical 0x200000 and updates software
@@ -222,7 +223,9 @@ The higher-bit path at 0x07944c16 scans four DUART sources and reads ISR
 at block+0x0a. Bits 0/4 select transmitter A/B; transmit data is written at
 block+0x06 or +0x16. Other branches handle status/input-change conditions.
 The physical wiring and precise TPU interrupt-generation semantics still
-need reconstruction before interactive serial I/O is demonstrated.
+need reconstruction before serial-wire emulation is demonstrated. A functional
+status adapter now supplies RX-ready bits 0..7 and combined DUART IRQ bits
+8..11. CISR writes clear bits where zero is written.
 
 ## Persistent configuration organization
 
@@ -286,9 +289,13 @@ checks are patched out.
 - Original MNENG3 executes with 4 MiB RAM and unchanged file hash.
 - Alignment and RAM-wait substitutions permit a 60-second bounded run,
   with DUART initialization and continuing scheduler/clock activity.
-- No Local prompt or external serial endpoint has been demonstrated.
-- UART/TPU interrupt wiring, receive injection and completed transmit output
-  are the next investigation. A holding-register trace is not a modem backend.
+- Firmware configures port 1 for CSR=0xbb, MR1=0x13, MR2=0x07 (9600, 8N1)
+  and consumes three diagnostic FIFO-injected CR bytes through its ISR.
+- Port 8 also consumes three diagnostic CRs and writes the DS90TL banner
+  and `Enter username>` prompt to its transmit holding register.
+- No Local prompt, decoded serial-wire output or external endpoint is demonstrated.
+- Transmit behavior differs between ports 1 and 8 and is the next
+  investigation. Physical UART/TPU interrupt wiring remains unresolved. A holding-register trace is not a modem backend.
 - Ethernet driver identification is strong, but DMA/ring behavior and host
   networking have not yet been validated by live packets.
 - ROM handoff, true persistent-storage technology/capacity, exact clocks,
@@ -301,3 +308,28 @@ Companion files: `internal-structure.md`, `ethernet-controller.md`,
 Manufacturer references:
 https://www.nxp.com/docs/en/user-guide/MC68332UM.pdf
 https://www.nxp.com/docs/en/reference-manual/SIMRM.pdf
+
+## Corrected port-diagnostic handoff and receive probe
+
+The header word at 0x0780501e was initially mislabeled as a presence mask.
+At 0x07871584..0x07871598, startup ORs it into both halves of the longword
+at header +0x0e and copies the result to 0x0798faaa. The earlier 0x00ff
+handoff therefore marked all eight ports in both halves (observed combined
+value 0xcbffcbff), while DUARTs remained at reset CSR/MR settings.
+
+Clearing header +0x0e and +0x1e reports healthy diagnostic status. Under the
+same assisted timing model and warm store initially seeded from FF, this
+causes normal UART configuration. Port 1 changes to CSR 0xbb, MR1 0x13,
+MR2 0x07, with MAME reporting 9600 baud. Three paced CR bytes injected into
+its FIFO are read at callback PC 0xfffff2a0, within the internal-RAM receive
+path. The earlier zero-filled store was not a reconstructed factory image;
+fresh/warm erased-store comparisons were retained separately.
+
+`--uart-probe-port` and `--uart-probe-at` control this diagnostic only.
+Direct FIFO injection deliberately bypasses receiver enable and framing,
+so it cannot establish wire-level receive, baud detection or modem handling.
+The port-1 holding-register TX trace contains only an initial CR. The port-8
+validation run, however, consumes all three injected CRs and emits the full
+DS90TL V2.4 banner and `Enter username>` prompt. Register-level transcripts
+are saved beside the corresponding logs. They are not decoded wire captures.
+Investigation of transmit asymmetry follows the receive-path checkpoint commit.

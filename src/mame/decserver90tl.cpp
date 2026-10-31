@@ -141,6 +141,7 @@ private:
 	TIMER_CALLBACK_MEMBER(observe);
 	TIMER_CALLBACK_MEMBER(tpu_complete);
 	TIMER_CALLBACK_MEMBER(clock_tick);
+	TIMER_CALLBACK_MEMBER(uart_probe);
 	required_device<ds90_cpu_device> m_cpu;
 	required_device<am7990_device> m_lance;
 	required_device_array<mc68681_device, 4> m_uart;
@@ -150,9 +151,13 @@ private:
 	u32 m_events = 0;
 	u32 m_ticks = 0;
 	u32 m_clock_ticks = 0;
+	unsigned m_probe_port = 0;
+	unsigned m_probe_count = 0;
+	unsigned m_serial_events = 0;
 	emu_timer *m_observer = nullptr;
 	emu_timer *m_tpu_timer = nullptr;
 	emu_timer *m_clock_timer = nullptr;
+	emu_timer *m_probe_timer = nullptr;
 };
 
 void ds90tl_state::dump_state()
@@ -197,6 +202,19 @@ u16 ds90tl_state::peripheral_r(offs_t offset, u16 mask)
 	u16 value = m_peripheral[offset];
 	// Reset-status register: a synthetic cold power-on, not captured ROM state.
 	if (address == 0xfffa06) value = 0x0080;
+	if (address == 0xfffe20)
+	{
+		// Functional substitution for the recovered TPU receive/DUART
+		// status paths. Physical signal routing and edge latches are unknown.
+		for (unsigned block = 0; block < 4; ++block)
+		{
+			if (m_uart[block]->m_chanA->read_chan_reg(1) & 1) value |= 1U << (block * 2);
+			if (m_uart[block]->m_chanB->read_chan_reg(1) & 1) value |= 1U << (block * 2 + 1);
+			if (m_uart[block]->irq_pending()) value |= 1U << (8 + block);
+		}
+		if (value && m_serial_events++ < 32)
+			std::fprintf(stderr, "DS90 SERIAL-STATUS pc=%08x cisr=%04x\n", u32(m_cpu->pc()), value);
+	}
 	record("READ-INTERNAL", address, value, mask);
 	return value;
 }
@@ -205,7 +223,10 @@ void ds90tl_state::peripheral_w(offs_t offset, u16 data, u16 mask)
 {
 	const u32 address = 0xfffa00 + offset * 2;
 	record("WRITE-INTERNAL", address, data, mask);
-	m_peripheral[offset] = (m_peripheral[offset] & ~mask) | (data & mask);
+	if (address == 0xfffe20)
+		m_peripheral[offset] &= data | ~mask; // CISR bits clear when zero is written
+	else
+		m_peripheral[offset] = (m_peripheral[offset] & ~mask) | (data & mask);
 	if (address == 0xfffe18 || address == 0xfffe1a)
 		m_tpu_timer->adjust(attotime::from_usec(2));
 	if (address == 0xfffe1c)
@@ -234,6 +255,20 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
 	m_cpu->set_input_line(6, ASSERT_LINE);
 }
 
+TIMER_CALLBACK_MEMBER(ds90tl_state::uart_probe)
+{
+	if (!m_probe_port) return;
+	const unsigned port = m_probe_port - 1;
+	duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
+	std::fprintf(stderr, "DS90 FIFO-INJECT port=%u byte=0d csr=%02x mr1=%02x mr2=%02x sr=%02x tx_rate=%d\n",
+		m_probe_port, channel.get_chan_CSR(), channel.read_MR1(), channel.read_MR2(),
+		channel.read_chan_reg(1), channel.get_tx_rate());
+	// Diagnostic FIFO injection only: bypasses receiver enable, framing,
+	// baud clocks and modem pins. Three paced CRs cannot overfill a 3-byte FIFO.
+	channel.rx_fifo_push(0x0d, 0);
+	if (++m_probe_count < 3) m_probe_timer->adjust(attotime::from_seconds(1));
+}
+
 TIMER_CALLBACK_MEMBER(ds90tl_state::tpu_complete)
 {
 	// Explicit provisional bootstrap substitution: complete requests only.
@@ -245,6 +280,9 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::tpu_complete)
 template<unsigned Block> u16 ds90tl_state::uart_r(offs_t offset, u16 mask)
 {
 	const u8 value = m_uart[Block]->read(offset);
+	if ((offset == 3 || offset == 11) && !machine().side_effects_disabled())
+		std::fprintf(stderr, "DS90 UART-RX port=%u byte=%02x pc=%08x\n",
+			Block * 2 + (offset == 11) + 1, value, u32(m_cpu->pc()));
 	record("READ-UART", 0x400000 + Block * 0x20 + offset * 2, value, mask);
 	return u16(value) << 8; // guest uses byte registers at even addresses
 }
@@ -303,6 +341,7 @@ void ds90tl_state::machine_start()
 	m_observer = timer_alloc(FUNC(ds90tl_state::observe), this);
 	m_tpu_timer = timer_alloc(FUNC(ds90tl_state::tpu_complete), this);
 	m_clock_timer = timer_alloc(FUNC(ds90tl_state::clock_tick), this);
+	m_probe_timer = timer_alloc(FUNC(ds90tl_state::uart_probe), this);
 }
 
 void ds90tl_state::machine_reset()
@@ -310,6 +349,15 @@ void ds90tl_state::machine_reset()
 	auto &space = m_cpu->space(AS_PROGRAM);
 	m_clock_timer->adjust(attotime::never);
 	m_cpu->set_input_line(6, CLEAR_LINE);
+	m_probe_timer->adjust(attotime::never);
+	const char *probe = std::getenv("DS90_UART_PROBE_PORT");
+	m_probe_port = probe ? std::clamp(std::atoi(probe), 0, 8) : 0;
+	m_probe_count = m_serial_events = 0;
+	if (m_probe_port)
+	{
+		const char *when = std::getenv("DS90_UART_PROBE_AT");
+		m_probe_timer->adjust(attotime::from_seconds(when ? std::clamp(std::atoi(when), 1, 55) : 20));
+	}
 	std::fill_n(&m_ram[0], 0x400000 / 2, 0);
 	std::fill(std::begin(m_peripheral), std::end(m_peripheral), 0);
 	std::fill(std::begin(m_boot), std::end(m_boot), 0);
@@ -328,9 +376,11 @@ void ds90tl_state::machine_reset()
 		space.write_byte(0x805000 + i, image[i]);
 	// Handoff memory-size field consumed by 0x07940578.
 	space.write_dword(0x8051b6, 0x400000);
-	// Runtime port mask consumed at 0x078714d6/0x07871520. The on-disk
-	// value 0x1c00 is not a valid eight-port handoff (asserts in 0x079423ac).
-	space.write_word(0x80501e, 0x00ff);
+	// ROM port-diagnostic state, not a presence mask: startup ORs the
+	// transient word into both halves of the persistent status longword.
+	// Report healthy ports. 0x00ff incorrectly marks every port unavailable.
+	space.write_dword(0x80500e, 0);
+	space.write_word(0x80501e, 0);
 	// Boot ROM normally validates board-configuration records. With no ROM
 	// implementation, request firmware defaults for the three metadata groups
 	// tested at 0x07940696..0x079406da (bits 19, 20, 21).

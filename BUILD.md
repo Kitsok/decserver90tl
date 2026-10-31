@@ -73,8 +73,9 @@ new directory. Neither option establishes a working Local prompt.
   RAM handoff write, not a modification of the firmware file.
 - Metadata default flags 19..21 at `0x07805016` are set as a temporary
   substitute for boot-ROM validation of board configuration records.
-- Eight-port handoff mask `0x00ff` at `0x0780501e` replaces the file header
-  value `0x1c00` in guest RAM.
+- Port diagnostic fields at `0x0780500e` (long) and `0x0780501e` (word)
+  are cleared to report healthy ports. The earlier `0x00ff` presence-mask
+  interpretation was incorrect and prevented normal UART setup.
 - Synthetic MAC `02:90:00:00:00:01` is read at `0x200000..0x200005`.
 - Inherited exception vectors target identifiable sentinel loops. The ROM
   fatal-report callback at handoff field `0x078051a2` targets another sentinel
@@ -100,3 +101,21 @@ new directory. Neither option establishes a working Local prompt.
 The first milestone remains a working original-firmware `Local>` prompt.
 Until the unresolved handoff and board behavior are validated, these
 experiments must not be described as a booted DECserver.
+
+## Diagnostic receive probe
+
+```sh
+python3 tools/run_mneng3.py --seconds 30 --rom-alignment-assist --ram-wait-cycles 1 --uart-probe-port 1 --nvram-directory run/nvram-uart1-fresh-20261031
+```
+
+Use a store initialized by firmware; a fresh store may spend most of its
+first 60-second run initializing configuration. `--uart-probe-at` selects
+when the probe starts (default 20 simulated seconds). The probe places three
+CR bytes, one second apart, directly into the selected receive FIFO. Port 0
+disables it. This bypasses receiver enable, baud sampling, parity/framing and
+modem signals; it is an ISR/register-path test, not a serial-wire endpoint.
+
+The provisional TPU status adapter exposes receive-ready bits 0..7 and
+combined DUART interrupt bits 8..11, and implements clear-on-zero status
+writes. Exact pin routing, capture/edge behavior and TPU microcode remain
+unmodeled. Observe `FIFO-INJECT`, `SERIAL-STATUS`, and `UART-RX` log entries.

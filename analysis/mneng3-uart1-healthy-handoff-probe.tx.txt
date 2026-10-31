@@ -1,0 +1,5 @@
+Transmit holding-register writes only; not a decoded serial-wire capture.
+
+Port 1, 1 bytes:
+<CR>
+

@@ -1,0 +1,41 @@
+Transmit holding-register writes only; not a decoded serial-wire capture.
+
+Port 1, 1 bytes:
+<CR>
+
+
+Port 8, 370 bytes:
+[H[J<CR>
+<CR>
+
+Network Access SW V2.4 BL50 for DS90TL<CR>
+
+<CR>
+<CR>
+
+(c) Copyright 2000, Digital Networks, DNPG, LLC - All Rights Reserved<CR>
+<CR>
+
+<CR>
+
+Please type HELP if you need assistance<CR>
+
+
+Enter username> <CR>
+[H[J<CR>
+<CR>
+
+Network Access SW V2.4 BL50 for DS90TL<CR>
+
+<CR>
+<CR>
+
+(c) Copyright 2000, Digital Networks, DNPG, LLC - All Rights Reserved<CR>
+<CR>
+
+<CR>
+
+Please type HELP if you need assistance<CR>
+
+
+Enter username> 

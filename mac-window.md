@@ -37,11 +37,11 @@ memory maps across images.
 
 ## Model implications
 
-The simulator currently supplies synthetic MAC 02:90:00:00:00:01 and no
-read side effects. Interrupt-path evidence means that this read-only identity
-approximation is incomplete. A shared decode could expose ROM data while
-also acknowledging a board timer/interrupt source. The relevant interrupt
-source must be identified before implementing acknowledgement semantics.
+The simulator supplies synthetic MAC 02:90:00:00:00:01 and provisionally
+clears the simulated board-clock level-6 request on a base-window read.
+This functional acknowledge follows the interrupt-path evidence; it does not
+establish the physical timer, latch or electrical decode. A shared decode
+could expose ROM data while also acknowledging a board interrupt source.
 
 Keep this window separate from the configuration store accessed relative
 to 0x100c00. Missing factory configuration in that store remains a viable

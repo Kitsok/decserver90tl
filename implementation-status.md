@@ -34,8 +34,9 @@ technology/capacity, write-enable gating and programming delays are unresolved.
 
 The first illegal instruction at `0x079423c2` was a bounds assertion:
 startup used the file-header word `0x1c00` as a port mask, selected port 12,
-and the lookup routine accepts only 0..7. The synthetic handoff now writes
-`0x00ff` to `0x0780501e` in guest RAM.
+and the lookup routine accepts only 0..7. The handoff initially used `0x00ff`, but follow-up showed this is a
+diagnostic/inhibit mask, not a presence mask. Current handoff clears both
+`0x0780500e` and `0x0780501e` to report healthy ports.
 
 The six-byte reader at `0x079409e2` reads `0x200000..0x200005`. The simulator
 supplies synthetic locally administered MAC `02:90:00:00:00:01` there.
@@ -142,3 +143,29 @@ PC 0x078ed000, address 0x0799f21f. The opt-in alignment service handles that
 operation and later odd reads/writes. The separate living runtime map is
 `firmware-organization.md`; serial IRQ details collected so far are recorded
 there. UART interrupt integration is next, after committing this checkpoint.
+
+## UART receive checkpoint
+
+A diagnostic mapping supplies TPU CISR receive-ready bits 0..7 and combined
+DUART interrupt bits 8..11, with clear-on-zero writes. The clock ISR polls
+these signals; electrical routing and TPU edge/capture behavior remain
+unmodeled. A paced FIFO-injection probe is opt-in.
+
+With the old port-diagnostic handoff, probes remained unread and the UART
+stayed at CSR/MR reset settings. Clearing the header's diagnostic fields
+permits normal UART setup. In the verified port-1 run, CSR=0xbb, MR1=0x13,
+MR2=0x07 and baud=9600; all three injected CR bytes are read by the original
+firmware at PC 0xfffff2a0. The 30-second run finishes normally. This is a
+functional receive-path result, not serial-wire or modem emulation. An initial
+TX CR is observed; no completed prompt yet. Port 8 likewise consumes all three CRs. Its transmit holding-register trace
+contains the DS90TL V2.4 banner and `Enter username>` prompt. The port-1
+trace contains only an initial CR; transmit behavior differs between channels
+and is the next investigation. There is no external endpoint or wire capture.
+
+
+Receive checkpoint evidence: `analysis/mneng3-uart1-healthy-handoff-probe.log`
+and `analysis/mneng3-uart8-healthy-handoff-probe.log`, with corresponding
+`.tx.txt` holding-register transcripts. Both runs finish 30 simulated seconds
+with status 0. The firmware file remains unchanged. Default diagnostics,
+configuration validation, ROM audit, Python compilation and whitespace checks
+pass. Commit this checkpoint before investigating transmit asymmetry.

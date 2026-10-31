@@ -344,10 +344,12 @@ store as a DS1287.
 
 Reference: https://www.analog.com/en/products/ds12887.html
 
-Runtime handoff also needs a valid port mask at image offset 0x1e. With the
+Runtime handoff also needs valid port-diagnostic state at image offset 0x1e. With the
 on-disk word 0x1c00, startup selects port 12 and the routine at 0x079423ac
-asserts because only indices 0..7 are accepted. The synthetic handoff writes
-0x00ff in guest RAM. Board metadata defaults are selected by bits 19..21 of
+asserts because only indices 0..7 are accepted. The early synthetic handoff wrote
+0x00ff, but this interpretation was wrong: startup ORs this mask into both
+halves of a diagnostic/inhibit word at header +0x0e. Current handoff clears
+both fields, which permits normal UART setup and receive processing. Board metadata defaults are selected by bits 19..21 of
 the longword at offset 0x16; initialization at 0x07940696 tests those flags
 and copies three default records. The experimental handoff requests those
 defaults because boot-ROM metadata validation has not been reproduced.

@@ -1,6 +1,6 @@
 # DECserver 90TL emulator investigation
 
-Investigation started 2026-10-31. MNENG3 now executes in an experimental CPU32 simulator with 4 MiB RAM. Startup remains incomplete; no firmware has been loaded onto physical hardware.
+Investigation started 2026-10-31. MNENG3 now executes in an experimental CPU32 simulator with 4 MiB RAM. Startup remains incomplete; diagnostic receive tests reach a username prompt on port 8. No firmware has been loaded onto physical hardware.
 
 ## Contents
 
