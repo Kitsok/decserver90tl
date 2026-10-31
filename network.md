@@ -156,3 +156,20 @@ SHOW commands, privileged access, an operational identification change,
 logout and reconnection. Transcripts and packets are saved under run/;
 analysis/telnet-verification.json records the latest result. No DHCP server
 is started. Incoming LAT sessions remain deferred to nanovax.
+
+## Serial Telnet listener regression
+
+`tools/verify_telnet_ports.py --nvram-seed run/my-decserver` configures a copied
+store via the TCP 23 management console, assigning serial ports 1–8 to listeners
+2001–2008. This firmware rejects SET/CHANGE PORT ACCESS with error 729; the test
+uses DEFINE PORT n ACCESS REMOTE followed by LOGOUT PORT n. Other initial serial
+settings use CHANGE: fixed 9600 baud, eight data bits, no parity, no flow control.
+
+The test exchanges distinct markers in both directions, checks port isolation,
+DSR and XON/XOFF pause/resume, and disconnect/reconnect. It uses the existing
+isolated TAP and manual IP, leaves the source store unchanged, and records
+analysis/telnet-ports-verification.json plus run/telnet-ports-transcript.log.
+The first individual-port run passed all checks on ports 1–6, then received a
+connection refusal from listener 2007. Listener 2008 remains untested in that
+run. All eight configuration sequences had returned without CLI errors. The
+cause of listener 2007's refusal remains under investigation.
