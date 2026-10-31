@@ -7,11 +7,16 @@ from pathlib import Path
 import subprocess
 
 from build_mame import ROOT
+from run_output import ConsoleOutput, stream_process
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--seconds', type=int, default=1)
+    parser.add_argument('--verbose', '-v', action='store_true',
+                        help='Show the full live trace on console (logfile is always complete)')
+    parser.add_argument('--log-file', type=Path,
+                        help='Raw trace path (default: run/bringup.log)')
     parser.add_argument('--uart-probe-port', type=int, default=0, choices=range(9),
                         help='Diagnostic FIFO input on port 1..8 (0 disables)')
     parser.add_argument('--uart-probe-hex', default='0d0d0d',
@@ -54,16 +59,23 @@ def main():
                '-rompath', str(run/'roms'), '-bench', str(args.seconds),
                '-skip_gameinfo', '-cfg_directory', str(run/'cfg'),
                '-nvram_directory', str((args.nvram_directory or run/'nvram').resolve())]
-    with (run/'bringup.log').open('w') as log:
-        try:
-            result = subprocess.run(command, cwd=run, env=env, stdout=log,
-                                    stderr=subprocess.STDOUT, timeout=120)
-        except subprocess.TimeoutExpired:
-            raise SystemExit(f'Host timeout; inspect {run/"bringup.log"}')
-    print((run/'bringup.log').read_text())
-    print(f'Firmware unchanged: {hashlib.sha256(firmware.read_bytes()).hexdigest() == digest}')
-    print(f'MAME exit status: {result.returncode}; log: {run/"bringup.log"}')
-    raise SystemExit(result.returncode)
+    log_path = (args.log_file or run/'bringup.log').resolve()
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    console = ConsoleOutput(args.seconds, args.verbose)
+    console.say(f'Starting MNENG3 / 4 MiB; limit {args.seconds} simulated seconds, 120 seconds host time')
+    console.say(f'Configuration store: {(args.nvram_directory or run/"nvram").resolve()}')
+    console.say(f'Full live trace: {log_path}')
+    try:
+        status = stream_process(command, run, env, log_path, console)
+    except subprocess.TimeoutExpired:
+        raise SystemExit(f'Host timeout; simulator stopped. Inspect {log_path}')
+    except KeyboardInterrupt:
+        raise SystemExit(f'Interrupted; simulator stopped. Log: {log_path}')
+    if status == 0:
+        console.say(f'Timed run completed ({args.seconds} simulated seconds); simulator stopped')
+    console.say(f'Firmware unchanged: {hashlib.sha256(firmware.read_bytes()).hexdigest() == digest}')
+    console.say(f'MAME exit status: {status}; log: {log_path}')
+    raise SystemExit(status)
 
 
 if __name__ == '__main__':

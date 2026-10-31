@@ -134,8 +134,9 @@ The executable shell wrapper runs both stages and preserves their logs:
 ```
 
 It works from any working directory. It reuses the selected store without
-erasing it, always runs both bounded stages, and saves `run/initialization.log`
-and `run/login.log`. These logs are replaced on subsequent runs. Use
+erasing it, always runs both bounded stages, and writes complete live traces directly to `run/initialization.log`
+and `run/login.log`, including when a stage fails. These logs are replaced
+on subsequent runs. Use
 `./run.sh --help` for usage. Build the executable first if it is absent.
 
 Use an initially absent NVRAM directory for a fresh-store reproduction.
@@ -157,3 +158,28 @@ in `analysis/local-prompt-verification.json` and the referenced files.
 before the next byte, and the run remains bounded even if input is not
 consumed. This diagnostic bypasses serial framing, receiver-enable checks
 and modem pins. It is not an interactive external serial interface.
+
+## Live console and full trace files
+
+Both console output and logfile output are enabled. The logfile always
+receives the complete combined MAME stdout/stderr trace and flushes each
+line as it arrives. The normal console shows stage limits, elapsed host
+time, progress about every five simulated seconds, readable UART text,
+diagnostic input and errors. Common terminal-control/flow-control bytes are
+filtered from the console only. Firmware warnings remain visible.
+
+```sh
+./run.sh                         # concise console, complete stage logfiles
+./run.sh --verbose               # full live console trace as well
+./run.sh --verbose run/another-decserver
+```
+
+Direct Python runs support the same `--verbose` flag and an optional
+`--log-file PATH`; their default logfile remains `run/bringup.log`. The
+launcher uses separate stage files directly, so failed runs also retain
+their trace. Console heartbeat messages appear if no visible update has
+arrived for five host seconds. Timeout/interruption stops the child process.
+The launcher explicitly reports normal timed completion versus nonzero exit.
+
+These remain bounded diagnostic runs. There is no attachable PTY or TCP
+serial socket yet; visible UART text is reconstructed from register traces.
