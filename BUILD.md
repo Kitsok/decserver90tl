@@ -125,6 +125,19 @@ unmodeled. Observe `FIFO-INJECT`, `SERIAL-STATUS`, and `UART-RX` log entries.
 
 ## Verified Local prompt recipe
 
+The executable shell wrapper runs both stages and preserves their logs:
+
+```sh
+./run.sh
+# Optional separate configuration store (relative to the repository):
+./run.sh run/another-decserver
+```
+
+It works from any working directory. It reuses the selected store without
+erasing it, always runs both bounded stages, and saves `run/initialization.log`
+and `run/login.log`. These logs are replaced on subsequent runs. Use
+`./run.sh --help` for usage. Build the executable first if it is absent.
+
 Use an initially absent NVRAM directory for a fresh-store reproduction.
 The first run allows firmware to initialize persistent records; the second
 supplies three CRs, then SIMULATOR and CR, at one byte per simulated second.
