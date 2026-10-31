@@ -10,6 +10,7 @@ Static investigation started 2026-10-31. No firmware has been executed or loaded
 - `reference/DS90TL-Top.jpg`: user-supplied board photograph.
 - [First-look findings](first-look.md).
 - [Proposed internal structure and register-level evidence](internal-structure.md).
+- [Ethernet controller identification and DMA interface](ethernet-controller.md).
 
 Run from any working directory:
 

@@ -1,0 +1,36 @@
+{
+  "scope": "Static inference; no firmware execution or controller emulation",
+  "controller_interface": "AMD Am7990 LANCE compatible; exact silicon unconfirmed",
+  "rdp": "0x00300000",
+  "rap": "0x00300002",
+  "mneng3_init_block_cpu": "0x07873e04",
+  "mneng3_init_block_dma24": "0x873e04",
+  "mneng1_init_block_cpu": "0x07835880",
+  "csr3": "0x0006 = BSWP | ACON",
+  "mneng3_rx_ring": {
+    "cpu": "0x0799ec08",
+    "dma24": "0x99ec08",
+    "entries": 32,
+    "entry_bytes": 8
+  },
+  "mneng3_tx_ring": {
+    "cpu": "0x0799ed08",
+    "dma24": "0x99ed08",
+    "entries": 8,
+    "entry_bytes": 8
+  },
+  "mneng3_rx_buffer_capacity": 1518,
+  "mneng3_irq": {
+    "vector_table_offset": "0x6c",
+    "vector_number": 27,
+    "inference": "level-3 autovector",
+    "handler": "0x07874cd0"
+  },
+  "unresolved": [
+    "Exact controller vendor/revision",
+    "Board-level interrupt wiring",
+    "Factory MAC readout source",
+    "Dynamic filtering and all error paths",
+    "Boot ROM Ethernet self-test behavior"
+  ]
+}

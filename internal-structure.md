@@ -175,6 +175,14 @@ shows it observes those edges.
 
 ## Ethernet: less established than the serial side
 
+**Later investigation, 2026-10-31:** the uncertainty below is superseded by
+[Ethernet controller identification](ethernet-controller.md). Both MNENG1
+and MNENG3 implement a LANCE/Am7990-compatible interface at `0x00300000`
+(RDP) and `0x00300002` (RAP). MNENG3 uses 32 RX and 8 TX descriptors,
+24-bit DMA, CSR3 byte swapping and an apparent level-3 autovector. Exact
+silicon identity and factory MAC storage remain unresolved. The paragraphs
+below preserve the earlier investigation state.
+
 An external Ethernet controller remains the working assumption. The exact
 controller, register base, DMA descriptors, byte ordering and interrupt
 vector are **not yet established**. The board photograph is insufficient
@@ -256,7 +264,7 @@ boundary much less speculative.
 | QSM | SCI/QSPI register behavior actually reached | High presence; workload role incomplete |
 | TPU | Host requests, parameter RAM, completion and interrupt semantics | High presence; function details incomplete |
 | Serial | Four dual UARTs at `0x400000 + 0x20*n`; optimized access path separately resolved | High topology; exact variant unresolved |
-| Ethernet | Controller register/DMA model connected to TAP | Necessary; controller unidentified |
+| Ethernet | LANCE-compatible RDP/RAP, CSR0–3 and DMA model connected to TAP | High interface confidence; exact silicon unresolved (see later report) |
 | Board controls | Only observed bits/straps and side effects | Medium |
 | Configuration storage | File-backed NVRAM accessed through recovered interface | Documented persistence; interface unknown |
 | Local firmware | Host-side loader initially; optional parallel flash model later | Design choice |

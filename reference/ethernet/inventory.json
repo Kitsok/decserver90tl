@@ -1,0 +1,22 @@
+[
+  {
+    "file": "Am7990-LANCE-Technical-Manual-1986.pdf",
+    "bytes": 3786606,
+    "sha256": "01be92c5c7a9e90b8319f46f9fed52b446a2676e9b1c362d10e4214b8f9cef72"
+  },
+  {
+    "file": "Am7990-LANCE-Technical-Manual-1986.txt",
+    "bytes": 372468,
+    "sha256": "a842f1c4d33075d62384cb181c6cc1c24f3688cb10fc3ff2ad4f5e71463ff1f2"
+  },
+  {
+    "file": "mame-am79c90.cpp",
+    "bytes": 22716,
+    "sha256": "b64570f33e7af53865608356419f2f030f493650377587018e97a96453ced094"
+  },
+  {
+    "file": "simh-vax_xs.c",
+    "bytes": 29193,
+    "sha256": "1b7b446418fd6fd04dd37071208162737036ee3bbddefebb1187e9c50608dd68"
+  }
+]
