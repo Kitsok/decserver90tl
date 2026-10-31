@@ -1,0 +1,13 @@
+{
+  "address": "192.0.2.90",
+  "sessions": [],
+  "server_before": "SHOW SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:34\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   LAT_029000000001   Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:             MNENG1\u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> ",
+  "remote_console_before": "SHOW SERVER REMOTE CONSOLE\r\u001b[H\u001b[J\r\nRemote Console         \u001b[K\r\n  Inactivity Logout:   \u001b[K\u001b[J\r\n\r\nLocal> ",
+  "configuration": [
+    "SET INTERNET SUBNET MASK 255.255.255.0\r\r\nLocal> ",
+    "SET INTERNET ADDRESS 192.0.2.90\r\r\nLocal> ",
+    "SET NOPRIVILEGED\r\r\nLocal> "
+  ],
+  "passed": false,
+  "error": "Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x715c0a8397f0>\ncommand: /usr/bin/telnet\nargs: [b'/usr/bin/telnet', b'192.0.2.90', b'23']\nbuffer (last 100 chars): \" '^]'.\\r\\n\\r\\r\\r\\n\\x07#\\x00\\r\\r\\r\\r\\n\\x07#\\x00\"\nbefore (last 100 chars): \" '^]'.\\r\\n\\r\\r\\r\\n\\x07#\\x00\\r\\r\\r\\r\\n\\x07#\\x00\"\nafter: <class 'pexpect.exceptions.TIMEOUT'>\nmatch: None\nmatch_index: None\nexitstatus: None\nflag_eof: False\npid: 434781\nchild_fd: 10\nclosed: False\ntimeout: 20\ndelimiter: <class 'pexpect.exceptions.EOF'>\nlogfile: <_io.TextIOWrapper name='/home/kostik/work/decnet/decserver90tl/run/telnet-transcript.log' mode='w' encoding='UTF-8'>\nlogfile_read: None\nlogfile_send: None\nmaxread: 2000\nignorecase: False\nsearchwindowsize: None\ndelaybeforesend: 0.05\ndelayafterclose: 0.1\ndelayafterterminate: 0.1\nsearcher: searcher_re:\n    0: re.compile('(?im)^Local> ')\n    1: re.compile('Password>')\n    2: re.compile('Enter username>')\n    3: re.compile('Username>')"
+}

@@ -27,6 +27,8 @@ def main():
         try:
             session.login()
             session.privilege()
+            report['server_before'] = session.command('SHOW SERVER')
+            report['remote_console_before'] = session.command('SHOW SERVER REMOTE CONSOLE')
             report['configuration'] = [session.command(command) for command in (
                 'SET INTERNET SUBNET MASK 255.255.255.0',
                 f'SET INTERNET ADDRESS {args.address}',
@@ -36,6 +38,7 @@ def main():
                     client = pexpect.spawn('/usr/bin/telnet', [args.address, '23'],
                                            encoding='ascii', codec_errors='replace', timeout=20)
                     client.logfile = transcript
+                    client.linesep = '\r'
                     responses = {}
                     try:
                         client.expect('Escape character is')
