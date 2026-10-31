@@ -1,0 +1,58 @@
+{
+  "initial_file_sha256": "0741d8b5c418d06c6652f35f29b89ce5f33694abb355c06050cb02302455af93",
+  "file_bytes": 65536,
+  "commands": [
+    {
+      "command": "SET SERVER NAME DS90VOL",
+      "response": "SET SERVER NAME DS90VOL\r\r\nLocal> "
+    },
+    {
+      "command": "SHOW SERVER",
+      "response": "SHOW SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:35\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   DS90VOL            Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:          \u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> "
+    },
+    {
+      "command": "DEFINE SERVER NAME DS90DEFINED",
+      "response": "DEFINE SERVER NAME DS90DEFINED\r\r\nLocal> "
+    },
+    {
+      "command": "SHOW SERVER",
+      "response": "SHOW SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:38\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   DS90VOL            Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:          \u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> "
+    },
+    {
+      "command": "LIST SERVER",
+      "response": "LIST SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:39\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   DS90DEFINED        Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:             MNENG1\u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> "
+    },
+    {
+      "command": "CHANGE SERVER NAME DS90SAVED",
+      "response": "CHANGE SERVER NAME DS90SAVED\r\r\nLocal> "
+    },
+    {
+      "command": "SHOW SERVER",
+      "response": "SHOW SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:41\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   DS90SAVED          Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:          \u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> "
+    },
+    {
+      "command": "LIST SERVER",
+      "response": "LIST SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:43\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   DS90SAVED          Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:             MNENG1\u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> "
+    }
+  ],
+  "minimum_simulated_write_drain_seconds": 10,
+  "file_sha256_before_exit": "0741d8b5c418d06c6652f35f29b89ce5f33694abb355c06050cb02302455af93",
+  "file_sha256_after_exit": "1f8f5967ad3b14b10b515283f4fc1ceb604c7e608decbb762079e5fea73306a5",
+  "host_file_unchanged_while_running": true,
+  "host_file_changed_after_exit": true,
+  "restart_show_server": "SHOW SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:34\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   LAT_029000000001   Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:          \u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> ",
+  "restart_list_server": "LIST SERVER\r\u001b[2J\u001b[H \u0000\u001b[K\r\n\u001b[K\r\nNetwork Access SW V2.4 BL50 for DS90TL  ROM        Uptime:   0 00:00:36\u001b[K\r\n\u001b[K\r\nAddress:   02-90-00-00-00-01   Name:   DS90SAVED          Number:     0\u001b[K\r\n\u001b[K\r\nIdentification:  \u001b[K\r\n\u001b[K\r\nCircuit Timer:            80           Password Limit:            3\u001b[K\r\nConsole Port:              1           Prompt:              Local> \u001b[K\r\nInactivity Timer:         30           Queue Limit:             100\u001b[K\r\nKeepalive Timer:          20           Retransmit Limit:          8\u001b[K\r\nMulticast Timer:          30           Session Limit:            64\u001b[K\r\nNode Limit:              200           Software:             MNENG1\u001b[K\r\n                                       TFTP Host:   255.255.255.255\u001b[K\r\n\u001b[K\r\nService Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAnnouncements,  Broadcast,  Dump,  Lock\u0000\r\n\r\nLocal> ",
+  "startup_warnings": [
+    "[  34.3s] UART 1: Local -602- Internal memory error in server parameters\n",
+    "[  34.4s] UART 1: Local -603- Communications server defaults in effect\n"
+  ],
+  "change_restored_to_operational_database": false,
+  "change_survived_in_permanent_database": true,
+  "in_session_checks": {
+    "set_updates_operational": true,
+    "define_leaves_operational_unchanged": true,
+    "define_updates_permanent": true,
+    "change_updates_operational": true,
+    "change_updates_permanent": true
+  }
+}

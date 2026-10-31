@@ -418,3 +418,15 @@ and inbound LAT sessions are still untested. The register-level DMA callbacks
 and active-low level-3 interrupt wiring required no changes for these exchanges.
 The loopback fixture independently checks CSR3=6 byte order, ownership, RX/TX
 interrupt flags and acknowledgement. See network.md and the Ethernet reports.
+
+### Permanent database survives; operational startup restoration does not
+
+A two-boot isolated test established SET/DEFINE/CHANGE behavior using distinct
+server names. In-session SHOW and LIST expose the correct operational and
+permanent values. After CHANGE, normal host shutdown and restart, LIST retains
+the changed name but SHOW uses the generated LAT_029000000001 default, with
+-602/-603 startup warnings. This narrows the open problem: the host NVRAM file
+is saved and reloaded, and the permanent value is readable, while applying the
+saved server parameters during startup fails. Additional queued-write drain
+time did not resolve it. The validation/restoration cause and other record types
+remain unverified. See settings-storage.md and analysis/settings-verification.json.

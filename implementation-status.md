@@ -239,3 +239,13 @@ An independent register loopback fixture verified DMA byte order, descriptor
 ownership and interrupt cause/acknowledgement. Full Telnet login and inbound
 LAT sessions remain untested. See [network.md](network.md) and the two recorded
 Ethernet verification reports for scope and commands.
+
+## Configuration persistence diagnosis
+
+SET, DEFINE and CHANGE correctly update the operational/permanent databases in
+session. The 64 KiB configram backing file is saved on normal MAME exit and read
+on the next start. A saved server name remains visible in LIST after restart,
+but SHOW falls back to defaults with -602/-603. Startup restoration of server
+parameters is therefore still defective; host file persistence alone is not the
+remaining problem. See settings-storage.md for paths, semantics and the isolated
+two-boot diagnostic. No production storage behavior was changed by this check.

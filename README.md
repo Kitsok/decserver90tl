@@ -54,3 +54,7 @@ Ethernet: `./run.sh --interactive --tap ds90tap` uses the existing LANCE
 model and a prepared, user-owned TAP on a bridge. See [network.md](network.md)
 for lab setup, guest IP commands, packet captures and verified ARP/ping/Telnet
 negotiation. Without `--tap`, networking stays offline.
+
+Configuration command semantics, NVRAM file paths, host save timing and the
+remaining startup-restoration defect are documented in
+[settings-storage.md](settings-storage.md).
