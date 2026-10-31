@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
 
 class ds90_cpu_device : public fscpu32_device
 {
@@ -153,6 +154,7 @@ private:
 	u32 m_clock_ticks = 0;
 	unsigned m_probe_port = 0;
 	unsigned m_probe_count = 0;
+	std::vector<u8> m_probe_data;
 	unsigned m_serial_events = 0;
 	unsigned m_uart_commands[8]{};
 	emu_timer *m_observer = nullptr;
@@ -258,16 +260,22 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
 
 TIMER_CALLBACK_MEMBER(ds90tl_state::uart_probe)
 {
-	if (!m_probe_port) return;
+	if (!m_probe_port || m_probe_count >= m_probe_data.size()) return;
 	const unsigned port = m_probe_port - 1;
 	duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
-	std::fprintf(stderr, "DS90 FIFO-INJECT port=%u byte=0d csr=%02x mr1=%02x mr2=%02x sr=%02x tx_rate=%d\n",
-		m_probe_port, channel.get_chan_CSR(), channel.read_MR1(), channel.read_MR2(),
+	if (channel.read_chan_reg(1) & 1)
+	{
+		m_probe_timer->adjust(attotime::from_seconds(1)); // diagnostic backpressure
+		return;
+	}
+	const u8 data = m_probe_data[m_probe_count];
+	std::fprintf(stderr, "DS90 FIFO-INJECT port=%u byte=%02x csr=%02x mr1=%02x mr2=%02x sr=%02x tx_rate=%d\n",
+		m_probe_port, data, channel.get_chan_CSR(), channel.read_MR1(), channel.read_MR2(),
 		channel.read_chan_reg(1), channel.get_tx_rate());
 	// Diagnostic FIFO injection only: bypasses receiver enable, framing,
-	// baud clocks and modem pins. Three paced CRs cannot overfill a 3-byte FIFO.
-	channel.rx_fifo_push(0x0d, 0);
-	if (++m_probe_count < 3) m_probe_timer->adjust(attotime::from_seconds(1));
+	// baud clocks and modem pins. Wait for an empty FIFO before the next byte.
+	channel.rx_fifo_push(data, 0);
+	if (++m_probe_count < m_probe_data.size()) m_probe_timer->adjust(attotime::from_seconds(1));
 }
 
 TIMER_CALLBACK_MEMBER(ds90tl_state::tpu_complete)
@@ -360,6 +368,18 @@ void ds90tl_state::machine_reset()
 	const char *probe = std::getenv("DS90_UART_PROBE_PORT");
 	m_probe_port = probe ? std::clamp(std::atoi(probe), 0, 8) : 0;
 	m_probe_count = m_serial_events = 0;
+	m_probe_data.clear();
+	const char *probe_hex = std::getenv("DS90_UART_PROBE_HEX");
+	const std::string hex = probe_hex ? probe_hex : "0d0d0d";
+	if (hex.size() > 256 || (hex.size() & 1)) fatalerror("Invalid diagnostic UART input length\n");
+	for (unsigned i = 0; i < hex.size(); i += 2)
+	{
+		const std::string byte = hex.substr(i, 2);
+		char *end = nullptr;
+		const unsigned long value = std::strtoul(byte.c_str(), &end, 16);
+		if (end != byte.c_str() + 2) fatalerror("Invalid diagnostic UART hex input\n");
+		m_probe_data.push_back(u8(value));
+	}
 	std::fill(std::begin(m_uart_commands), std::end(m_uart_commands), 0);
 	if (m_probe_port)
 	{

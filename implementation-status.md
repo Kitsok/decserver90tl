@@ -4,8 +4,9 @@
 with 4 MiB RAM. With the opt-in ROM alignment assist, startup passes the
 previous 0x543 failure, initializes all four DUARTs and reaches the scheduler.
 With one extra RAM wait cycle, the 60-second bounded run also avoids the
-scheduler idle error. Startup remains incomplete: no Local prompt, network
-backend or external modem endpoint is available.
+scheduler idle error. The diagnostic login sequence now reaches Local on
+port 1. External serial/network endpoints are still absent, and firmware
+reports server-parameter warnings with defaults in effect.
 
 ## Verified
 
@@ -182,3 +183,22 @@ The patched port-1 probe exits 0 after 30 simulated seconds and consumes
 all three diagnostic CRs. The next milestone is supplying a username and
 reaching Local through a reproducible input path. This fix is committed
 before that next investigation; no external serial endpoint is claimed.
+
+## Local prompt checkpoint
+
+Original MNENG3 accepts username SIMULATOR and reaches Local on port 1
+with alignment assistance and one RAM wait cycle. This was reproduced from
+an absent NVRAM directory using a 60-second initialization run followed by
+a 50-second login run. Both exit 0. Diagnostic input is three CRs followed
+by SIMULATOR and CR, starting at second 30, one byte per second.
+
+The bounded probe accepts 1..128 hex-encoded bytes and applies backpressure
+when its FIFO is nonempty. Malformed, oversized and empty inputs are rejected
+before simulator launch. It continues to bypass real serial framing and
+modem signals. All source/image hashes, commands, evidence paths and limits
+are in `analysis/local-prompt-verification.json`.
+
+The firmware emits warnings 602/603 for server parameters and uses defaults.
+That is unresolved and is not hidden by the successful prompt test. No host
+serial endpoint or network backend is attached. Commit this milestone before
+investigating the parameter warnings or external serial integration.

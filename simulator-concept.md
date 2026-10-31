@@ -236,6 +236,12 @@ emulated UART**. The next is **a real LAT connection over TAP**. Those prove
 the CPU/peripheral and network boundaries before investing in complete modem
 integration or detailed flash behavior.
 
+Checkpoint 2026-10-31: the original firmware reaches Local through an
+opt-in diagnostic FIFO/login sequence and provisional ROM/timing services.
+See `analysis/local-prompt-verification.json`. External serial endpoints,
+decoded wire transmission, live packets and full configuration fidelity
+remain outstanding; the prompt test does not establish those boundaries.
+
 ## Open decisions requiring evidence
 
 Exact CPU derivative and memory aliases; ROM handoff and any ROM callbacks;

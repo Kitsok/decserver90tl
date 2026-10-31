@@ -293,7 +293,8 @@ checks are patched out.
   and consumes three diagnostic FIFO-injected CR bytes through its ISR.
 - Port 8 also consumes three diagnostic CRs and writes the DS90TL banner
   and `Enter username>` prompt to its transmit holding register.
-- No Local prompt, decoded serial-wire output or external endpoint is demonstrated.
+- A subsequent login test reaches Local on port 1; see the recipe and
+  limitations below. No decoded serial-wire output or external endpoint yet.
 - Transmit behavior differs between ports 1 and 8 and is the next
   investigation. Physical UART/TPU interrupt wiring remains unresolved. A holding-register trace is not a modem backend.
 - Ethernet driver identification is strong, but DMA/ring behavior and host
@@ -348,4 +349,36 @@ their numeric values change. A subsequent identical port-1 probe emits the
 full banner and Enter username prompt, with TX-ready asserted between
 holding-register writes. The 30-second run exits normally. Command/status
 traces are included in the regression log, and `patches/README.md` explains
-the change and its limits. No decoded wire capture or Local prompt yet.
+the change and its limits. That regression reached the username prompt;
+the later login test below reaches Local through FIFO injection.
+
+## First Local prompt: reproducible diagnostic login
+
+The injector now accepts a bounded byte sequence rather than only CRs.
+Three leading CRs, followed by SIMULATOR and CR, yield an accepted username
+and Local prompt on port 1. A single leading CR control did not establish
+that login state; initialization/autobaud interaction remains to be mapped.
+The working sequence begins at simulated second 30, one byte per second.
+
+A fresh-store reproduction first ran 60 seconds from absent NVRAM, then
+rebooted with the same store for a 50-second login experiment. Both exited 0
+and the original firmware hash stayed unchanged. The report and complete
+commands are in `analysis/local-prompt-verification.json`; the register-level
+transcript is `analysis/mneng3-local-repro-login-50s.tx.txt`.
+
+Observed tail:
+
+```
+Enter username> SIMULATOR
+Local -602- Internal memory error in server parameters
+Local -603- Communications server defaults in effect
+Local>
+```
+
+Do not interpret the parameter warnings as a proven physical RAM fault or
+as a fully diagnosed NVRAM problem. The guest reports defaults in effect;
+the underlying validity/initialization cause is the next investigation.
+No firmware warning is suppressed. Input bypasses receiver-enable, framing,
+baud sampling and modem pins; output is a TX-register trace, not decoded wire
+capture. This establishes the original command interpreter's prompt under
+the current assisted model, not a complete eight-modem/network appliance.

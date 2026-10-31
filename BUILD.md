@@ -60,7 +60,8 @@ provisional board model. One extra RAM wait cycle per 16-bit transfer avoids
 the observed scheduler idle timeout; this setting is experimental, not a
 measured hardware value. Default wait cycles remain zero. For an independent
 persistent-store experiment, add `--nvram-directory run/nvram-new` using a
-new directory. Neither option establishes a working Local prompt.
+new directory. The no-input run alone does not establish a Local prompt;
+use the login recipe below to exercise that milestone.
 
 ## Explicit experimental choices
 
@@ -100,9 +101,9 @@ new directory. Neither option establishes a working Local prompt.
 - UART writes are observed at the transmit holding registers; this does not
   yet establish completed transmission or an interactive serial endpoint.
 
-The first milestone remains a working original-firmware `Local>` prompt.
-Until the unresolved handoff and board behavior are validated, these
-experiments must not be described as a booted DECserver.
+The original firmware now reaches `Local>` through a diagnostic FIFO input
+sequence, with the explicit substitutions above. It is not yet connected to
+a host serial endpoint, and hardware/ROM fidelity remains incomplete.
 
 ## Diagnostic receive probe
 
@@ -121,3 +122,25 @@ The provisional TPU status adapter exposes receive-ready bits 0..7 and
 combined DUART interrupt bits 8..11, and implements clear-on-zero status
 writes. Exact pin routing, capture/edge behavior and TPU microcode remain
 unmodeled. Observe `FIFO-INJECT`, `SERIAL-STATUS`, and `UART-RX` log entries.
+
+## Verified Local prompt recipe
+
+Use an initially absent NVRAM directory for a fresh-store reproduction.
+The first run allows firmware to initialize persistent records; the second
+supplies three CRs, then SIMULATOR and CR, at one byte per simulated second.
+
+```sh
+python3 tools/run_mneng3.py --seconds 60 --rom-alignment-assist --ram-wait-cycles 1 --nvram-directory run/nvram-local-repro-20261031
+python3 tools/run_mneng3.py --seconds 50 --rom-alignment-assist --ram-wait-cycles 1 --nvram-directory run/nvram-local-repro-20261031 --uart-probe-port 1 --uart-probe-at 30 --uart-probe-hex 0d0d0d53494d554c41544f520d
+```
+
+Both verified runs exit 0. Port-1 TX-register output includes
+`Enter username> SIMULATOR` and `Local>`. The firmware also reports error
+messages 602/603 for server parameters and defaults in effect. Their cause
+is unresolved. Logs, a printable transcript and source hashes are preserved
+in `analysis/local-prompt-verification.json` and the referenced files.
+
+`--uart-probe-hex` accepts 1..128 bytes. The injector waits for an empty FIFO
+before the next byte, and the run remains bounded even if input is not
+consumed. This diagnostic bypasses serial framing, receiver-enable checks
+and modem pins. It is not an interactive external serial interface.

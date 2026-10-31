@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-31",
+  "firmware_sha256": "a3764087d79df64eb7124056824652cf23b558fcae2029f887e4a37a3db49ad3",
+  "mame_revision": "2692d09218b67df92b9eb26b7c0c0cc04ca4c72e",
+  "driver_sha256": "f5815ed0a62d44bb8e4d14e0f5f5f9796334a683b3dfaa4b1ec58517f78b9720",
+  "run_wrapper_sha256": "68f43602506bb2f868fe435f1bf482541c2ccd82808ee70c02f8aa8041a32e7f",
+  "cold_initial_state": "NVRAM directory did not exist; MAME initialized storage to FF",
+  "cold": {
+    "command": [
+      "python3",
+      "tools/run_mneng3.py",
+      "--nvram-directory",
+      "run/nvram-local-repro-20261031",
+      "--rom-alignment-assist",
+      "--ram-wait-cycles",
+      "1",
+      "--seconds",
+      "60"
+    ],
+    "exit_status": 0,
+    "log": "analysis/mneng3-local-repro-cold-60s.log"
+  },
+  "login": {
+    "command": [
+      "python3",
+      "tools/run_mneng3.py",
+      "--nvram-directory",
+      "run/nvram-local-repro-20261031",
+      "--rom-alignment-assist",
+      "--ram-wait-cycles",
+      "1",
+      "--seconds",
+      "50",
+      "--uart-probe-port",
+      "1",
+      "--uart-probe-at",
+      "30",
+      "--uart-probe-hex",
+      "0d0d0d53494d554c41544f520d"
+    ],
+    "exit_status": 0,
+    "log": "analysis/mneng3-local-repro-login-50s.log",
+    "tx_bytes": 687,
+    "username": "SIMULATOR",
+    "local_prompt": true
+  },
+  "observed_warnings": [
+    "Local -602- Internal memory error in server parameters",
+    "Local -603- Communications server defaults in effect"
+  ],
+  "limits": [
+    "FIFO injection bypasses receiver enable, framing, baud sampling and modem pins",
+    "TX transcript contains register writes, not decoded serial-wire data",
+    "ROM alignment, timing, port diagnostics and persistent-storage model remain provisional",
+    "No external serial or network backend attached"
+  ]
+}
