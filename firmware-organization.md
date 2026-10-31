@@ -453,3 +453,14 @@ and actual corrupt-record fallback remain intact. Repeated SET/DEFINE/CHANGE
 and restart checks now restore the changed server name in both databases,
 without -602/-603. See analysis/settings-handoff-verification.json and the
 updated analysis/settings-verification.json.
+
+### Physical NVRAM capacity/technology estimate
+
+Runtime inspection gives the initialized record table's highest primary logical
+allocation end as 0xe800. Conversion by /2 plus base 0x100c00 yields exclusive
+end 0x108000, consistent with a 32 KiB device mapped from 0x100000. The model's
+64 KiB backing region is oversized and remains unchanged for compatibility.
+Byte programming, a 10 ms writer-service interval and readback polling suggest
+parallel EEPROM (28C256 class); a compatible DS1230-type battery-backed SRAM
+cannot be excluded. The writer's delay constant is 0x960, or decimal 2400.
+See nvram-device.md for sources and the limits of this inference.

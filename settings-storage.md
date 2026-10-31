@@ -124,3 +124,11 @@ JSON report. `--assert-restored` makes the two-boot diagnostic fail if database
 semantics or startup restoration regress. Without it, the tool records observations
 including failures. A user-owned initialized seed with
 other credentials needs a corresponding test adaptation.
+
+## Likely real memory device
+
+New firmware-layout inspection points to 32 KiB of useful physical storage,
+with a parallel 28C256-class EEPROM the leading candidate. A compatible
+battery-backed SRAM remains possible. The 64 KiB simulator file is deliberately
+unchanged. See [nvram-device.md](nvram-device.md) for the capacity arithmetic,
+write/polling evidence, datasheet comparisons and uncertainty.
