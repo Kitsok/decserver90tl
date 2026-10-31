@@ -34,6 +34,12 @@ def main():
     actual = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()
     if actual != expected:
         raise SystemExit(f'MAME revision mismatch: expected {expected}, found {actual}')
+    for patch in sorted((ROOT/'patches').glob('mame-*.patch')):
+        reverse = subprocess.run(['git', '-C', str(source), 'apply', '--reverse', '--check', str(patch)],
+                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if reverse.returncode:
+            subprocess.run(['git', '-C', str(source), 'apply', '--check', str(patch)], check=True)
+            subprocess.run(['git', '-C', str(source), 'apply', str(patch)], check=True)
     destination = source / 'src/mame/dec/decserver90tl.cpp'
     destination.parent.mkdir(exist_ok=True)
     driver = ROOT/'src/mame/decserver90tl.cpp'

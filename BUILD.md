@@ -34,8 +34,10 @@ python3 tools/build_mame.py -j 2
 The script verifies `mame-revision.txt`, copies the driver into the ignored
 checkout and registers it in MAME's driver list. It also restricts the
 M680X0 group's build file list to the CPU32/Musashi engine and common code,
-omitting unrelated generated 68000/68008 engines. CPU implementation code is
-unchanged. It builds the `ds90tl` subtarget and copies the result to
+omitting unrelated generated 68000/68008 engines. The upstream CPU implementation code is unchanged; the board-specific
+CPU adapter provides the documented alignment/timing substitutions. Local
+MAME device corrections in `patches/mame-*.patch` are applied reproducibly;
+see `patches/README.md`. It builds the `ds90tl` subtarget and copies the result to
 `build/mame-ds90tl`. Source and outputs in `.deps/`, `build/` and `run/`
 are ignored by this repository.
 

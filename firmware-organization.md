@@ -333,3 +333,19 @@ validation run, however, consumes all three injected CRs and emits the full
 DS90TL V2.4 banner and `Enter username>` prompt. Register-level transcripts
 are saved beside the corresponding logs. They are not decoded wire captures.
 Investigation of transmit asymmetry follows the receive-path checkpoint commit.
+
+## DUART transmit-rate update correction
+
+Channel controls showed that ports 2, 3 and 8 produced the username banner,
+while port 1 stopped after its initial CR despite transmitter enable and
+TX-ready at that write. This was a model defect, not a firmware flow-control
+requirement: MAME's ACR write handler refreshed both serial rates, and the
+unchanged-rate refresh reset an active shift register and its timer while
+leaving the DUART's separate ready status stale.
+
+The pinned dependency patch now changes serial-interface rates only when
+their numeric values change. A subsequent identical port-1 probe emits the
+full banner and Enter username prompt, with TX-ready asserted between
+holding-register writes. The 30-second run exits normally. Command/status
+traces are included in the regression log, and `patches/README.md` explains
+the change and its limits. No decoded wire capture or Local prompt yet.

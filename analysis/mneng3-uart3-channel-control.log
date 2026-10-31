@@ -1,0 +1,1176 @@
+DS90 CPU rom_alignment_assist=1 ram_wait_cycles=1
+DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0
+DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; no network backend
+DS90 WRITE-INTERNAL pc=0794459e address=fffa00 data=60cf mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa04 data=9b00 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa38 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa44 data=3a56 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa46 data=0155 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa48 data=0005 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa4a data=68b0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa4c data=fffb mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa4e data=6801 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa58 data=1003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa5a data=78f0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa5c data=2003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa5e data=6870 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa60 data=3000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa62 data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa64 data=4000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa66 data=78f0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa68 data=8007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa6a data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa6c data=9007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa6e data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa70 data=a007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa72 data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa74 data=b007 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa76 data=7bf0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa10 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa16 data=00f2 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa14 data=000d mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa1e data=0048 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffa1c data=0037 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc00 data=4081 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc14 data=0008 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc16 data=0034 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc08 data=0030 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffc0a data=202c mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffb04 data=fff0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe00 data=00c3 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe0c data=9988 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe0e data=8888 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe10 data=8888 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe12 data=8888 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe14 data=0900 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe16 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff00 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff10 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff20 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff30 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff40 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff50 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff60 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff70 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff80 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffff90 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffa0 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffb0 data=000b mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffc0 data=0003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffc4 data=2000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffd0 data=0003 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffe0 data=0092 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffe4 data=00e0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=ffffe6 data=01c0 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffff0 data=0092 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffff4 data=001d mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffff6 data=003a mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe18 data=a3ff mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe1a data=ffff mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe1c data=f555 mask=ffff
+DS90 WRITE-INTERNAL pc=0794459e address=fffe1e data=aaaa mask=ffff
+DS90 READ-INTERNAL pc=079445a8 address=fffc14 data=0008 mask=00ff
+DS90 READ-INTERNAL pc=079445b0 address=fffa06 data=0080 mask=00ff
+DS90 WRITE-INTERNAL pc=079445e8 address=fffa20 data=00ec mask=ffff
+DS90 WRITE-INTERNAL pc=079445ee address=fffa26 data=0055 mask=ffff
+DS90 WRITE-INTERNAL pc=079445f4 address=fffa26 data=00aa mask=ffff
+DS90 READ-INTERNAL pc=079445fe address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079445fe address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944602 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944602 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944602 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794460e address=ffffd2 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794461e address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794461e address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794462c address=ffffd2 data=0000 mask=ffff
+DS90 CLOCK tick=1 pc=07944612 sr=2600 vector=00001078
+DS90 READ-INTERNAL pc=0794461e address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794461e address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794462c address=ffffd2 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794461e address=fffe18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794461e address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0c00 mask=ffff
+DS90 READ-INTERNAL pc=07944622 address=fffe18 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794462c address=ffffd2 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=0794467a address=fffc16 data=003f mask=ffff
+DS90 WRITE-INTERNAL pc=07944680 address=fffc14 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07944686 address=fffc14 data=0008 mask=ffff
+DS90 WRITE-INTERNAL pc=0794468c address=fffa1e data=00c8 mask=ffff
+DS90 READ-INTERNAL pc=079404c2 address=fffa18 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079404c2 address=fffa18 data=0037 mask=ffff
+DS90 READ-INTERNAL pc=079404ca address=fffa10 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079404ca address=fffa10 data=000d mask=ffff
+DS90 CLOCK tick=2 pc=079404ee sr=2604 vector=00001078
+DS90 CLOCK tick=3 pc=079404f0 sr=2600 vector=00001078
+DS90 PROGRESS ms=1 pc=079404f0 sp=079dbfbc sr=2608 clock_ticks=4 guest_us=00000000
+DS90 PROGRESS ms=2 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=12 guest_us=00000000
+DS90 PROGRESS ms=3 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=20 guest_us=00000000
+DS90 PROGRESS ms=4 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=29 guest_us=00000000
+DS90 PROGRESS ms=5 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=37 guest_us=00000000
+DS90 PROGRESS ms=6 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=45 guest_us=00000000
+DS90 PROGRESS ms=7 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=53 guest_us=00000000
+DS90 PROGRESS ms=8 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=61 guest_us=00000000
+DS90 PROGRESS ms=9 pc=07871448 sp=079dbfc0 sr=2604 clock_ticks=70 guest_us=00000000
+DS90 PROGRESS ms=10 pc=07871446 sp=079dbfc0 sr=2604 clock_ticks=78 guest_us=00000000
+DS90 WRITE-INTERNAL pc=0794165e address=fffa26 data=0055 mask=ffff
+DS90 WRITE-INTERNAL pc=07941666 address=fffa26 data=00aa mask=ffff
+DS90 WRITE-INTERNAL pc=0794165e address=fffa26 data=0055 mask=ffff
+DS90 WRITE-INTERNAL pc=07941666 address=fffa26 data=00aa mask=ffff
+DS90 PROGRESS ms=100 pc=0787215a sp=079dbf84 sr=2619 clock_ticks=815 guest_us=00000000
+DS90 PROGRESS ms=200 pc=0786f49a sp=079dbf68 sr=2600 clock_ticks=1634 guest_us=00000000
+DS90 PROGRESS ms=300 pc=0786f4ac sp=079dbf68 sr=2600 clock_ticks=2453 guest_us=00000000
+DS90 WRITE-INTERNAL pc=079446fc address=fffa22 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07944704 address=fffa24 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=0794470c address=fffe1c data=f555 mask=ffff
+DS90 WRITE-INTERNAL pc=0794470c address=fffe1c data=c555 mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400004 data=9090 mask=ff00
+DS90 UART-CMD port=1 byte=90 sr_before=00 sr_after=00 pc=079425b4
+DS90 WRITE-UART pc=079425be address=400014 data=9090 mask=ff00
+DS90 UART-CMD port=2 byte=90 sr_before=00 sr_after=00 pc=079425be
+DS90 WRITE-UART pc=079425ce address=40001a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400008 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40000a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400008 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40001e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40000c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40000e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40001c data=00ff mask=ff00
+DS90 WRITE-UART pc=079432f4 address=400004 data=2020 mask=ff00
+DS90 UART-CMD port=1 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400004 data=3030 mask=ff00
+DS90 UART-CMD port=1 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400004 data=1010 mask=ff00
+DS90 UART-CMD port=1 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400000 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400000 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400002 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40000a data=0000 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400008 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40000a data=0101 mask=ff00
+DS90 READ-UART pc=0794389e address=400002 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400002 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400002 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400002 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400002 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=fffe mask=ffff
+DS90 WRITE-UART pc=079432f4 address=400014 data=2020 mask=ff00
+DS90 UART-CMD port=2 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400014 data=3030 mask=ff00
+DS90 UART-CMD port=2 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400014 data=1010 mask=ff00
+DS90 UART-CMD port=2 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400010 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400010 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400012 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40000a data=0101 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400008 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40000a data=1111 mask=ff00
+DS90 READ-UART pc=0794389e address=400012 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400012 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400012 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400012 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400012 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=fffd mask=ffff
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=feff mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400024 data=9090 mask=ff00
+DS90 UART-CMD port=3 byte=90 sr_before=00 sr_after=00 pc=079425b4
+DS90 WRITE-UART pc=079425be address=400034 data=9090 mask=ff00
+DS90 UART-CMD port=4 byte=90 sr_before=00 sr_after=00 pc=079425be
+DS90 WRITE-UART pc=079425ce address=40003a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400028 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40002a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400028 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40003e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40002c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40002e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40003c data=00ff mask=ff00
+DS90 WRITE-UART pc=079432f4 address=400024 data=2020 mask=ff00
+DS90 UART-CMD port=3 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400024 data=3030 mask=ff00
+DS90 UART-CMD port=3 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400024 data=1010 mask=ff00
+DS90 UART-CMD port=3 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400020 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400020 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400022 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40002a data=0000 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400028 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40002a data=0101 mask=ff00
+DS90 READ-UART pc=0794389e address=400022 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400022 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400022 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400022 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400022 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=fffb mask=ffff
+DS90 WRITE-UART pc=079432f4 address=400034 data=2020 mask=ff00
+DS90 UART-CMD port=4 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400034 data=3030 mask=ff00
+DS90 UART-CMD port=4 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400034 data=1010 mask=ff00
+DS90 UART-CMD port=4 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400030 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400030 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400032 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40002a data=0101 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400028 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40002a data=1111 mask=ff00
+DS90 READ-UART pc=0794389e address=400032 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400032 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400032 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400032 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400032 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=fff7 mask=ffff
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=fdff mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400044 data=9090 mask=ff00
+DS90 UART-CMD port=5 byte=90 sr_before=00 sr_after=00 pc=079425b4
+DS90 WRITE-UART pc=079425be address=400054 data=9090 mask=ff00
+DS90 UART-CMD port=6 byte=90 sr_before=00 sr_after=00 pc=079425be
+DS90 WRITE-UART pc=079425ce address=40005a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400048 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40004a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400048 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40005e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40004c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40004e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40005c data=00ff mask=ff00
+DS90 WRITE-UART pc=079432f4 address=400044 data=2020 mask=ff00
+DS90 UART-CMD port=5 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400044 data=3030 mask=ff00
+DS90 UART-CMD port=5 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400044 data=1010 mask=ff00
+DS90 UART-CMD port=5 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400040 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400040 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400042 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40004a data=0000 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400048 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40004a data=0101 mask=ff00
+DS90 READ-UART pc=0794389e address=400042 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400042 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400042 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400042 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400042 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=ffef mask=ffff
+DS90 WRITE-UART pc=079432f4 address=400054 data=2020 mask=ff00
+DS90 UART-CMD port=6 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400054 data=3030 mask=ff00
+DS90 UART-CMD port=6 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400054 data=1010 mask=ff00
+DS90 UART-CMD port=6 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400050 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400050 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400052 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40004a data=0101 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400048 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40004a data=1111 mask=ff00
+DS90 READ-UART pc=0794389e address=400052 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400052 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400052 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400052 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400052 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=ffdf mask=ffff
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=fbff mask=ffff
+DS90 WRITE-UART pc=079425b4 address=400064 data=9090 mask=ff00
+DS90 UART-CMD port=7 byte=90 sr_before=00 sr_after=00 pc=079425b4
+DS90 WRITE-UART pc=079425be address=400074 data=9090 mask=ff00
+DS90 UART-CMD port=8 byte=90 sr_before=00 sr_after=00 pc=079425be
+DS90 WRITE-UART pc=079425ce address=40007a data=8080 mask=ff00
+DS90 WRITE-UART pc=079425da address=400068 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=079425e6 address=40006a data=0000 mask=ff00
+DS90 READ-UART pc=079425ea address=400068 data=0000 mask=ff00
+DS90 READ-UART pc=079425ee address=40007e data=00ff mask=ff00
+DS90 WRITE-UART pc=079425f8 address=40006c data=0000 mask=ff00
+DS90 WRITE-UART pc=07942604 address=40006e data=0202 mask=ff00
+DS90 READ-UART pc=07942608 address=40007c data=00ff mask=ff00
+DS90 WRITE-UART pc=079432f4 address=400064 data=2020 mask=ff00
+DS90 UART-CMD port=7 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400064 data=3030 mask=ff00
+DS90 UART-CMD port=7 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400064 data=1010 mask=ff00
+DS90 UART-CMD port=7 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400060 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400060 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400062 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40006a data=0000 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400068 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40006a data=0101 mask=ff00
+DS90 READ-UART pc=0794389e address=400062 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400062 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400062 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400062 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400062 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=ffbf mask=ffff
+DS90 WRITE-UART pc=079432f4 address=400074 data=2020 mask=ff00
+DS90 UART-CMD port=8 byte=20 sr_before=00 sr_after=00 pc=079432f4
+DS90 WRITE-UART pc=079432fe address=400074 data=3030 mask=ff00
+DS90 UART-CMD port=8 byte=30 sr_before=00 sr_after=00 pc=079432fe
+DS90 WRITE-UART pc=07943308 address=400074 data=1010 mask=ff00
+DS90 UART-CMD port=8 byte=10 sr_before=00 sr_after=00 pc=07943308
+DS90 WRITE-UART pc=07943318 address=400070 data=1313 mask=ff00
+DS90 WRITE-UART pc=0794331e address=400070 data=0707 mask=ff00
+DS90 WRITE-UART pc=07943328 address=400072 data=cccc mask=ff00
+DS90 WRITE-UART pc=0794334a address=40006a data=0101 mask=ff00
+DS90 WRITE-UART pc=0794335e address=400068 data=e0e0 mask=ff00
+DS90 WRITE-UART pc=0794271e address=40006a data=1111 mask=ff00
+DS90 READ-UART pc=0794389e address=400072 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400072 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400072 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400072 data=0000 mask=ff00
+DS90 READ-UART pc=0794389e address=400072 data=0000 mask=ff00
+DS90 READ-INTERNAL pc=079433d8 address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=079433de address=fffe20 data=ff7f mask=ffff
+DS90 READ-INTERNAL pc=0794263e address=fffe20 data=0000 mask=ffff
+DS90 WRITE-INTERNAL pc=07942644 address=fffe20 data=f7ff mask=ffff
+DS90 WRITE-INTERNAL pc=07941e44 address=fffa18 data=0037 mask=ffff
+DS90 WRITE-INTERNAL pc=07941e4c address=fffa10 data=000d mask=ffff
+DS90 WRITE-INTERNAL pc=0794477c address=fffa22 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=07944790 address=fffe1c data=c555 mask=ffff
+DS90 WRITE-INTERNAL pc=07944790 address=fffe1c data=f555 mask=ffff
+DS90 READ-INTERNAL pc=fffff18e address=fffd4c data=0000 mask=ff00
+DS90 WRITE-INTERNAL pc=fffff18e address=fffd4c data=0101 mask=ff00
+DS90 READ-INTERNAL pc=fffff19e address=fffe20 data=0000 mask=ffff
+DS90 READ-INTERNAL pc=fffff18e address=fffd4c data=0100 mask=ff00
+DS90 WRITE-INTERNAL pc=fffff18e address=fffd4c data=0202 mask=ff00
+DS90 ROM-ALIGNMENT-ASSIST write32 pc=078ed000 address=0799f21f
+DS90 ROM-ALIGNMENT-ASSIST write32 pc=078ed004 address=0799f223
+DS90 PROGRESS ms=400 pc=fffff184 sp=079dbf00 sr=2604 clock_ticks=3254 guest_us=00015753
+DS90 PROGRESS ms=500 pc=07945462 sp=079dbf08 sr=2504 clock_ticks=4073 guest_us=0002dc6c
+DS90 PROGRESS ms=600 pc=07945464 sp=079dbf08 sr=2504 clock_ticks=4892 guest_us=00046186
+DS90 PROGRESS ms=700 pc=078a6b9a sp=079dbee0 sr=2504 clock_ticks=5711 guest_us=0005ee41
+DS90 PROGRESS ms=800 pc=078720ce sp=079dbf24 sr=2500 clock_ticks=6530 guest_us=0007735b
+DS90 PROGRESS ms=900 pc=fffff184 sp=079dbee4 sr=2600 clock_ticks=7350 guest_us=0008f875
+DS90 PROGRESS ms=1000 pc=078725d8 sp=079dbed0 sr=2500 clock_ticks=8169 guest_us=000a7d8f
+DS90 PROGRESS ms=1100 pc=0787251c sp=079dbeec sr=2500 clock_ticks=8988 guest_us=000c02a9
+DS90 PROGRESS ms=1200 pc=0793f4b4 sp=079dbef4 sr=2504 clock_ticks=9807 guest_us=000d8f64
+DS90 PROGRESS ms=1300 pc=0787251c sp=079dbeec sr=2500 clock_ticks=10626 guest_us=000f147e
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883aba address=079dbf15
+DS90 ROM-ALIGNMENT-ASSIST read32 pc=07883abc address=079dbf11
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883ae4 address=079dbf0d
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883b5a address=079dbf01
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883bec address=079dbeff
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883b5a address=079dbf01
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883bec address=079dbeff
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883b5a address=079dbf01
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883bec address=079dbeff
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883b5a address=079dbf01
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883bec address=079dbeff
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883b5a address=079dbf01
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883bec address=079dbeff
+DS90 ROM-ALIGNMENT-ASSIST read16 pc=07883b5a address=079dbf01
+DS90 PROGRESS ms=1400 pc=fffff184 sp=079dbe04 sr=2600 clock_ticks=11446 guest_us=00109997
+DS90 PROGRESS ms=1500 pc=0789494c sp=079dbec8 sr=250b clock_ticks=12265 guest_us=00121eb1
+DS90 PROGRESS ms=1600 pc=07894958 sp=079dbec8 sr=2501 clock_ticks=13084 guest_us=0013a3cb
+DS90 PROGRESS ms=1700 pc=07894958 sp=079dbec8 sr=2501 clock_ticks=13903 guest_us=00153086
+DS90 PROGRESS ms=1800 pc=07894974 sp=079dbec8 sr=250b clock_ticks=14722 guest_us=0016b5a0
+DS90 PROGRESS ms=1900 pc=fffff184 sp=079dbec0 sr=260b clock_ticks=15542 guest_us=00183aba
+DS90 UART-CMD port=1 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=1 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=1 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=1 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=1 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=1 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=1 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=1 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 UART-CMD port=1 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=1 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=1 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 UART-CMD port=2 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=2 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=2 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=2 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=2 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=2 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=2 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=2 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 UART-CMD port=2 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=2 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=2 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 UART-CMD port=3 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=3 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=3 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=3 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=3 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=3 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=3 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=3 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=3 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=3 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=3 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=4 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=4 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=4 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=4 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=4 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=4 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=4 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=4 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=4 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=4 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=4 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=5 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=5 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=5 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=5 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=5 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=5 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=5 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=5 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0400
+DS90 UART-CMD port=5 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=5 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=5 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0400
+DS90 SERIAL-STATUS pc=fffff19e cisr=0400
+DS90 UART-CMD port=6 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=6 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=6 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=6 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=6 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=6 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=6 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=6 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0400
+DS90 UART-CMD port=6 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=6 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=6 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0400
+DS90 SERIAL-STATUS pc=fffff19e cisr=0400
+DS90 UART-CMD port=7 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=7 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=7 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=7 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=7 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=7 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=7 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=7 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0800
+DS90 UART-CMD port=7 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=7 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=7 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0800
+DS90 SERIAL-STATUS pc=fffff19e cisr=0800
+DS90 UART-CMD port=8 byte=20 sr_before=00 sr_after=00 pc=079439ba
+DS90 UART-CMD port=8 byte=20 sr_before=00 sr_after=00 pc=07943a60
+DS90 UART-CMD port=8 byte=10 sr_before=00 sr_after=00 pc=07943a92
+DS90 UART-CMD port=8 byte=20 sr_before=00 sr_after=00 pc=07943aa8
+DS90 UART-CMD port=8 byte=10 sr_before=00 sr_after=00 pc=07943adc
+DS90 UART-CMD port=8 byte=20 sr_before=00 sr_after=00 pc=07943af2
+DS90 UART-CMD port=8 byte=20 sr_before=00 sr_after=00 pc=07943b78
+DS90 UART-CMD port=8 byte=05 sr_before=00 sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0800
+DS90 UART-CMD port=8 byte=02 sr_before=0c sr_after=0c pc=079434c0
+DS90 UART-CMD port=8 byte=80 sr_before=0c sr_after=0c pc=07944306
+DS90 UART-CMD port=8 byte=05 sr_before=0c sr_after=0c pc=0794341c
+DS90 SERIAL-STATUS pc=fffff19e cisr=0800
+DS90 SERIAL-STATUS pc=fffff19e cisr=0800
+DS90 SERIAL-STATUS pc=fffff19e cisr=0100
+DS90 UART-TX port=1 byte=0d char=. sr_before=0c
+DS90 PROGRESS ms=2000 pc=0794162e sp=079dbf6c sr=200a clock_ticks=16361 guest_us=0019bfd4
+DS90 PROGRESS ms=2100 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=17180 guest_us=001b44ee
+DS90 PROGRESS ms=2200 pc=07870298 sp=079dbe60 sr=2000 clock_ticks=17999 guest_us=001cd1a9
+DS90 PROGRESS ms=2300 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=18818 guest_us=001e56c2
+DS90 PROGRESS ms=2400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=19638 guest_us=001fdbdc
+DS90 PROGRESS ms=2500 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=20457 guest_us=002160f6
+DS90 PROGRESS ms=2600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=21276 guest_us=0022e610
+DS90 PROGRESS ms=2700 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=22095 guest_us=002472cb
+DS90 PROGRESS ms=2800 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=22914 guest_us=0025f7e5
+DS90 PROGRESS ms=2900 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=23734 guest_us=00277cff
+DS90 PROGRESS ms=3000 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=24553 guest_us=00290219
+DS90 PROGRESS ms=3100 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=25372 guest_us=002a8732
+DS90 PROGRESS ms=3200 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=26191 guest_us=002c13ed
+DS90 PROGRESS ms=3300 pc=0794162e sp=079dbf6c sr=200a clock_ticks=27010 guest_us=002d9907
+DS90 PROGRESS ms=3400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=27830 guest_us=002f1e21
+DS90 PROGRESS ms=3500 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=28649 guest_us=0030a33b
+DS90 PROGRESS ms=3600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=29468 guest_us=00322855
+DS90 PROGRESS ms=3700 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=30287 guest_us=0033b510
+DS90 PROGRESS ms=3800 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=31106 guest_us=00353a2a
+DS90 PROGRESS ms=3900 pc=fffff184 sp=079dbf64 sr=2611 clock_ticks=31926 guest_us=0036bf44
+DS90 PROGRESS ms=4000 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=32745 guest_us=0038445e
+DS90 PROGRESS ms=4100 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=33564 guest_us=0039c977
+DS90 PROGRESS ms=4200 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=34383 guest_us=003b5632
+DS90 PROGRESS ms=4300 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=35202 guest_us=003cdb4c
+DS90 PROGRESS ms=4400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=36022 guest_us=003e6066
+DS90 PROGRESS ms=4500 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=36841 guest_us=003fe580
+DS90 PROGRESS ms=4600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=37660 guest_us=00416a9a
+DS90 PROGRESS ms=4700 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=38479 guest_us=0042f755
+DS90 PROGRESS ms=4800 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=39298 guest_us=00447c6f
+DS90 PROGRESS ms=4900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=40118 guest_us=00460189
+DS90 PROGRESS ms=5000 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=40937 guest_us=004786a2
+DS90 PROGRESS ms=5100 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=41756 guest_us=00490bbc
+DS90 PROGRESS ms=5200 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=42575 guest_us=004a9877
+DS90 PROGRESS ms=5300 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=43394 guest_us=004c1d91
+DS90 PROGRESS ms=5400 pc=fffff184 sp=079dbf64 sr=2611 clock_ticks=44214 guest_us=004da2ab
+DS90 PROGRESS ms=5500 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=45033 guest_us=004f27c5
+DS90 PROGRESS ms=5600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=45852 guest_us=0050acdf
+DS90 PROGRESS ms=5700 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=46671 guest_us=0052399a
+DS90 PROGRESS ms=5800 pc=07941618 sp=079dbf6c sr=2000 clock_ticks=47490 guest_us=0053beb4
+DS90 PROGRESS ms=5900 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=48310 guest_us=005543cd
+DS90 PROGRESS ms=6000 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=49129 guest_us=0056c8e7
+DS90 PROGRESS ms=6100 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=49948 guest_us=00584e01
+DS90 PROGRESS ms=6200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=50767 guest_us=0059dabc
+DS90 PROGRESS ms=6300 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=51586 guest_us=005b5fd6
+DS90 PROGRESS ms=6400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=52406 guest_us=005ce4f0
+DS90 PROGRESS ms=6500 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=53225 guest_us=005e6a0a
+DS90 PROGRESS ms=6600 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=54044 guest_us=005fef24
+DS90 PROGRESS ms=6700 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=54863 guest_us=00617bdf
+DS90 PROGRESS ms=6800 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=55682 guest_us=006300f8
+DS90 PROGRESS ms=6900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=56502 guest_us=00648612
+DS90 PROGRESS ms=7000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=57321 guest_us=00660b2c
+DS90 PROGRESS ms=7100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=58140 guest_us=00679046
+DS90 PROGRESS ms=7200 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=58959 guest_us=00691d01
+DS90 PROGRESS ms=7300 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=59778 guest_us=006aa21b
+DS90 PROGRESS ms=7400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=60598 guest_us=006c2735
+DS90 PROGRESS ms=7500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=61417 guest_us=006dac4f
+DS90 PROGRESS ms=7600 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=62236 guest_us=006f3168
+DS90 PROGRESS ms=7700 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=63055 guest_us=0070be23
+DS90 PROGRESS ms=7800 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=63874 guest_us=0072433d
+DS90 PROGRESS ms=7900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=64694 guest_us=0073c857
+DS90 PROGRESS ms=8000 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=65513 guest_us=00754d71
+DS90 PROGRESS ms=8100 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=66332 guest_us=0076d28b
+DS90 PROGRESS ms=8200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=67151 guest_us=00785f46
+DS90 PROGRESS ms=8300 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=67970 guest_us=0079e460
+DS90 PROGRESS ms=8400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=68790 guest_us=007b697a
+DS90 PROGRESS ms=8500 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=69609 guest_us=007cee93
+DS90 PROGRESS ms=8600 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=70428 guest_us=007e73ad
+DS90 PROGRESS ms=8700 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=71247 guest_us=00800068
+DS90 PROGRESS ms=8800 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=72066 guest_us=00818582
+DS90 PROGRESS ms=8900 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=72886 guest_us=00830a9c
+DS90 PROGRESS ms=9000 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=73705 guest_us=00848fb6
+DS90 PROGRESS ms=9100 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=74524 guest_us=008614d0
+DS90 PROGRESS ms=9200 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=75343 guest_us=0087a18b
+DS90 PROGRESS ms=9300 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=76162 guest_us=008926a5
+DS90 PROGRESS ms=9400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=76982 guest_us=008aabbe
+DS90 PROGRESS ms=9500 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=77801 guest_us=008c30d8
+DS90 PROGRESS ms=9600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=78620 guest_us=008db5f2
+DS90 PROGRESS ms=9700 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=79439 guest_us=008f42ad
+DS90 PROGRESS ms=9800 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=80258 guest_us=0090c7c7
+DS90 PROGRESS ms=9900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=81078 guest_us=00924ce1
+DS90 PROGRESS ms=10000 pc=07941618 sp=079dbf6c sr=2000 clock_ticks=81897 guest_us=0093d1fb
+DS90 PROGRESS ms=10100 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=82716 guest_us=00955715
+DS90 PROGRESS ms=10200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=83535 guest_us=0096e3d0
+DS90 PROGRESS ms=10300 pc=0794162e sp=079dbf6c sr=2019 clock_ticks=84354 guest_us=009868ea
+DS90 PROGRESS ms=10400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=85174 guest_us=0099ee03
+DS90 PROGRESS ms=10500 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=85993 guest_us=009b731d
+DS90 PROGRESS ms=10600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=86812 guest_us=009cf837
+DS90 PROGRESS ms=10700 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=87631 guest_us=009e84f2
+DS90 PROGRESS ms=10800 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=88450 guest_us=00a00a0c
+DS90 PROGRESS ms=10900 pc=fffff184 sp=079dbf64 sr=2611 clock_ticks=89270 guest_us=00a18f26
+DS90 PROGRESS ms=11000 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=90089 guest_us=00a31440
+DS90 PROGRESS ms=11100 pc=07941618 sp=079dbf6c sr=2000 clock_ticks=90908 guest_us=00a4995a
+DS90 PROGRESS ms=11200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=91727 guest_us=00a62615
+DS90 PROGRESS ms=11300 pc=0794162e sp=079dbf6c sr=2000 clock_ticks=92546 guest_us=00a7ab2e
+DS90 PROGRESS ms=11400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=93366 guest_us=00a93048
+DS90 PROGRESS ms=11500 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=94185 guest_us=00aab562
+DS90 PROGRESS ms=11600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=95004 guest_us=00ac3a7c
+DS90 PROGRESS ms=11700 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=95823 guest_us=00adc737
+DS90 PROGRESS ms=11800 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=96642 guest_us=00af4c51
+DS90 PROGRESS ms=11900 pc=fffff184 sp=079dbf64 sr=260a clock_ticks=97462 guest_us=00b0d16b
+DS90 PROGRESS ms=12000 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=98281 guest_us=00b25685
+DS90 PROGRESS ms=12100 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=99100 guest_us=00b3db9e
+DS90 PROGRESS ms=12200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=99919 guest_us=00b56859
+DS90 PROGRESS ms=12300 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=100738 guest_us=00b6ed73
+DS90 PROGRESS ms=12400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=101558 guest_us=00b8728d
+DS90 PROGRESS ms=12500 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=102377 guest_us=00b9f7a7
+DS90 PROGRESS ms=12600 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=103196 guest_us=00bb7cc1
+DS90 PROGRESS ms=12700 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=104015 guest_us=00bd097c
+DS90 PROGRESS ms=12800 pc=07941628 sp=079dbf6c sr=2008 clock_ticks=104834 guest_us=00be8e96
+DS90 PROGRESS ms=12900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=105654 guest_us=00c013b0
+DS90 PROGRESS ms=13000 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=106473 guest_us=00c198c9
+DS90 PROGRESS ms=13100 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=107292 guest_us=00c31de3
+DS90 PROGRESS ms=13200 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=108111 guest_us=00c4aa9e
+DS90 PROGRESS ms=13300 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=108930 guest_us=00c62fb8
+DS90 PROGRESS ms=13400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=109750 guest_us=00c7b4d2
+DS90 PROGRESS ms=13500 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=110569 guest_us=00c939ec
+DS90 PROGRESS ms=13600 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=111388 guest_us=00cabf06
+DS90 PROGRESS ms=13700 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=112207 guest_us=00cc4bc1
+DS90 PROGRESS ms=13800 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=113026 guest_us=00cdd0db
+DS90 PROGRESS ms=13900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=113846 guest_us=00cf55f4
+DS90 PROGRESS ms=14000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=114665 guest_us=00d0db0e
+DS90 PROGRESS ms=14100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=115484 guest_us=00d26028
+DS90 PROGRESS ms=14200 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=116303 guest_us=00d3ece3
+DS90 PROGRESS ms=14300 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=117122 guest_us=00d571fd
+DS90 PROGRESS ms=14400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=117942 guest_us=00d6f717
+DS90 PROGRESS ms=14500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=118761 guest_us=00d87c31
+DS90 PROGRESS ms=14600 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=119580 guest_us=00da014b
+DS90 PROGRESS ms=14700 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=120399 guest_us=00db8e06
+DS90 PROGRESS ms=14800 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=121218 guest_us=00dd131f
+DS90 PROGRESS ms=14900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=122038 guest_us=00de9839
+DS90 PROGRESS ms=15000 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=122857 guest_us=00e01d53
+DS90 PROGRESS ms=15100 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=123676 guest_us=00e1a26d
+DS90 PROGRESS ms=15200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=124495 guest_us=00e32f28
+DS90 PROGRESS ms=15300 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=125314 guest_us=00e4b442
+DS90 PROGRESS ms=15400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=126134 guest_us=00e6395c
+DS90 PROGRESS ms=15500 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=126953 guest_us=00e7be76
+DS90 PROGRESS ms=15600 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=127772 guest_us=00e94390
+DS90 PROGRESS ms=15700 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=128591 guest_us=00ead04b
+DS90 PROGRESS ms=15800 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=129410 guest_us=00ec5564
+DS90 PROGRESS ms=15900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=130230 guest_us=00edda7e
+DS90 PROGRESS ms=16000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=131049 guest_us=00ef5f98
+DS90 PROGRESS ms=16100 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=131868 guest_us=00f0e4b2
+DS90 PROGRESS ms=16200 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=132687 guest_us=00f2716d
+DS90 PROGRESS ms=16300 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=133506 guest_us=00f3f687
+DS90 PROGRESS ms=16400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=134326 guest_us=00f57ba1
+DS90 PROGRESS ms=16500 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=135145 guest_us=00f700bb
+DS90 PROGRESS ms=16600 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=135964 guest_us=00f885d4
+DS90 PROGRESS ms=16700 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=136783 guest_us=00fa128f
+DS90 PROGRESS ms=16800 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=137602 guest_us=00fb97a9
+DS90 PROGRESS ms=16900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=138422 guest_us=00fd1cc3
+DS90 PROGRESS ms=17000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=139241 guest_us=00fea1dd
+DS90 PROGRESS ms=17100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=140060 guest_us=010026f7
+DS90 PROGRESS ms=17200 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=140879 guest_us=0101b3b2
+DS90 PROGRESS ms=17300 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=141698 guest_us=010338cc
+DS90 PROGRESS ms=17400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=142518 guest_us=0104bde6
+DS90 PROGRESS ms=17500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=143337 guest_us=010642ff
+DS90 PROGRESS ms=17600 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=144156 guest_us=0107c819
+DS90 PROGRESS ms=17700 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=144975 guest_us=010954d4
+DS90 PROGRESS ms=17800 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=145794 guest_us=010ad9ee
+DS90 PROGRESS ms=17900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=146614 guest_us=010c5f08
+DS90 PROGRESS ms=18000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=147433 guest_us=010de422
+DS90 PROGRESS ms=18100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=148252 guest_us=010f693c
+DS90 PROGRESS ms=18200 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=149071 guest_us=0110f5f7
+DS90 PROGRESS ms=18300 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=149890 guest_us=01127b11
+DS90 PROGRESS ms=18400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=150710 guest_us=0114002a
+DS90 PROGRESS ms=18500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=151529 guest_us=01158544
+DS90 PROGRESS ms=18600 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=152348 guest_us=01170a5e
+DS90 PROGRESS ms=18700 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=153167 guest_us=01189719
+DS90 PROGRESS ms=18800 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=153986 guest_us=011a1c33
+DS90 PROGRESS ms=18900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=154806 guest_us=011ba14d
+DS90 PROGRESS ms=19000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=155625 guest_us=011d2667
+DS90 PROGRESS ms=19100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=156444 guest_us=011eab81
+DS90 PROGRESS ms=19200 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=157263 guest_us=0120383c
+DS90 PROGRESS ms=19300 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=158082 guest_us=0121bd55
+DS90 PROGRESS ms=19400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=158902 guest_us=0123426f
+DS90 PROGRESS ms=19500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=159721 guest_us=0124c789
+DS90 PROGRESS ms=19600 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=160540 guest_us=01264ca3
+DS90 PROGRESS ms=19700 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=161359 guest_us=0127d95e
+DS90 PROGRESS ms=19800 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=162178 guest_us=01295e78
+DS90 PROGRESS ms=19900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=162998 guest_us=012ae392
+DS90 FIFO-INJECT port=3 byte=0d csr=bb mr1=13 mr2=07 sr=0c tx_rate=9600
+DS90 PROGRESS ms=20000 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=163817 guest_us=012c68ac
+DS90 SERIAL-STATUS pc=fffff19e cisr=0004
+DS90 UART-RX port=3 byte=0d pc=fffff2a0
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=3 byte=20 sr_before=0c sr_after=0c pc=079439ba
+DS90 UART-CMD port=3 byte=01 sr_before=0c sr_after=0c pc=079439ca
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 PROGRESS ms=20100 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=164636 guest_us=012dedc5
+DS90 PROGRESS ms=20200 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=165455 guest_us=012f7a80
+DS90 PROGRESS ms=20300 pc=07941618 sp=079dbf6c sr=2000 clock_ticks=166274 guest_us=0130ff9a
+DS90 PROGRESS ms=20400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=167094 guest_us=013284b4
+DS90 PROGRESS ms=20500 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=167913 guest_us=013409ce
+DS90 PROGRESS ms=20600 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=168732 guest_us=01358ee8
+DS90 PROGRESS ms=20700 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=169551 guest_us=01371ba3
+DS90 PROGRESS ms=20800 pc=0794162e sp=079dbf6c sr=2000 clock_ticks=170370 guest_us=0138a0bd
+DS90 PROGRESS ms=20900 pc=fffff184 sp=079dbf64 sr=2611 clock_ticks=171190 guest_us=013a25d7
+DS90 FIFO-INJECT port=3 byte=0d csr=bb mr1=13 mr2=07 sr=0c tx_rate=9600
+DS90 PROGRESS ms=21000 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=172009 guest_us=013baaf1
+DS90 SERIAL-STATUS pc=fffff19e cisr=0004
+DS90 UART-RX port=3 byte=0d pc=fffff2a0
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=3 byte=20 sr_before=0c sr_after=0c pc=07943b78
+DS90 UART-CMD port=3 byte=01 sr_before=0c sr_after=0c pc=07943b88
+DS90 UART-CMD port=3 byte=10 sr_before=0c sr_after=0c pc=07943adc
+DS90 UART-CMD port=3 byte=20 sr_before=0c sr_after=0c pc=07943af2
+DS90 UART-CMD port=3 byte=01 sr_before=0c sr_after=0c pc=07943b02
+DS90 UART-CMD port=3 byte=10 sr_before=0c sr_after=0c pc=07943a92
+DS90 UART-CMD port=3 byte=20 sr_before=0c sr_after=0c pc=07943aa8
+DS90 UART-CMD port=3 byte=01 sr_before=0c sr_after=0c pc=07943ab8
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=3 byte=20 sr_before=0c sr_after=0c pc=07943a60
+DS90 UART-CMD port=3 byte=01 sr_before=0c sr_after=0c pc=07943a70
+DS90 SERIAL-STATUS pc=fffff19e cisr=0200
+DS90 UART-CMD port=3 byte=20 sr_before=0c sr_after=0c pc=079439ba
+DS90 UART-CMD port=3 byte=01 sr_before=0c sr_after=0c pc=079439ca
+DS90 UART-TX port=3 byte=11 char=. sr_before=0c
+DS90 UART-TX port=3 byte=1b char=. sr_before=0c
+DS90 UART-TX port=3 byte=5b char=[ sr_before=04
+DS90 UART-TX port=3 byte=48 char=H sr_before=04
+DS90 UART-TX port=3 byte=1b char=. sr_before=04
+DS90 UART-TX port=3 byte=5b char=[ sr_before=04
+DS90 UART-TX port=3 byte=4a char=J sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=4e char=N sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=77 char=w sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=6b char=k sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=41 char=A sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=53 char=S sr_before=04
+DS90 UART-TX port=3 byte=57 char=W sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=56 char=V sr_before=04
+DS90 UART-TX port=3 byte=32 char=2 sr_before=04
+DS90 UART-TX port=3 byte=2e char=. sr_before=04
+DS90 UART-TX port=3 byte=34 char=4 sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=42 char=B sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=35 char=5 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=66 char=f sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=44 char=D sr_before=04
+DS90 UART-TX port=3 byte=53 char=S sr_before=04
+DS90 UART-TX port=3 byte=39 char=9 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=54 char=T sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=28 char=( sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=29 char=) sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=43 char=C sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=70 char=p sr_before=04
+DS90 UART-TX port=3 byte=79 char=y sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=67 char=g sr_before=04
+DS90 UART-TX port=3 byte=68 char=h sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=32 char=2 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=2c char=, sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=44 char=D sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=67 char=g sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=4e char=N sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=77 char=w sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=6b char=k sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 PROGRESS ms=21100 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=172828 guest_us=013d300a
+DS90 UART-TX port=3 byte=2c char=, sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=44 char=D sr_before=04
+DS90 UART-TX port=3 byte=4e char=N sr_before=04
+DS90 UART-TX port=3 byte=50 char=P sr_before=04
+DS90 UART-TX port=3 byte=47 char=G sr_before=04
+DS90 UART-TX port=3 byte=2c char=, sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=43 char=C sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=2d char=- sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=41 char=A sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=52 char=R sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=67 char=g sr_before=04
+DS90 UART-TX port=3 byte=68 char=h sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=52 char=R sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=76 char=v sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=64 char=d sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=50 char=P sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=79 char=y sr_before=04
+DS90 UART-TX port=3 byte=70 char=p sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=48 char=H sr_before=04
+DS90 UART-TX port=3 byte=45 char=E sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=50 char=P sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=66 char=f sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=79 char=y sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=75 char=u sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=64 char=d sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=45 char=E sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=75 char=u sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=6d char=m sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=3e char=> sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 PROGRESS ms=21200 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=173647 guest_us=013ebcc5
+DS90 PROGRESS ms=21300 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=174466 guest_us=014041df
+DS90 PROGRESS ms=21400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=175286 guest_us=0141c6f9
+DS90 PROGRESS ms=21500 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=176105 guest_us=01434c13
+DS90 PROGRESS ms=21600 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=176924 guest_us=0144d12d
+DS90 PROGRESS ms=21700 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=177743 guest_us=01465de8
+DS90 PROGRESS ms=21800 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=178562 guest_us=0147e302
+DS90 PROGRESS ms=21900 pc=fffff184 sp=079dbf64 sr=2610 clock_ticks=179382 guest_us=0149681c
+DS90 FIFO-INJECT port=3 byte=0d csr=bb mr1=13 mr2=07 sr=0c tx_rate=9600
+DS90 PROGRESS ms=22000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=180201 guest_us=014aed35
+DS90 UART-RX port=3 byte=0d pc=fffff2a0
+DS90 UART-TX port=3 byte=0d char=. sr_before=0c
+DS90 UART-TX port=3 byte=1b char=. sr_before=0c
+DS90 UART-TX port=3 byte=5b char=[ sr_before=04
+DS90 UART-TX port=3 byte=48 char=H sr_before=04
+DS90 UART-TX port=3 byte=1b char=. sr_before=04
+DS90 UART-TX port=3 byte=5b char=[ sr_before=04
+DS90 UART-TX port=3 byte=4a char=J sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=4e char=N sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=77 char=w sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=6b char=k sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=41 char=A sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=53 char=S sr_before=04
+DS90 UART-TX port=3 byte=57 char=W sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=56 char=V sr_before=04
+DS90 UART-TX port=3 byte=32 char=2 sr_before=04
+DS90 UART-TX port=3 byte=2e char=. sr_before=04
+DS90 UART-TX port=3 byte=34 char=4 sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=42 char=B sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=35 char=5 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=66 char=f sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=44 char=D sr_before=04
+DS90 UART-TX port=3 byte=53 char=S sr_before=04
+DS90 UART-TX port=3 byte=39 char=9 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=54 char=T sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=28 char=( sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=29 char=) sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=43 char=C sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=70 char=p sr_before=04
+DS90 UART-TX port=3 byte=79 char=y sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=67 char=g sr_before=04
+DS90 UART-TX port=3 byte=68 char=h sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=32 char=2 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=30 char=0 sr_before=04
+DS90 UART-TX port=3 byte=2c char=, sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=44 char=D sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=67 char=g sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=4e char=N sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=77 char=w sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=6b char=k sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=2c char=, sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=44 char=D sr_before=04
+DS90 PROGRESS ms=22100 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=181020 guest_us=014c724f
+DS90 UART-TX port=3 byte=4e char=N sr_before=04
+DS90 UART-TX port=3 byte=50 char=P sr_before=04
+DS90 UART-TX port=3 byte=47 char=G sr_before=04
+DS90 UART-TX port=3 byte=2c char=, sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=43 char=C sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=2d char=- sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=41 char=A sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=52 char=R sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=67 char=g sr_before=04
+DS90 UART-TX port=3 byte=68 char=h sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=52 char=R sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=76 char=v sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=64 char=d sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=50 char=P sr_before=04
+DS90 UART-TX port=3 byte=6c char=l sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=79 char=y sr_before=04
+DS90 UART-TX port=3 byte=70 char=p sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=48 char=H sr_before=04
+DS90 UART-TX port=3 byte=45 char=E sr_before=04
+DS90 UART-TX port=3 byte=4c char=L sr_before=04
+DS90 UART-TX port=3 byte=50 char=P sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=66 char=f sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=79 char=y sr_before=04
+DS90 UART-TX port=3 byte=6f char=o sr_before=04
+DS90 UART-TX port=3 byte=75 char=u sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=64 char=d sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=69 char=i sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=63 char=c sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=0d char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=0a char=. sr_before=04
+DS90 UART-TX port=3 byte=45 char=E sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=74 char=t sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 UART-TX port=3 byte=75 char=u sr_before=04
+DS90 UART-TX port=3 byte=73 char=s sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=72 char=r sr_before=04
+DS90 UART-TX port=3 byte=6e char=n sr_before=04
+DS90 UART-TX port=3 byte=61 char=a sr_before=04
+DS90 UART-TX port=3 byte=6d char=m sr_before=04
+DS90 UART-TX port=3 byte=65 char=e sr_before=04
+DS90 UART-TX port=3 byte=3e char=> sr_before=04
+DS90 UART-TX port=3 byte=20 char=  sr_before=04
+DS90 PROGRESS ms=22200 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=181839 guest_us=014dff0a
+DS90 PROGRESS ms=22300 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=182658 guest_us=014f8424
+DS90 PROGRESS ms=22400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=183478 guest_us=0151093e
+DS90 PROGRESS ms=22500 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=184297 guest_us=01528e58
+DS90 PROGRESS ms=22600 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=185116 guest_us=01541372
+DS90 PROGRESS ms=22700 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=185935 guest_us=0155a02d
+DS90 PROGRESS ms=22800 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=186754 guest_us=01572547
+DS90 PROGRESS ms=22900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=187574 guest_us=0158aa60
+DS90 PROGRESS ms=23000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=188393 guest_us=015a2f7a
+DS90 PROGRESS ms=23100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=189212 guest_us=015bb494
+DS90 PROGRESS ms=23200 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=190031 guest_us=015d414f
+DS90 PROGRESS ms=23300 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=190850 guest_us=015ec669
+DS90 PROGRESS ms=23400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=191670 guest_us=01604b83
+DS90 PROGRESS ms=23500 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=192489 guest_us=0161d09d
+DS90 PROGRESS ms=23600 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=193308 guest_us=016355b7
+DS90 PROGRESS ms=23700 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=194127 guest_us=0164e272
+DS90 PROGRESS ms=23800 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=194946 guest_us=0166678b
+DS90 PROGRESS ms=23900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=195766 guest_us=0167eca5
+DS90 PROGRESS ms=24000 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=196585 guest_us=016971bf
+DS90 PROGRESS ms=24100 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=197404 guest_us=016af6d9
+DS90 PROGRESS ms=24200 pc=07941628 sp=079dbf6c sr=2008 clock_ticks=198223 guest_us=016c8394
+DS90 PROGRESS ms=24300 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=199042 guest_us=016e08ae
+DS90 PROGRESS ms=24400 pc=fffff184 sp=079dbf64 sr=2611 clock_ticks=199862 guest_us=016f8dc8
+DS90 PROGRESS ms=24500 pc=07941618 sp=079dbf6c sr=2000 clock_ticks=200681 guest_us=017112e2
+DS90 PROGRESS ms=24600 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=201500 guest_us=017297fb
+DS90 PROGRESS ms=24700 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=202319 guest_us=017424b6
+DS90 PROGRESS ms=24800 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=203138 guest_us=0175a9d0
+DS90 PROGRESS ms=24900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=203958 guest_us=01772eea
+DS90 PROGRESS ms=25000 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=204777 guest_us=0178b404
+DS90 PROGRESS ms=25100 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=205596 guest_us=017a391e
+DS90 PROGRESS ms=25200 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=206415 guest_us=017bc5d9
+DS90 PROGRESS ms=25300 pc=0794162e sp=079dbf6c sr=2019 clock_ticks=207234 guest_us=017d4af3
+DS90 PROGRESS ms=25400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=208054 guest_us=017ed00d
+DS90 PROGRESS ms=25500 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=208873 guest_us=01805526
+DS90 PROGRESS ms=25600 pc=0794162e sp=079dbf6c sr=2000 clock_ticks=209692 guest_us=0181da40
+DS90 PROGRESS ms=25700 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=210511 guest_us=018366fb
+DS90 PROGRESS ms=25800 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=211330 guest_us=0184ec15
+DS90 PROGRESS ms=25900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=212150 guest_us=0186712f
+DS90 PROGRESS ms=26000 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=212969 guest_us=0187f649
+DS90 PROGRESS ms=26100 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=213788 guest_us=01897b63
+DS90 PROGRESS ms=26200 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=214607 guest_us=018b081e
+DS90 PROGRESS ms=26300 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=215426 guest_us=018c8d38
+DS90 PROGRESS ms=26400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=216246 guest_us=018e1252
+DS90 PROGRESS ms=26500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=217065 guest_us=018f976b
+DS90 PROGRESS ms=26600 pc=07941628 sp=079dbf6c sr=2008 clock_ticks=217884 guest_us=01911c85
+DS90 PROGRESS ms=26700 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=218703 guest_us=0192a940
+DS90 PROGRESS ms=26800 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=219522 guest_us=01942e5a
+DS90 PROGRESS ms=26900 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=220342 guest_us=0195b374
+DS90 PROGRESS ms=27000 pc=07941628 sp=079dbf6c sr=2008 clock_ticks=221161 guest_us=0197388e
+DS90 PROGRESS ms=27100 pc=0794162e sp=079dbf6c sr=2008 clock_ticks=221980 guest_us=0198bda8
+DS90 PROGRESS ms=27200 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=222799 guest_us=019a4a63
+DS90 PROGRESS ms=27300 pc=07941628 sp=079dbf6c sr=2000 clock_ticks=223618 guest_us=019bcf7d
+DS90 PROGRESS ms=27400 pc=fffff184 sp=079dbf64 sr=2608 clock_ticks=224438 guest_us=019d5496
+DS90 PROGRESS ms=27500 pc=0794163a sp=079dbf6c sr=2000 clock_ticks=225257 guest_us=019ed9b0
+DS90 PROGRESS ms=27600 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=226076 guest_us=01a05eca
+DS90 PROGRESS ms=27700 pc=0794163c sp=079dbf6c sr=2000 clock_ticks=226895 guest_us=01a1eb85
+DS90 PROGRESS ms=27800 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=227714 guest_us=01a3709f
+DS90 PROGRESS ms=27900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=228534 guest_us=01a4f5b9
+DS90 PROGRESS ms=28000 pc=07941618 sp=079dbf6c sr=2000 clock_ticks=229353 guest_us=01a67ad3
+DS90 PROGRESS ms=28100 pc=07941620 sp=079dbf6c sr=2000 clock_ticks=230172 guest_us=01a7ffed
+DS90 PROGRESS ms=28200 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=230991 guest_us=01a98ca8
+DS90 PROGRESS ms=28300 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=231810 guest_us=01ab11c1
+DS90 PROGRESS ms=28400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=232630 guest_us=01ac96db
+DS90 PROGRESS ms=28500 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=233449 guest_us=01ae1bf5
+DS90 PROGRESS ms=28600 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=234268 guest_us=01afa10f
+DS90 PROGRESS ms=28700 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=235087 guest_us=01b12dca
+DS90 PROGRESS ms=28800 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=235906 guest_us=01b2b2e4
+DS90 PROGRESS ms=28900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=236726 guest_us=01b437fe
+DS90 PROGRESS ms=29000 pc=0794162e sp=079dbf6c sr=2011 clock_ticks=237545 guest_us=01b5bd18
+DS90 PROGRESS ms=29100 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=238364 guest_us=01b74231
+DS90 PROGRESS ms=29200 pc=07941616 sp=079dbf6c sr=2008 clock_ticks=239183 guest_us=01b8ceec
+DS90 PROGRESS ms=29300 pc=07941634 sp=079dbf6c sr=2010 clock_ticks=240002 guest_us=01ba5406
+DS90 PROGRESS ms=29400 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=240822 guest_us=01bbd920
+DS90 PROGRESS ms=29500 pc=07941642 sp=079dbf6c sr=2000 clock_ticks=241641 guest_us=01bd5e3a
+DS90 PROGRESS ms=29600 pc=07941634 sp=079dbf6c sr=2000 clock_ticks=242460 guest_us=01bee354
+DS90 PROGRESS ms=29700 pc=07941648 sp=079dbf6c sr=2008 clock_ticks=243279 guest_us=01c0700f
+DS90 PROGRESS ms=29800 pc=0794162e sp=079dbf6c sr=200a clock_ticks=244098 guest_us=01c1f529
+DS90 PROGRESS ms=29900 pc=fffff184 sp=079dbf64 sr=2600 clock_ticks=244918 guest_us=01c37a43
+DS90 PROGRESS ms=30000 pc=07941626 sp=079dbf6c sr=2000 clock_ticks=245737 guest_us=01c4ff5c
+Average speed: 142.54% (29 seconds)

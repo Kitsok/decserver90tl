@@ -154,6 +154,7 @@ private:
 	unsigned m_probe_port = 0;
 	unsigned m_probe_count = 0;
 	unsigned m_serial_events = 0;
+	unsigned m_uart_commands[8]{};
 	emu_timer *m_observer = nullptr;
 	emu_timer *m_tpu_timer = nullptr;
 	emu_timer *m_clock_timer = nullptr;
@@ -293,10 +294,16 @@ template<unsigned Block> void ds90tl_state::uart_w(offs_t offset, u16 data, u16 
 	if (mask & 0xff00)
 	{
 		const u8 value = data >> 8;
+		const unsigned port = Block * 2 + (offset >= 8);
+		duart_channel &channel = offset >= 8 ? *m_uart[Block]->m_chanB : *m_uart[Block]->m_chanA;
+		const u8 before = channel.read_chan_reg(1);
 		if (offset == 3 || offset == 11)
-			std::fprintf(stderr, "DS90 UART-TX port=%u byte=%02x char=%c\n",
-				Block * 2 + (offset == 11) + 1, value, value >= 32 && value < 127 ? value : '.');
+			std::fprintf(stderr, "DS90 UART-TX port=%u byte=%02x char=%c sr_before=%02x\n",
+				Block * 2 + (offset == 11) + 1, value, value >= 32 && value < 127 ? value : '.', before);
 		m_uart[Block]->write(offset, value);
+		if ((offset == 2 || offset == 10) && m_uart_commands[port]++ < 32)
+			std::fprintf(stderr, "DS90 UART-CMD port=%u byte=%02x sr_before=%02x sr_after=%02x pc=%08x\n",
+				port + 1, value, before, channel.read_chan_reg(1), u32(m_cpu->pc()));
 	}
 }
 
@@ -353,6 +360,7 @@ void ds90tl_state::machine_reset()
 	const char *probe = std::getenv("DS90_UART_PROBE_PORT");
 	m_probe_port = probe ? std::clamp(std::atoi(probe), 0, 8) : 0;
 	m_probe_count = m_serial_events = 0;
+	std::fill(std::begin(m_uart_commands), std::end(m_uart_commands), 0);
 	if (m_probe_port)
 	{
 		const char *when = std::getenv("DS90_UART_PROBE_AT");

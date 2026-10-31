@@ -1,0 +1,33 @@
+--- a/src/devices/machine/mc68681.cpp
++++ b/src/devices/machine/mc68681.cpp
+@@ -1657,13 +1657,24 @@
+ 		break;
+ 
+ 	case 0x01: /* CSR */
++	{
+ 		CSR = data;
+-		tx_baud_rate = m_uart->calc_baud(m_ch, false, data & 0xf);
+-		rx_baud_rate = m_uart->calc_baud(m_ch, true, (data>>4) & 0xf);
+-		//printf("%s ch %d CSR %02x Tx baud %d Rx baud %d\n", tag(), m_ch, data, tx_baud_rate, rx_baud_rate);
+-		set_rcv_rate(rx_baud_rate);
+-		set_tra_rate(tx_baud_rate);
+-		break;
++		// ACR interrupt-control writes also call baud_updated(). Reapplying
++		// an unchanged rate must not reset an active serial shift register.
++		const int new_tx_rate = m_uart->calc_baud(m_ch, false, data & 0xf);
++		const int new_rx_rate = m_uart->calc_baud(m_ch, true, (data>>4) & 0xf);
++		if (rx_baud_rate != new_rx_rate)
++		{
++			rx_baud_rate = new_rx_rate;
++			set_rcv_rate(rx_baud_rate);
++		}
++		if (tx_baud_rate != new_tx_rate)
++		{
++			tx_baud_rate = new_tx_rate;
++			set_tra_rate(tx_baud_rate);
++		}
++		break;
++	}
+ 
+ 	case 0x02: /* CR */
+ 		write_CR(data);

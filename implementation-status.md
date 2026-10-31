@@ -169,3 +169,16 @@ and `analysis/mneng3-uart8-healthy-handoff-probe.log`, with corresponding
 with status 0. The firmware file remains unchanged. Default diagnostics,
 configuration validation, ROM audit, Python compilation and whitespace checks
 pass. Commit this checkpoint before investigating transmit asymmetry.
+
+## UART transmit checkpoint
+
+The port-1 asymmetry is resolved by the pinned MC68681-family dependency
+patch. An ACR refresh of unchanged baud rates had reset active serial shift
+registers/timers and stalled TX-ready. Rates now update only when changed.
+Controls on ports 2 and 3 emitted the same username banner as port 8;
+port 1 now does so as well. See `patches/README.md` and
+`analysis/mneng3-uart1-tx-rate-fix.log` plus its `.tx.txt` transcript.
+The patched port-1 probe exits 0 after 30 simulated seconds and consumes
+all three diagnostic CRs. The next milestone is supplying a username and
+reaching Local through a reproducible input path. This fix is committed
+before that next investigation; no external serial endpoint is claimed.
