@@ -13,14 +13,14 @@ def digest(path):
 
 class Session:
 
-    def __init__(self, work, stage):
+    def __init__(self, work, stage, runner_args=()):
         self.output = []
         self.data = bytearray()
         self.pty = None
         self.guest = 0
         self.path = None
         self.reserved = os.openpty()
-        self.proc = subprocess.Popen(['python3', str(ROOT / 'tools/run_mneng3.py'), '--interactive', '--rom-alignment-assist', '--ram-wait-cycles', '1', '--nvram-directory', str(work / 'nvram'), '--serial-control', str(work / 'control.sock'), '--log-file', str(ROOT / f'run/settings-{stage}.log')], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        self.proc = subprocess.Popen(['python3', str(ROOT / 'tools/run_mneng3.py'), '--interactive', '--rom-alignment-assist', '--ram-wait-cycles', '1', '--nvram-directory', str(work / 'nvram'), '--serial-control', str(work / 'control.sock'), '--log-file', str(ROOT / f'run/settings-{stage}.log'), *runner_args], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
         def reader():
             for line in self.proc.stdout:
