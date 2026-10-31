@@ -22,7 +22,19 @@ No firmware has been loaded onto physical hardware.
 - [Build instructions](BUILD.md).
 - [Implementation status](implementation-status.md).
 
-Run from any working directory:
+## Build and run locally
+
+```sh
+./build.sh                 # fetch pinned MAME if needed, then build
+./build.sh --check         # check prerequisites without building
+./run.sh --interactive
+```
+
+The build targets the local host. Missing system dependencies are reported with
+an installation command; they are not installed automatically. Use `-j N` to
+set parallelism or `--offline` to prohibit fetching. See [BUILD.md](BUILD.md).
+
+Run the analysis tool from any working directory:
 
 ```sh
 python3 /home/kostik/work/decnet/decserver90tl/tools/inspect_firmware.py

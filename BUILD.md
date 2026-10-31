@@ -18,7 +18,32 @@ packages, unpack a local sysroot, or modify the host network configuration.
 MAME's build consumes substantial disk space and several minutes on its
 first invocation, even with one machine selected.
 
-## Pinned dependency
+## One-command local build
+
+From any working directory, run:
+
+```sh
+./build.sh
+./build.sh -j 2          # explicit parallelism; two jobs is the default
+./build.sh --check       # prerequisite/firmware checks only
+./build.sh --offline     # reuse local dependencies without downloading
+```
+
+The entry point builds for the local host, not nanovax/AArch64. It checks system
+tools and development packages, validates the original MNENG3 firmware hash,
+fetches the exact revision in mame-revision.txt when needed, and invokes the
+existing MAME builder. MAME's bundled dependencies and build tools are built as
+part of the selected machine target. No Python packages are needed for this
+build or the launcher; Capstone is only needed by separate analysis tools.
+
+Outputs are .deps/mame and build/mame-ds90tl. Subsequent builds reuse the checkout
+and object files. A mismatched existing MAME checkout is rejected rather than
+reset; existing patches and user changes are not discarded. Concurrent build.sh
+invocations are rejected. System packages, target kernel drivers, Courier, and
+host networking are not installed or changed by this script. Serialsim is an
+optional runtime backend already installed separately on nanovax.
+
+## Pinned dependency (manual alternative)
 
 Run in the repository root:
 
@@ -31,7 +56,7 @@ git -C .deps/mame checkout --detach FETCH_HEAD
 python3 tools/build_mame.py -j 2
 ```
 
-The script verifies `mame-revision.txt`, copies the driver into the ignored
+The Python builder verifies `mame-revision.txt`, copies the driver into the ignored
 checkout and registers it in MAME's driver list. It also restricts the
 M680X0 group's build file list to the CPU32/Musashi engine and common code,
 omitting unrelated generated 68000/68008 engines. The upstream CPU implementation code is unchanged; the board-specific
