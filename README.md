@@ -11,6 +11,9 @@ Static investigation started 2026-10-31. No firmware has been executed or loaded
 - [First-look findings](first-look.md).
 - [Proposed internal structure and register-level evidence](internal-structure.md).
 - [Ethernet controller identification and DMA interface](ethernet-controller.md).
+- [Simulator implementation concept](simulator-concept.md).
+- [Build instructions](BUILD.md).
+- [Paused implementation status](implementation-status.md).
 
 Run from any working directory:
 
