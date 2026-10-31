@@ -328,3 +328,49 @@ Raw instruction bytes are included. Fixed-offset analysis is tied to the
 downloaded images in `analysis/inventory.json`. Capstone 68020 mode is a
 decoding aid, not a claim that the chip is a 68020; its full-format address
 rendering and bit-operation size suffixes require care.
+
+## 2026-10-31 implementation reuse survey
+
+An online source check and inspection of the pinned local MAME tree confirm
+that the next step is host-network integration, not writing a new LANCE model.
+
+| Implementation | Existing support | Fit for this project |
+|---|---|---|
+| [MAME am79c90.cpp](https://github.com/mamedev/mame/blob/master/src/devices/machine/am79c90.cpp) | Am7990/Am79C90 registers, initialization, descriptor DMA, packet filtering, interrupts, send/receive and loopback | Already instantiated in our board driver; keep it |
+| [QEMU lance.c](https://github.com/qemu/qemu/blob/master/hw/net/lance.c) and [pcnet.c](https://github.com/qemu/qemu/blob/master/hw/net/pcnet.c) | LANCE frontend sharing the PCnet core and QEMU networking | Useful independent reference; importing it also requires adapting QEMU device, DMA, timer and network APIs |
+| SIMH VAX LANCE, saved in [reference/ethernet/simh-vax_xs.c](reference/ethernet/simh-vax_xs.c) | Existing VAX LANCE simulator | Useful DEC-oriented reference; coupled to SIMH and VAX interfaces |
+
+QEMU's source explicitly identifies its SPARC LANCE frontend as the Am7990
+portion of STP2000, delegates register operations to the PCnet core, and uses
+SPARC DMA callbacks. It is not a standalone drop-in library for our MAME board.
+The saved SIMH source identifies itself as the LANCE Ethernet simulator and
+includes VAX headers. Current upstream SIMH file retrieval failed in this check;
+the local source remains available from the earlier documented download.
+
+MAME also supplies a [TUN/TAP provider](https://github.com/mamedev/mame/blob/master/src/osd/modules/netdev/taptun.cpp).
+Its [command-line documentation](https://docs.mamedev.org/commandline/commandline-all.html)
+describes `-networkprovider taptun` and `-listnetwork`.
+
+Locally verified against pinned MAME revision
+`2692d09218b67df92b9eb26b7c0c0cc04ca4c72e`:
+
+- Our board maps `0x300000..0x300003` to the existing AM7990, connects DMA
+  callbacks and its interrupt output, and builds with `USE_TAPTUN=1`.
+- `am7990_device_base` inherits `device_network_interface`; packet delivery
+  already uses its send/receive machinery.
+- The common network interface offers `set_interface(int id)` for selecting
+  an OSD network device. Our board/launcher has no explicit selection yet.
+- On Linux the pinned TAP implementation opens `/dev/net/tun` with
+  `IFF_TAP | IFF_NO_PI`, requesting `tap-mess-<uid>-0`. It does not accept
+  an arbitrary TAP name through that constructor's `name` argument.
+- Running `build/mame-ds90tl -noreadconfig -networkprovider taptun -listnetwork`
+  reports `TUN/TAP Device`. This proves provider enumeration only, not that
+  the process can open a TAP or exchange packets.
+
+Recommended next work: select the built-in TAP provider for the LANCE, arrange
+an owned persistent TAP and bridge attachment, expose configuration in the
+launcher, and capture traffic while checking DMA byte order, descriptor ownership
+and receive/transmit interrupts. Keep SIMH and QEMU as independent references
+if observed controller behavior disagrees. No bridge, TAP or host network
+configuration was changed during this survey; no firmware networking success
+is claimed yet.
