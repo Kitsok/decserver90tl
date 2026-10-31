@@ -1,55 +1,6 @@
 {
   "address": "192.0.2.90",
-  "ports": [
-    {
-      "port": 1,
-      "tcp_port": 2001,
-      "bidirectional": true,
-      "dsr": true,
-      "xon_xoff": true,
-      "reconnect": true
-    },
-    {
-      "port": 2,
-      "tcp_port": 2002,
-      "bidirectional": true,
-      "dsr": true,
-      "xon_xoff": true,
-      "reconnect": true
-    },
-    {
-      "port": 3,
-      "tcp_port": 2003,
-      "bidirectional": true,
-      "dsr": true,
-      "xon_xoff": true,
-      "reconnect": true
-    },
-    {
-      "port": 4,
-      "tcp_port": 2004,
-      "bidirectional": true,
-      "dsr": true,
-      "xon_xoff": true,
-      "reconnect": true
-    },
-    {
-      "port": 5,
-      "tcp_port": 2005,
-      "bidirectional": true,
-      "dsr": true,
-      "xon_xoff": true,
-      "reconnect": true
-    },
-    {
-      "port": 6,
-      "tcp_port": 2006,
-      "bidirectional": true,
-      "dsr": true,
-      "xon_xoff": true,
-      "reconnect": true
-    }
-  ],
+  "ports": [],
   "configuration": [
     {
       "command": "CHANGE PORT 1 AUTOBAUD DISABLED",
@@ -80,12 +31,12 @@
       "response": "LOGOUT PORT 1\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2001 PORTS 1",
-      "response": "SET TELNET LISTENER 2001 PORTS 1\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2001 PORTS 1",
+      "response": "CHANGE TELNET LISTENER 2001 PORTS 1\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2001 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2001 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2001 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2001 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 2 AUTOBAUD DISABLED",
@@ -116,12 +67,12 @@
       "response": "LOGOUT PORT 2\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2002 PORTS 2",
-      "response": "SET TELNET LISTENER 2002 PORTS 2\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2002 PORTS 2",
+      "response": "CHANGE TELNET LISTENER 2002 PORTS 2\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2002 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2002 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2002 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2002 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 3 AUTOBAUD DISABLED",
@@ -152,12 +103,12 @@
       "response": "LOGOUT PORT 3\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2003 PORTS 3",
-      "response": "SET TELNET LISTENER 2003 PORTS 3\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2003 PORTS 3",
+      "response": "CHANGE TELNET LISTENER 2003 PORTS 3\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2003 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2003 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2003 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2003 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 4 AUTOBAUD DISABLED",
@@ -188,12 +139,12 @@
       "response": "LOGOUT PORT 4\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2004 PORTS 4",
-      "response": "SET TELNET LISTENER 2004 PORTS 4\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2004 PORTS 4",
+      "response": "CHANGE TELNET LISTENER 2004 PORTS 4\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2004 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2004 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2004 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2004 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 5 AUTOBAUD DISABLED",
@@ -224,12 +175,12 @@
       "response": "LOGOUT PORT 5\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2005 PORTS 5",
-      "response": "SET TELNET LISTENER 2005 PORTS 5\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2005 PORTS 5",
+      "response": "CHANGE TELNET LISTENER 2005 PORTS 5\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2005 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2005 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2005 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2005 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 6 AUTOBAUD DISABLED",
@@ -260,12 +211,12 @@
       "response": "LOGOUT PORT 6\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2006 PORTS 6",
-      "response": "SET TELNET LISTENER 2006 PORTS 6\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2006 PORTS 6",
+      "response": "CHANGE TELNET LISTENER 2006 PORTS 6\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2006 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2006 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2006 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2006 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 7 AUTOBAUD DISABLED",
@@ -296,12 +247,12 @@
       "response": "LOGOUT PORT 7\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2007 PORTS 7",
-      "response": "SET TELNET LISTENER 2007 PORTS 7\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2007 PORTS 7",
+      "response": "CHANGE TELNET LISTENER 2007 PORTS 7\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2007 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2007 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2007 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2007 CONNECTIONS ENABLED\r\r\n"
     },
     {
       "command": "CHANGE PORT 8 AUTOBAUD DISABLED",
@@ -332,87 +283,41 @@
       "response": "LOGOUT PORT 8\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2008 PORTS 8",
-      "response": "SET TELNET LISTENER 2008 PORTS 8\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2008 PORTS 8",
+      "response": "CHANGE TELNET LISTENER 2008 PORTS 8\r\r\n"
     },
     {
-      "command": "SET TELNET LISTENER 2008 CONNECTIONS ENABLED",
-      "response": "SET TELNET LISTENER 2008 CONNECTIONS ENABLED\r\r\n"
+      "command": "CHANGE TELNET LISTENER 2008 CONNECTIONS ENABLED",
+      "response": "CHANGE TELNET LISTENER 2008 CONNECTIONS ENABLED\r\r\n"
     },
     {
-      "command": "SET PORT 1 FLOW CONTROL DSR",
-      "response": "SET PORT 1 FLOW CONTROL DSR\r\r\n"
+      "command": "SHOW TELNET LISTENER 2007",
+      "response": "SHOW TELNET LISTENER 2007\r\u001b[H\u001b[J\r\n\r\nListener TCP-port:  2007                     Listener Type:  TELNET \u001b[K\r\nIdentification:     \u001b[K\r\nPorts:              7\u001b[K\r\nConnections:        Enabled \u001b[K\r\nIP Address:         192.0.2.90\u001b[K\u001b[J\r\n\r\n"
     },
     {
-      "command": "SET PORT 1 FLOW CONTROL XON",
-      "response": "SET PORT 1 FLOW CONTROL XON\r\r\n"
+      "command": "SHOW TELNET LISTENER 2008",
+      "response": "SHOW TELNET LISTENER 2008\r\u001b[H\u001b[J\r\n\r\nListener TCP-port:  2008                     Listener Type:  TELNET \u001b[K\r\nIdentification:     \u001b[K\r\nPorts:              8\u001b[K\r\nConnections:        Enabled \u001b[K\r\nIP Address:         192.0.2.90\u001b[K\u001b[J\r\n\r\n"
     },
     {
-      "command": "SET PORT 1 FLOW CONTROL DISABLED",
-      "response": "SET PORT 1 FLOW CONTROL DISABLED\r\r\n"
+      "command": "SHOW PORT 7",
+      "response": "SHOW PORT 7\r\u001b[2J\u001b[H \u001b[K\r\n\u001b[K\r\nPort  7:                               Server: LAT_029000000001\u001b[K\r\n\u001b[K\r\nCharacter Size:            8           Input Speed:               9600\u001b[K\r\nFlow Control:            XON           Output Speed:              9600\u001b[K\r\nParity:                 None           Signal Control:        Disabled\u001b[K\r\nStop Bits:           Dynamic                           \u001b[K\r\n\u001b[K\r\nAccess:                Local           Local Switch:              None\u001b[K\r\nBackwards Switch:       None           Name:                    PORT_7\u001b[K\r\nBreak:                 Local           Session Limit:                4\u001b[K\r\nForwards Switch:        None           Type:                      Ansi\u001b[K\r\nDefault Protocol:        LAT           Default Menu:              None\u001b[K\r\nAutolink Timer One:10 Two:10           Dialer Script:             None\u001b[K\r\n\u001b[K\r\nPreferred Service: None\u001b[K\r\nAuthorized Groups:   0\u0000\u001b[K\r\n(Current)  Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAutobaud,  Autoprompt,  Broadcast,  Failover,  Input Flow Control,  Lock,\u001b[K\r\nLoss Notification,  Message Codes,  Output Flow Control,  Verification\u0000\r\n\r\n"
     },
     {
-      "command": "SET PORT 2 FLOW CONTROL DSR",
-      "response": "SET PORT 2 FLOW CONTROL DSR\r\r\n"
+      "command": "LIST PORT 7",
+      "response": "LIST PORT 7\r\u001b[2J\u001b[H \u001b[K\r\n\u001b[K\r\nPort  7:                               Server: \u001b[K\r\n\u001b[K\r\nCharacter Size:            8           Input Speed:               9600\u001b[K\r\nFlow Control:           None           Output Speed:              9600\u001b[K\r\nParity:                 None           Signal Control:        Disabled\u001b[K\r\nStop Bits:           Dynamic                           \u001b[K\r\n\u001b[K\r\nAccess:               Remote           Local Switch:              None\u001b[K\r\nBackwards Switch:       None           Name:                    PORT_7\u001b[K\r\nBreak:                 Local           Session Limit:                4\u001b[K\r\nForwards Switch:        None           Type:                      Ansi\u001b[K\r\nDefault Protocol:        LAT           Default Menu:              None\u001b[K\r\nAutolink Timer One:10 Two:10           Dialer Script:             None\u001b[K\r\n\u001b[K\r\nPreferred Service: None\u001b[K\r\nAuthorized Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAutoprompt,  Broadcast,  Failover,  Lock,  Loss Notification,\u001b[K\r\nMessage Codes,  Verification\u0000\r\n\r\n"
     },
     {
-      "command": "SET PORT 2 FLOW CONTROL XON",
-      "response": "SET PORT 2 FLOW CONTROL XON\r\r\n"
-    },
-    {
-      "command": "SET PORT 2 FLOW CONTROL DISABLED",
-      "response": "SET PORT 2 FLOW CONTROL DISABLED\r\r\n"
-    },
-    {
-      "command": "SET PORT 3 FLOW CONTROL DSR",
-      "response": "SET PORT 3 FLOW CONTROL DSR\r\r\n"
-    },
-    {
-      "command": "SET PORT 3 FLOW CONTROL XON",
-      "response": "SET PORT 3 FLOW CONTROL XON\r\r\n"
-    },
-    {
-      "command": "SET PORT 3 FLOW CONTROL DISABLED",
-      "response": "SET PORT 3 FLOW CONTROL DISABLED\r\r\n"
-    },
-    {
-      "command": "SET PORT 4 FLOW CONTROL DSR",
-      "response": "SET PORT 4 FLOW CONTROL DSR\r\r\n"
-    },
-    {
-      "command": "SET PORT 4 FLOW CONTROL XON",
-      "response": "SET PORT 4 FLOW CONTROL XON\r\r\n"
-    },
-    {
-      "command": "SET PORT 4 FLOW CONTROL DISABLED",
-      "response": "SET PORT 4 FLOW CONTROL DISABLED\r\r\n"
-    },
-    {
-      "command": "SET PORT 5 FLOW CONTROL DSR",
-      "response": "SET PORT 5 FLOW CONTROL DSR\r\r\n"
-    },
-    {
-      "command": "SET PORT 5 FLOW CONTROL XON",
-      "response": "SET PORT 5 FLOW CONTROL XON\r\r\n"
-    },
-    {
-      "command": "SET PORT 5 FLOW CONTROL DISABLED",
-      "response": "SET PORT 5 FLOW CONTROL DISABLED\r\r\n"
-    },
-    {
-      "command": "SET PORT 6 FLOW CONTROL DSR",
-      "response": "SET PORT 6 FLOW CONTROL DSR\r\r\n"
-    },
-    {
-      "command": "SET PORT 6 FLOW CONTROL XON",
-      "response": "SET PORT 6 FLOW CONTROL XON\r\r\n"
-    },
-    {
-      "command": "SET PORT 6 FLOW CONTROL DISABLED",
-      "response": "SET PORT 6 FLOW CONTROL DISABLED\r\r\n"
+      "command": "SHOW TELNET LISTENER 2007",
+      "response": "SHOW TELNET LISTENER 2007\r\u001b[H\u001b[J\r\n\r\nListener TCP-port:  2007                     Listener Type:  TELNET \u001b[K\r\nIdentification:     \u001b[K\r\nPorts:              7\u001b[K\r\nConnections:        Enabled \u001b[K\r\nIP Address:         192.0.2.90\u001b[K\u001b[J\r\n\r\n"
     }
   ],
+  "restarted_with_saved_configuration": true,
+  "listener7_before": "SHOW TELNET LISTENER 2007\r\u001b[H\u001b[J\r\n\r\nListener TCP-port:  2007                     Listener Type:  TELNET \u001b[K\r\nIdentification:     \u001b[K\r\nPorts:              7\u001b[K\r\nConnections:        Enabled \u001b[K\r\nIP Address:         192.0.2.90\u001b[K\u001b[J\r\n\r\n",
+  "listener8_before": "SHOW TELNET LISTENER 2008\r\u001b[H\u001b[J\r\n\r\nListener TCP-port:  2008                     Listener Type:  TELNET \u001b[K\r\nIdentification:     \u001b[K\r\nPorts:              8\u001b[K\r\nConnections:        Enabled \u001b[K\r\nIP Address:         192.0.2.90\u001b[K\u001b[J\r\n\r\n",
+  "port7_show": "SHOW PORT 7\r\u001b[2J\u001b[H \u001b[K\r\n\u001b[K\r\nPort  7:                               Server: LAT_029000000001\u001b[K\r\n\u001b[K\r\nCharacter Size:            8           Input Speed:               9600\u001b[K\r\nFlow Control:            XON           Output Speed:              9600\u001b[K\r\nParity:                 None           Signal Control:        Disabled\u001b[K\r\nStop Bits:           Dynamic                           \u001b[K\r\n\u001b[K\r\nAccess:                Local           Local Switch:              None\u001b[K\r\nBackwards Switch:       None           Name:                    PORT_7\u001b[K\r\nBreak:                 Local           Session Limit:                4\u001b[K\r\nForwards Switch:        None           Type:                      Ansi\u001b[K\r\nDefault Protocol:        LAT           Default Menu:              None\u001b[K\r\nAutolink Timer One:10 Two:10           Dialer Script:             None\u001b[K\r\n\u001b[K\r\nPreferred Service: None\u001b[K\r\nAuthorized Groups:   0\u0000\u001b[K\r\n(Current)  Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAutobaud,  Autoprompt,  Broadcast,  Failover,  Input Flow Control,  Lock,\u001b[K\r\nLoss Notification,  Message Codes,  Output Flow Control,  Verification\u0000\r\n\r\n",
+  "port7_list": "LIST PORT 7\r\u001b[2J\u001b[H \u001b[K\r\n\u001b[K\r\nPort  7:                               Server: \u001b[K\r\n\u001b[K\r\nCharacter Size:            8           Input Speed:               9600\u001b[K\r\nFlow Control:           None           Output Speed:              9600\u001b[K\r\nParity:                 None           Signal Control:        Disabled\u001b[K\r\nStop Bits:           Dynamic                           \u001b[K\r\n\u001b[K\r\nAccess:               Remote           Local Switch:              None\u001b[K\r\nBackwards Switch:       None           Name:                    PORT_7\u001b[K\r\nBreak:                 Local           Session Limit:                4\u001b[K\r\nForwards Switch:        None           Type:                      Ansi\u001b[K\r\nDefault Protocol:        LAT           Default Menu:              None\u001b[K\r\nAutolink Timer One:10 Two:10           Dialer Script:             None\u001b[K\r\n\u001b[K\r\nPreferred Service: None\u001b[K\r\nAuthorized Groups:   0\u0000\u001b[K\r\n\u001b[K\r\nEnabled Characteristics:\u001b[K\r\nAutoprompt,  Broadcast,  Failover,  Lock,  Loss Notification,\u001b[K\r\nMessage Codes,  Verification\u0000\r\n\r\n",
+  "listener7_at_refusal": "SHOW TELNET LISTENER 2007\r\u001b[H\u001b[J\r\n\r\nListener TCP-port:  2007                     Listener Type:  TELNET \u001b[K\r\nIdentification:     \u001b[K\r\nPorts:              7\u001b[K\r\nConnections:        Enabled \u001b[K\r\nIP Address:         192.0.2.90\u001b[K\u001b[J\r\n\r\n",
   "passed": false,
-  "error": "End Of File (EOF). Exception style platform.\n<pexpect.pty_spawn.spawn object at 0x7a2714b2ccd0>\ncommand: /usr/bin/telnet\nargs: ['/usr/bin/telnet', '-8', '192.0.2.90', '2007']\nbuffer (last 100 chars): b''\nbefore (last 100 chars): b'Trying 192.0.2.90...\\r\\ntelnet: Unable to connect to remote host: Connection refused\\r\\n'\nafter: <class 'pexpect.exceptions.EOF'>\nmatch: None\nmatch_index: None\nexitstatus: None\nflag_eof: True\npid: 437750\nchild_fd: 20\nclosed: False\ntimeout: 15\ndelimiter: <class 'pexpect.exceptions.EOF'>\nlogfile: <_io.BufferedWriter name='/home/kostik/work/decnet/decserver90tl/run/telnet-ports-transcript.log'>\nlogfile_read: None\nlogfile_send: None\nmaxread: 2000\nignorecase: False\nsearchwindowsize: None\ndelaybeforesend: 0.05\ndelayafterclose: 0.1\ndelayafterterminate: 0.1\nsearcher: searcher_re:\n    0: re.compile(b'Escape character is')",
+  "error": "End Of File (EOF). Exception style platform.\n<pexpect.pty_spawn.spawn object at 0x7772fa140190>\ncommand: /usr/bin/telnet\nargs: ['/usr/bin/telnet', '-8', '192.0.2.90', '2007']\nbuffer (last 100 chars): b''\nbefore (last 100 chars): b'Trying 192.0.2.90...\\r\\ntelnet: Unable to connect to remote host: Connection refused\\r\\n'\nafter: <class 'pexpect.exceptions.EOF'>\nmatch: None\nmatch_index: None\nexitstatus: None\nflag_eof: True\npid: 441245\nchild_fd: 35\nclosed: False\ntimeout: 15\ndelimiter: <class 'pexpect.exceptions.EOF'>\nlogfile: <_io.BufferedWriter name='/home/kostik/work/decnet/decserver90tl/run/telnet-ports-transcript.log'>\nlogfile_read: None\nlogfile_send: None\nmaxread: 2000\nignorecase: False\nsearchwindowsize: None\ndelaybeforesend: 0.05\ndelayafterclose: 0.1\ndelayafterterminate: 0.1\nsearcher: searcher_re:\n    0: re.compile(b'Escape character is')",
   "seed_unchanged": true
 }

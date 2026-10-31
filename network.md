@@ -173,3 +173,20 @@ The first individual-port run passed all checks on ports 1–6, then received a
 connection refusal from listener 2007. Listener 2008 remains untested in that
 run. All eight configuration sequences had returned without CLI errors. The
 cause of listener 2007's refusal remains under investigation.
+
+Follow-up narrowed the failure: SHOW PORT 7 reports operational Access Local,
+XON flow control and autobaud enabled, while LIST PORT 7 shows saved Access
+Remote, no flow control and autobaud disabled. Both listener 2007 and 2008
+report enabled with the expected serial mappings. The guest sends TCP RST/ACK
+for the refused connection. Re-enabling/remapping listeners and waiting for
+configuration writes did not resolve it. The same SHOW/LIST mismatch remains
+after a normal restart with saved IP and listener settings. This points to a
+port-configuration activation/restoration problem; its root cause is unproven.
+
+The diagnostic now saves IP/listener settings, drains pending writes, restarts,
+and then tests requested ports. Use `--ports 7,8` for the focused reproduction;
+it stops at the first failure, so port 8 remains unverified. The latest report
+records that focused failure. The six successful port results remain in commit
+630bcdc's version of the report. Low PTYs are reserved across both boots to
+keep reconnecting user terminals from consuming test data. The original seed
+remains unchanged. No all-eight-port or simultaneous-session success is claimed.

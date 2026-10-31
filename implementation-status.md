@@ -283,3 +283,14 @@ manually as 192.0.2.90/24; no DHCP server is used. Original settings are unchang
 The corrected test uses CR line endings and recognizes the hash prompt.
 No CPU, network-controller, or firmware modification was needed. See
 analysis/telnet-verification.json and network.md. LAT tests remain deferred.
+
+## Telnet serial listener coverage
+
+Serial ports 1–6 passed bidirectional markers, port isolation, DSR and XON/XOFF
+pause/resume, and disconnect/reconnect through listeners 2001–2006. Port 7
+refuses TCP connections: its enabled listener maps correctly, but operational
+access remains Local despite saved Remote access. Waiting for writes and
+restarting the copied store did not resolve that SHOW/LIST mismatch. Port 8
+remains untested because the regression stops at the first failure. See
+network.md and analysis/telnet-ports-verification.json. Further live runs were
+stopped at the user's request to avoid excessive testing.

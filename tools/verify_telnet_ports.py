@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Exercise eight Telnet serial listeners on a prepared isolated TAP lab."""
 import argparse
+from contextlib import ExitStack
 import json
 import os
 from pathlib import Path
@@ -42,13 +43,20 @@ def main():
     parser.add_argument('--nvram-seed', type=Path, required=True)
     parser.add_argument('--tap', default='ds90tap')
     parser.add_argument('--address', default='192.0.2.90')
+    parser.add_argument('--ports', default='1,2,3,4,5,6,7,8')
     args = parser.parse_args()
     seed = args.nvram_seed / 'ds90tl/configram'
     original = digest(seed)
     report = {'address': args.address, 'ports': [], 'configuration': []}
+    listeners = {port: 2000+port for port in range(1, 9)}
     clients = []
     fds = []
-    with tempfile.TemporaryDirectory(prefix='ds90-telnet-ports-') as temporary:
+    with ExitStack() as resources, tempfile.TemporaryDirectory(prefix='ds90-telnet-ports-') as temporary:
+        # Keep recycled low PTYs occupied across both boots. A user's tio can
+        # otherwise reconnect to /dev/pts/2 and consume the test's serial bytes.
+        for _ in range(8):
+            for fd in os.openpty():
+                resources.callback(os.close, fd)
         work = Path(temporary)
         shutil.copytree(args.nvram_seed, work / 'nvram')
         session = Session(work, 'telnet-ports', ('--tap', args.tap))
@@ -56,8 +64,8 @@ def main():
         try:
             session.login()
             session.privilege()
-            for command in ('SET INTERNET SUBNET MASK 255.255.255.0',
-                            f'SET INTERNET ADDRESS {args.address}', 'SET NOPRIVILEGED'):
+            for command in ('CHANGE INTERNET SUBNET MASK 255.255.255.0',
+                            f'CHANGE INTERNET ADDRESS {args.address}', 'SET NOPRIVILEGED'):
                 session.command(command)
             console = pexpect.spawn('/usr/bin/telnet', [args.address, '23'], timeout=20)
             clients.append(console)
@@ -89,8 +97,34 @@ def main():
                     command(f'CHANGE PORT {port} {setting}')
                 command(f'DEFINE PORT {port} ACCESS REMOTE')
                 command(f'LOGOUT PORT {port}')
-                command(f'SET TELNET LISTENER {2000+port} PORTS {port}')
-                command(f'SET TELNET LISTENER {2000+port} CONNECTIONS ENABLED')
+                command(f'CHANGE TELNET LISTENER {2000+port} PORTS {port}')
+                command(f'CHANGE TELNET LISTENER {2000+port} CONNECTIONS ENABLED')
+            guest = session.guest
+            session.wait(lambda: session.guest >= guest + 10, 30)
+            console.sendline(b'LOGOUT')
+            console.expect(pexpect.EOF)
+            console.close()
+            session.stop()
+            session = Session(work, 'telnet-ports-restored', ('--tap', args.tap))
+            session.wait(lambda: session.guest >= 30, 100)
+            console = pexpect.spawn('/usr/bin/telnet', [args.address, '23'], timeout=20)
+            clients.append(console)
+            console.logfile = transcript
+            console.linesep = b'\r'
+            console.expect(b'Escape character is')
+            console.sendline(b'')
+            console.expect(b'#\x00')
+            console.sendline(b'ACCESS')
+            console.expect(b'Enter username>')
+            console.sendline(b'PORT_TEST')
+            console.expect(rb'(?m)^Local> ')
+            console.sendline(b'SET PRIVILEGED')
+            console.expect(b'Password>')
+            console.sendline(b'SYSTEM')
+            console.expect(rb'(?m)^Local> ')
+            report['restarted_with_saved_configuration'] = True
+            report['listener7_before'] = command('SHOW TELNET LISTENER 2007')
+            report['listener8_before'] = command('SHOW TELNET LISTENER 2008')
             paths = {int(p): path for line in session.output
                      for p, path in re.findall(r'SERIAL port=(\d+) path=(\S+)', line)}
             assert len(paths) == 8, paths
@@ -100,14 +134,21 @@ def main():
                 receive(fd, .1)
 
             def connect(port):
-                client = pexpect.spawn('/usr/bin/telnet', ['-8', args.address, str(2000+port)], timeout=15)
+                client = pexpect.spawn('/usr/bin/telnet', ['-8', args.address, str(listeners[port])], timeout=15)
                 clients.append(client)
                 client.logfile = transcript
-                client.expect(b'Escape character is')
+                try:
+                    client.expect(b'Escape character is')
+                except pexpect.EOF:
+                    report[f'port{port}_show'] = command(f'SHOW PORT {port}')
+                    report[f'port{port}_list'] = command(f'LIST PORT {port}')
+                    report[f'listener{port}_at_refusal'] = command(f'SHOW TELNET LISTENER {2000+port}')
+                    raise
                 return client
 
             with ModemControl(work / 'control.sock') as modem:
-                for port, fd in enumerate(fds, 1):
+                for port in map(int, args.ports.split(',')):
+                    fd = fds[port-1]
                     client = connect(port)
                     print(f'Testing serial port {port}', flush=True)
                     down = f'NET_TO_SERIAL_{port}_END'.encode()
@@ -146,7 +187,7 @@ def main():
                     replacement.send(marker)
                     until(fd, marker)
                     replacement.close(force=True)
-                    report['ports'].append({'port': port, 'tcp_port': 2000+port,
+                    report['ports'].append({'port': port, 'tcp_port': listeners[port],
                                             'bidirectional': True, 'dsr': True,
                                             'xon_xoff': True, 'reconnect': True})
             report['passed'] = True
