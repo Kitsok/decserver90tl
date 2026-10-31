@@ -1,0 +1,23 @@
+[
+  {
+    "name": "MNENG1.SYS",
+    "size": 593408,
+    "sha256": "d4f5b755514cde7bb4840f27e35e3ea6a129bf1f8266f587aae3e708023e2226",
+    "entropy": 6.7448,
+    "zlib_size": 284633
+  },
+  {
+    "name": "MNENG2.SYS",
+    "size": 891904,
+    "sha256": "5afd3bdbb98a70055fad666e6196cca2012fcd285f768f751bc81f0642000111",
+    "entropy": 7.8047,
+    "zlib_size": 849246
+  },
+  {
+    "name": "MNENG3.SYS",
+    "size": 1619456,
+    "sha256": "a3764087d79df64eb7124056824652cf23b558fcae2029f887e4a37a3db49ad3",
+    "entropy": 6.8023,
+    "zlib_size": 695941
+  }
+]

@@ -1,0 +1,1710 @@
+0000035f <Y01.00-000K
+0000147a k&`(pONqQ
+00001638 NuMunchkin V5.4 ROM to DRAM
+00002a06 *** This software is Copyright 1990, 1991, 1992 by Digital Equipment Corporation All rights reserved ***
+00003bb1 ((H~HB\Q
+0000620d heP,HpWB
+000065e7 (                                        
+00008133 8,L(N$IB
+00008bf2 *_dD M*m
+0000bb7a *_(_Nu m
+0000c0e9 DNuS@(Z4<
+0000c192 S@g BBHBf
+0000cd8f +<./!>?"=*;:#-0
+0000d7a8 MANuJCk.g
+0000e9ff 8$Hp4BXQ
+00016d10 10111622233032334044647580AOCRDoECELIPIfItLFNoONOfTOToanasatbebydoidifinisitnoofonortoup110120128150180200255300600ALLANYARPAYTAllAreBRKCOMDELDNSDSRDTREOREndForGETLANLATMGTMIBMTUNOPODLRETSETSetTCPTheUseXONYouactallandanyarebitbutcanendethforhashowitskeylogmaymtunetnewnnnnornotoffoneoutperseesetsubtcpthetoptrytwousewayyou9600ANSIBITSCRLFCTRLDUMPDoesECHOFLOWFROMFULLHELPHOSTLISTLOCKLOOPLOSSLogsMASKMODENAMENODENONENOTENameNoteOPENOnlyPINGPORTPortROOTSENDSHOWSIZESLIPSNMPSTOPSTUBTESTTIMETRAPTYPEThisTypeVIEWWhenXOFFYourZEROaddraddsalsobackbeenbitsbothcasecommdatadoesdowndumpeachechofileflowfromfullhavehostidleinetintokeysletslinelistloadlocklogslonglostmakemanymapsmaskmodemoremustnameneednextnodenullonlyoverportrootsameselfsendsentsesssetsshowsizestopsuchtaketesttextthanthatthentheythistimetypeuseduseruseswantwhenwillwishwithyour19200327673840057600ASCIIAbortAfterBREAKBRIEFBreakCHECKCLEARCLOSECODESCOUNTDELAYENTRYEnterEraseINPUTLIMITLOCALLOGINLocalNODESPORTSPURGEQUEUEQUOTERETRYSALESSLAVESPEEDSTATESYNCHTIMERTOPICThereUSERSWIDTHaboutafterallowbeingbreakbuildcachecheckclearcodesdepthenterentryeraseerrorexactfailsfirstfontsfoundgrouphostsinputlimitlistsloadslocalloginlowermarksmatchmeansnamednodesofferotherportspressqueuerangereadyresetretrysendsspeedstartteststheirtherethesethosetimestopictrapstriedtriestypesuntilusersusingvalidvaluewherewhichwhileACCESSAllowsBINARYCHANGECLIENTChooseDEFINEDEMANDDIALUPDOMAINDUPLEXDefineDeviceDomainEnableEntersGROUPSLOGOUTNUMBEROUTPUTOutputPARITYPROMPTREMOTEREMOVERESUMERecordResetsReturnSERVERSIGNALSTATUSSUBNETSWITCHSYSTEMSimpleSystemTELNETTOGGLETelnetUnlockabortsaccessactiveaffectallowsappearbeforebinarycancelcannotcauseschangechecksclearsclientclosescommasdefinedeletedevicedomaindoubleechoedeffecteitherenableentersescapeexceptformatgroupslengthlockedloggedlogoutloopedmemorymodifymoduleneedednumberoffersoptionoutputparityperiodpersonplacedplacespowerspromptproperqueuedqueuesquotesrecallrecordrefersrelaysremoteremoveresetsresumereturnscreensecureselectseriesservershouldsignalsinglestartsstatusstoredstreamstringsubnetswitchsystemtargettestedtypinguniqueunlockvalueswithinADDRESSCIRCUITCONNECTCONSOLECONTROLDEFAULTDTRWAITDYNAMICDefaultDeletesDigitalENABLEDFORWARDGATEWAYHoweverLEARNEDLIMITEDLOADINGMESSAGEMONITORNETWORKNEWLINEORDEREDPASSALLPASTHRUPROFILEProcessQUEUINGRECEIVEREQUESTRemovesSERVICESESSIONSUMMARYSessionSpecifyaddressalreadyanotherappearsappliesassertsbetweencancelschangedchangescheckedcommandconnectconsolecontactcontextcontrolcorrectcurrentdefaultdefineddefinesdeleteddeletesdevicesdisabledisplaydynamicenabledenablesencloseenteredentriesexampleexecutefeaturefurthergatewayhandledhighesthyphensinsteadkeywordlearnedletterslistinglocallyloggingmappingmaximummembersmessageminutesmonitorneithernetworknumbersofferedomittedoptionsperformpermitspoweredprocessprofilepromptsprovidequeuingratingsreceiveremovesrequestresumedresumesreturnsroutingrunningsecondsservicesessionsettingsignalsspecialspecifysubnetssummarysupportsystemstrafficvariouswhetherwithoutAUTOBAUDBACKWARDCOUNTERSDIAGNOSEDISABLEDDisplaysEXTERNALEthernetFAILOVERFORWARDSHARDCOPYINTERNALINTERNETLISTENERLOOPBACKMYSYSTEMModifiesNormallyPASSWORDPROTOCOLPasswordProtocolSECURITYSERVICESSESSIONSSOFTCOPYSOFTWARESeparateTERMINALTRANSMITTUTORIALUSERNAMEacceptedaccessedaddress1address2assignedattachedcombinedcommandscomputerconnectscontainscontrolscountersdatabasedisableddisablesdisplaysenclosedexecutesexistingfacilityfeaturesfilenamefunctiongatewayshardwareinactiveincludesindicateinhibitsinternalinternetintervalkeyboardkeywordslistenerlocationmanagingmessagesmodifiedmultipleofferingoptionaloutgoingpasswordpersonalphysicalpressingpreviousproperlyprotocolprovidesreceivedreceivesremotelyreplacedreplacesrequestsrequiredservicessessionssettingssoftwarespecificterminaltransfertransmitusernameverifiesASSISTANTBACKWARDSBROADCASTCHARACTERCOMMUNITYDEDICATEDDSRLOGOUTHEARTBEATInterruptKEEPALIVELONGBREAKMULTICASTOperationPREFERREDUPPERCASEassistantautomaticavailablebroadcastcharactercircuitrycollisioncommunityconnectedconnectorcontainedcurrentlydatabasesdedicateddesignatedetectiondeterminedirectiondisplayedestablishfollowingforwardedfunctionsidenticalimplementincludinginitiatedinterfaceinterruptkeyboardslistenersmulticastoperationpermanentpermittedpreferredprotectedprotocolsquotationrecursiverepresentrequestedretrievesreturningsequencesspecifiedspecifiesterminalsterminatetransmitsvariablesAUTHORIZEDAUTOPROMPTAbbreviateDISCONNECTINACTIVITYINITIALIZEINTERRUPTSManagementNAMESERVERPRIVILEGEDRESOLUTIONRETRANSMITassociatedassociatescharactersconfiguredconnectiondeterminesdisconnectequivalentforwardingidentifiesinterruptsmanagementnameserveroperationsoutputtingparametersparticularpredefinedpreviouslyprivilegedregardlessthroughoutAUTOCONNECTCONNECTIONSDESTINATIONINTERACTIVEMAINTENANCEconnectionsconsecutiveconstraintsdestinationdisconnectsenvironmenthexadecimalimmediatelyinformationinitializesinteractiveinterpretednameserversoperationalrecognitionrecommendedtransmittedMODIFICATIONNOPRIVILEGEDNOTIFICATIONRestrictionsVERIFICATIONVerificationannouncementdisconnectedmillisecondsrepresentingtransceiverstransparencyunprivilegedANNOUNCEMENTSMULTISESSIONSautomaticallycommunicationdisassociatestransmissionsAUTHENTICATIONIDENTIFICATIONcharacteristiccommunicationsidentificationinitializationCHARACTERISTICSCharacteristicscharacteristicsidentifications
+00018225 disconnect
+00018231 sessions
+00018247 autoprompt
+0001825b broadcast
+00018267 services
+00018293 preferred
+0001829f loopback
+000182a9 password
+000182b2 verification
+000182c0 heartbeat
+000182e3 location
+00018301 counters
+00018341 autobaud
+0001834b autoconnect
+00018363 disabled
+00018373 dedicated
+0001837f character
+000183c1 hardcopy
+000183cb softcopy
+000183e1 notification
+00018406 keepalive
+00018421 modification
+0001842f privileged
+0001843a override
+0001846b software
+00018475 noprivileged
+00018489 initialize
+00018495 on-demand
+000184a7 physical
+000184b1 transmit
+000184cb assistant
+000184dc username
+0001850d diagnose
+0001852c forwards
+00018537 backwards
+00018542 identification
+0001855b retransmit
+00018585 authorized
+000185a3 interrupts
+000185af destination
+000185ef inactivity
+00018607 characteristics
+00018630 interactive
+0001863d security
+00018647 internal
+00018651 external
+0001865b maintenance
+00018669 alternate
+00018675 node-name
+00018681 port-list
+0001868d service-name
+0001869b tutorial
+000186a5 multisessions
+000186c4 terminals
+000186dc connections
+000186e9 multicast
+000186f5 announcements
+00018741 dsrlogout
+000187a1 autoflush
+000187ad autosynch
+000187e3 ethernet
+000187ed failover
+00018813 internet
+00018833 listener
+0001883d localchars
+00018855 nameserver
+00018861 negotiation
+000188b3 permanent
+000188cb protocol
+000188d5 resolution
+00018917 terminal
+000189c3 indication
+00018a0f transfer
+00018a2f authentication
+00018a49 community
+00018aa9 longbreak
+00018abd ri-dcd-dsrs-dtr
+00018acf cts-dsr-rts-dtr
+00018af1 %8S%IR not offered on requested %IQ
+00018b16 %8SObject %IQ %KK%IM
+00018b2c %8S%IK%KF
+00018b37 %A012- %L %IT %D resumed%2N
+00018b53 %A010- %IT %D to %L on %IV %L %I7%2N
+00018b78 %A010- %IT %D to %L %I7%2N
+00018b93 %A011- %IT %D disconnected from %L
+00018bb7 %A013- Continuing attempts to %K0 to %L
+00018be0 %A014- All %K2 disconnected%N
+00018bfe %A016- Attempting failover to %L on %IV %L
+00018c2a %A017- %IZ at position %3Z to %L
+00018c4c %A017- %IZ at position %3Z to %L on node %L
+00018c79 %A018- Queued %kb to %L canceled%N
+00018c9c %A019- %IQ %2D locked%N
+00018cb4 %A020- Logged out %IQ %2D on %K6 %L
+00018cd9 %A030- %IT%IY activated
+00018cf1 %A031- %IT%IY terminated
+00018d0a %A032- %IT%IY for %IT %D terminated
+00018d2f %A101- %D other %IT(s) active
+00018d4e %A102- No other %IT(s) active
+00018d6c %A111- %IQ(s) with %K7 %Ka not notified%N
+00018d96 %8S%K7 %Ka at %IQ %2D%N
+00018dae %A120- WARNING - %kb to %IR is not secure
+00018dd9 %A199- WARNING - %IA shutdown in %5D minutes
+00018e07 %A210- %I3not %I7, %IZ %kb timeout%N
+00018e2c %A%3D- %I3to %L not %I7%N
+00018e46 %A%3D- %I3to %L terminated%N
+00018e63 %8SNo response within timeout period
+00018e89 %8SCommunication protocol%I4
+00018ea7 %8SInsufficient %IV resources
+00018ec6 %8S%IA shutdown in%IL
+00018edd %8SNode user %K1
+00018eef %8S%KA %KB%IN
+00018efe %8S%IK%IR class
+00018f0f %8S%IK%kR or slot received
+00018f2b %8STime %KC expired
+00018f40 %8SNo%ILbeing made
+00018f54 %8S%IR in use
+00018f63 %8SNo such %IR
+00018f73 %8S%IR disabled
+00018f84 %8SRequested %kj is not in %kh
+00018fa4 %8SImmediate %kb rejected
+00018fbf %8S%kb denied
+00018fce %8SCorrupted solicit request
+00019039 %A501- From %IQ %2D, %L%N
+00019053 %A511- %K3 complete %9D bytes written, %9D%I4(s) detected
+0001908d %A512- %K4 %K3 successful
+000190a8 %A513- %K4 %K3 failure
+000190c0 %A514- %K3 complete %10D buffers sent, %10D buffer(s) in%I4
+000190fc %A%3D- %M6 memory error in %A parameters
+00019125 %8S%IA defaults in effect
+00019140 %A%3D- %A %IS %Ka
+00019157 Broadcast
+00019161 %A701- %IS syntax%I4
+00019176 %A702- Keyword "%L"%IM or ambiguous
+0001919a %A703- Value %IKor%IN, "%L"
+000191b6 %A704- %IW%IX
+000191c4 %A705- %kj %4Z not in %kh
+000191de %A704- %IW%IX
+000191ec %A707- Existing or queued %MK prevent %IW
+00019216 %A709- %IR %L not offered by %IV %L
+0001923a %A710- %IV %L%IM
+0001924b %A711- %IR %L%IM
+0001925c %A712- No %I3%I7
+0001926d %A713- %I3already %I7
+00019283 %A714- %KD %IR/host has not been defined
+000192ac %A715- %IR %L not currently available
+000192d2 %A716- %kb to %IR %L denied
+000192ee %A717- %IT %D not %I7
+00019304 %A718- %IT %KC %IU
+00019317 %A719- Insufficient resources to complete %IW%N
+00019347 %A721- No %Kc %IR on %IQ %2D
+00019364 %A722- %K6 %Ka
+00019373 %A723- AUTOCONNECT and protocol ANY cannot coexist
+000193a6 %A724- %IR %IV %I3%KC %IU
+000193c0 %A725- %kb to %IV %L denied
+000193dc %A726- %IV %L not reachable
+000193f8 %A728-%IBwith %I3%I7/pending
+00019415 %A729-%IBby a SET or CHANGE %IS
+00019435 %A730- Temporary resource conflict - please try again
+0001946b %A731- %IQ not configured for %KE %K3
+00019491 %A732- %IQ %2D not under %K3
+000194ae %A733- %IQ %2D already under %K3
+000194cf %A734- %IK%IW from a %ke%IY %k3
+000194ef %A735- %IR %L does not support requested %K3
+0001951c %A736-%IBby a DEFINE or CHANGE %IS
+0001953f %A741- %IG%KF
+0001954d %A742- %KF %KG failed
+00019563 %A743- Another %IQ already %k0
+00019582 %A750- Another %IQ has this %KK
+000195a2 %A752- %IR %KC %IU
+000195b5 %A761- Unsupported by %IQ hardware
+000195d8 %A762- Conflict of parameters on (some) port(s)
+00019608 %A770- %IK%IW with %ME %KZ
+00019623 %A771- %IKor no response from attached device
+00019651 %A772- %IZ %kb failed, error or no response from %IR%N
+000196a2 Password> %
+000196af Lock Password> %
+000196c1 Verification> %
+000196d2 Unlock Password> 
+000196e4 (Remote)
+000196f9 %I6%25T%10D%40T%I8Sent, 1 Collision:%67T%10D%N
+00019728 %I9%ID%25T%10D%40T%I8Sent, 2+ Collisions:%10D%N
+00019758 %I9Sent:%25T%10D%40TSend Failures:%67T%10D%N
+00019785 %I8%ID%25T%10D%40TSend Failure Reasons:%67T%D%D%D%D%D%D%D%D%D%D%N
+000197c7 %I8Sent:%25T%10D%40TReceive Failures:%67T%10D%N
+000197f7 %ML %I9%IE%25T%10D%40TReceive Failure Reasons:%67T%D%D%D%D%D%D%D%D%D%D%N
+00019840 %ML %I9Sent:%25T%10D%40TUnrecognized %kg:%67T%10D%N
+00019874 %ML %I8%IE%25T%10D%40TData %IO:%67T%10D%N
+0001989e %ML %I8Sent:%25T%10D%40TUser%IC%67T%10D%N
+000198c8 %I8Sent, Deferred:%25T%10D%40TSystem%IC%67T%10D%N
+00019922 %N%I5%ID%25T%10D%40TDuplicates %ID%67T%10D%N
+0001994f %I5%IF%25T%10D%40T%I5Re-%IF%67T%10D%N
+00019975 Solicitations Accepted:%S%10D%40T%IG%I5%IE%67T%10D%N
+000199aa Solicitations Rejected:%S%10D%40T%IGSlots %IE%67T%10D%N
+000199e2 Multiple %IV Addresses:%10D%40T%IGMulticasts %IE%67T%10D%N
+00019a32 %2N%IQ%S%2D:%S%L%40T%K6:%S%L%2N
+00019a52 %Kd %Ki:%28T%D%40T%KU %KW:%64T%A%N
+00019a75 %Kd %Ki:%28T%D%40TPrimary %KW:%64T%A%N
+00019a9c %Kg %Kh:%25T%A%40T%KV %KW:%64T%A%N
+00019abf %Kg %Kh:%25T%A%40T%M9 %KW:%64T%A%N
+00019ae2 %Ke:%24T%A%40T%A%63T%A%N
+00019afb %Me %Mf:%22T%A%40T%A%56T%A%2N
+00019b19 %kb:%21T%A%40T%Kr %Ks:%67T%A%N
+00019b38 %kU %Ks:%25T%A%40T%KK:%55T%L%N
+00019b57 %km:%21T%A %40T%IT %KC:%70T%D%N
+00019b77 %kT %Ks:%25T%A%40T%Kf:%67T%A%N
+00019b96 Default Protocol:%23T%A%2N
+00019bb1 %A%S%IR:%S%L%A%L%A%L%2N
+00019bc9 %kc %kK:
+00019bd2 %N(Current)%2S%kK:
+00019bfd %I6%23T%10D
+00019c09 %8T%Kr Accesses:%3S%10D%N
+00019c23 Framing %I0%23T%10D
+00019c37 %8T%ke Accesses:%2S%10D%N
+00019c51 %Ke %I0%23T%10D%N
+00019c63 %IO %I0%23T%10D
+00019c73 %kb:%14T%A%40T%IP %IR:%54T%L%N
+00019c92 %M1:%9T%A%40T%IP %IV:%54T%2S%L%N
+00019cb3 %K2:%21T%D%40T%IP %IQ:%54T%2S%L%2N
+00019cd6 %2N%IQ%9T%kb%19T%M1%33T%K8 Offered%N
+00019cfb %N%1S%2D%9T%A%19T%A%33T
+00019d1d ,%N%33T%L
+00019d27 Enabled Characteristics:
+00019d40 Autobaud
+00019d49 Autoconnect
+00019d55 Autoprompt
+00019d60 Broadcast
+00019d71 DSRlogout
+00019d83 Failover
+00019d8c Inactivity Logout
+00019d9e Input Flow Control
+00019db1 Interrupts
+00019dbc Limited View
+00019dce Longbreak Logout
+00019ddf Loss Notification
+00019df1 Message Codes
+00019e04 Multisessions
+00019e12 On-Demand Loading
+00019e24 Output Flow Control
+00019e38 Password
+00019e49 Remote Modification
+00019e62 Security
+00019e6b Signal Check
+00019e78 Verification
+00019f51 Input XOFFed:     
+00019f64 Output XOFFed:    
+00019f77                   Output Signals: 
+00019fc8                   Input Signals:  
+0001a046    Local
+0001a04f   Remote
+0001a058     None
+0001a061  Dynamic
+0001a06a Local   
+0001a073 Remote  
+0001a07c None    
+0001a085 Dynamic 
+0001a0c6 Signal Select:
+0001a0d5 RI-DCD-DSRS-DTR
+0001a0e5 CTS-DSR-RTS-DTR
+0001a0f5 Modem Control: 
+0001a105 Signal Control:
+0001a115 Disabled
+0001a11e  Enabled
+0001a127   Node: 
+0001a130   Destination: 
+0001a142 Destination: 
+0001a151 None availableNone
+0001a1aa     Connected
+0001a1b8    Connecting
+0001a1c6 Disconnecting
+0001a1d4        Locked
+0001a1e2    Local mode
+0001a1f0          Idle
+0001a1fe   Signal Wait
+0001a20c  Disconnected
+0001a21a Session Mode
+0001a227 Local Mode
+0001a232 Permanent    
+0001a285 Interactive
+0001a2a1 Dedicated
+0001a2ab Preferred
+0001a2b5 -dedicated
+0001a2c0 -preferred
+0001a316 %2N%IV %KK%21T%M1%34T%kV%N
+0001a331 %N%L%18T%2D %A%34T%L
+0001a346 %N%L%21T%A%34T%L
+0001a357 %2N%IV: %L%N
+0001a364 %N%I6%25T%10D%41TMultiple %IV Addresses:%68T%10D
+0001a395 %N%I5%ID%25T%10D%41TDuplicates %ID%68T%10D
+0001a3c0 %N%I5%IF%25T%10D%41T%I5Re-transmitted:%68T%10D
+0001a3ef %NSlots %ID%25T%10D%41T%IG%I5%ID%68T%10D
+0001a418 %NSlots %IF%25T%10D%41T%IGSlots %ID%68T%10D
+0001a444 %N%I9%ID%25T%10D%41TSolicitations Accepted:%68T%10D
+0001a478 %N%I9%IF%25T%10D%41TSolicitations Rejected:%68T%10D
+0001a504 %4N%IV: %L%41T%KJ:  %2H-%2H-%2H-%2H-%2H-%2H
+0001a530 %NLAT Protocol:%19TV%D.%D%41TData Link Frame %Ki:%63T%5D%N
+0001a56b %N%kV: %L%N
+0001a577 %N%IV %kK:
+0001a582 %N%IR %KK%21T%M1   Rating  %kV%N
+0001a5b8 Connected
+0001a5c2 Reachable
+0001a5d4 Unreachable
+0001a5e0 Requesting
+0001a608 %2NPosition  %kj%18TSource %IV%37T%IR%55T%IQ %KK%N
+0001a63b %N%4T%3D%11T%4Z%18T%L%37T%L%56T%2D  %L
+0001a662 %N%4T%3D%11T%4Z%18T%L%37T%L
+0001a689 b%N%kV: %L%N
+0001a696 %3N%IR: %L%N
+0001a6a3 %2N%IR %L - %2D %A
+0001a6b6 %N%L%18T%2D %A%34T%L
+0001a6cb %4N%IR %L - %A
+0001a6da %2N%IR %KK%21T%M1%34T%kV%N
+0001a6f5 %2N%IV %KK%21T%M1   Rating  %kV%N
+0001a717 %N%L%21T%A%33T%3D  %L
+0001a72d %N%L%18T%2D %A%33T%3D  %L
+0001a747 %N%L%21T%A%34T%L
+0001a765 %A%2D-%2D
+0001a76f %N%KZ %M0:%N
+0001a786 %NRating: %3D%N
+0001a796 Connections
+0001a7a2 Password
+0001a7c0 Unavailable
+0001a7cc Available
+0001a7e6 %2N%IQ    %kb%9S%M1%N
+0001a7fc %N %2D     %A%26T%A
+0001a830 %2N%IQ    %kJ%13S%M1%10S%IR%N
+0001a84e %N %2D     %L%30T%A%3S%L
+0001a867 %N%IQ %2D:%2S%L%30T%A%44T%IP %IT: %D
+0001a88c %N%IQ %2D:%2S%L%30T%A%44T%IP %IT: %A
+0001a8b1 Connected    
+0001a8bf Connecting   
+0001a8cd Disconnecting
+0001a8db Locked       
+0001a8e9 Local mode   
+0001a8f7 Idle         
+0001a905 Signal Wait  
+0001a913 %N- %IT %D: %A%30T%A%44T%L
+0001a92e %N- %IT %D: %A%30T%A%44T%L  (%L)
+0001a94f Queued at 
+0001a95a %N- %IT %D: %A%3D%30T%A%44T%L
+0001a978 %N- %IT %D: %A%3D%30T%A%44T%L  (%L)
+0001a99c Disconnected 
+0001a9aa %2N%II%L  %29TLAT V%D.%D  %40TROM %L  %52TUptime:%S%3D %2Z:%2Z:%2Z%2N
+0001a9f0 %KJ:%3S%2H-%2H-%2H-%2H-%2H-%2H%32T%KK:%3S%L%59T%k5:%S%5D%2N
+0001aa2c %kV:%2S%L%2N
+0001aa39 %KA %KB:%26T%3D
+0001aa49 %12T%KF %KC:%37T%3D%N
+0001aa5f %12T%KF %KC:%36T%Kb%N
+0001aa75 %k3 %IQ:%26T%3D
+0001aa85 %12T%Ma:%5S%L%N
+0001aa95 %kn %KB:%26T%3D
+0001aaa5 %12T%kh %KC:%37T%3D%N
+0001aabb %Ku %KB:%26T%3D
+0001aacb %12T%kX %KC:%37T%3D%N
+0001aae1 %ML %KB:%26T%3D
+0001aaf1 %12T%IT %KC:%37T%3D%N
+0001ab07 %IV %KC:%25T%4D
+0001ab17 %IV %KC:%25T%Kb
+0001ab27 %12T%k7:%3S%L%2N
+0001ab38 {%k7 %M1: %kO
+0001ab46 %IR %kK:
+0001ab4f %K6 %kK:
+0001ab58 Enabled Characteristics:
+0001ab71 Heartbeat
+0001ab89 Broadcast
+0001ab93 Announcements
+0001aba1 %22TCur%2SHigh%2SMax%2N
+0001abb9 Active %KS:%21T%4D%27T%4D%32T%4D%41TMinutes To Shutdown:%62T%10D%N
+0001abfc Active %KS:%21T%4D%27T%4D%32T%4D%41TMinutes To Shutdown:%62T%7SN/A%N
+0001ac41 Active %kI:%21T%4D%27T%4D%32T%4D%41TDiscarded %K9:%62T%10D%N
+0001ac7e %kh Entries:%21T%4D%27T%4D%32T%4D%41TResource %I0%62T%10D%2N
+0001acbb Available %K8:%21T%4D%27T%4D%33T%A%41T%IQ Framing %I0%62T%10D%N
+0001acfb %Kr %K8:%21T%4D%27T%4D%32T%4D%41T%IQ %Ke %I0%62T%10D%N
+0001ad32 Reachable %K9:%21T%4D%27T%4D%32T%4D%41T%IQ %IO %I0%62T%10D%N
+0001ad6f Reachable %K9:%21T%4D%27T%4D%32T%Kb%41T%IQ %IO %I0%62T%10D%N
+0001adac %NActive Circuits:%21T%4D%27T%4D%32T%4D%41TPrimary %MX:%S%L%N
+0001adea Connected %K9:%21T%4D%27T%4D%32T%4D%41TLoad %KJ:%S%2H-%2H-%2H-%2H-%2H-%2H%N
+0001ae36 Connected %K2:%21T%4D%27T%4D%32T%4D
+0001ae5a Connected %K2:%21T%4D%27T%4D%32T%Kb
+0001ae7e %5S%k4 %KJ:%S%2H-%2H-%2H-%2H-%2H-%2H%N
+0001aea5 %5S%k4 %KJ:%4S%Kb Available%N
+0001aec3 %A CPU Used:%22T%3D%28T%3D%33T%3D
+0001aee5 %5S%k3 User:%1S%2H-%2H-%2H-%2H-%2H-%2H%N
+0001af0e %5S%k3 User:%4S%Kb Available%N
+0001af2d %5S%k3 User:%2S%L%N
+0001af41 %A Memory Used:%22T%3D%28T%3D%33T%3D%5SBoot Protocol:%S%L%2N
+0001af7e Selftest %M1: %K6: %2H-%2H-%2H %IR: %5H %IQ: %H%H%H%H%H%H%H%H%H%H%H%H%H%H%H%H%N
+0001afce Selftest %M1: %kO%N
+0001afe2 %k7 %M1: PC=%8H, SP=%8H, SR=%4H, ME=%8H, CO=%3H
+0001b012 %k7 %M1: %kO
+0001b0d1 Name not availableN/A
+0001b0f7  Subtopic? <
+0001b105 Enter <CTRL/Z> to exit HELP or press <RET> to continue... =%
+0001b143 Enter <CTRL/Z> to exit HELP or press <RET> to continue... %2RSorry, no documentation for %L %L%R
+0001b1a4 %RAdditional help available for:%R
+0001b478 ********
+0001b482 Help Screens Copyright 1988, 1989, 1990, 1991, 1992
+0001b4b7 ********
+0001b4c5 Equipment Corporation
+0001b4df Aonline 
+0001b4f3 reference 
+0001b4ff tutorial
+0001b62a BACKWARDS
+0001b6aa BROADCAST
+0001b75d contain 
+0001b78e aexactly 
+0001b7b1 1uppercase 
+0001b7fa CLEAR/PURGE
+0001b815 whatever 
+0001b8a5 would produce
+0001b9c8 DISCONNECT/CLOSE
+0001ba89 FORWARDS
+0001bb0c INITIALIZE
+0001bb5e QCANCEL 
+0001bb6a a delayed 
+0001bb82 mins] [DISABLE] [
+0001bbb0 ,{NORMAL}
+0001bbc1 postpones 
+0001bc6f repeat n 
+0001bc99 repeats 
+0001bcd1 , protecting 
+0001bd01 , choose a 
+0001bf41 Specifying 
+0001bf56 forces a 
+0001bfa9 continuously-updated 
+0001bff2 corresponding 
+0001c02a REMOVE QUEUE
+0001c411 itself, 
+0001c47c resolution 
+0001c4ce CLEAR/PURGE SERVICE
+0001c53a ^DEFINE/\SET/CHANGE PORT
+0001c64b affects 
+0001c78f DEFINE/SET/CHANGE SERVER
+0001c7c7 initialize 
+0001c890 DEFINE/SET/CHANGE SERVICE
+0001c8eb referred 
+0001c9ad SET SESSION
+0001ca0c SET PRIVILEGED/NOPRIVILEGED
+0001ca9e attempts, 
+0001caf4 nonprivileged 
+0001cb11 SHOW NODES
+0001cb7d produces a 
+0001cbf6 SHOW/LIST PORTS
+0001cd4c SHOW/LIST SERVER
+0001ce59 utilization 
+0001ce68 quptime 
+0001ceae SHOW/LIST SERVICES
+0001d014 SHOW QUEUE
+0001d109 satisfied 
+0001d142 SHOW SESSIONS
+0001d1bf SHOW USERS
+0001d276 TEST INTERNET
+0001d2ff TEST LOOP
+0001d3c6 TEST PORT
+0001d3dd sending a 
+0001d467 qlines (
+0001d48a qwidth (
+0001d4d6 qexternal 
+0001d500 TEST SERVICE
+0001d5db Abuffers 
+0001d62d loopback 
+0001d667 DEFINE/SET/CHANGE PORT DIALUP
+0001d6be  DEFINE/SET/CHANGE PORT DSRLOGOUT
+0001d784 DEFINE/SET/CHANGE PORT ACCESS
+0001d7ed alternate 
+0001d7f9 operating 
+0001d836 , initiate 
+0001d85d completely.
+0001d889 ^DEFINE/\SET/CHANGE PORT TYPE
+0001d8c5 q<DELETE> 
+0001d950 downward 
+0001da20 qbottom 
+0001da32 "DEFINE/SET/CHANGE PORT AUTOCONNECT
+0001da86 Also, enabling 
+0001dabb repeatedly 
+0001db09 !^DEFINE/\SET/CHANGE PORT AUTOPROMPT
+0001db99 appearance 
+0001dbdd %^DEFINE/\SET/CHANGE PORT FORWARD SWITCH
+0001dc51 Control 
+0001dc7c &^DEFINE/\SET/CHANGE PORT BACKWARD SWITCH
+0001dcf0 Control 
+0001dd1b  DEFINE/SET/CHANGE PORT BROADCAST
+0001dd90 DEFINE/SET/CHANGE PORT BREAK
+0001ddc3 pressed 
+0001de5e disregard <
+0001de70 (DEFINE/SET/CHANGE PORT ON-DEMAND LOADING
+0001deaa -demand loading (
+0001dec4 !foreign
+0001deda composed 
+0001dee7 unusually large 
+0001df29 override 
+0001df44 therefore, assuring 
+0001df59 qcontinuous 
+0001df89  DEFINE/SET/CHANGE PORT PREFERRED
+0001e0f7  DEFINE/SET/CHANGE PORT DEDICATED
+0001e2a6 (DEFINE/SET/CHANGE PORT LOSS NOTIFICATION
+0001e321 1(beeping sound)
+0001e347 qnotification 
+0001e35f *DEFINE/SET/CHANGE PORT REMOTE MODIFICATION
+0001e408 #DEFINE/SET/CHANGE PORT LIMITED VIEW
+0001e436 prohibit a 
+0001e446 1executing 
+0001e4bc #^DEFINE/\SET/CHANGE PORT LOCAL SWITCH
+0001e55c DEFINE PORT SIGNAL CONTROL
+0001e590 utilizes 
+0001e5b0 Enabling 
+0001e5d4 Disable 
+0001e60b qconnecting cable 
+0001e663 manipulates 
+0001e677 monitors 
+0001e695 manipulate 
+0001e6ad (DEFINE/SET/CHANGE PORT AUTHORIZED GROUPS
+0001e7a3 P, 1,3,5-8).
+0001e858 DEFINE/SET/CHANGE PORT PASSWORD
+0001e8c9 prompted 
+0001e8dc $^DEFINE/\SET/CHANGE PORT MULTISESSIONS
+0001e9b7 DEFINE/SET/CHANGE PORT NAME
+0001ea64 DEFINE/SET/CHANGE PORT USERNAME
+0001eb27 $DEFINE/SET/CHANGE PORT SESSION LIMIT
+0001ebb0 created 
+0001ebc5 Areached.
+0001ebd2 DEFINE/SET/CHANGE PORT SECURITY
+0001ec1d directly 
+0001ec73 #DEFINE/SET/CHANGE PORT SIGNAL CHECK
+0001ecb3 !Ready (
+0001ecf6 asserted 
+0001ed0d considered 
+0001ed3a allowing a
+0001ed4e &DEFINE/SET/CHANGE PORT ALTERNATE SPEED
+0001ed89 , 1200, 1800, 2000, 2400, 4800, 
+0001edbd (DEFINE/SET/CHANGE PORT INACTIVITY LOGOUT
+0001ee07 qinactivity.
+0001ee49 1expires.
+0001ee6e !DEFINE/SET/CHANGE PORT INTERRUPTS
+0001ef45 #^DEFINE/\SET/CHANGE PORT VERIFICATION
+0001ef7c 1confirming 
+0001ef9e switches 
+0001efdc $DEFINE/SET/CHANGE PORT MESSAGE CODES
+0001f05a DEFINE/SET/CHANGE PORT QUEUING
+0001f135 SET PORT GROUPS
+0001f163 a subset 
+0001f1a8 Limiting 
+0001f1b9 shortens 
+0001f277 P, 1,3,5-8).
+0001f340 DEFINE/SET/CHANGE PORT DTRWAIT
+0001f3b0 1a delay 
+0001f3ba 1asserting 
+0001f3fe DEFINE/SET/CHANGE PORT FAILOVER
+0001f475 failover 
+0001f48c DEFINE/SET/CHANGE PORT LOCK
+0001f4b3 disallow 
+0001f4bf 1locking 
+0001f4fc 'DEFINE/SET/CHANGE PORT LONGBREAK LOGOUT
+0001f55d qlasts approximately 2.5 - 3.5 
+0001f582 Aissued 
+0001f5fc DEFINE/SET/CHANGE PORT SPEED
+0001f634 Aparameter 
+0001f6a3 , 1200, 1800, 2000, 2400, 4800, 
+0001f718 DEFINE/SET/CHANGE PORT AUTOBAUD
+0001f76c normally 
+0001f7b4 Aspeeds 
+0001f851 %DEFINE/SET/CHANGE PORT CHARACTER SIZE
+0001f8be  ] { 8 }
+0001f8d6 DEFINE/SET/CHANGE PORT PARITY
+0001f917 Q{EVEN }
+0001f94e  DEFINE/SET/CHANGE PORT STOP BITS
+0001f9bd #DEFINE/SET/CHANGE PORT FLOW CONTROL
+0001fa8e ingoing 
+0001fafd "DEFINE/SET/CHANGE SERVER BROADCAST
+0001fb77 &DEFINE/SET/CHANGE SERVER ANNOUNCEMENTS
+0001fbb2 advertising 
+0001fc18 DEFINE/SET/CHANGE SERVER PROMPT
+0001fc77 Qconsists 
+0001fca4 Qdefaults 
+0001fcbd DEFINE/SET/CHANGE SERVER NAME
+0001fd11 identify 
+0001fd9a _xxxxxxxxxxxx, 
+0001fdd4 DEFINE/SET/CHANGE SERVER NUMBER
+0001fe49 'DEFINE/SET/CHANGE SERVER LOGIN PASSWORD
+0001ff1d &DEFINE/SET/CHANGE SERVER CIRCUIT TIMER
+0001ff9f -DEFINE/SET/CHANGE SERVER MAINTENANCE PASSWORD
+0001ffd0 1a maintenance 
+00020002 downline 
+0002003a digits (0-9,A-F).
+000200b7 #DEFINE/SET/CHANGE SERVER NODE LIMIT
+0002012e 1conjunction 
+000201b6  DEFINE/SET/CHANGE SERVER CONSOLE
+000201f9 troubleshooting.
+00020251 $DEFINE/SET/CHANGE SERVER QUEUE LIMIT
+0002030c DEFINE/SET/CHANGE SERVER DUMP
+00020338 dumping 
+00020348 a fatal bugcheck
+0002038a crashes.
+000203a8 "DEFINE/SET/CHANGE SERVER HEARTBEAT
+0002041e ignore heartbeat errors.
+00020452 generates 
+00020463 Qdetect 
+00020478 generate 
+00020487 'DEFINE/SET/CHANGE SERVER SERVICE GROUPS
+0002050a qrequesting 
+0002059b P, 1,3,5-8).
+00020669 )DEFINE/SET/CHANGE SERVER INACTIVITY TIMER
+000206c5 agreater 
+00020713 (DEFINE/SET/CHANGE SERVER KEEPALIVE TIMER
+00020750 regular intervals determined
+0002078f exchanged.
+000207d0 DEFINE/SET/CHANGE SERVER LOCK
+00020844 'DEFINE/SET/CHANGE SERVER PASSWORD LIMIT
+000208f2 )DEFINE/SET/CHANGE SERVER RETRANSMIT LIMIT
+00020934 retransmits 
+00020944 unacknowledged 
+00020959 disconnecting 
+0002098c Qranges 
+000209aa &DEFINE/SET/CHANGE SERVER SESSION LIMIT
+000209e4 qsimultaneous 
+00020a57 (DEFINE/SET/CHANGE SERVER MULTICAST TIMER
+00020adb 'DEFINE/SET/CHANGE SERVER IDENTIFICATION
+00020b3b welcome banner 
+00020b95 ,DEFINE/SET/CHANGE SERVER PRIVILEGED PASSWORD
+00020c5f !DEFINE/SET/CHANGE SERVER SOFTWARE
+00020d5e AMNENG1 
+00020d70 under most circumstances.
+00020d8c %DEFINE/SET/CHANGE SERVICE CONNECTIONS
+00020dc2 accepts 
+00020e0a (DEFINE/SET/CHANGE SERVICE IDENTIFICATION
+00020e3b advertise 
+00020e86 !announcements 
+00020f07 "DEFINE/SET/CHANGE SERVICE PASSWORD
+00021004 DEFINE/SET/CHANGE SERVICE PORTS
+000210a2 separated 
+00021155 DEFINE/SET/CHANGE SERVICE QUEUE
+000211d4 SET SESSION LAT
+000212a4 7SHOW/LIST PORTS CHARACTERISTICS/COUNTERS/STATUS/SUMMARY
+00021345 $SHOW/LIST PORTS ACCESS/ALL/port-list
+000213e0 LOGIN HELP
+0002140f assistance, 
+00021431 TUTORIAL
+00021442 1a variety 
+000214b9 Pressing 
+00021544 Subtopic?" 
+0002159b CONNECTing 
+000215b1 COMMAND Line Recall
+000215cc FILE Transfers
+000215dc SPECIAL Keys
+000215ec Conventions
+000215f9 TD/SMP - 
+00021608 LOCKING 
+00021615 Communications 
+00021626 Features
+0002163c CONNECTING TO A SYSTEM
+00021671 supports 
+0002179a substitute 
+000217cb Acalled a 
+00021817 @COMMAND LINE RECALL/SPECIAL KEYS/PORT AND DEVICE CHARACTERISTICS
+0002189c arecalls 
+000218b9 right arrows move 
+000218cc qcursor.
+000218ef @/R> - Retypes 
+00021917 qentire 
+0002192c @/Z> - Cancels 
+0002193d processing 
+00021970 p> - Returns 
+000219f8 > - Executes 
+00021a5a FILE TRANSFERS
+00021ad7 partner.
+00021b88 program.
+00021b92 Once completed, 
+00021bb3 Disable 
+00021bf7 HELP CONVENTIONS
+00021c1c qauthorized 
+00021c35 q"Topic?" 
+00021c9c 1conventions 
+00021cb8 Brackets ([]) 
+00021ccf Braces ({}) 
+00021d00 qbrackets 
+00021d19 Slashes (/) 
+00021d46 qslashes.
+00021d55 Commands 
+00021d60 written 
+00021d6f Lowercase words 
+00021db3 asterisk (*).
+00021de0 redisplay 
+00021df7 aa question mark (?).
+00021e29 LOCKING YOUR PORT
+00021e4a unattended, 
+00021e60 prevent 
+00021e9c 1alphanumeric 
+00021eb7 Reenter 
+00021ee4 @> 1bucket (
+00021efa P> 1bucket (
+00021f2d TD/SMP - SESSION MANAGEMENT
+00021f52 Terminal 
+00021f9d !- Establishes a 
+00021fc3 additional 
+00021feb 1- Disconnects 
+0002208e - Returns 
+000220d1 - Changes 
+000220fe SESSIONS
+0002210b 1describes 
+00022142 configuration.
+00022156 Multiple 
+00022161 - Connect 
+00022197 Preferred 
+000221a2 !- Configure 
+000221fc Queuing 
+00022299 Arejected.
+0002230f Switching 
+0002239a specifying 
+000223e6 !configure 
+0002248c SLIP SESSION
+0002256a astarting a 
+0002258f q-562- Starting 
+000225a0 1datalink 
+000225b0 COMMUNICATIONS SERVER FEATURES
+000225f4 qsmallest 
+0002260a distinguishes 
+0002263d abbreviated 
+0002264b SE PO DEF PRO.
+0002265f Broadcast 
+0002266a a- Send 
+00022719 Logging 
+00022759 Username - 
+0002279e DEFINE/SET/CHANGE INTERNET
+0002282c CLEAR/PURGE INTERNET
+0002286b SHOW/LIST INTERNET
+000228e5 "DEFINE/SET/CHANGE INTERNET GATEWAY
+0002296a Restriction:
+00022983 ADEFINEd 
+0002299b Overlapping 
+000229ad avoided.
+00022ae1 CLEAR/PURGE INTERNET GATEWAY
+00022c5d SHOW/LIST INTERNET GATEWAY
+00022ca6 "DEFINE/SET/CHANGE INTERNET ADDRESS
+00022d14 &DEFINE/SET/CHANGE INTERNET SUBNET MASK
+00022d91 partition
+00022da1 asection 
+00022df8 "SHOW/LIST INTERNET CHARACTERISTICS
+00022e4d SHOW INTERNET COUNTERS
+00022e8e DEFINE/SET/CHANGE INTERNET ARP
+00022eec !ETHERNET 
+00022efa ![NOPURGE]
+00022f6e CLEAR/PURGE INTERNET ARP ENTRY
+00023000 SHOW/LIST INTERNET ARP
+00023043 !DEFINE/SET/CHANGE TELNET LISTENER
+00023067 Enables a 
+0002310c @, 2001 - 2016 decimal.
+000231a9 include 
+000231b3 combination 
+000231d4 disassociate 
+00023220 Rdescriptive 
+00023248 CLEAR/PURGE TELNET LISTENER
+00023272 Qfactory 
+00023310 SHOW/LIST TELNET LISTENER
+000233ab 'DEFINE/SET/CHANGE PORT DEFAULT PROTOCOL
+000233d5 Defines 
+00023490 Requests a 
+00023525 CONNECT ANY
+000235a7 establishes a 
+00023681 CONNECT TELNET/TELNET/OPEN
+0002375a CONNECT LAT/SERVICE
+000237c6 qcombinations 
+000238bc CONNECT PORT
+000238f8 Aappropriately.
+00023936 ZERO INTERNET
+00023987 ZERO PORT
+00023999 qdesignated 
+00023a01 DEFINE/SET/CHANGE INTERNET HOST
+00023a93 CLEAR/PURGE INTERNET HOST
+00023be1 SHOW/LIST INTERNET HOST
+00023d8e @, TTL (
+00023db8 %DEFINE/SET/CHANGE INTERNET NAMESERVER
+00023ea5 CLEAR/PURGE INTERNET NAMESERVER
+00023f83 *DEFINE/SET/CHANGE INTERNET NAME RESOLUTION
+00024083 Qamount 
+000240c3 retrieval preference:
+0002416b Regardless 
+00024179 qoutcome, 
+000241a1 ksolely 
+00024215 "SHOW/LIST INTERNET NAME RESOLUTION
+00024288 qsetable 
+000242b5 qdifferent 
+000242d9 DEFINE/SET/CHANGE PORT TELNET
+000243a5 qaffected 
+000243fe -DEFINE/SET/CHANGE  PORT/SESSION TELNET CLIENT
+00024504 transfers.
+00024557 qability 
+00024591 independently.
+000245b1  ] {7|8}
+000245ee AUTOSYNCH {
+0002460e AUTOFLUSH {
+0002462e Autosynch
+00024646 !sequence 
+00024673 Autoflush
+00024689 Aflushed 
+00024783 ] {charcter |<
+000248ea suspends, 
+00024a3b subsequent 
+00024abc qverification 
+00024b09 $DEFINE/SET/CHANGE PORT TELNET SERVER
+00024b42 } [INDICATION] {
+00024bac application 
+00024bd3  ] {7|8}
+00024ce0 !Character) 
+00024d89 suspend,
+00024d9b abort a 
+00024de3  ] {7|8}
+00024ecf SHOW/LIST PORT TELNET
+00024fc5 SEND TELNET
+00024fe0 indicated:
+00025083 indicating 
+0002514d qimplementation 
+000251c0 dropped.
+000251cc SHOW PORT SESSIONS
+000252d3 DEFINE/SET/CHANGE SNMP
+000252f4 1Network 
+0002532e [FAILURE] {
+00025372 ${GETNEXT}
+000253f8 emit authentication
+0002540f failure 
+00025427 A- Communities 
+00025452 qInformation Base (
+0002549b 1limits, 
+000254f9 provided, 
+00025585 sequentially.
+000255ff SHOW/LIST SNMP
+00025624 1Network
+000256d7 "Running" 
+000256f0 CLEAR/PURGE SNMP COMMUNITY
+00025740 Acommunities 
+0002574e QPUBLIC.
+0002576c DEFINE/SET/CHANGE PORT SLIP
+00025896 Aallowed, since 
+000258a7 aaddresses
+000258e8 `/CHANGEd.
+000259b8 `/CHANGEd. 2) 
+000259f0 Maximum Transmission Unit 
+00025a18 qlargest
+00025a24 datagram 
+00025a31 1bytes) 
+00025a64 SHOW/LIST PORT SLIP
+00025b30 "CLEAR/PURGE PORT SLIP HOST ADDRESS
+00025bc8 CONNECT SLIP
+00025c47 DEFINE/SET/CHANGE SYSTEM
+00025c78 !{CONTACT 
+00025c8d {LOCATION 
+00025cb6 manager.
+00025d1f SHOW/LIST SYSTEM
+000268ac internet
+0002691d  ARP resolution received ethernet broadcast for IP address
+00026959  Duplicate IP address received from ARP
+00026ad6 Resolving Name...
+00026aec Trying...
+00026afa Trying...
+00026b08 available parameter length is:
+00026b2f available parameter length is:
+00026b56 available parameter length is:
+00026b7d available parameter length is:
+00026ba4 available parameter length is:
+00026bf0 %s established
+00026bff %s on node %s established
+00026cbc @(#)db_lookup.c
+00026ccc 4.14 (Berkeley) 2/17/88
+00026ce8 @(#)db_save.c
+00026cf6 4.13 (Berkeley) 2/17/88
+00026d38 @(#)db_update.c
+00026d48 4.16 (Berkeley) 2/28/88
+00026db4  no memory to init DNS!
+00026dcd  open DNS system socket fail !
+00026dfa dns_fact_reset:no memory to reset name table.
+00026e28 dns_fact_reset:no memory to reset resolution section.
+00026e5e nvr_load_resolution: no memory to read nvram.
+00026e94 .in-addr.arpa
+00026ea2 free_req_rcb:internal error. rcb not found.
+00026ece pend_request:internal error. rcb not found
+00026ef9 ui_reply(3):internal error. rcb not found.
+00026f24  socket state changes!
+00026f3c @(#)ns_forw.c
+00026f4a 4.26 (Berkeley) 3/28/88
+00026f70 @(#)ns_req.c
+00026f7d 4.32 (Berkeley) 3/31/88
+00026fa1 Name_Too_long
+00026fb0 @(#)ns_resp.c
+00026fbe 4.50 (Berkeley) 4/7/88
+00026fd8 @(#)ns_sort.c
+00026fe6 4.3 (Berkeley) 2/17/88
+00027000 @(#)ns_stats.c
+0002700f 4.3 (Berkeley) 2/17/88
+000270b0 response pending
+000270c1 truncated responses
+000270d5 martian responses
+000270e7 bad responses dropped
+000270fd check_ns calls
+0002710c prime cache calls
+0002711e system queries
+0002712d FORMERR answers
+0002713d FAIL answers
+0002714a OK answers
+00027155 duplicate responses
+00027169 responses
+00027173 duplicate queries
+00027185 iqueries
+00027196 output packets
+000271a5 input packets
+000271c2 %-8s  %-15s  %-8s  %-15s  %-5s  %s%s
+000271f8 %-15s        %-17s    %-8s%s
+00027215 Internet Address       Ethernet Address     Status
+00027258 %-19s%s%s
+00027271 %-26s%10s     %-27s%10s%s
+000272a2 %-26s%10s     %-27s%10s%s
+000272d1              %s
+000272e3 %s  %-10s  %s  %s
+000272f6 %-15s     %-5s      %s%s
+0002730f     Remote
+0002731a      Local
+00027325    Ordered
+00027330       Stub
+0002733b      Slave
+00027355 Domain Name: %s
+0002736b Nameservers: (Locally configured)
+0002738e Nameservers: (Locally configured)
+000273b4 Nameservers: (Learned)
+000273cc Nameservers: (Learned)
+00027497 Listener TCP-port:  %u%s
+000274c8 %s, %s, Protocol %s%s
+000274f5 %s:  %-18s %-13s Current Session: %s%s
+00027531 - %s: %-13s %-6s %s %s%s%s%s
+00027566 Port    Username            Status          Service%s
+000275a5 %3d     %-20s%-16s%s%s
+000275d7 %-7s: %-29s Server: %s%s
+000275f4 %-7s: %-29s Server: %s%s
+00027616 Host Address:  %s%40TMTU:  %s%s
+0002764b %-7s: %-29s Server: %s%s
+00027667 %4D %2Z:%2Z:%2Z
+00027678 Connect Time: %s%s
+00027699 Bytes Received:       %10s    Bytes Sent:         %10s%s
+000276dd Packets Received:     %10s    Packets Sent:       %10s%s
+00027721 Receive Packets Lost: %10s    Send Packets Lost:  %10s%s
+00027760 Send Packets Queued:  %10s%s
+0002781e %-27s%10s     %-27s%10s%s
+00027846 %-26s %10s   %-26s %10s
+0002785f %-32s  %-15s  %3s  %3s    %3s  %3s %s
+000278a1 Running    
+000278ad Not Running
+000278ba %-20s%11s%s
+000278da Contact:  %s
+000278e7 Location: %s%s
+000278fc Contact:  %s
+00027909 Location: %s%s
+0002796c %.25s %.*s  ROM %.*s  LAT V%u.%u  LOAD IMAGE: %.*s
+0002799f                                                                 
+000279f6 Resolving Name...
+00027a0c Pinging...
+00027a1b Pinging...
+00027a59 DISCONNECT
+00027a64 SHUTDOWN
+00027a9a SOCKADDR
+00027aa3 PEERADDR
+00027aac CONNECT2
+00027ab5 FASTTIMO
+00027abe SLOWTIMO
+00027ac7 PROTORCV
+00027ad0 PROTOSEND
+00027b42 SYN_SENT
+00027b4b SYN_RCVD
+00027b54 ESTABLISHED
+00027b60 CLOSE_WAIT
+00027b6b FIN_WAIT_1
+00027b7e LAST_ACK
+00027b87 FIN_WAIT_2
+00027b92 TIME_WAIT
+00027d68 0123456789abcdef
+00028114 *** Bad Command From Peer ***
+000283b3 |Telnet Console
+00028406 TIMING MARK
+00028452 EXTENDED ASCII
+00028468 BYTE MACRO
+00028473 DATA ENTRY TERMINAL
+0002848e SUPDUP OUTPUT
+0002849c SEND LOCATION
+000284aa TERMINAL TYPE
+000284b8 END OF RECORD
+000284c6 TACACS UID
+000284d1 OUTPUT MARKING
+000284e7 3270 REGIME
+0002850d LINEMODE
+00028b2b 0123456789
+00028b36 0123456789ABCDEF
+00028b47 0123456789abcdef
+00028b5c (no message defined for this message code)
+00028b88 Local -%03d- 
+00028b97 Local - 
+00028ba1             
+00028baf         
+00028bb8 PING session currently active
+00028bd6 Session %d to %s established
+00028bf4 Session %d to %s 
+00028c07 Session %d disconnected from %s
+00028c27 Logged out port %d on server %s 
+00028c7b \%d other session(s) active
+00028caf \no error
+00028cb9 Telnet option negotiation in progress
+00028cdf Telnet session disconnected
+00028cfb Insufficient resources to complete Telnet connection
+00028d30 Telnet option negotiation in progress, please try again
+00028d68 Telnet session was not established
+00028d8b Insufficient resources to complete Telnet operation
+00028dbf Invalid operation on a Telnet server session
+00028dec Invalid operation on a Telnet client session
+00028e19 Type-ahead not yet processed, please try again
+00028e48 Character already in use
+00028e61 Telnet option not supported by peer
+00028e85 Telnet operation invalid in current mode
+00028eae ALB too small for SHOW
+00028ec5 Bad ALB length
+00028ed4 ALB illegal directive
+00028eea Not a Telnet function
+00028f00 Not a listener
+00028f0f Not a session
+00028f1d Illegal argument
+00028f2e Telnet function not implemented
+00028f4e Telnet option not implemented
+00028f6c Port(s) already mapped to another service
+00028f96 Telnet listener failed to get a socket
+00028fbd Telnet listener failed to bind socket
+00028fe3 Telnet listener failed to listen on socket
+0002900e Must first enable ports on this listener
+00029037 Port refused to map this port to the listener
+00029065 Cannot do this while listener has active server connections
+000290a1 ID too long
+000290ad Cannot do this while listener is enabled
+000290d6 Invalid TCP port number
+000290ee Cannot modify Telnet Remote Console ports
+00029118 Invalid internet address
+00029131 Invalid subnet mask
+00029145 Invalid gateway address
+0002915d Invalid gateway address, gateway not on our internet subnet
+00029199 Invalid network address
+000291b1 Invalid Ethernet address
+000291ca Invalid ARP entry, internet address not on our internet subnet
+00029209 ARP entry limit reached
+00029221 Server internet address already set
+00029245 Error deleting ARP entry, entry not known
+0002926f Gateway entry already exists
+0002928c Error deleting gateway entry, entry not known
+000292ba Gateway entry limit reached
+000292d6 Operation requires internet address to be set
+00029304 Internet checksum failure, parameters not loaded
+00029335 ARP entry checksum error
+0002934e Gateway entry checksum error
+0002936b Conflict between subnet mask and network address
+0002939c Network is down
+000293ac Network is unreachable
+000293c3 Network dropped connection on reset
+000293e7 Software caused connection abort
+00029408 Connection reset by peer
+00029421 Insufficient resources to perform operation
+0002944d Connection timed out
+00029462 Connection refused
+00029475 Host is down
+00029482 No route to host
+00029493 Cannot connect to broadcast address
+000294b7 Operation requires internet address to be set
+000296df \Insufficient resources to perform operation
+0002970c Unsupported function
+00029721 Invalid command on session protocol
+00029745 Warning - too many characters; input truncated
+00029774 Invalid argument
+00029785 PING successful: host reachable
+000297a5 Host unreachable
+000297b6 Insufficient resources: PING disallowed
+000297de PING timed out
+000297ed Internet host not known
+00029805 Host name lookup failure
+0002981e No address associated with name
+0002983e No buffer available to resolve name
+00029862 Add to database failure
+0002987a Illegal domain name
+0002988e Illegal internet address
+000298a7 Request in process
+000298ba Maximum queries exceeded
+000298d3 Request in pending queue
+000298ec Resolution domain is not set
+00029909 Unknown server error
+0002991e Unsupported function
+00029933 DNS entry limit exceeded
+0002994c DNS parameter out of range
+00029a2f \SLIP not enabled on that port
+00029a4e SLIP function not implemented
+00029a6c Illegal SLIP Directive
+00029a83 Not a SLIP Directive
+00029a98 SLIP address conflicts with address of another interface
+00029ad1 SLIP address not contained in address of LAN interface
+00029b08 Console messages are not output during SLIP sessions
+00029b3d Cannot enable SLIP on MULTISESSIONS port
+00029b66 Port already has SLIP HOST ADDRESS
+00029b89 Port does not have a SLIP HOST ADDRESS
+00029bb0 Cannot have two SLIP sessions on port
+00029bd6 Starting SLIP datalink session
+00029bf5 Invalid SLIP argument
+00029c0b FLOW CONTROL cannot be XON for SLIP sessions
+00029caf \Community name not specified
+00029ccd Community names must consist only of printable characters
+00029d07 Specified address is not a valid community address
+00029d3a Insufficient space: total unused community characters left is %d
+00029d7b Disable TRAPs before setting internet address to ANY
+00029db0 Assign a specific internet address before enabling TRAPs
+00029de9 Permanent database inaccessible at this moment
+00029e18 No resources available at this moment
+00029e3e Community name does not exist
+00029e5c Community data lost, SNMP reset to factory defaults
+00029e90 SNMP SET access not supported
+00029eae No resources - SNMP not enabled
+00029ece No internet address - SNMP not enabled
+00029ef5 Community name truncated
+00029f87 \Command syntax error
+00029f9d Keyword "%s" not known or ambiguous
+00029fc1 Value invalid or out of range, "%d"
+00029fe5 Operation requires privilege
+0002a002 Entry %d not in queue
+0002a018 Secure operation requires privilege
+0002a03c Existing or queued connections prevent operation
+0002a06d Service %s not offered by node %s
+0002a08f Node %s not known
+0002a0a1 Service %s not known
+0002a0b6 No connection established
+0002a0d0 Connection already established
+0002a0ef Preferred service/host has not been defined
+0002a11b Service %s not currently available
+0002a13e Access to service %s denied
+0002a15a Session %d not established
+0002a175 Session limit reached
+0002a18b Insufficient resources to complete operation
+0002a1b8 Protocol does not support operation
+0002a1dc Invalid operation from a remote management console
+0002a20f Specified server name already in use
+0002a2f3 \ERROR CODE ZERO IS NOT AN ERROR! (This shouldn't be printed!)
+0002a332 Just a test message
+0002a346 Another test
+0002a388 (Domain)
+0002a3b4  !"#$%&'()*+,-./0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+0002a4a4 Network:
+0002a4d3 Gateway:
+0002a4dc Host:   
+0002a516 No Purge
+0002a524 Internet Address:
+0002a53a Subnet Mask:     
+0002a554 TCP Segments:             
+0002a578                           
+0002a59c  Transmitted:             
+0002a5c0 Bytes Transmitted:        
+0002a5e4   Data:                   
+0002a608  Bytes Data:              
+0002a62c   Data Retransmitted:     
+0002a650  Bytes Data Retransmitted:
+0002a674   Other:                  
+0002a698 Bytes Received:           
+0002a6bc  Received:                
+0002a6e0                           
+0002a704  Segments Discarded:      
+0002a728                           
+0002a74c                           
+0002a770 Internet Connections:     
+0002a794 IP Packets Transmitted:   
+0002a7b8  Requested:               
+0002a7dc IP Packets Received:      
+0002a800  Accepted:                
+0002a824 IP Fragments Received:    
+0002a848  Established:             
+0002a86c IP Fragments Dropped:     
+0002a890  Closed:                  
+0002a8b4 IP Error in Header:       
+0002a8d7   Dropped:                 
+0002a8fc                           
+0002a920                           
+0002a944 ICMP Messages:            
+0002a968 UDP Datagrams:            
+0002a98b ! Transmitted:             
+0002a9af % Transmitted:             
+0002a9d3 " Received:                
+0002a9f7 & Received:                
+0002aa1b # Dropped:                 
+0002aa3f ' Dropped:                 
+0002aa63 $ Destination Unreachable: 
+0002aa88                           
+0002aaad Internet Address                 Name
+0002aad5 %-15s                  %-s%s
+0002ac04        expired
+0002ac13 Internet Address          TTL    Name
+0002ac3b %-15s  %s  %-s%s
+0002ac55 %5D %2Z:%2Z:%2Z
+0002ad80 Input Packets:            
+0002ada4 Duplicate Responses:      
+0002adc8 Output Packets:           
+0002adec Bad Responses:            
+0002ae10 Total Responses:          
+0002ae34 Truncated Responses:      
+0002ae58 OK Answers:               
+0002ae7c Fail Answers:             
+0002aea0 Total Queries:            
+0002aec4 FORMERR Answers:          
+0002aee8                           
+0002af0c Duplicate Queries:        
+0002af2c Resolution Host Limit: 
+0002af48 Resolution Time Limit: 
+0002af64 Resolution Mode:       
+0002af80 Resolution Retry Limit:
+0002b030 %s, %s, Protocol %s%s
+0002b052 Disabled
+0002b063 Disabled (negotiating)
+0002b07a Enabled (negotiating)
+0002b0a7 End of Record
+0002b0b5 Remote Flow Control
+0002b0ca   Do-%-23s%s%s
+0002b0da   Will-%-21s%s%s
+0002b0f0 (no status information available for LAT sessions)%s
+0002b129 (no status information available for SLIP sessions)%s
+0002b163 (no status information available for PING sessions)%s
+0002b19d (no status information available for MOP sessions)%s
+0002b207 -  s  f      
+0002b215  +s  f      
+0002b222   s +f      
+0002b22f  -s -f      
+0002b23c             
+0002b249          TBS
+0002b26f I         
+0002b27a      None
+0002b284 Character
+0002b28e    Binary
+0002b2a8         
+0002b2b1  Enabled
+0002b2ba Disabled
+0002b2c3 Enabled 
+0002b30c         
+0002b315 Disabled
+0002b31e Transmit
+0002b327  Recieve
+0002b330   Duplex
+0002b34f 0       
+0002b414            
+0002b420     Passall
+0002b42c     Pasthru
+0002b438 Interactive
+0002b444   MCB error
+0002b4d0 Profile:            
+0002b4e5 Echo:               
+0002b4fa Newline From Term:  
+0002b50f Toggle Echo:        
+0002b524 Newline From Host:  
+0002b539 Binary:             
+0002b54e Newline To Term:    
+0002b563 Xmit Char Size:     
+0002b578 Newline To Host:    
+0002b58d Rcv Char Size:      
+0002b5a2 Input Flow Control: 
+0002b5b7 Signal Req:         
+0002b5cc Output Flow Control:
+0002b5e1 IP:                 
+0002b5f6 Local Msg Verify:   
+0002b60b SYNCH:              
+0002b620 Local Switch Recog: 
+0002b635 AYT:                
+0002b64a Quote:              
+0002b65f AO:                 
+0002b674 EOR:                
+0002b689 BRK:                
+0002b69e EC:                 
+0002b6b3 EL:                 
+0002b6c8 NOP:                
+0002b99c Transparency Mode:     
+0002b9d0 Host Address:  
+0002b9f8 (no characteristics information available for PING sessions)
+0002ba4c (no characteristics information available for MOP sessions)
+0002ba9c (no characteristics information available for this session)
+0002baf8 Identification:     
+0002bb0d Ports:              
+0002bb22 Connections:    
+0002bb81 %s%s    %s%s%s
+0002be3e %-7s: %-29s Server: %s%s
+0002be5b Access: %13s%18sCurrent Service: %18s%s
+0002be85 Status: %13s%18sCurrent Node: %21s%s
+0002beab Sessions: %11d%18sCurrent Port: %21s%s
+0002bed6 Input XOFFed: %7s%18sOutput Signals: %s%s
+0002bf08 Output XOFFed: %6s%18sInput Signals:  %s%s
+0002c072 Port    Access    Status        Services Offered%s
+0002c0a9 %3d     %-9s %-13s 
+0002c0bd Permanent
+0002c0e9 Listener %4d, 
+0002c0f8 Listener %2d, 
+0002d11c In Get-Requests:          
+0002d13c Out Get-Requests:         
+0002d15c In Get-Next Requests:     
+0002d17c Out Get-Next Requests:    
+0002d19c In Set-Requests:          
+0002d1bc Out Set-Requests:         
+0002d1dc In Get-Responses:         
+0002d1fc Out Get-Responses:        
+0002d21c In Traps:                 
+0002d23c Out Traps:                
+0002d25c In Bad Types:             
+0002d27c                           
+0002d29c In ASN Parse Errors:      
+0002d2bc                           
+0002d2dc In Bad Community Uses:    
+0002d2fc                           
+0002d31c In Bad Community Names:   
+0002d33c                           
+0002d35c In Bad Versions:          
+0002d37c                           
+0002d39c In Packets:               
+0002d3bc Out Packets:              
+0002d3dc In Packets Too Big:       
+0002d3fc Out Packets Too Big:      
+0002d41c In No Such Name:          
+0002d43c Out No Such Name:         
+0002d45c In Bad Values:            
+0002d47c Out Bad Values:           
+0002d49c In Read Only:             
+0002d4bc Out Read Only:            
+0002d4dc In General Error:         
+0002d4fc Out General Error:        
+0002d51c In Tot. Variable Requests:
+0002d53c                           
+0002d55c In Tot. Variables for Set:
+0002d57c                           
+0002d59c SNMP State:             
+0002d5ba Authentication Failure: 
+0002d5d4 ENABLED   
+0002d5df DISABLED  
+0002d5ea ANY       
+0002d5fd Community Name                    Address          GET GETNEXT SET TRAP
+0002d658 SNMP Agent Status: 
+0002d674 Remote Console
+0002d683 Port %2d
+0002d693 Remote Session
+0002d6a7 Session %1d
+0002d6b3 Session ?
+0002d6ec Connecting
+0002d6f7 Connected
+0002d701 Disconnected
+0002d70e Disconnecting
+0002d72c Queued at %1d
+0002d73a Local Mode
+0002d751 Signal Wait
+0002d75d Session Mode
+0002d7ed                                 
+0002da2f HHHHHHHHHHHHHHHHHHHH
+0002daea  _ftoa: Floating point support must be specified
+0002e3aa NuLAT_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$-_.
+0002e437 12345678PORT_
+0002ec42 +$+6+H+Z+l+~+
+0002ec5e ,(,B,\,v,
+0002ece0 C(C2C<CFCPCZCrC
+0002ecfc D2DJDbDzD
+0002f1d0                 
+0002f1e1                 
+0002f1f2                 
+0002f207                 
+0002f218                 
+0002f25b                 
+0002f26c                                         
+0002f295 SYSTEM          
+0002f2a6 ACCESS          
+0002f2f7 Local>          
+000325e8 *_"HpHBYQ
+00033566 / / / / / / / / C
+00033638 / / / / / / / / H
+000337a9 Enter username> 
+000337bc Local> ^U^R%
+000337cd # HELPPORT_/
+000370fe *_db`T y
+000379f8 Nu"J"a,IB
+00038858 *_e*$Hp;BXQ
+0003942e 0000000000000000
+0003943f 0000000000000000
+00039450 0000000000000000
+00039465 REMOTE CONSOLE  
+00039476 REMOTE CONSOLE   
+00039614 _dgf(@$l
+00039ab2  @"U"Q#P
+00039af0  @"U"Q#P
+00039b1a  T"T"Q#h
+00039b3e  T"T"Q#h
+0003a062 BP`" D (
+0003d6e2 Hz`> D((
+0003debc Bf*H(GXL G 
+0003ded8 g$ G P0(
+0003f3a5 @XO*H F 
+0003f573 rXO*H E 
+0004183d @`<*G*U`
+00041fa6 p0`X E'h
+00041fb2 JFfF D0(
+0004205a  E P"D#h
+00042082  E P"D#h
+000420a0 g> F"D (
+000420ba g$ F P0(
+0004211a g* F P.(
+000423bf  &_NuQOH
+00042a50 rN`p"M$FN
+00042a6e `b~-`Pp-`Z$D6<
+00042bd2 z/`> F)h
+00044d07 pp1`j$Ga
+00046a1e %T6|= `8t
+00046c20 PM/%/%&<
+000487aa XO&_N^NuNV
+0004888c  EBP`* E0
+00048e40 8pN^NuNV
+00049d73 L`2`L Gp
+00049e2f L`.`H Gp
+0004a1a3 $BP`, D 
+0004a251 4`L F"D"
+0004ced1 t`r"M$Ka
+0004cedb l`h"M$Ka
+0004cfda &J(I"L$Ka
+0004cff0 &J(I"L$Ka
+0004ed02 @D K`@*<
+0004f249 1`<*K E,(
+0004f7cf 1`J*K E,(
+0004f861 1`L*K E,(
+0005312c ;@`"` &<
+0005584e Nu C"Jp(
+0005587a Nu C"J (
+0005abe0 80N^Nu o
+0005af5e &J(D*T*,
+0005b00a 0r&_N^Nu
+0005b7de *_Nu C P (
+0005b7e9 xNu C P (
+0005d1d8 REMOTE CONSOLE
+0005d72c ^HeXbRJ9
+0006214a &H K&_Nu
+00062615 8/ / $Ka
+000627e7 rPON^NuNV
+0006285e PON^NuNV
+00062a38 8pN^NuNV
+000633b2 XO&_NuNV
+000634d8 XO&_N^NuH
+000635c8 XO&_PONuH
+00063ec9 | K&_NuH
+0006441e "^`l"D$MN
+00064e90 `2*L`("K$MN
+00065304 &_N^NuNV
+00066c26 8pN^NuNV
+0006729e PO&_NuNV
+00067564 80N^NuNV
+00067620 &_N^NuNV
+00067d5a 80N^NuNV
+00067f7c *U`$"L$M&
+0006894c  F``"F"Q$MN
+0006961e 8pN^NuNV
+00069d59 ,` (D(T`
+00069e70  E`B E0(
+00069e7a [@f. E0(
+00069eb8 8pN^NuNV
+0006abf4 S@ft D"m
+0006b058 "@HQ"H&.
+0006ba44 80N^NuNV
+0006bc86 8pN^NuNV
+0006bd40 80N^NuNV
+0006befa 80N^NuNV
+0006c8ec 8pN^Nu y
+0006cd64 N^Nu J`($
+0006d65a / / "M$|
+0006d7de Yz`$`" .
+0006d8d8 / / "K$|
+0006d93a / / "K$|
+0006d960 /!/!"H$|
+0006d9f2 / / "M$|
+0006dbe6 / / "K$|
+0006dc48 / / "K$|
+0006dc6e /!/!"H$|
+0006dd00 / / "M$|
+0006dd64 / / "K$|
+0006df06 / / "K$|
+0006df2c /!/!"H$|
+0006dfc8 / / "M$|
+0006e060 / / "K$|
+0006e25a / / "K$|
+0006e280 /!/!"H$|
+0006e32c / / "L$|
+0006e47c / / "K$|
+0006e500 / / "K$|
+0006e562 / / "K$|
+0006e588 /!/!"H$|
+0006e5e4 xdPO`|$|
+0006e650 / / "L$|
+0006e862 / / "K$|
+0006e8e6 / / "K$|
+0006e948 / / "K$|
+0006e96e /!/!"H$|
+0006ea04 / / "M$|
+0006ea9c / / "K$|
+0006ec96 / / "K$|
+0006ecbc /!/!"H$|
+0006ed5d H/ / "M$|
+0006edb9 H/ / "K$|
+0006ee47 H/ / "K$|
+0006efc1 H/ / "K$|
+0006f00e 8pN^NuNV
+0006f2bf H/ / "K$|
+0006f2ff H/ / "K$|
+0006f33d H/ / "K$|
+0006f3c5 H/ / "K$|
+0006f3f1 H/ / "K$|
+0006f455 H/ / "K$|
+0006f4f9 H/ / "K$|
+0006f51b H/ / "K$|
+0006f56f H/ / "K$|
+0006f5d1 H/ / "K$|
+0006f5f7 H/!/!"H$|
+0006f746 / / "L$|
+0006f822 K@*K`P(|
+0006f84a L**K`((|
+0006f8bc /#/#"M$LN
+0006f920 / / "L$|
+0006f954 /!/!"H$|
+0006fae4 / / "K$|
+0006fd5c / / "K$l
+0006fe1e / / "K$l
+0006fe6c / / "K$l
+000707e8 / / "K$l
+00070adc / / "M$l
+00070bd2 / / "L$|
+00070cda / / "K$|
+00070d00 /!/!"H$|
+00070e52 / / "M$l
+00070f38 / / "L$|
+00071040 / / "K$|
+00071066 /!/!"H$|
+0007119e / / "M$l
+0007131e /!/!"H$|
+000713ba / / "K$l
+000713de /!/!"H$|
+00071582 / / "M$l
+0007184a / / "K$|
+0007196e / / "K$|
+000719d4 / / "K$|
+000719fa /!/!"H$|
+00071b2c / / "L$|
+00071f64 / / "L$|
+00071f88 /!/!"H$|
+000720a6 / / "L$|
+000720e8 / / "L$|
+00072314 / / "L$|
+00072338 /!/!"H$|
+000724c4 / / "K$|
+000726c2 / / "L$|
+000726f6 /!/!"H$|
+000727b2 / / "K$|
+00072872 / / "K$|
+0007292c / / "K$|
+00072a58 / / "K$|
+00072ab2 / / "K$|
+00072c6c / / "K$|
+00072cf0 / / "K$|
+00072d62 /!/!"H$|
+00072d92 / / "K$|
+00072e00 /!/!"H$|
+00072e30 / / "K$|
+00072e9e / / "K$|
+00072ec2 /!/!"H$|
+00072edc 0r&_N^Nu/
+00072fb6 /!/!"H$|
+00073064 /!/!"H$|
+000730dc /!/!"H$|
+00073152 /!/!"H$|
+000731f4 /!/!"H$|
+0007326c /!/!"H$|
+00073316  N/ / &<
+0007333a  N/ / &<
+000733de / / "L$|
+00073506 / / "L$|
+0007353a /!/!"H$|
+000735fa / / "K$|
+00073650 / / "K$|
+0007375c / / "K$|
+00073854  N/ / &<
+00073878  N/ / &<
+0007391c / / "L$|
+00073a44 / / "L$|
+00073a78 /!/!"H$|
+00073b2e / / "K$|
+00073c46 / / "K$|
+00073d40 / / "K$|
+00073e3a / / "K$|
+00073f34 / / "K$|
+00073fca / / "K$|
+000740b4 RASCTJJCf
+00074d26 `: E P"E"Q )
+00074d64 8pN^NuNV
+0007524e  F P"F"Q
+0007526e  F P"F"Q
+000752aa  F P"F"Q
+000752bb X F P"F"Q
+000768c6 BP`* S!k
+00076a2e TJTISCJCf
+00077342  E P"E"Q
+0007735f X E P"E"Qp
+00077aa0 `H G&P&k
+00077b6f ,v,"M$DN
+00077e8b tt v#$KN
+00078655 x&_PONuH
+0007874c PO D P/(
+0007877a $D"L$R&.
+000792ac &_N^NuNV
+000793ab 0N^Nu Ir
+000794e3 x`0"M$TN
+000795d0 &_N^NuNV
+00079686 &_N^NuNV
+00079d76  G P"F#h
+0007a152 &_N^NuNV
+0007a1fe UO? / $n
+0007a210 &_N^NuNV
+0007a2b8 &_N^NuNV
+0007a4b9 0N^Nu Ir
+0007a9bc &J(I"L$KN
+0007a9ec &J(I"L$KN
+0007d286 PO`: T-P
+0007db6e PO`< S-P
+0007ddf9 T`Z E P(
+0007de21 &`4"M$L6
+0007e84a 80N^Nu&9
+0007eabd |TKSDJDf
+0007ec9a PO`,`( o
+0007f398 _$ P`*`B
+0007f762 / / "K$|
+0008006a xdPO Dp  
+00080198 8pN^NuNV
+000809aa / / "K$|
+00080a52 / / "K$|
+00080a78 /!/!"H$|
+00080af6 / / "M$|
+00080f3b ./ / "K$|
+00080f8f ./ / "K$|
+00081011 ./ / "K$|
+0008104f ./ / "K$|
+00081083 ./ / "K$|
+000810d1 ./ / "K$|
+0008111d ./ / "K$|
+00081143 ./!/!"H$|
+000811df ./ / "L$|
+00081304 / / "K$|
+000813ac / / "K$|
+000813d2 /!/!"H$|
+0008144a / / "L$|
+0008167e / / "M$|
+0008171c f  D$D&(
+000817c2 / / "K$|
+0008180a / / "K$|
+00081cac 0rPM/%/%&<
+00081cde 0rPM/%/%&<
+00081f2a  N/ / &<
+0008203b F`R N/ / $L"
+0008205b &`2 N/ / $
+000820c0  N/ / $.
+000820f2 `P N/ / $L"
+00082111 p`0 N/ / &
+00085ebc 0r&_NuNV
+000861e8 &E E P h
+000862f4 '](D*T(m
+00086428  K&_NuQO/
+00086480  K&_PONu
+00086a32 *_Nu R%i
+00087508 &_NuNuNu/
+00087594 @D&_NuNV
+000887e9 BL46-13 *** DECserver 90TL V1.1C Port Test ***
+00088827 DECserver 90TL Communications Server V1.1C (%L) - LAT V5.1
+0008886b (c) Copyright 1996, Digital Equipment Corporation - All Rights Reserved
+000888b5 Please type HELP if you need assistance
+000888eb  [PORT #
+000888f4 connection 
+00088907 Messages 
+00088911 Seconds Since Zeroed:
+00088927 established
+00088942 Communications server
+00088958  Parameter cannot be modified 
+00088977  Buffer Unavailable:
+0008898c Received:
+0008899d Transmitted:
+000889aa Illegal 
+000889bb DECserver 90TL V1.1C 
+000889d1  - optional syntax in brackets:
+000889f1 invalid 
+000889fa  progress 
+00088a05  not known
+00088a10  out of range
+00088a58 operation
+00088a62  requires privilege
+00088a76  management
+0008b2d2 k&`(pONqQ
+0008c354 0200000002000000020000000200000002000000020000000200000002000000/1///////1///////1///////1///////1///////1///////1///////1//////
+0008de86  G"G"Q#h
+0008df52  F"F"Q#h
+0008e33e (K*L U-H
+0008e3f0  E P"E-i
+000904da  JHO,_Nu
+00090d5a Local -719- Insufficient resources to complete operation

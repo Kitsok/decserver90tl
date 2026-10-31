@@ -1,0 +1,233 @@
+0000035f <Y01.00-000K
+00001480 k&`@pONqQ
+00001690 NuMunchkin V5.5 ROM to DRAM
+00002adc *** This software is Copyright 2000 by Digital Networks, DNPG, LLC All rights reserved ***
+00003a02  JHO,_Nuv
+00003e5f 0`.*F*U`
+00004502  G"G"Q#h
+000045ce  F"F"Q#h
+00005bb3 L K&_NuNV
+00005e65 VPO D PB
+0000633b Dg@ D P.(
+000080e9 V2.4 BL50
+000080f3 M  *** Network Access SW V2.4 BL50 for DS90TL Port Test ***
+0000813e Network Access SW V2.4 BL50 for DS90TL
+0000816e (c) Copyright 2001, Digital Networks, DNPG, LLC - All Rights Reserved
+000081b6 Please type HELP if you need assistance
+0000820e  [PORT #
+00008217 connection 
+0000822a Messages 
+00008234 Seconds Since Zeroed:
+0000824a established
+00008265 Communications server
+0000827b  Parameter cannot be modified 
+0000829a  Buffer Unavailable:
+000082af Received:
+000082c0 Transmitted:
+000082cd Illegal 
+000082de Network Access SW V2.4 BL50 for DS90TL 
+00008306  - optional syntax in brackets:
+00008326 invalid 
+0000832f  progress 
+0000833a  not known
+00008345  out of range
+0000838d operation
+00008397  requires privilege
+000083ab  management
+000083be Network Access SW 
+00008a04 0200000002000000020000000200000002000000020000000200000002000000/1///////1///////1///////1///////1///////1///////1///////1//////
+00009b48 k&`@pONqQ
+0000b616 9"V(&^ey
+0000ce19 znNaf=N)
+000104ca G(/*fY\E]9
+00010620 V, Nr;>4
+00013aa6 X4`Ysfes
+0001462a Uu&~Cd>=
+0001473d nvt-CDDD
+00014e5a Mbyr,S'@
+00014eb3 CpAT+uMH
+000150b7 w$.m.r91R
+00016bd2 fP@Hi%4G
+00019d85 _Xs#^rB4
+0001b8e5 71%*nIc`
+0001d0a1 J:`_V(|w
+0001e510 >80~Of/7;
+0001f2a6 N&uN*u R8
+000200a8 q&q.+z%\
+0002096b /s-l%UQUq
+00021003 _k7gZLZ!
+00022456 $Y:+/}^V
+00023aca dIS=(sqB
+00024497 C`H!eDR(G
+00024dbb "AaB7+)"
+00024e40 +E1@"=JG
+000258b9 `Rh8HUUU
+0002a39a ?/R{,Pz'3S
+0002b31f :q3@,Abf"
+0002bf7a U%y]E(TUUU
+0002c035 LSUUVU9YU
+0002c607 W[UUUe]`
+0002cf45 lYxBpDK<=,
+0002fb40 (EDDDDDDDDDDDDD4
+00030304 H~kQ&$g(
+000312e2 333333333
+00031b31 RUUUU_CUUUU
+00031bd9 hffF[633
+00031cf6 a$IR,oD 
+00032ae8 bEUDQEI^
+00032bc6 q+#.k"!z
+00033104 EQ433333333
+0003311d ;3322####
+000332fe $ipvvvv&I
+00033596 EDDDDDDD
+000346eb &&&&^yil
+000349bd v+M"&!nE\
+000350bd  GO...VO
+000352e4 id^K\m|%
+00035cac k#h27BA<>
+00035d88 {?UWb>{(
+00036df8 0kL2-*w#[f*k/
+00036f73 p'y7w/'9
+00037b1f A~uueEPH%jkB
+000382d0 0m:.\aYk
+000396c2 rO)C6VbF)sT
+00039702 }__}uuu&
+00039afc j VBbFrp<
+0003a256 rJhzswwW
+0003aa40 (:[SNiE-
+0003c212 ]yGG)j(Y
+0003dd42 lY"wA *K
+0003ee2b ud#1a90("
+0003fe02 3n(OrJ;e
+00043577 }P#!+d;C
+00047037 wac$}kt;$
+00047b4d o=&EL9w0{t
+0004800e N>;lhHsl
+0004a8a7 JH@8:E!W
+0004b97f TZt$,K{gL
+0004c856 wwwwwwwW5
+0004db0b l])JX%/S
+0004e2ff WDDDDDDDDDDDDDD
+00050641 Y^DcR]Uv
+00055a30 .^Oo^ Um
+0005a016 }2/Tt&A:
+0005bebc @2%Lkr4e
+0005d54d ak[$SJ;e#
+0005ff57 ^~^})m U
+00061fc7 E$uOeIscV
+000621ae MK(E'Nn@f
+00062712 lu-r+d$b
+00062d8a |_u<.dxF%
+00063c84 n$5!Xk[kC
+000692d9 sUzU]UL'
+0006b17a @DDDDDDDDDDDDDDDDD
+0006d489 (~cy>;1w
+0006df3b Zc*mFT S
+00071371 <CHqTx=1
+00073e3e W/g1Fh$P
+000748a6 AeeK$se%%
+00074b6b !,mum9'3
+000764b7 MZsND1/ A.
+00076a83 C!6\x~H9$
+00077472 Kpg:'3k}
+000774eb wwGpz__b`
+0007802b 36\u<:-di
+00079dd6 &m3e-)jKJ)
+0007a45e _6@R*[Y%U>
+0007aa46 '3fk!+=&c+
+0007b9f3 *uwwI\\N@
+0007c5c0 Qi9B)_#}B
+0007d215 Ukt./!BS
+0007fc35 PyNE+IsR
+00080ff3 kajORe9O
+00081081 d+?`2,lU
+000818eb {3Fl6uvS
+00081fe5 AXnTW N*
+0008216f 5"FIH,BK
+00082f0a c1MH <G I{
+000836dc e-|XeX=4
+000850c2 5sQQLv>s
+000870df US7>CUUU
+0008730f P=\@HN(+
+0008a143 \A6d4MQ(e
+0008a674 #+:o$Bnn7
+0008abab Hr6?`Hkf^
+0008ac35 Ft>b#.V@
+0008cb2d zBrQ)BNHB>-
+0008d817 gDo=BNN,
+0008e870 !22q@bBBBDF@&
+0008ec1d PUu(PGMYA
+0008efa5 xb<Og1T@
+00090057  @c=B@Ij`
+000918c4 """~bHI6_
+00091dc4 70rr&M:K
+00092596 Vu3tz.GhU
+00092aff Xd03.=1qj
+0009453f vuXKXfsA
+000947c5 P:UH$:n[
+00095c20 wwwwwwwww
+00095cb8 e#+0`d#/P
+00096449 2$~|AI[b
+0009691e nMY6KVJsB
+00096a02 A*Mu@x,H
+000973f8 _20P9P(m;6
+00097d1e %iA+!H'G
+0009b8bf }tNvVTKJe
+0009b92c zJR0"P,h
+0009e971 )r<DDDDDDDDDDDD
+000a0a39 """"""""""""
+000a2e30 7?LJJ9!e
+000a36d4 )P6qPTbX
+000a3826 G6'wO)K:rn
+000a486d %DbK\\,,
+000a5704 U`i|9!_<ZU
+000a8059 }2c^UMC9U
+000a9460 :kKXp(qw
+000a96c2 >}$"""""""""
+000a9e47  uR$H!25.
+000ab544 DDf9n<j.7
+000ab61b f[eZR.g@
+000ac357 k#FY2(Dqx
+000ac5c8 1b@x;"L0~d!
+000ae12f &d:>{$%@
+000afd18 !S7,*gT>
+000b0506 w5wME7www
+000b1601 n89-|Wh1
+000b2755 G7yvSJI_
+000b32d9 5R"eT`ti
+000b3eda |KL'J4U%UU,f;SfL
+000b448f _os4qe'[55
+000b5e17 NGDDDDDw"Q
+000b666e :h]QQ&'.
+000b6b78 t:HE3+Y{
+000b7ff8 NsJywGhM
+000b93c7 @tls?8#'*L
+000b9fee .w!acR~A
+000bb255 k.=E*CQE/
+000bc6a9 2MjB3%E7K
+000bcfa7 )5Gx>++;a
+000bdb89 bJXbfNIC
+000be159 kmhCY[Q$."%b
+000bf3e6 y.dXY5L h>=!
+000c0c24 WOkdnh`u
+000c1782 %,:m&^!`k
+000c181a 'ksBe*95A
+000c31f9 )~wwwfwwYU
+000c3fff cMM#>((X_
+000c725f Lf(gTj*I
+000c9f62 n|M+oWdh
+000caf30 TM))"v)#
+000cb41d .VUa8@%*
+000cbb4d )"<cWO^5
+000ccff6 *i5eJIeb
+000cec59 _(gSLZpGA
+000cfc0e wJ>}:jNsY
+000cff29 &qx`=^UM
+000d1585 UMzGDDDDD
+000d2344 &zECM-=_p
+000d3c36 #"""""""""""""""
+000d3d7e sUNgK+J"
+000d5067 M,"YYn=H
+000d5edc CDDDDDDDDDDDD
+000d70c1 NS@d.S6|V!
+000d8ef6 M[Jtz"17&
