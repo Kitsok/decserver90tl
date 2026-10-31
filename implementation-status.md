@@ -271,3 +271,15 @@ failure. Legacy files remain compatible. Three-boot firmware checks show DEFINE
 and CHANGE surviving SIGKILL, with operational-only SET discarded; component
 checks cover queue guards, lock contention, malformed files and permission errors.
 The original seed is unchanged. See settings-storage.md and the new NVRAM reports.
+
+## Full Telnet console verified
+
+Two-session Telnet regressions pass with the default ACCESS login password
+and with a password set by CHANGE SERVER LOGIN PASSWORD on a copied store.
+The beep/# response is the normal password prompt, not corrupted output.
+Both runs verify SHOW SERVER/INTERNET, SYSTEM privileged access, an operational
+identification change, logout, and reconnection. The guest address is assigned
+manually as 192.0.2.90/24; no DHCP server is used. Original settings are unchanged.
+The corrected test uses CR line endings and recognizes the hash prompt.
+No CPU, network-controller, or firmware modification was needed. See
+analysis/telnet-verification.json and network.md. LAT tests remain deferred.

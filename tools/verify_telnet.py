@@ -16,6 +16,8 @@ def main():
     parser.add_argument('--nvram-seed', type=Path, required=True)
     parser.add_argument('--tap', default='ds90tap')
     parser.add_argument('--address', default='192.0.2.90')
+    parser.add_argument('--change-login-password', action='store_true',
+                        help='Test CHANGE SERVER LOGIN PASSWORD on the copied store')
     args = parser.parse_args()
     seed = args.nvram_seed / 'ds90tl/configram'
     before = digest(seed)
@@ -29,6 +31,12 @@ def main():
             session.privilege()
             report['server_before'] = session.command('SHOW SERVER')
             report['remote_console_before'] = session.command('SHOW SERVER REMOTE CONSOLE')
+            password = 'ACCESS'
+            if args.change_login_password:
+                password = 'TELNETPASS'
+                report['login_password_configuration'] = session.command(
+                    'CHANGE SERVER LOGIN PASSWORD "TELNETPASS"')
+            report['login_password_source'] = 'CHANGE on copied store' if args.change_login_password else 'factory default ACCESS'
             report['configuration'] = [session.command(command) for command in (
                 'SET INTERNET SUBNET MASK 255.255.255.0',
                 f'SET INTERNET ADDRESS {args.address}',
@@ -43,6 +51,8 @@ def main():
                     try:
                         client.expect('Escape character is')
                         client.sendline('')
+                        client.expect('#\x00')
+                        client.sendline(password)
                         for _ in range(8):
                             state = client.expect([r'(?im)^Local> ', r'Password>', r'Enter username>', r'Username>'])
                             if state == 0:

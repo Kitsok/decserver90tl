@@ -1,5 +1,21 @@
 # First complete Telnet session attempt
 
+**Resolved:** the beep and `#` are the documented login-password prompt,
+not evidence of malformed output. The initial test did not recognize that
+prompt and never submitted the login password. `SYSTEM` is the privileged
+password, distinct from the default login password `ACCESS`.
+
+The corrected test recognizes `#`, supplies the login password, and reaches
+Local>. A live run using `CHANGE SERVER LOGIN PASSWORD "TELNETPASS"` on the
+copied store passed two sessions, SHOW SERVER/INTERNET, SET PRIVILEGED with
+SYSTEM, an identification change, logout and reconnection. No emulator or
+firmware change was needed. The historical observations below remain as the
+investigation record; the common-formatting hypothesis was not established.
+
+DEC's field service notes describe the hash prompt and distinguish ACCESS
+from SYSTEM:
+https://www.bitsavers.org/pdf/dec/fieldService/DEC_Datadoc_FS_Notes_Issue_42_199505/19_ETHERNET_SERVERS.pdf
+
 The prepared brds90/ds90tap lab was used with a copied NVRAM store and
 manual SET INTERNET SUBNET MASK 255.255.255.0 and SET INTERNET ADDRESS
 192.0.2.90 commands. No DHCP server was started.

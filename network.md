@@ -133,3 +133,26 @@ lowest recycled PTY against reconnecting terminal clients, records packets in
 another prepared TAP/bridge with its `--tap` and `--bridge` options. The default
 subnet is fixed to the isolated 192.0.2.0/24 lab; avoid running multiple instances
 with the same guest IP or synthetic MAC on a shared bridge.
+
+## Telnet console login
+
+After assigning the manual IP, run `telnet 192.0.2.90`. Press Return to get
+the beep and `#` login-password prompt, then enter the factory login password
+`ACCESS`. This differs from `SYSTEM`, used after `SET PRIVILEGED` at Local>.
+`CHANGE SERVER LOGIN PASSWORD "new-password"` changes the login password in
+both operational and permanent settings; use it through a privileged session.
+
+The complete console regression uses the installed `/usr/bin/telnet` and
+Python pexpect, a copied store, and manually assigned 192.0.2.90/24:
+
+```sh
+python3 tools/verify_telnet.py --nvram-seed run/my-decserver
+python3 tools/verify_telnet.py --nvram-seed run/my-decserver --change-login-password
+```
+
+The default test expects the seed's login password to be ACCESS. The optional
+flag first sets a known test password in the copy. Both check two sessions,
+SHOW commands, privileged access, an operational identification change,
+logout and reconnection. Transcripts and packets are saved under run/;
+analysis/telnet-verification.json records the latest result. No DHCP server
+is started. Incoming LAT sessions remain deferred to nanovax.
