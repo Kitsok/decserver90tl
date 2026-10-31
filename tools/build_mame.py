@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-j', '--jobs', type=int, default=2)
+    parser.add_argument('--skip-machine-layouts', action='store_true',
+                        help='Skip unrelated src/mame/layout generation; keep core renderer layouts')
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error('--jobs must be positive')
@@ -76,6 +78,10 @@ def main():
              'NO_USE_PULSEAUDIO=1', 'NO_USE_PIPEWIRE=1', 'USE_PCAP=0',
              'USE_TAPTUN=1', 'NOWERROR=1', 'OPTIMIZE=1', 'SYMBOLS=0',
              'USE_SYSTEM_LIB_EXPAT=0', 'USE_SYSTEM_LIB_ZLIB=0']
+    if args.skip_machine_layouts:
+        # Command-line Make assignments override the top-level wildcard.
+        # CPU/renderer core layouts are separate generated-project tasks.
+        flags.append('LAYOUTS=')
     child = subprocess.Popen(['make', f'-j{args.jobs}', *flags], cwd=source, env=env,
                              start_new_session=True, pass_fds=(lock.fileno(),))
     try:

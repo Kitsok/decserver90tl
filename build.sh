@@ -106,5 +106,5 @@ if [[ $actual != "$revision" ]]; then
 fi
 
 printf 'Building DECserver 90TL for %s with %s jobs.\n' "$(uname -m)" "$jobs"
-python3 tools/build_mame.py --jobs "$jobs"
+python3 tools/build_mame.py --jobs "$jobs" --skip-machine-layouts
 printf '\nBuild complete: %s/build/mame-ds90tl\nRun: %s/run.sh --interactive\n' "$repo_dir" "$repo_dir"
