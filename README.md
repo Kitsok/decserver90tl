@@ -1,6 +1,6 @@
 # DECserver 90TL emulator investigation
 
-Static investigation started 2026-10-31. No firmware has been executed or loaded onto physical hardware.
+Investigation started 2026-10-31. MNENG3 now executes in an experimental CPU32 simulator with 4 MiB RAM. Startup remains incomplete; no firmware has been loaded onto physical hardware.
 
 ## Contents
 
@@ -13,7 +13,7 @@ Static investigation started 2026-10-31. No firmware has been executed or loaded
 - [Ethernet controller identification and DMA interface](ethernet-controller.md).
 - [Simulator implementation concept](simulator-concept.md).
 - [Build instructions](BUILD.md).
-- [Paused implementation status](implementation-status.md).
+- [Implementation status](implementation-status.md).
 
 Run from any working directory:
 

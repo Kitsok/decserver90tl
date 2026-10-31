@@ -1,79 +1,81 @@
-# Implementation status — paused before execution
+# Implementation status — first firmware execution
 
-2026-10-31. Paused at the user's request. **MNENG3 has not been executed.**
-No simulator executable has linked, no machine configuration validation has
-run, and there is no firmware run log or working Local prompt yet.
+2026-10-31. The executable builds and MNENG3 executes under MAME CPU32
+with 4 MiB RAM. Startup is incomplete: no Local prompt, network backend or
+external modem endpoint is available.
 
-## Implemented source
+## Verified
 
-- A headless MAME driver using the existing CPU32, Am7990 and four MC68681
-  models, with exactly 4 MiB external RAM.
-- An image-specific synthetic boot handoff for MNENG3, including inherited
-  vectors, stack, entry point and RAM-size field. It is unvalidated.
-- Provisional 24-bit address decoding and internal RAM/register banks.
-- LANCE DMA/interrupt adapters and UART register/transmit-write tracing.
-- Register and progress diagnostics, full CPU-state dumps on unsupported
-  external accesses, and inherited-exception sentinel loops.
-- An explicitly provisional scheduled TPU-request completion substitution.
-  SIM/QSM/TPU function behavior is incomplete.
-- A pinned MAME build wrapper, narrowed CPU build file list, build lock,
-  and bounded offline run wrapper with firmware hash verification.
+- Build output: `build/mame-ds90tl`; MAME machine validation passes.
+- ROM audit passes: `romset ds90tl is good`.
+- Original firmware SHA-256 remains unchanged.
+- Startup executes the internal-register initialization table, waits for the
+  provisional TPU request completion, sets VBR to `0x0783b6ac`, services the
+  watchdog and reaches configuration-store checksum routines.
+- Python wrappers compile and `git diff --check` passes.
 
-Source is in `src/mame/decserver90tl.cpp`; instructions are in `BUILD.md`.
-The driver has no connected modem endpoint or network backend in its initial
-run configuration. No bridge or host network configuration was changed.
+## Execution findings
 
-## Build evidence
+The initial run stops on a byte read at `0x101238` in the checksum loop at
+`0x07872152`. The access callback reports PC `0x07872154` (the next
+instruction). That routine constructs its address as `0x100c00 + offset`.
+Nearby routines compare storage bytes against RAM copies and prepare writes.
+This strongly suggests the configuration-store interface. The physical
+capacity and actual write protocol remain unconfirmed.
 
-The custom driver translation unit compiled and its static library archived.
-CPU32/Musashi, LANCE and MC68681 translation units compiled. MAME's frontend
-and SDL platform libraries archived. The remaining build was in common
-memory-access/runtime code, with no current compile errors reported when
-paused. This is compilation evidence, not firmware compatibility evidence.
+An erased 8 KiB window at `0x100000` advanced execution until a read at
+`0x102000`. The provisional window is now 64 KiB and file-backed through
+MAME NVRAM, saved under `run/nvram/ds90tl/configram`. It survives resets and
+invocations; it starts FF only if the backing file is absent. Actual storage
+technology/capacity, write-enable gating and programming delays are unresolved.
 
-The paused build log is saved as `analysis/build-paused-2026-10-31.log`.
-Its `fatal: No names found, cannot describe anything` line is from Git's
-version-description lookup in the shallow, untagged MAME checkout; the build
-continued past it. It is not a C++ compilation failure.
+The first illegal instruction at `0x079423c2` was a bounds assertion:
+startup used the file-header word `0x1c00` as a port mask, selected port 12,
+and the lookup routine accepts only 0..7. The synthetic handoff now writes
+`0x00ff` to `0x0780501e` in guest RAM.
 
-Completed objects remain in ignored `.deps/mame/build/` for incremental
-continuation. An unfinished zero-length object was removed after stopping.
-There is no `build/mame-ds90tl` executable yet.
+The six-byte reader at `0x079409e2` reads `0x200000..0x200005`. The simulator
+supplies synthetic locally administered MAC `02:90:00:00:00:01` there.
+An earlier startup probe also reads `0x200000`; its side effects are unknown.
 
-## Process state and cleanup
+Boot metadata flags 19..21 at `0x07805016` select three firmware defaults.
+The experimental handoff requests those defaults until boot-ROM metadata
+validation is reproduced. This is an explicit bring-up substitution, not
+proof of the original ROM handoff. It may overwrite metadata on each boot.
 
-An outer tool interruption left an earlier build tree alive. Its compiler
-processes were stopped before rebuilding to avoid concurrent writes, and
-the affected/incomplete objects were removed. The build wrapper now holds
-an inherited file lock and has process-group cleanup for normal Python
-interrupt handling. A concurrent invocation was verified to refuse to start.
+The firmware has run for 10 simulated seconds without an exception while
+writing configuration bytes. The file contained 17,424 non-FF bytes afterward.
+A longer run, and then the metadata-default experiment, reached further
+configuration-record bounds errors. The latest bounds check rejects offset
+`0x0e00` in record 22 (declared size `0x0c00`). Firmware error code is 0x543.
+The error handler originally jumped through a zero inherited boot callback.
+The synthetic handoff now supplies a diagnostic sentinel callback at 0x1400
+through field 0x078051a2. Verified output: code `0543`, caller `0787260e`,
+parameter `00000e00`, report SP `079dbdf0`.
+Both a fresh FF store and an isolated zero-filled store reproduce the bounds
+error, so changing the initial byte pattern does not resolve it. No Local
+prompt yet; the configuration-record size/offset disagreement remains open.
 
-On this pause, the outer tool interruption again did not stop the entire
-process tree, so the remaining project-owned build processes were explicitly
-stopped. **The build lock was then acquired successfully**, confirming no
-build process retained it. No firmware run was launched or left pending.
+Execution logs are preserved in `analysis/mneng3-*.log`, including the port-mask
+assertion, identity-read stop, persistent-store runs and metadata experiments.
+A MAME status 0 for a bounded run only establishes that its time limit expired,
+not that DECserver startup completed.
 
-The temporary package downloads and unpacked sysroot were removed after
-the user installed the system development dependencies. Only the pinned
-MAME checkout, build cache and lock remain under `.deps/`.
+## Remaining provisional behavior
 
-## Checks completed
+Clocks, boot handoff, address decoding, UART wiring and board selection need
+validation. SIM/QSM/TPU behavior is incomplete; the TPU completion timer only
+clears requests. Synthetic inherited exception vectors provide diagnostic
+sentinels. Network and modem integration follow a working firmware startup.
 
-- System pkg-config dependencies resolved: SDL2, SDL2_ttf, fontconfig and EGL.
-- The driver compiled successfully after correcting integration errors.
-- Build-wrapper duplicate invocation refused while the lock was held.
-- Python wrappers passed `py_compile`.
-- `git diff --check` passed.
-- MNENG3 SHA-256 remains
-  `a3764087d79df64eb7124056824652cf23b558fcae2029f887e4a37a3db49ad3`.
+## Build notes
 
-## Next steps after explicit resumption
+The resumed build exposed an incomplete cached memory-dispatch object from
+the previous forced pause. Rebuilding that object fixed linking. The wrapper
+now copies MAME's actual `ds90tl` output name. ROM staging uses lowercase
+`mneng3.sys`, as required by MAME validation; the source image retains its
+original repository filename.
 
-1. Resume `python3 tools/build_mame.py -j 2` and finish linking.
-2. Validate the MAME machine configuration and image identity.
-3. Run `python3 tools/run_mneng3.py --seconds 1` to obtain the first real
-   firmware execution evidence.
-4. Resolve the first observed handoff/device failure, preserving the
-   distinction between demonstrated behavior and provisional substitutions.
-
-Do not infer boot success or a usable DECserver from this source checkpoint.
+Only the pinned MAME checkout/cache and build lock remain in `.deps/`.
+The earlier paused checkpoint is recorded in
+`analysis/build-paused-2026-10-31.log`. No host networking was changed.

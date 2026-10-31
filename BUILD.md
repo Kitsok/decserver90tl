@@ -60,9 +60,21 @@ exit status and reports whether the firmware file changed.
   `0x078713f8`, with initial SP `0x07bff000` and VBR zero.
 - The handoff memory-size field at `0x078051b6` is set to 4 MiB. This is a
   RAM handoff write, not a modification of the firmware file.
-- Inherited exception vectors target identifiable sentinel loops.
+- Metadata default flags 19..21 at `0x07805016` are set as a temporary
+  substitute for boot-ROM validation of board configuration records.
+- Eight-port handoff mask `0x00ff` at `0x0780501e` replaces the file header
+  value `0x1c00` in guest RAM.
+- Synthetic MAC `02:90:00:00:00:01` is read at `0x200000..0x200005`.
+- Inherited exception vectors target identifiable sentinel loops. The ROM
+  fatal-report callback at handoff field `0x078051a2` targets another sentinel
+  that prints firmware error code, caller and parameter.
 - SIM/QSM/TPU registers are traced. TPU host requests provisionally complete
   after a scheduled delay; TPU function semantics are not implemented.
+- A provisional 64 KiB configuration-store window at `0x100000` starts erased
+  when no backing file exists. MAME saves it to `run/nvram/ds90tl/configram`;
+  it survives resets and invocations. Capacity and programming behavior remain
+  unconfirmed. Remove or move that file while the simulator is stopped to
+  repeat an erased-store boot.
 - Unknown external accesses stop the experiment with a PC/address report.
 - UART writes are observed at the transmit holding registers; this does not
   yet establish completed transmission or an interactive serial endpoint.

@@ -4,6 +4,7 @@
 #include "cpu/m68000/fscpu32.h"
 #include "machine/am79c90.h"
 #include "machine/mc68681.h"
+#include "machine/nvram.h"
 
 #include <algorithm>
 #include <cstdio>
@@ -37,6 +38,12 @@ protected:
 private:
 	void memory_map(address_map &map);
 	u16 boot_r(offs_t offset) { return m_boot[offset]; }
+	u16 identity_r(offs_t offset)
+	{
+		// Synthetic locally administered Ethernet address 02:90:00:00:00:01.
+		static constexpr u16 words[] = { 0x0290, 0x0000, 0x0001 };
+		return words[offset];
+	}
 	u16 unexpected_r(offs_t offset, u16 mask = ~0);
 	void unexpected_w(offs_t offset, u16 data, u16 mask = ~0);
 	u16 peripheral_r(offs_t offset, u16 mask = ~0);
@@ -167,6 +174,10 @@ void ds90tl_state::memory_map(address_map &map)
 	map.global_mask(0x00ffffff); // provisional 24-bit external decode
 	map(0x000000, 0xffffff).rw(FUNC(ds90tl_state::unexpected_r), FUNC(ds90tl_state::unexpected_w));
 	map(0x000000, 0x001fff).r(FUNC(ds90tl_state::boot_r));
+	// Provisional erased configuration-store window. Firmware checksum and
+	// readback routines address bytes relative to 0x100c00; size unconfirmed.
+	map(0x100000, 0x10ffff).ram().share("configram");
+	map(0x200000, 0x200005).r(FUNC(ds90tl_state::identity_r));
 	map(0x300000, 0x300003).rw(m_lance, FUNC(am7990_device::regs_r), FUNC(am7990_device::regs_w));
 	map(0x400000, 0x40001f).rw(FUNC(ds90tl_state::uart_r<0>), FUNC(ds90tl_state::uart_w<0>));
 	map(0x400020, 0x40003f).rw(FUNC(ds90tl_state::uart_r<1>), FUNC(ds90tl_state::uart_w<1>));
@@ -204,6 +215,17 @@ void ds90tl_state::machine_reset()
 		space.write_byte(0x805000 + i, image[i]);
 	// Handoff memory-size field consumed by 0x07940578.
 	space.write_dword(0x8051b6, 0x400000);
+	// Runtime port mask consumed at 0x078714d6/0x07871520. The on-disk
+	// value 0x1c00 is not a valid eight-port handoff (asserts in 0x079423ac).
+	space.write_word(0x80501e, 0x00ff);
+	// Boot ROM normally validates board-configuration records. With no ROM
+	// implementation, request firmware defaults for the three metadata groups
+	// tested at 0x07940696..0x079406da (bits 19, 20, 21).
+	space.write_dword(0x805016, space.read_dword(0x805016) | 0x00380000);
+	// Firmware fatal-report callback normally belongs to the inherited ROM.
+	// Preserve its report fields and stop, rather than jumping through zero.
+	m_boot[0x1400 / 2] = 0x60fe;
+	space.write_dword(0x8051a2, 0x1400);
 	m_events = m_ticks = 0;
 	std::fprintf(stderr, "DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0\n"
 		"DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; no network backend\n");
@@ -214,9 +236,23 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::observe)
 {
 	const u32 pc = m_cpu->pc();
 	const u32 sp = m_cpu->state_int(M68K_SP);
+	if (pc == 0x1400)
+	{
+		auto &space = m_cpu->space(AS_PROGRAM);
+		dump_state();
+		fatalerror("DS90 firmware fatal code=%04x caller=%08x parameter=%08x report_sp=%08x\n",
+			space.read_word(0x805036), space.read_dword(0x805028),
+			space.read_dword(0x805032), space.read_dword(0x80502c));
+	}
 	if (pc >= 0x1000 && pc < 0x1400)
+	{
+		dump_state();
+		for (unsigned i = 0; i < 32; ++i)
+			std::fprintf(stderr, "DS90 STACK address=%08x data=%08x\n", sp + i * 4,
+				m_cpu->space(AS_PROGRAM).read_dword(sp + i * 4));
 		fatalerror("DS90 inherited exception vector=%u pc=%08x sp=%08x saved_pc=%08x\n",
 			(pc - 0x1000) / 4, pc, sp, m_cpu->space(AS_PROGRAM).read_dword(sp + 2));
+	}
 	if (++m_ticks <= 10 || m_ticks % 100 == 0)
 		std::fprintf(stderr, "DS90 PROGRESS ms=%u pc=%08x sp=%08x sr=%04x\n",
 			m_ticks, pc, sp, u16(m_cpu->state_int(M68K_SR)));
@@ -227,6 +263,9 @@ void ds90tl_state::ds90tl(machine_config &config)
 	DS90_CPU(config, m_cpu, 16'000'000); // provisional clock, not measured
 	m_cpu->set_addrmap(AS_PROGRAM, &ds90tl_state::memory_map);
 	AM7990(config, m_lance, 20'000'000);
+	// File-backed approximation only; physical storage and write protocol
+	// are not yet identified. Preserve bytes across resets and invocations.
+	NVRAM(config, "configram", nvram_device::DEFAULT_ALL_1);
 	m_lance->dma_in().set(FUNC(ds90tl_state::dma_r));
 	m_lance->dma_out().set(FUNC(ds90tl_state::dma_w));
 	m_lance->intr_out().set(FUNC(ds90tl_state::lance_irq));
@@ -239,7 +278,7 @@ INPUT_PORTS_END
 
 ROM_START(ds90tl)
 	ROM_REGION(0x18b600, "firmware", 0)
-	ROM_LOAD("MNENG3.SYS", 0, 0x18b600, CRC(5275e52d) SHA1(df36a007dd3da3b6dbacf96318787e5e07d7f378))
+	ROM_LOAD("mneng3.sys", 0, 0x18b600, CRC(5275e52d) SHA1(df36a007dd3da3b6dbacf96318787e5e07d7f378))
 ROM_END
 
 } // anonymous namespace

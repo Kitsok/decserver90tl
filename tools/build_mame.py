@@ -83,8 +83,8 @@ def main():
         raise SystemExit(status)
     output = ROOT/'build'
     output.mkdir(exist_ok=True)
-    # SUBTARGET changes MAME's executable basename.
-    binary = source/'mameds90tl'
+    # A source-filtered MAME build names the executable after SUBTARGET.
+    binary = source/'ds90tl'
     shutil.copy2(binary, output/'mame-ds90tl')
     print(output/'mame-ds90tl')
 

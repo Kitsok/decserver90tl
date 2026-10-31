@@ -232,10 +232,19 @@ GPIO. This is an inference requiring confirmation.
 ## RAM, persistence and boot
 
 DEC's Owner's Manual distinguishes the volatile operational database from
-the permanent database in NVRAM. The NVRAM's physical window and access
-protocol remain unknown. File-backed storage can reproduce persistence
-once those accesses are understood; the firmware image itself must not be
-confused with persistent configuration.
+the permanent database in NVRAM. Runtime bring-up now locates byte-addressed
+configuration checksum/readback operations relative to `0x100c00`. The
+write helper at `0x07940c00` sets QSM register `0xfffc14` bit 2, writes one
+byte through A2, then clears bit 2. The delay helper at `0x07940c22` runs
+DBRA with 0x960 iterations between operations. This is consistent with
+write-enable gating for nonvolatile memory; EEPROM versus battery-backed
+RAM/RTC remains unresolved. User also identifies a nonvolatile storage
+component on the real board, with its technology still uncertain.
+
+The simulator provisionally provides a file-backed 64 KiB window at
+`0x100000`, initially erased to FF, without write-enable/timing enforcement.
+This is an implementation approximation, not established chip capacity.
+The firmware image itself is separate from persistent configuration.
 
 MNENG3's startup sets SP to `0x079dbfc0`, copies the inherited vector table,
 and initializes its own VBR. The mapping suggests a useful starting point
@@ -322,3 +331,32 @@ Source context: local `docs/DECserver-90TL-Owners-Manual.txt` in the parent
 workspace; user-supplied `reference/DS90TL-Top.jpg`; firmware provenance and
 hashes in this repository's README and analysis inventory. No firmware
 changes, active network tests, physical resets or deployment were performed.
+
+## RTC hypothesis and configuration-store capacity
+
+The user suggested a DS1287-style battery-backed RTC/RAM module. The
+DS12887, documented as a DS1287 replacement, exposes 128 total locations
+including clock/control registers and 114 bytes of RAM. That capacity cannot
+by itself explain the several-kilobyte linear configuration-store operations
+seen here. A separate RTC remains possible; no RTC register interface has
+been established. The simulator must not identify its provisional 64 KiB
+store as a DS1287.
+
+Reference: https://www.analog.com/en/products/ds12887.html
+
+Runtime handoff also needs a valid port mask at image offset 0x1e. With the
+on-disk word 0x1c00, startup selects port 12 and the routine at 0x079423ac
+asserts because only indices 0..7 are accepted. The synthetic handoff writes
+0x00ff in guest RAM. Board metadata defaults are selected by bits 19..21 of
+the longword at offset 0x16; initialization at 0x07940696 tests those flags
+and copies three default records. The experimental handoff requests those
+defaults because boot-ROM metadata validation has not been reproduced.
+
+The firmware fatal-report path at `0x07948438` stores code at `0x07805036`,
+parameter at `0x07805032`, return address at `0x07805028`, SR at `0x07805030`
+and SP at `0x0780502c`, then jumps via inherited pointer `0x078051a2`.
+The simulator supplies a stopping diagnostic callback for this ROM service.
+The current reproducible error is code 0x543, reached from the storage bounds
+checker at `0x07872602`. Both fresh-FF and zero-filled storage reproduce an
+out-of-range record-22 offset 0x0e00 against declared size 0x0c00. Do not
+expand that record or bypass its check without resolving the mismatch.
