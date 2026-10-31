@@ -405,3 +405,16 @@ in the firmware verification; default XON/XOFF mode used 0x13/0x07.
 See [modem-lines.md](modem-lines.md) for disassembly, sources, modeled behavior,
 provisional B-channel routing, sideband API and verification. This supersedes
 the earlier statement that modem pins were entirely unimplemented.
+
+### Ethernet verified against host traffic
+
+The assisted MNENG3 model has now exchanged live frames through the existing
+AM7990 and a host TAP/bridge. With the test copy configured as 192.0.2.90/24,
+ARP and all three pings from 192.0.2.1 succeeded, TCP port 23 returned Telnet
+negotiation, and a LAT advertisement used destination 09:00:2b:00:00:0f with
+EtherType 0x6004. The observed source MAC was 02:90:00:00:00:01. These results
+supersede the earlier absence of live networking validation; full Telnet login
+and inbound LAT sessions are still untested. The register-level DMA callbacks
+and active-low level-3 interrupt wiring required no changes for these exchanges.
+The loopback fixture independently checks CSR3=6 byte order, ownership, RX/TX
+interrupt flags and acknowledgement. See network.md and the Ethernet reports.

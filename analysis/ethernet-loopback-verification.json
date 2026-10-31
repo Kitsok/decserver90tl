@@ -1,0 +1,12 @@
+{
+  "kind": "isolated AM7990 register component test; no host network",
+  "initialization": true,
+  "csr3": 6,
+  "dma_address_bits": 24,
+  "transmit_bytes": 32,
+  "receive_bytes_including_fcs": 36,
+  "payload_byte_order": true,
+  "descriptor_ownership": true,
+  "receive_transmit_interrupts": true,
+  "interrupt_acknowledgement": true
+}

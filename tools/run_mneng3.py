@@ -5,6 +5,9 @@ import hashlib
 import os
 from pathlib import Path
 import subprocess
+import tempfile
+
+from tap_network import validate_tap
 
 from build_mame import ROOT
 from run_output import ConsoleOutput, stream_process
@@ -14,6 +17,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--interactive', action='store_true', help='Expose eight PTYs and run until Ctrl-C')
     parser.add_argument('--serial-control', type=Path, help='Interactive modem control socket (default: run/serial-control.sock)')
+    parser.add_argument('--ethernet-pcap', type=Path, help='Capture TAP packets (default: logfile with .pcap suffix)')
+    parser.add_argument('--tap', help='Attach LANCE to this existing, bridged Linux TAP (default: offline)')
     parser.add_argument('--seconds', type=int, default=None)
     parser.add_argument('--verbose', '-v', action='store_true',
                         help='Show the full live trace on console (logfile is always complete)')
@@ -32,6 +37,13 @@ def main():
     parser.add_argument('--nvram-directory', type=Path,
                         help='Separate persistent store for an isolated boot experiment')
     args = parser.parse_args()
+    if args.ethernet_pcap and not args.tap:
+        parser.error('--ethernet-pcap requires --tap')
+    if args.tap:
+        try:
+            bridge = validate_tap(args.tap)
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
     if args.seconds is None:
         args.seconds = 0 if args.interactive else 1
     try:
@@ -60,22 +72,38 @@ def main():
     env['DS90_UART_PROBE_HEX'] = probe_data.hex()
     env['DS90_SERIAL_CONTROL'] = str((args.serial_control or run/'serial-control.sock').resolve())
     env['DS90_SERIAL_PTY'] = '1' if args.interactive else '0'
+    env.pop('DS90_TAP_NAME', None)
+    env.pop('DS90_TAP_PCAP', None)
+    if args.tap:
+        env['DS90_TAP_NAME'] = args.tap
     env.update(SDL_VIDEODRIVER='dummy', SDL_AUDIODRIVER='dummy')
     command = [str(ROOT/'build/mame-ds90tl'), 'ds90tl', '-noreadconfig',
                '-rompath', str(run/'roms'), '-bench', str(args.seconds),
                '-skip_gameinfo', '-cfg_directory', str(run/'cfg'),
+               '-networkprovider', 'taptun' if args.tap else 'none',
                '-nvram_directory', str((args.nvram_directory or run/'nvram').resolve())]
-    if args.interactive:
+    if args.interactive or args.tap:
         index = command.index('-bench')
         command[index:index + 2] = ['-video', 'none', '-sound', 'none', '-throttle', '-seconds_to_run', str(args.seconds)]
     log_path = (args.log_file or run/'bringup.log').resolve()
     log_path.parent.mkdir(parents=True, exist_ok=True)
+    if args.tap:
+        pcap_path = (args.ethernet_pcap or log_path.with_suffix('.pcap')).resolve()
+        if pcap_path == log_path:
+            parser.error('Ethernet capture and text log paths must differ')
+        pcap_path.parent.mkdir(parents=True, exist_ok=True)
+        env['DS90_TAP_PCAP'] = str(pcap_path)
     console = ConsoleOutput('unlimited' if not args.seconds else args.seconds, args.verbose)
     console.say('Starting MNENG3 / 4 MiB; eight interactive PTYs; Ctrl-C to stop' if args.interactive else f'Starting MNENG3 / 4 MiB; limit {args.seconds} simulated seconds, 120 seconds host time')
     console.say(f'Configuration store: {(args.nvram_directory or run/"nvram").resolve()}')
     console.say(f'Full live trace: {log_path}')
+    console.say(f'Ethernet: TAP {args.tap}, bridge {bridge}; capture: {pcap_path}' if args.tap else 'Ethernet: offline')
     try:
-        status = stream_process(command, run, env, log_path, console, timeout=None if args.interactive else 120)
+        # Host MAME cfg must not silently restore a previous network interface.
+        # Guest settings remain in the selected persistent NVRAM directory.
+        with tempfile.TemporaryDirectory(prefix='cfg-', dir=run) as cfg:
+            command[command.index('-cfg_directory') + 1] = cfg
+            status = stream_process(command, run, env, log_path, console, timeout=None if args.interactive else 120)
     except subprocess.TimeoutExpired:
         raise SystemExit(f'Host timeout; simulator stopped. Inspect {log_path}')
     except KeyboardInterrupt:

@@ -47,3 +47,13 @@ handles 2692-compatible DTR commands and automatic receive-DTR behavior locally.
 
 The patch composes with the baud-preservation patch. See modem-lines.md and
 tools/verify_modem*.py for real firmware and isolated register verification.
+
+## mame-tap-interface-selection.patch
+
+Extends the existing Linux TAP backend with optional `DS90_TAP_NAME`, keeping
+the upstream name fallback when unset. Rejects failed device opens/attachments
+instead of returning a dead network device. `DS90_TAP_PCAP` optionally captures
+Ethernet frames at the host boundary, without FCS, and flushes each record;
+packet metadata is also written to the full trace. No chip registers, descriptor
+logic or network protocols are reimplemented here. See network.md for real
+firmware ARP/ping/Telnet verification and the offline LANCE loopback fixture.

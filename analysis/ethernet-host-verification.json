@@ -1,0 +1,32 @@
+{
+  "firmware": "MNENG3.SYS",
+  "ram_mib": 4,
+  "pty_local_login": true,
+  "privileged_login": true,
+  "configuration_responses": {
+    "SET INTERNET SUBNET MASK 255.255.255.0": "SET INTERNET SUBNET MASK 255.255.255.0\r\r\nLocal> ",
+    "SET INTERNET ADDRESS 192.0.2.90": "SET INTERNET ADDRESS 192.0.2.90\r\r\nLocal> "
+  },
+  "ping_returncode": 0,
+  "ping_output": "PING 192.0.2.90 (192.0.2.90) from 192.0.2.1 brds90: 56(84) bytes of data.\n64 bytes from 192.0.2.90: icmp_seq=1 ttl=255 time=4.52 ms\n64 bytes from 192.0.2.90: icmp_seq=2 ttl=255 time=2.38 ms\n64 bytes from 192.0.2.90: icmp_seq=3 ttl=255 time=2.60 ms\n\n--- 192.0.2.90 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2002ms\nrtt min/avg/max/mdev = 2.384/3.167/4.519/0.959 ms\n",
+  "tcp_port_23": "connected",
+  "tcp_port_23_initial_bytes_hex": "fffb03fffd03fffb05fffd19fffb01",
+  "captured_frames": 32,
+  "ether_types": {
+    "86dd": 7,
+    "0806": 4,
+    "0800": 20,
+    "6004": 1
+  },
+  "station_mac_seen": true,
+  "normal_shutdown_and_socket_cleanup": true,
+  "station_arp_replies": 1,
+  "station_icmp_echo_replies": 3,
+  "station_lat_multicasts": 1,
+  "tap": "ds90tap",
+  "bridge": "brds90",
+  "guest_ipv4": "192.0.2.90",
+  "host_ipv4": "192.0.2.1",
+  "telnet_negotiation": true,
+  "limitations": "Telnet connection/negotiation and outgoing LAT multicast were observed; full Telnet login and incoming LAT sessions were not exercised."
+}

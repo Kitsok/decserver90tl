@@ -49,3 +49,8 @@ DTR/DSR modem signaling and firmware XON/XOFF flow control are now supported.
 Use `python3 tools/serial_control.py get all` to inspect lines, or
 `python3 tools/serial_control.py set 1 dsr 0` to lower port 1 DSR.
 See [modem-lines.md](modem-lines.md) for the host API and hardware evidence.
+
+Ethernet: `./run.sh --interactive --tap ds90tap` uses the existing LANCE
+model and a prepared, user-owned TAP on a bridge. See [network.md](network.md)
+for lab setup, guest IP commands, packet captures and verified ARP/ping/Telnet
+negotiation. Without `--tap`, networking stays offline.

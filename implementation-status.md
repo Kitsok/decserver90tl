@@ -223,3 +223,19 @@ configured, and automatic receive throttling drops DTR at FIFO full. Firmware
 XOFF/XON was verified through the PTY. See [modem-lines.md](modem-lines.md) and
 the recorded firmware/component tests. Physical pin routing remains provisional;
 PTY modem ioctls, input framing and modem emulator adapters remain unimplemented.
+
+## Ethernet TAP milestone
+
+The existing AM7990 model now attaches to an explicitly selected, user-prepared
+TAP using MAME's taptun provider. The runner requires an UP bridged TAP, keeps
+offline mode explicit, paces networked runs, and records full packet PCAPs.
+`network.sh` prepares an isolated bridge/TAP without modifying existing
+interfaces. Host MAME configuration is isolated per run so it cannot silently
+restore an old interface selection. Guest NVRAM selection remains persistent.
+
+Verified with MNENG3/4 MiB and a copied NVRAM store: ARP, three ICMP echo
+replies, TCP port 23 connection/Telnet negotiation and outgoing LAT multicast.
+An independent register loopback fixture verified DMA byte order, descriptor
+ownership and interrupt cause/acknowledgement. Full Telnet login and inbound
+LAT sessions remain untested. See [network.md](network.md) and the two recorded
+Ethernet verification reports for scope and commands.

@@ -240,3 +240,11 @@ python3 tools/serial_control.py set 1 dsr 1
 The default control socket is `run/serial-control.sock`. PTY modem-line ioctls
 are not supported; use this sideband to drive DSR and read guest-controlled DTR.
 The 90TL has no RTS/CTS, DCD or RI connector signals.
+
+### Ethernet over a bridge
+
+Use `./run.sh --interactive --tap ds90tap` after preparing the TAP/bridge.
+The new `network.sh` helper prepares an isolated lab with sudo; the simulator
+runs as your normal user. See [network.md](network.md) for setup, guest IP
+configuration and capture inspection. Networking is opt-in. Packet capture
+defaults to `run/interactive.pcap`, alongside the full text log.

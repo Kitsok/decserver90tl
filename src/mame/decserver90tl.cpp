@@ -493,6 +493,7 @@ void ds90tl_state::dma_w(offs_t offset, u16 data, u16 mask)
 void ds90tl_state::lance_irq(int state)
 {
 	// MAME LANCE's callback is active-low.
+	std::fprintf(stderr, "DS90 LANCE-IRQ asserted=%u pc=%08x\n", unsigned(!state), u32(m_cpu->pc()));
 	m_cpu->set_input_line(3, state ? CLEAR_LINE : ASSERT_LINE);
 }
 
@@ -628,9 +629,19 @@ void ds90tl_state::machine_reset()
 	// Preserve its report fields and stop, rather than jumping through zero.
 	m_boot[0x1400 / 2] = 0x60fe;
 	space.write_dword(0x8051a2, 0x1400);
+	const char *tap = std::getenv("DS90_TAP_NAME");
+	if (tap && *tap)
+	{
+		m_lance->set_interface(0); // the explicitly selected taptun provider
+		if (m_lance->get_interface() != 0)
+			fatalerror("Cannot attach LANCE to TAP %s; check TAP ownership and permissions\n", tap);
+		std::fprintf(stderr, "DS90 NETWORK attached tap=%s mac=02:90:00:00:00:01\n", tap);
+	}
+	else if (m_lance->get_interface() >= 0)
+		m_lance->set_interface(-1);
 	m_events = m_ticks = m_clock_ticks = 0;
 	std::fprintf(stderr, "DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0\n"
-		"DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; no network backend\n");
+		"DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; host network opt-in via TAP\n");
 	m_observer->adjust(attotime::from_msec(1), 0, attotime::from_msec(1));
 }
 

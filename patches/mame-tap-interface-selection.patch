@@ -1,0 +1,162 @@
+--- a/src/osd/modules/netdev/taptun.cpp
++++ b/src/osd/modules/netdev/taptun.cpp
+@@ -15,6 +15,11 @@
+ #include "util/unicode.h"
+ 
+ #include <memory>
++#include <cstdlib>
++#include <cstring>
++#include <cstdio>
++#include <chrono>
++#include <stdexcept>
+ #include <vector>
+ 
+ #if defined(_WIN32)
+@@ -83,6 +88,14 @@
+ 	~netdev_tap();
+ 
+ 	int send(void const *buf, int len) override;
++	bool valid() const
++	{
++#if defined(_WIN32)
++		return m_handle != INVALID_HANDLE_VALUE;
++#else
++		return m_fd >= 0;
++#endif
++	}
+ 
+ protected:
+ 	int recv_dev(uint8_t **buf) override;
+@@ -94,8 +107,10 @@
+ 	bool m_receive_pending;
+ #else
+ 	int m_fd = -1;
+-	char m_ifname[10];
+-#endif
++	char m_ifname[IFNAMSIZ];
++#endif
++	FILE *m_capture = nullptr;
++	void capture(void const *buf, int len, const char *direction);
+ 	uint8_t m_buf[2048];
+ };
+ 
+@@ -105,23 +120,49 @@
+ #if defined(__linux__)
+ 	m_fd = -1;
+ 	if((m_fd = open("/dev/net/tun", O_RDWR)) == -1) {
+-		osd_printf_verbose("tap: open failed %d\n", errno);
++		osd_printf_error("tap: cannot open /dev/net/tun: %s\n", std::strerror(errno));
+ 		return;
+ 	}
+ 
+ 	struct ifreq ifr;
+ 	memset(&ifr, 0, sizeof(ifr));
+ 	ifr.ifr_flags = IFF_TAP | IFF_NO_PI;
+-	sprintf(ifr.ifr_name, "tap-mess-%d-0", getuid());
++	const char *requested = std::getenv("DS90_TAP_NAME");
++	if (requested && *requested)
++	{
++		if (std::strlen(requested) >= sizeof(ifr.ifr_name))
++		{
++			osd_printf_error("tap: interface name too long\n");
++			close(m_fd); m_fd = -1;
++			return;
++		}
++		std::strcpy(ifr.ifr_name, requested);
++	}
++	else
++		snprintf(ifr.ifr_name, sizeof(ifr.ifr_name), "tap-mess-%d-0", getuid());
+ 	if(ioctl(m_fd, TUNSETIFF, (void *)&ifr) == -1) {
+-		osd_printf_verbose("tap: ioctl failed %d\n", errno);
++		osd_printf_error("tap: cannot attach %s: %s\n", ifr.ifr_name, std::strerror(errno));
+ 		close(m_fd);
+ 		m_fd = -1;
+ 		return;
+ 	}
+ 	osd_printf_verbose("netdev_tap: network up!\n");
+-	strncpy(m_ifname, ifr.ifr_name, 10);
++	std::strcpy(m_ifname, ifr.ifr_name);
+ 	fcntl(m_fd, F_SETFL, O_NONBLOCK);
++	const char *capture_path = std::getenv("DS90_TAP_PCAP");
++	if (capture_path && *capture_path)
++	{
++		m_capture = std::fopen(capture_path, "wb");
++		// Classic little-endian PCAP, Ethernet, no FCS, snaplen 65535.
++		const uint8_t header[] = {0xd4,0xc3,0xb2,0xa1,2,0,4,0,0,0,0,0,0,0,0,0,0xff,0xff,0,0,1,0,0,0};
++		if (!m_capture || std::fwrite(header, 1, sizeof(header), m_capture) != sizeof(header) || std::fflush(m_capture))
++		{
++			if (m_capture) { std::fclose(m_capture); m_capture = nullptr; }
++			osd_printf_error("tap: cannot initialize capture %s\n", capture_path);
++			close(m_fd); m_fd = -1;
++			return;
++		}
++	}
+ #elif defined(_WIN32)
+ 	std::wstring device_path(L"" USERMODEDEVICEDIR);
+ 	device_path.append(wstring_from_utf8(name));
+@@ -145,6 +186,7 @@
+ 
+ netdev_tap::~netdev_tap()
+ {
++	if (m_capture) std::fclose(m_capture);
+ #if defined(_WIN32)
+ 	if (m_handle != INVALID_HANDLE_VALUE)
+ 	{
+@@ -156,6 +198,27 @@
+ #else
+ 	close(m_fd);
+ #endif
++}
++
++void netdev_tap::capture(void const *buf, int len, const char *direction)
++{
++	if (len <= 0) return;
++	const auto *bytes = static_cast<const uint8_t *>(buf);
++	if (len >= 14)
++		osd_printf_info("DS90 NETWORK-%s bytes=%d dst=%02x:%02x:%02x:%02x:%02x:%02x src=%02x:%02x:%02x:%02x:%02x:%02x type=%02x%02x\n",
++			direction, len, bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5],
++			bytes[6], bytes[7], bytes[8], bytes[9], bytes[10], bytes[11], bytes[12], bytes[13]);
++	std::fflush(stdout);
++	if (!m_capture) return;
++	const auto micros = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
++	uint8_t header[16];
++	const uint32_t fields[] = {uint32_t(micros / 1000000), uint32_t(micros % 1000000), uint32_t(len), uint32_t(len)};
++	for (unsigned word = 0; word < 4; ++word)
++		for (unsigned byte = 0; byte < 4; ++byte)
++			header[word * 4 + byte] = fields[word] >> (byte * 8);
++	if (std::fwrite(header, 1, sizeof(header), m_capture) != sizeof(header)
++		|| std::fwrite(buf, 1, len, m_capture) != size_t(len) || std::fflush(m_capture))
++		throw std::runtime_error("TAP packet capture write failed");
+ }
+ 
+ static u32 finalise_frame(u8 buf[], u32 length)
+@@ -339,6 +402,7 @@
+ {
+ 	if(m_fd == -1) return 0;
+ 	len = write(m_fd, buf, len);
++	if (len > 0) capture(buf, len, "TX");
+ 	return (len == -1)?0:len;
+ }
+ 
+@@ -350,7 +414,10 @@
+ 	int len = read(m_fd, m_buf, sizeof(m_buf));
+ 
+ 	if (len > 0)
++	{
++		capture(m_buf, len, "RX");
+ 		len = finalise_frame(m_buf, len);
++	}
+ 
+ 	*buf = m_buf;
+ 	return (len == -1) ? 0 : len;
+@@ -380,7 +447,9 @@
+ 	if ((0 > id) || (m_devices.size() <= id))
+ 		return nullptr;
+ 
+-	return std::make_unique<netdev_tap>(m_devices[id].name.c_str(), handler);
++	auto device = std::make_unique<netdev_tap>(m_devices[id].name.c_str(), handler);
++	if (!device->valid()) return nullptr;
++	return device;
+ }
+ 
+ std::vector<network_device_info> taptun_module::list_devices()
