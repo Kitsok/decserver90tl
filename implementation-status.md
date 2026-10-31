@@ -213,3 +213,13 @@ PTY. PTYs stay open across terminal disconnects. SIGINT/SIGTERM in interactive
 mode requests normal simulator shutdown and NVRAM saving. This extends the
 existing diagnostic byte-level UART model; modem signals and serial wire timing
 remain unimplemented. See BUILD.md for terminal connection commands.
+
+## DTR/DSR and software flow control
+
+All eight interfaces now expose DSR input and DTR output via a local control
+socket alongside their data PTYs. The board translates recovered 2692-compatible
+DTR commands; the DUART model holds transmit bytes while DSR is negated when
+configured, and automatic receive throttling drops DTR at FIFO full. Firmware
+XOFF/XON was verified through the PTY. See [modem-lines.md](modem-lines.md) and
+the recorded firmware/component tests. Physical pin routing remains provisional;
+PTY modem ioctls, input framing and modem emulator adapters remain unimplemented.

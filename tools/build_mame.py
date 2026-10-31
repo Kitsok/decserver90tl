@@ -13,6 +13,7 @@ from pathlib import Path
 import shutil
 import signal
 import subprocess
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -91,7 +92,14 @@ def main():
     output.mkdir(exist_ok=True)
     # A source-filtered MAME build names the executable after SUBTARGET.
     binary = source/'ds90tl'
-    shutil.copy2(binary, output/'mame-ds90tl')
+    # Replace the inode so an existing simulator can keep running its build.
+    with tempfile.NamedTemporaryFile(dir=output, prefix='.mame-ds90tl-', delete=False) as staging:
+        staged = Path(staging.name)
+    try:
+        shutil.copy2(binary, staged)
+        os.replace(staged, output/'mame-ds90tl')
+    finally:
+        staged.unlink(missing_ok=True)
     print(output/'mame-ds90tl')
 
 

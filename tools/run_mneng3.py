@@ -13,6 +13,7 @@ from run_output import ConsoleOutput, stream_process
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--interactive', action='store_true', help='Expose eight PTYs and run until Ctrl-C')
+    parser.add_argument('--serial-control', type=Path, help='Interactive modem control socket (default: run/serial-control.sock)')
     parser.add_argument('--seconds', type=int, default=None)
     parser.add_argument('--verbose', '-v', action='store_true',
                         help='Show the full live trace on console (logfile is always complete)')
@@ -57,6 +58,7 @@ def main():
     env['DS90_UART_PROBE_PORT'] = str(args.uart_probe_port)
     env['DS90_UART_PROBE_AT'] = str(args.uart_probe_at)
     env['DS90_UART_PROBE_HEX'] = probe_data.hex()
+    env['DS90_SERIAL_CONTROL'] = str((args.serial_control or run/'serial-control.sock').resolve())
     env['DS90_SERIAL_PTY'] = '1' if args.interactive else '0'
     env.update(SDL_VIDEODRIVER='dummy', SDL_AUDIODRIVER='dummy')
     command = [str(ROOT/'build/mame-ds90tl'), 'ds90tl', '-noreadconfig',

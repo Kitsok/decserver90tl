@@ -44,3 +44,8 @@ Interactive serial: run `./run.sh --interactive` to expose all eight ports as
 local PTYs. Connect a terminal to the printed path, e.g.
 `screen /dev/pts/7 9600`. See [BUILD.md](BUILD.md#interactive-serial-ports)
 for startup, login and transport limitations.
+
+DTR/DSR modem signaling and firmware XON/XOFF flow control are now supported.
+Use `python3 tools/serial_control.py get all` to inspect lines, or
+`python3 tools/serial_control.py set 1 dsr 0` to lower port 1 DSR.
+See [modem-lines.md](modem-lines.md) for the host API and hardware evidence.

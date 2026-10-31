@@ -1,0 +1,53 @@
+{
+  "firmware": "MNENG3.SYS",
+  "ram_mib": 4,
+  "eight_dsr_inputs_and_port_isolation": true,
+  "invalid_requests_rejected": true,
+  "pty_local_login": true,
+  "logged_in_state": {
+    "port": 1,
+    "dsr": 1,
+    "dtr": 1,
+    "dsr_flow": 0,
+    "rx_dtr_flow": 0,
+    "mr1": 19,
+    "mr2": 7,
+    "sr": 12,
+    "input_pins": 248,
+    "rx_enabled": 1,
+    "tx_enabled": 1,
+    "tx_queued": 0
+  },
+  "firmware_xoff_stops_xon_resumes": true,
+  "dsr_flow_state": {
+    "port": 1,
+    "dsr": 1,
+    "dtr": 1,
+    "dsr_flow": 1,
+    "rx_dtr_flow": 1,
+    "mr1": 147,
+    "mr2": 23,
+    "sr": 12,
+    "input_pins": 248,
+    "rx_enabled": 1,
+    "tx_enabled": 1,
+    "tx_queued": 0
+  },
+  "dsr_held_state": {
+    "port": 1,
+    "dsr": 0,
+    "dtr": 1,
+    "dsr_flow": 1,
+    "rx_dtr_flow": 1,
+    "mr1": 147,
+    "mr2": 23,
+    "sr": 0,
+    "input_pins": 249,
+    "rx_enabled": 1,
+    "tx_enabled": 1,
+    "tx_queued": 0
+  },
+  "dsr_stops_transmitter_and_resumes": true,
+  "port1_output_bytes": 2566,
+  "normal_shutdown_and_socket_cleanup": true
+}

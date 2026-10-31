@@ -16,6 +16,10 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <sys/stat.h>
+#include <sstream>
 
 class ds90_cpu_device : public fscpu32_device
 {
@@ -154,6 +158,15 @@ private:
 	TIMER_CALLBACK_MEMBER(clock_tick);
 	TIMER_CALLBACK_MEMBER(uart_probe);
 	TIMER_CALLBACK_MEMBER(serial_poll);
+	void serial_transmit(unsigned port, u8 data);
+	void modem_inputs(unsigned block);
+	void modem_poll();
+	bool modem_dtr(unsigned port);
+	std::string modem_status(unsigned port);
+	int m_modem_socket = -1;
+	std::string m_modem_path;
+	bool m_dsr[8] = {true,true,true,true,true,true,true,true};
+	u8 m_output_pins[4] = {0xff,0xff,0xff,0xff};
 	int m_pty[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
 	int m_pty_slave[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
 	std::deque<u8> m_serial_output[8];
@@ -273,9 +286,14 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
 	m_cpu->set_input_line(6, ASSERT_LINE);
 }
 
-// Host terminal byte transport: deliberately bypasses serial framing/modem pins.
+// Host byte transport with explicit DTR/DSR sideband; serial framing is assisted.
 ds90tl_state::~ds90tl_state()
 {
+	if (m_modem_socket >= 0)
+	{
+		::close(m_modem_socket);
+		::unlink(m_modem_path.c_str());
+	}
 	for (unsigned port = 0; port < 8; ++port)
 	{
 		if (m_pty[port] >= 0) ::close(m_pty[port]);
@@ -284,9 +302,94 @@ ds90tl_state::~ds90tl_state()
 	}
 }
 
+void ds90tl_state::serial_transmit(unsigned port, u8 data)
+{
+	// Called when the DUART actually moves THR to the shift register, after
+	// CTS/DSR gating. A CPU THR write alone is not transmitted output.
+	std::fprintf(stderr, "DS90 UART-TX port=%u byte=%02x char=%c\n",
+		port + 1, data, data >= 32 && data < 127 ? data : '.');
+	if (m_pty[port] < 0) return;
+	if (m_serial_output[port].size() >= 65536)
+		fatalerror("Serial output queue full on port %u; attach a terminal\n", port + 1);
+	m_serial_output[port].push_back(data);
+}
+
+void ds90tl_state::modem_inputs(unsigned block)
+{
+	// Firmware masks at 079423c4/c8 select IP0 for A and IP2 for B.
+	// Mirror B onto the native CTS input as a functional board substitution;
+	// the physical fan-out/routing has not been traced on the real PCB.
+	m_uart[block]->ip0_w(!m_dsr[block * 2]);
+	m_uart[block]->ip1_w(!m_dsr[block * 2 + 1]);
+	m_uart[block]->ip2_w(!m_dsr[block * 2 + 1]);
+	m_uart[block]->m_chanA->tx_cts_w(m_dsr[block * 2]);
+	m_uart[block]->m_chanB->tx_cts_w(m_dsr[block * 2 + 1]);
+}
+
+bool ds90tl_state::modem_dtr(unsigned port)
+{
+	duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
+	// The DUART calls this output RTS; the 90TL connector exposes it as DTR.
+	return !BIT(m_output_pins[port / 2], port & 1)
+		&& !((channel.read_MR1() & 0x80) && channel.rx_fifo_full());
+}
+
+std::string ds90tl_state::modem_status(unsigned port)
+{
+	duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
+	char status[512];
+	std::snprintf(status, sizeof(status),
+		"{\"port\":%u,\"dsr\":%u,\"dtr\":%u,\"dsr_flow\":%u,\"rx_dtr_flow\":%u,\"mr1\":%u,\"mr2\":%u,\"sr\":%u,\"input_pins\":%u,\"rx_enabled\":%u,\"tx_enabled\":%u,\"tx_queued\":%zu}\n",
+		port + 1, unsigned(m_dsr[port]), unsigned(modem_dtr(port)),
+		unsigned(bool(channel.read_MR2() & 0x10)), unsigned(bool(channel.read_MR1() & 0x80)),
+		unsigned(channel.read_MR1()), unsigned(channel.read_MR2()), unsigned(channel.read_chan_reg(1)),
+		unsigned(m_uart[port / 2]->read(13)), unsigned(channel.receiver_enabled()),
+		unsigned(channel.transmitter_enabled()), m_serial_output[port].size());
+	return status;
+}
+
+void ds90tl_state::modem_poll()
+{
+	// Bounded work per tick, so a busy control client cannot starve the CPU.
+	for (unsigned count = 0; m_modem_socket >= 0 && count < 16; ++count)
+	{
+		char request[256];
+		sockaddr_un peer{};
+		socklen_t peer_size = sizeof(peer);
+		const ssize_t length = ::recvfrom(m_modem_socket, request, sizeof(request), 0,
+			reinterpret_cast<sockaddr *>(&peer), &peer_size);
+		if (length < 0) break;
+		std::istringstream input(std::string(request, length));
+		std::string command, signal, trailing;
+		unsigned port = 0;
+		int value = -1;
+		input >> command >> port;
+		std::string reply = "{\"error\":\"Use GET port or SET port DSR 0|1; ports 1..8; only DTR/DSR exist\"}\n";
+		if (input && port >= 1 && port <= 8)
+		{
+			bool valid = false;
+			if (command == "GET") valid = !(input >> trailing);
+			else if (command == "SET")
+			{
+				if ((input >> signal >> value) && signal == "DSR" && (value == 0 || value == 1) && !(input >> trailing))
+				{
+					m_dsr[port - 1] = value != 0;
+					modem_inputs((port - 1) / 2);
+					std::fprintf(stderr, "DS90 MODEM port=%u DSR=%d\n", port, value);
+					valid = true;
+				}
+			}
+			if (valid) reply = modem_status(port - 1);
+		}
+		::sendto(m_modem_socket, reply.data(), reply.size(), MSG_NOSIGNAL,
+			reinterpret_cast<sockaddr *>(&peer), peer_size);
+	}
+}
+
 TIMER_CALLBACK_MEMBER(ds90tl_state::serial_poll)
 {
 	if (serial_stop_requested) { machine().schedule_exit(); return; }
+	modem_poll();
 	for (unsigned port = 0; port < 8; ++port)
 	{
 		if (m_pty[port] < 0) continue;
@@ -295,10 +398,11 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::serial_poll)
 		{
 			const u8 byte = pending.front();
 			if (::write(m_pty[port], &byte, 1) != 1) break;
+			std::fprintf(stderr, "DS90 PTY-TX port=%u byte=%02x\n", port + 1, byte);
 			pending.pop_front();
 		}
 		duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
-		if (!(channel.read_chan_reg(1) & 1))
+		if (!channel.rx_fifo_full())
 		{
 			u8 byte;
 			if (::read(m_pty[port], &byte, 1) == 1)
@@ -358,15 +462,17 @@ template<unsigned Block> void ds90tl_state::uart_w(offs_t offset, u16 data, u16 
 		duart_channel &channel = offset >= 8 ? *m_uart[Block]->m_chanB : *m_uart[Block]->m_chanA;
 		const u8 before = channel.read_chan_reg(1);
 		if (offset == 3 || offset == 11)
-			std::fprintf(stderr, "DS90 UART-TX port=%u byte=%02x char=%c sr_before=%02x\n",
+			std::fprintf(stderr, "DS90 UART-THR port=%u byte=%02x char=%c sr_before=%02x\n",
 				Block * 2 + (offset == 11) + 1, value, value >= 32 && value < 127 ? value : '.', before);
-		if ((offset == 3 || offset == 11) && m_pty[port] >= 0)
+		// 2692-family extended commands assert/negate OP0/OP1. The
+		// generic 68681 masks command bit 7 and would misdecode 0x90.
+		if ((offset == 2 || offset == 10) && ((value & 0xf0) == 0x80 || (value & 0xf0) == 0x90))
 		{
-			if (m_serial_output[port].size() >= 65536)
-				fatalerror("Serial output queue full on port %u; attach a terminal\n", port + 1);
-			m_serial_output[port].push_back(value);
+			m_uart[Block]->write((value & 0xf0) == 0x80 ? 14 : 15, 1U << (port & 1));
+			m_uart[Block]->write(offset, value & 0x0f);
 		}
-		m_uart[Block]->write(offset, value);
+		else
+			m_uart[Block]->write(offset, value);
 		if ((offset == 2 || offset == 10) && m_uart_commands[port]++ < 32)
 			std::fprintf(stderr, "DS90 UART-CMD port=%u byte=%02x sr_before=%02x sr_after=%02x pc=%08x\n",
 				port + 1, value, before, channel.read_chan_reg(1), u32(m_cpu->pc()));
@@ -418,6 +524,22 @@ void ds90tl_state::machine_start()
 		serial_stop_requested = 0;
 		std::signal(SIGINT, serial_stop);
 		std::signal(SIGTERM, serial_stop);
+		const char *control = std::getenv("DS90_SERIAL_CONTROL");
+		if (!control || !*control) fatalerror("Missing serial control socket path\n");
+		m_modem_path = control;
+		sockaddr_un address{};
+		address.sun_family = AF_UNIX;
+		if (m_modem_path.size() >= sizeof(address.sun_path)) fatalerror("Serial control socket path too long\n");
+		std::strcpy(address.sun_path, m_modem_path.c_str());
+		m_modem_socket = ::socket(AF_UNIX, SOCK_DGRAM | SOCK_NONBLOCK | SOCK_CLOEXEC, 0);
+		if (m_modem_socket < 0) fatalerror("Cannot create serial control socket\n");
+		if (::bind(m_modem_socket, reinterpret_cast<sockaddr *>(&address), sizeof(address)))
+		{
+			::close(m_modem_socket); m_modem_socket = -1;
+			fatalerror("Cannot bind serial control socket %s: %s\n", control, std::strerror(errno));
+		}
+		if (::chmod(control, 0600)) fatalerror("Cannot restrict serial control socket permissions\n");
+		std::fprintf(stderr, "DS90 SERIAL control=%s (DTR/DSR; terminal defaults DSR=1)\n", control);
 		for (unsigned port = 0; port < 8; ++port)
 		{
 			m_pty[port] = ::posix_openpt(O_RDWR | O_NOCTTY | O_NONBLOCK);
@@ -462,6 +584,12 @@ void ds90tl_state::machine_reset()
 		const unsigned long value = std::strtoul(byte.c_str(), &end, 16);
 		if (end != byte.c_str() + 2) fatalerror("Invalid diagnostic UART hex input\n");
 		m_probe_data.push_back(u8(value));
+	}
+	for (unsigned block = 0; block < 4; ++block)
+	{
+		m_uart[block]->ip3_w(1); m_uart[block]->ip4_w(1);
+		m_uart[block]->ip5_w(1); m_uart[block]->ip6_w(1);
+		modem_inputs(block);
 	}
 	std::fill(std::begin(m_uart_commands), std::end(m_uart_commands), 0);
 	if (m_probe_port)
@@ -558,7 +686,12 @@ void ds90tl_state::ds90tl(machine_config &config)
 	m_lance->dma_out().set(FUNC(ds90tl_state::dma_w));
 	m_lance->intr_out().set(FUNC(ds90tl_state::lance_irq));
 	for (unsigned i = 0; i < 4; ++i)
-		MC68681(config, m_uart[i], 3'686'400); // clock/variant still provisional
+		{
+		MC68681(config, m_uart[i], 3'686'400); // exact variant still provisional
+		m_uart[i]->outport_cb().set([this, i](u8 pins) { m_output_pins[i] = pins; });
+		m_uart[i]->subdevice<duart_channel>("cha")->byte_tx_cb().set([this, i](u8 data) { serial_transmit(i * 2, data); });
+		m_uart[i]->subdevice<duart_channel>("chb")->byte_tx_cb().set([this, i](u8 data) { serial_transmit(i * 2 + 1, data); });
+	}
 }
 
 static INPUT_PORTS_START(ds90tl)

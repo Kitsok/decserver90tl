@@ -34,3 +34,16 @@ by this regression alone.
 
 The patch preserves the source file's original MAME BSD-3-Clause licensing.
 It does not alter MNENG3.SYS or remove firmware checks.
+
+## mame-duart-modem-byte-transport.patch
+
+Adds a logical CTS input (ready by default), a transmit-byte callback at the
+holding-to-shift-register boundary, and receive FIFO/enabled-state accessors.
+MR2-controlled CTS gates between characters and holds THR/TxRDY until resume;
+mode changes can release held data and transmitter reset discards it. The 90TL
+board connects its DSR signal to this control and its PTY to the byte callback.
+Existing drivers with no CTS connection retain an asserted default. The board
+handles 2692-compatible DTR commands and automatic receive-DTR behavior locally.
+
+The patch composes with the baud-preservation patch. See modem-lines.md and
+tools/verify_modem*.py for real firmware and isolated register verification.

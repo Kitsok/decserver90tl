@@ -207,10 +207,12 @@ server parameters still apply. For screen, Ctrl-A then D detaches; for picocom,
 Ctrl-A then Ctrl-X exits. Reattach to the same PTY while the simulator is running.
 Use one terminal client per port. Stop the simulator with Ctrl-C in its launcher.
 
-This is a byte transport at the DUART register/FIFO boundary. It bypasses receive
-enable, baud/framing and modem signals; the terminal's baud setting does not
-control transfer speed. Output is taken from firmware transmit-register writes,
-not a decoded serial waveform. Input waits until the receive FIFO is empty.
+This is an assisted byte transport at the DUART register/FIFO boundary. Input
+bypasses receive enable and baud/framing; the terminal's baud setting does not
+control transfer speed. Output is captured at the start of an actual UART
+transmission, after DSR gating, rather than decoded from a serial waveform.
+Input waits for a free receive FIFO slot. DTR/DSR and XON/XOFF flow control are
+supported; see [modem-lines.md](modem-lines.md) for the control socket and tests.
 The emulation is paced to real time where host performance permits. A disconnected
 terminal retains queued output within finite PTY/host buffers; an unread output
 queue exceeding 64 KiB stops with an explicit error. This is a Linux/POSIX host
@@ -226,3 +228,15 @@ python3 tools/run_mneng3.py --interactive --seconds 50 \
 
 Omit `--seconds` for an unlimited interactive run. Interactive mode has no host
 timeout. Ctrl-C/SIGTERM requests normal MAME exit so persistent storage is saved.
+
+Modem controls are separate from the data PTYs:
+
+```sh
+python3 tools/serial_control.py get all
+python3 tools/serial_control.py set 1 dsr 0
+python3 tools/serial_control.py set 1 dsr 1
+```
+
+The default control socket is `run/serial-control.sock`. PTY modem-line ioctls
+are not supported; use this sideband to drive DSR and read guest-controlled DTR.
+The 90TL has no RTS/CTS, DCD or RI connector signals.

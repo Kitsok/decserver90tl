@@ -1,0 +1,126 @@
+--- a/src/devices/machine/mc68681.h
++++ b/src/devices/machine/mc68681.h
+@@ -48,6 +48,14 @@
+ 	void rx_16x_clock_w(bool state);
+ 
+ 	int get_tx_rate() const { return tx_baud_rate; }
++
++	// Logical CTS assertion, for byte-oriented board transports. Default ready
++	// preserves existing drivers that do not connect this input.
++	void tx_cts_w(bool asserted);
++	auto byte_tx_cb() { return m_write_byte.bind(); }
++	bool rx_fifo_full() const { return rx_fifo_num >= MC68681_RX_FIFO_SIZE; }
++	bool receiver_enabled() const { return rx_enabled != 0; }
++	bool transmitter_enabled() const { return m_tx_enabled; }
+ 
+ 	void rx_pin_w(int state);
+ 
+@@ -85,6 +93,9 @@
+ 	uint8_t m_rx_pin;
+ 
+ 	duart_base_device *m_uart;
++	devcb_write8 m_write_byte;
++	bool m_cts_asserted = true;
++	void start_pending_tx(bool ready);
+ 
+ 	void write_MR(uint8_t data);
+ 	void set_MR2(uint8_t data);
+--- a/src/devices/machine/mc68681.cpp
++++ b/src/devices/machine/mc68681.cpp
+@@ -1354,6 +1354,7 @@
+ 	, m_bits_transmitted(255)
+ 	, m_tx_enabled(false)
+ 	, m_rx_pin(1)
++	, m_write_byte(*this)
+ {
+ 	std::fill_n(&rx_fifo[0], MC68681_RX_FIFO_SIZE + 1, 0);
+ }
+@@ -1382,6 +1383,7 @@
+ 	save_item(NAME(m_bits_transmitted));
+ 	save_item(NAME(m_tx_enabled));
+ 	save_item(NAME(m_rx_pin));
++	save_item(NAME(m_cts_asserted));
+ }
+ 
+ void duart_channel::device_reset()
+@@ -1451,28 +1453,33 @@
+ 	update_interrupts();
+ }
+ 
++void duart_channel::start_pending_tx(bool ready)
++{
++	if (!m_tx_data_in_buffer || !is_transmit_register_empty() || !m_tx_enabled)
++		return;
++	// CTS is sampled between characters, never halfway through a frame.
++	// A held byte remains in the THR, with TxRDY clear, until CTS returns.
++	if ((MR2 & 0x10) && !m_cts_asserted && (MR2 & 0xc0) == 0)
++		return;
++	transmit_register_setup(m_tx_data);
++	m_bits_transmitted = 0;
++	m_tx_data_in_buffer = false;
++	if ((MR2 & 0xc0) != 0x80) m_write_byte(m_tx_data);
++	if (ready) SR |= STATUS_TRANSMITTER_READY;
++	update_interrupts();
++}
++
++void duart_channel::tx_cts_w(bool asserted)
++{
++	if (m_cts_asserted == asserted) return;
++	m_cts_asserted = asserted;
++	if (asserted) start_pending_tx(true);
++}
++
+ void duart_channel::tra_complete()
+ {
+-	// The transmit shift register has just emptied.  If another character is
+-	// waiting in the THR, transfer it to the shift register and assert TxRDY:
+-	// per the datasheet the THR->shift transfer is where the TxRDY conditions
+-	// are re-asserted, providing "one full character time of buffering".  If the
+-	// THR is empty the transmitter is now idle, so set TxEMT (TxRDY is already
+-	// set from the previous transfer).
+-	//
+-	// Asserting TxRDY here, at the transfer -- rather than in the idle branch --
+-	// both prevents the transmitter from deadlocking when TxRDY would otherwise
+-	// fail to re-assert on a CPU-write / final-bit-time race, and preserves the
+-	// one-character buffering window that firmware polling or pipelining on TxRDY
+-	// relies on.
+ 	if (m_tx_data_in_buffer)
+-	{
+-		transmit_register_setup(m_tx_data);
+-		m_bits_transmitted = 0;
+-		m_tx_data_in_buffer = false;
+-		SR |= STATUS_TRANSMITTER_READY;
+-		update_interrupts();
+-	}
++		start_pending_tx(true);
+ 	else
+ 	{
+ 		SR |= STATUS_TRANSMITTER_EMPTY;
+@@ -1705,6 +1712,7 @@
+ {
+ 	const bool was_local_loopback = (MR2 & 0xc0) == 0x80;
+ 	MR2 = data;
++	start_pending_tx(true);
+ 
+ 	// local loopback disconnects RxD and feeds the receiver from the (idle, marking) transmitter
+ 	const bool local_loopback = (MR2 & 0xc0) == 0x80;
+@@ -1900,16 +1908,9 @@
+ 	}
+ 
+ 	SR &= ~(STATUS_TRANSMITTER_READY | STATUS_TRANSMITTER_EMPTY);
+-	if (!is_transmit_register_empty())
+-	{
+-		m_tx_data = data;
+-		m_tx_data_in_buffer = true;
+-	}
+-	else
+-	{
+-		transmit_register_setup(data);
+-		m_bits_transmitted = 0;
+-	}
++	m_tx_data = data;
++	m_tx_data_in_buffer = true;
++	start_pending_tx(false);
+ 
+ 	update_interrupts();
+ }

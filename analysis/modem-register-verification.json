@@ -1,0 +1,9 @@
+{
+  "kind": "isolated UART register component test",
+  "ports": 8,
+  "dsr_holds_and_resumes_exact_byte_on_all_ports": true,
+  "extended_assert_negate_dtr_commands_on_all_ports": true,
+  "full_rx_fifo_drops_dtr_and_drain_restores_on_all_ports": true,
+  "disabled_dsr_flow_allows_transmission_on_all_ports": true,
+  "reset_discards_held_transmit_byte_on_all_ports": true
+}

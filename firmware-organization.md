@@ -390,3 +390,18 @@ Interactive mode exposes eight PTYs, indexed one-to-one with firmware UART ports
 is captured at transmit-register writes. This does not change the inferred
 firmware address map or implement receiver-enable, baud/framing or modem pins.
 The PTYs are simulator facilities, not inferred hardware components.
+
+### DTR/DSR command and status paths
+
+The 90TL connector exposes DTR output and DSR input. Pin-mask tables at
+0x079423c4/c8 contain DSR masks 0x01 (channel A) and 0x04 (channel B), copied
+to driver object +0x141a. The DSR query at 0x07944318 reads shared input
+register base+0x1a with active-low polarity. DTR setter 0x079442d4 issues
+command 0x90 to negate and 0x80 to assert the output. These match 2692-family
+extended commands, which the generic 68681 model previously misdecoded.
+MR2 bit 4 enables DSR gating of the transmitter, and MR1 bit 7 enables DTR
+receive throttling. `SET PORT FLOW CONTROL DSR` produced MR1=0x93/MR2=0x17
+in the firmware verification; default XON/XOFF mode used 0x13/0x07.
+See [modem-lines.md](modem-lines.md) for disassembly, sources, modeled behavior,
+provisional B-channel routing, sideband API and verification. This supersedes
+the earlier statement that modem pins were entirely unimplemented.
