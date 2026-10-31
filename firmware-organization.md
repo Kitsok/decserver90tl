@@ -382,3 +382,11 @@ No firmware warning is suppressed. Input bypasses receiver-enable, framing,
 baud sampling and modem pins; output is a TX-register trace, not decoded wire
 capture. This establishes the original command interpreter's prompt under
 the current assisted model, not a complete eight-modem/network appliance.
+
+### Host PTY transport (simulator extension)
+
+Interactive mode exposes eight PTYs, indexed one-to-one with firmware UART ports
+1–8. A 1 ms emulated timer transfers host input to an empty DUART RX FIFO; output
+is captured at transmit-register writes. This does not change the inferred
+firmware address map or implement receiver-enable, baud/framing or modem pins.
+The PTYs are simulator facilities, not inferred hardware components.

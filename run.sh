@@ -5,19 +5,21 @@ set -euo pipefail
 repo_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 
 usage() {
-    printf 'Usage: %s [--verbose] [nvram-directory]\n' "$0"
+    printf 'Usage: %s [--verbose] [--interactive] [nvram-directory]\n' "$0"
     printf 'Runs 60 seconds of initialization, then a 50-second diagnostic login.\n'
     printf 'Default store: run/my-decserver. Relative paths are relative to the repository.\n'
-    printf 'This is a scripted FIFO probe, not an interactive terminal.\n'
+    printf 'Use --interactive for eight serial PTYs, running until Ctrl-C.\n'
     printf 'Console: live progress and serial text. Logfiles: full raw trace.\n'
     printf 'Use --verbose to also show the full trace on console.\n'
 }
 
+interactive=false
 console_args=()
 positional=()
 while (( $# )); do
     case $1 in
         -h|--help) usage; exit 0 ;;
+        --interactive) interactive=true ;;
         -v|--verbose) console_args=(--verbose) ;;
         --) shift; positional+=("$@"); break ;;
         -*) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
@@ -51,6 +53,10 @@ run_stage() {
         return "$status"
     fi
 }
+
+if $interactive; then
+    exec python3 tools/run_mneng3.py "${common_args[@]}" --interactive --log-file run/interactive.log
+fi
 
 printf 'Configuration storage: %s\n' "$nvram_dir"
 printf 'Two timed runs: 60 + 50 simulated seconds; wall time depends on host speed.\n'

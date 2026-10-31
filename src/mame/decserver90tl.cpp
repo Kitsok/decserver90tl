@@ -10,6 +10,12 @@
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
+#include <deque>
+#include <cerrno>
+#include <csignal>
+#include <fcntl.h>
+#include <termios.h>
+#include <unistd.h>
 
 class ds90_cpu_device : public fscpu32_device
 {
@@ -103,6 +109,9 @@ ds90_cpu_device::ds90_cpu_device(const machine_config &config, const char *tag, 
 
 namespace {
 
+volatile std::sig_atomic_t serial_stop_requested = 0;
+void serial_stop(int) { serial_stop_requested = 1; }
+
 class ds90tl_state : public driver_device
 {
 public:
@@ -110,6 +119,7 @@ public:
 		: driver_device(config, type, tag), m_cpu(*this, "maincpu"),
 		  m_lance(*this, "lance"), m_uart(*this, "uart%u", 0U), m_ram(*this, "ram")
 	{ }
+	~ds90tl_state() override;
 	void ds90tl(machine_config &config);
 
 protected:
@@ -143,6 +153,11 @@ private:
 	TIMER_CALLBACK_MEMBER(tpu_complete);
 	TIMER_CALLBACK_MEMBER(clock_tick);
 	TIMER_CALLBACK_MEMBER(uart_probe);
+	TIMER_CALLBACK_MEMBER(serial_poll);
+	int m_pty[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+	int m_pty_slave[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
+	std::deque<u8> m_serial_output[8];
+	emu_timer *m_serial_timer = nullptr;
 	required_device<ds90_cpu_device> m_cpu;
 	required_device<am7990_device> m_lance;
 	required_device_array<mc68681_device, 4> m_uart;
@@ -258,6 +273,43 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
 	m_cpu->set_input_line(6, ASSERT_LINE);
 }
 
+// Host terminal byte transport: deliberately bypasses serial framing/modem pins.
+ds90tl_state::~ds90tl_state()
+{
+	for (unsigned port = 0; port < 8; ++port)
+	{
+		if (m_pty[port] >= 0) ::close(m_pty[port]);
+		if (m_pty_slave[port] >= 0) ::close(m_pty_slave[port]);
+		m_pty[port] = m_pty_slave[port] = -1;
+	}
+}
+
+TIMER_CALLBACK_MEMBER(ds90tl_state::serial_poll)
+{
+	if (serial_stop_requested) { machine().schedule_exit(); return; }
+	for (unsigned port = 0; port < 8; ++port)
+	{
+		if (m_pty[port] < 0) continue;
+		auto &pending = m_serial_output[port];
+		while (!pending.empty())
+		{
+			const u8 byte = pending.front();
+			if (::write(m_pty[port], &byte, 1) != 1) break;
+			pending.pop_front();
+		}
+		duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
+		if (!(channel.read_chan_reg(1) & 1))
+		{
+			u8 byte;
+			if (::read(m_pty[port], &byte, 1) == 1)
+			{
+				channel.rx_fifo_push(byte, 0);
+				std::fprintf(stderr, "DS90 PTY-RX port=%u byte=%02x\n", port + 1, byte);
+			}
+		}
+	}
+}
+
 TIMER_CALLBACK_MEMBER(ds90tl_state::uart_probe)
 {
 	if (!m_probe_port || m_probe_count >= m_probe_data.size()) return;
@@ -308,6 +360,12 @@ template<unsigned Block> void ds90tl_state::uart_w(offs_t offset, u16 data, u16 
 		if (offset == 3 || offset == 11)
 			std::fprintf(stderr, "DS90 UART-TX port=%u byte=%02x char=%c sr_before=%02x\n",
 				Block * 2 + (offset == 11) + 1, value, value >= 32 && value < 127 ? value : '.', before);
+		if ((offset == 3 || offset == 11) && m_pty[port] >= 0)
+		{
+			if (m_serial_output[port].size() >= 65536)
+				fatalerror("Serial output queue full on port %u; attach a terminal\n", port + 1);
+			m_serial_output[port].push_back(value);
+		}
 		m_uart[Block]->write(offset, value);
 		if ((offset == 2 || offset == 10) && m_uart_commands[port]++ < 32)
 			std::fprintf(stderr, "DS90 UART-CMD port=%u byte=%02x sr_before=%02x sr_after=%02x pc=%08x\n",
@@ -353,6 +411,31 @@ void ds90tl_state::memory_map(address_map &map)
 
 void ds90tl_state::machine_start()
 {
+	m_serial_timer = timer_alloc(FUNC(ds90tl_state::serial_poll), this);
+	const char *serial = std::getenv("DS90_SERIAL_PTY");
+	if (serial && std::string_view(serial) == "1")
+	{
+		serial_stop_requested = 0;
+		std::signal(SIGINT, serial_stop);
+		std::signal(SIGTERM, serial_stop);
+		for (unsigned port = 0; port < 8; ++port)
+		{
+			m_pty[port] = ::posix_openpt(O_RDWR | O_NOCTTY | O_NONBLOCK);
+			if (m_pty[port] < 0 || ::grantpt(m_pty[port]) || ::unlockpt(m_pty[port]))
+				fatalerror("Cannot allocate serial PTY: %s\n", std::strerror(errno));
+			const char *path = ::ptsname(m_pty[port]);
+			if (!path) fatalerror("Cannot resolve serial PTY\n");
+			// Keep the slave open across terminal disconnects and disable echo.
+			m_pty_slave[port] = ::open(path, O_RDWR | O_NOCTTY | O_NONBLOCK);
+			termios settings{};
+			if (m_pty_slave[port] < 0 || ::tcgetattr(m_pty_slave[port], &settings))
+				fatalerror("Cannot configure serial PTY\n");
+			::cfmakeraw(&settings);
+			if (::tcsetattr(m_pty_slave[port], TCSANOW, &settings)) fatalerror("Cannot set raw serial PTY\n");
+			std::fprintf(stderr, "DS90 SERIAL port=%u path=%s\n", port + 1, path);
+		}
+		m_serial_timer->adjust(attotime::from_msec(1), 0, attotime::from_msec(1));
+	}
 	m_observer = timer_alloc(FUNC(ds90tl_state::observe), this);
 	m_tpu_timer = timer_alloc(FUNC(ds90tl_state::tpu_complete), this);
 	m_clock_timer = timer_alloc(FUNC(ds90tl_state::clock_tick), this);

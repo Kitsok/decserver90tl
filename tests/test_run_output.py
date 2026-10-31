@@ -19,6 +19,14 @@ class RunOutputTests(unittest.TestCase):
         self.assertEqual(sum('Emulated' in line for line in output), 2)
         self.assertFalse(any('WRITE-INTERNAL' in line for line in output))
 
+    def test_serial_paths_visible_with_default_console(self):
+        output = []
+        console = ConsoleOutput('unlimited', emit=output.append)
+        for port in range(1, 9):
+            console.handle(f'DS90 SERIAL port={port} path=/dev/pts/{port + 10}')
+        self.assertEqual(len(output), 8)
+        self.assertTrue(output[-1].endswith('SERIAL port=8 path=/dev/pts/18'))
+
     def test_serial_prompt_is_readable_without_terminal_control_codes(self):
         output = []
         console = ConsoleOutput(60, emit=output.append)

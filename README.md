@@ -39,3 +39,8 @@ Retrieved 2026-10-31 from Terri Kennedy's DECserver archive. Local filenames nor
 | `firmware/MNENG3.SYS` | https://www.glaver.org/DECserver/DNAS%20(DECserver%20Network%20Access%20Software)/V2.4/Firmware%20Images/mneng3.sys |
 
 Sizes and SHA-256 values are in `analysis/inventory.json`. Download hashes establish local identity, not independent authentication against vendor checksums. Firmware remains subject to its original copyright and terms.
+
+Interactive serial: run `./run.sh --interactive` to expose all eight ports as
+local PTYs. Connect a terminal to the printed path, e.g.
+`screen /dev/pts/7 9600`. See [BUILD.md](BUILD.md#interactive-serial-ports)
+for startup, login and transport limitations.

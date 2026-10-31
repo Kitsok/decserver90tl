@@ -70,7 +70,9 @@ class ConsoleOutput:
                 char = '<CR>' if byte == 13 else repr(chr(byte)) if 32 <= byte < 127 else f'0x{byte:02x}'
                 self.say(f'Diagnostic input: UART {match[1]} {char}')
             return
-        if line.startswith('DS90 BOOT '):
+        if line.startswith('DS90 SERIAL '):
+            self.say(line.removeprefix('DS90 '))
+        elif line.startswith('DS90 BOOT '):
             self.say('Firmware started (MNENG3, 4 MiB RAM)')
         elif line.startswith(('DS90 unsupported', 'DS90 unresolved', 'DS90 firmware fatal',
                             'DS90 inherited exception')):
@@ -107,7 +109,7 @@ def stream_process(command, cwd, env, log_path, console, timeout=120):
         eof = False
         try:
             while not eof or process.poll() is None:
-                if time.monotonic() - started >= timeout:
+                if timeout is not None and time.monotonic() - started >= timeout:
                     raise subprocess.TimeoutExpired(command, timeout)
                 console.heartbeat()
                 try:

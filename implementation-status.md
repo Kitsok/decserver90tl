@@ -202,3 +202,14 @@ The firmware emits warnings 602/603 for server parameters and uses defaults.
 That is unresolved and is not hidden by the successful prompt test. No host
 serial endpoint or network backend is attached. Commit this milestone before
 investigating the parameter warnings or external serial integration.
+
+## Interactive host serial transport
+
+`run.sh --interactive` now exposes all eight UART ports as independent local
+PTYs and runs continuously, with host pacing and live trace logging. The driver
+polls host input every simulated millisecond, delivers a byte when the channel's
+RX FIFO is empty, and forwards transmit-register writes to the corresponding
+PTY. PTYs stay open across terminal disconnects. SIGINT/SIGTERM in interactive
+mode requests normal simulator shutdown and NVRAM saving. This extends the
+existing diagnostic byte-level UART model; modem signals and serial wire timing
+remain unimplemented. See BUILD.md for terminal connection commands.

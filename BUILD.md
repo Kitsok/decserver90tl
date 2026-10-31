@@ -181,5 +181,48 @@ their trace. Console heartbeat messages appear if no visible update has
 arrived for five host seconds. Timeout/interruption stops the child process.
 The launcher explicitly reports normal timed completion versus nonzero exit.
 
-These remain bounded diagnostic runs. There is no attachable PTY or TCP
+The default recipe remains a bounded diagnostic run. For attachable PTYs, use
+`--interactive` as described below. There is no TCP
 serial socket yet; visible UART text is reconstructed from register traces.
+
+### Interactive serial ports
+
+Run `./run.sh --interactive` after the initialization recipe above. This uses
+`run/my-decserver` by default and keeps the simulator running until Ctrl-C.
+All eight ports are exposed on local Unix PTYs; startup prints a separate line
+such as `SERIAL port=1 path=/dev/pts/7` for each port. Paths change between runs.
+The full trace is written to `run/interactive.log`.
+
+In another terminal, connect to the printed path, for example:
+
+```sh
+screen /dev/pts/7 9600
+# Or, if picocom is installed:
+picocom --baud 9600 --flow n /dev/pts/7
+```
+
+Wait for firmware startup, then press Enter several times for the username
+prompt. Enter `SIMULATOR` to reach `Local>`. Existing firmware warnings about
+server parameters still apply. For screen, Ctrl-A then D detaches; for picocom,
+Ctrl-A then Ctrl-X exits. Reattach to the same PTY while the simulator is running.
+Use one terminal client per port. Stop the simulator with Ctrl-C in its launcher.
+
+This is a byte transport at the DUART register/FIFO boundary. It bypasses receive
+enable, baud/framing and modem signals; the terminal's baud setting does not
+control transfer speed. Output is taken from firmware transmit-register writes,
+not a decoded serial waveform. Input waits until the receive FIFO is empty.
+The emulation is paced to real time where host performance permits. A disconnected
+terminal retains queued output within finite PTY/host buffers; an unread output
+queue exceeding 64 KiB stops with an explicit error. This is a Linux/POSIX host
+implementation, not yet a Courier/analog modem backend.
+
+For a bounded interactive experiment, use the Python runner directly:
+
+```sh
+python3 tools/run_mneng3.py --interactive --seconds 50 \
+  --rom-alignment-assist --ram-wait-cycles 1 \
+  --nvram-directory run/my-decserver --log-file run/interactive-test.log
+```
+
+Omit `--seconds` for an unlimited interactive run. Interactive mode has no host
+timeout. Ctrl-C/SIGTERM requests normal MAME exit so persistent storage is saved.
