@@ -56,5 +56,5 @@ for lab setup, guest IP commands, packet captures and verified ARP/ping/Telnet
 negotiation. Without `--tap`, networking stays offline.
 
 Configuration command semantics, NVRAM file paths, host save timing and the
-remaining startup-restoration defect are documented in
+corrected startup handoff are documented in
 [settings-storage.md](settings-storage.md).

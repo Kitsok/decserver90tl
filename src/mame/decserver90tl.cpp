@@ -621,10 +621,29 @@ void ds90tl_state::machine_reset()
 	// Report healthy ports. 0x00ff incorrectly marks every port unavailable.
 	space.write_dword(0x80500e, 0);
 	space.write_word(0x80501e, 0);
-	// Boot ROM normally validates board-configuration records. With no ROM
-	// implementation, request firmware defaults for the three metadata groups
-	// tested at 0x07940696..0x079406da (bits 19, 20, 21).
-	space.write_dword(0x805016, space.read_dword(0x805016) | 0x00380000);
+	// Supply erased factory fields from this image's own fallback constants.
+	// Forcing header bits 19..21 instead calls 079406de, which ALSO marks
+	// server parameters invalid (bit 18), bypassing a valid saved record.
+	// These are provisional factory values, not user settings or a checksum
+	// bypass. Preserve populated fields and let firmware validate record 5.
+	struct factory_field { u32 offset, source, length; };
+	static constexpr factory_field fields[] = {
+		{ 0x08, 0x0786c264, 14 },
+		{ 0x1e, 0x0786c272, 20 },
+		{ 0x32, 0x0786c286, 8 }
+	};
+	unsigned provisioned = 0;
+	for (const auto &field : fields)
+	{
+		bool erased = true;
+		for (unsigned i = 0; i < field.length; ++i)
+			erased &= space.read_byte(0x100c00 + field.offset + i) == 0xff;
+		if (!erased) continue;
+		for (unsigned i = 0; i < field.length; ++i)
+			space.write_byte(0x100c00 + field.offset + i, image[field.source - 0x07805000 + i]);
+		++provisioned;
+	}
+	std::fprintf(stderr, "DS90 NVRAM provisioned_erased_factory_fields=%u\n", provisioned);
 	// Firmware fatal-report callback normally belongs to the inherited ROM.
 	// Preserve its report fields and stop, rather than jumping through zero.
 	m_boot[0x1400 / 2] = 0x60fe;

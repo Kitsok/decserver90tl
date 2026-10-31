@@ -102,6 +102,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--nvram-seed', type=Path, required=True)
+    parser.add_argument('--assert-restored', action='store_true', help='Fail unless database semantics and startup restoration pass')
     parser.add_argument('--report', type=Path, default=ROOT / 'analysis/settings-verification.json')
     args = parser.parse_args()
     report = {}
@@ -149,5 +150,10 @@ def main():
     }
     args.report.write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps({key: value for key, value in report.items() if key != 'commands'}, indent=2))
+    if args.assert_restored:
+        assert all(report['in_session_checks'].values()), report['in_session_checks']
+        assert report['change_restored_to_operational_database'], 'Changed name not restored'
+        assert report['change_survived_in_permanent_database'], 'Changed name missing from NVRAM'
+        assert not report['startup_warnings'], report['startup_warnings']
 if __name__ == '__main__':
     main()

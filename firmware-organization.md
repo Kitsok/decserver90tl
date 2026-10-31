@@ -430,3 +430,26 @@ is saved and reloaded, and the permanent value is readable, while applying the
 saved server parameters during startup fails. Additional queued-write drain
 time did not resolve it. The validation/restoration cause and other record types
 remain unverified. See settings-storage.md and analysis/settings-verification.json.
+
+### Settings startup restoration fixed
+
+The previously forced boot-header bits 19–21 invoked metadata fallback at
+0x079406de, which also sets bit 18 in header +0x16 (BSET #2 at byte +0x17).
+That bit overrides the successful record-5 checksum and selects server defaults
+at 0x078715d4. It also causes the -602/-603 reports at 0x0787ae20 onward.
+The old boot-handoff description is superseded: the model now fills only erased
+factory fields from image constants, without forcing those flags.
+
+Record 49 reads the reserved region starting at 0x100c00. Its relevant fields
+are offsets +0x08 (14 bytes, defaults at 0x0786c264), +0x1e (20 bytes, defaults
+at 0x0786c272), and +0x32 (8 bytes, defaults at 0x0786c286). The second group
+contains the length-prefixed default boot-image label MNENG1. Exact factory
+hardware contents remain unknown; these are explicit synthetic values.
+
+Record 5 has logical base 0x0adc, stride 0x0194 and checksum boundary 0x0192.
+The byte-storage conversion maps its 201-byte payload to 0x10116e..0x101236
+and its 8-bit additive checksum to 0x101237. Both firmware checksum validation
+and actual corrupt-record fallback remain intact. Repeated SET/DEFINE/CHANGE
+and restart checks now restore the changed server name in both databases,
+without -602/-603. See analysis/settings-handoff-verification.json and the
+updated analysis/settings-verification.json.

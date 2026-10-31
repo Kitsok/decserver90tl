@@ -1,0 +1,6 @@
+{
+  "valid_saved_record": "DS90 SETTINGS-HANDOFF-PASS flags=0000ff40 server_fallback=false",
+  "corrupt_saved_record": "DS90 SETTINGS-HANDOFF-PASS flags=0004ff40 server_fallback=true",
+  "existing_factory_fields": "DS90 SETTINGS-HANDOFF-PASS flags=0000ff40 server_fallback=false",
+  "fresh_erased_store": "DS90 SETTINGS-HANDOFF-PASS flags=0004ffff server_fallback=true"
+}

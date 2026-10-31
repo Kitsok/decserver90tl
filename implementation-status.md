@@ -249,3 +249,14 @@ but SHOW falls back to defaults with -602/-603. Startup restoration of server
 parameters is therefore still defective; host file persistence alone is not the
 remaining problem. See settings-storage.md for paths, semantics and the isolated
 two-boot diagnostic. No production storage behavior was changed by this check.
+
+## Server-parameter restoration fixed
+
+The false startup rejection came from forced factory-metadata fallback in our
+boot handoff, not host-file persistence. Factory fallback also marked server
+parameters invalid. The model now provisions only fully erased factory fields
+using the firmware's own fallback constants and leaves saved settings/checksum
+validation alone. Two-boot verification restores the changed server name in
+SHOW and LIST with no -602/-603. Valid, corrupt, pre-populated and fresh-store
+handoff checks pass, along with twelve unit tests. Host-file writes still occur
+on normal exit; exact physical storage hardware remains unconfirmed.
