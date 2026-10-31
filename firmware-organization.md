@@ -74,7 +74,7 @@ Observed startup sequence:
 
 | Linked handoff field | Consumer/meaning | Current supplied value |
 |---|---|---|
-| 0x07805016, long | Validity/default flags; bits 19..21 select three metadata defaults at 0x07940696 onward | OR with 0x00380000; provisional substitute for ROM validation |
+| 0x07805016, long | Low 16 bits: port-record failures; bit 18: server parameters; bits 19..21: factory metadata defaults | Clear inherited low 16 bits before checksum validation; preserve upper bits; provision only erased factory fields |
 | 0x0780500e, long | Accumulated port diagnostic/inhibit status, copied to 0x0798faaa | 0: healthy synthetic ports |
 | 0x0780501e, word | Transient diagnostic/recovery port mask, consumed at 0x078714d6 and 0x07871520 | 0; disk 0x1c00 selects invalid indices; earlier 0x00ff setting inhibited all ports |
 | 0x07805027, byte | Board/profile discriminator | Firmware initialization behavior, not an independently verified hardware ID |
@@ -228,6 +228,35 @@ status adapter now supplies RX-ready bits 0..7 and combined DUART IRQ bits
 8..11. CISR writes clear bits where zero is written.
 
 ## Persistent configuration organization
+
+### Port-record validity and the inherited image header
+
+MNENG3.SYS contains 0x00004040 at linked header address 0x07805016.
+The validator at 0x07940502 loads this value into D6, checks sixteen
+record-6 slots, and only adds failure bits with BSET at 0x07940522. It
+does not clear inherited failures when a slot validates successfully.
+Each slot's logical offset is index * 0x118.
+
+Startup copies the resulting flags to 0x0798fab2 at 0x078715ac. Port
+configuration loading computes 1 << (port_number - 1) and tests these flags
+at 0x0787a506. A set bit copies the 0x8c-byte default template from
+0x07872624; a clear bit reads record 6 through 0x0787240e instead. Thus the
+image's stale bit 6 always forces defaults for physical port 7, independently
+of its saved record. Bit 14 similarly refers to slot 15, outside this board's
+eight physical ports. LIST can still display the actual saved record while
+SHOW reports the default operational copy.
+
+The reset shim now clears only the low sixteen inherited flags at 0x07805016
+before the validator runs. Upper server/factory bits are preserved. Firmware
+still computes checksum failures and selects defaults for invalid records;
+neither checksum results nor command handlers are intercepted. This is a
+boot-handoff correction, with firmware image bytes on disk unchanged.
+
+A focused two-boot run saved settings for ports 7 and 8 and restored them on
+restart. Both then passed bidirectional data, isolation, DSR and XON/XOFF
+pause/resume, and disconnect/reconnect via listeners 2007/2008. The original
+store was unchanged. The test configures only selected ports; no further full
+serial sweep was run for this correction.
 
 The record table at 0x079ac16c has 16-byte entries, initialized by
 0x07940c36 and its continuation. Recovered entry fields:

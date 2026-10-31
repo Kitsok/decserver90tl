@@ -172,7 +172,7 @@ analysis/telnet-ports-verification.json plus run/telnet-ports-transcript.log.
 The first individual-port run passed all checks on ports 1–6, then received a
 connection refusal from listener 2007. Listener 2008 remains untested in that
 run. All eight configuration sequences had returned without CLI errors. The
-cause of listener 2007's refusal remains under investigation.
+cause of listener 2007's refusal was subsequently traced to the handoff below.
 
 Follow-up narrowed the failure: SHOW PORT 7 reports operational Access Local,
 XON flow control and autobaud enabled, while LIST PORT 7 shows saved Access
@@ -181,12 +181,21 @@ report enabled with the expected serial mappings. The guest sends TCP RST/ACK
 for the refused connection. Re-enabling/remapping listeners and waiting for
 configuration writes did not resolve it. The same SHOW/LIST mismatch remains
 after a normal restart with saved IP and listener settings. This points to a
-port-configuration activation/restoration problem; its root cause is unproven.
+port-configuration activation/restoration problem rather than a listener limit.
 
 The diagnostic now saves IP/listener settings, drains pending writes, restarts,
-and then tests requested ports. Use `--ports 7,8` for the focused reproduction;
-it stops at the first failure, so port 8 remains unverified. The latest report
-records that focused failure. The six successful port results remain in commit
-630bcdc's version of the report. Low PTYs are reserved across both boots to
-keep reconnecting user terminals from consuming test data. The original seed
-remains unchanged. No all-eight-port or simultaneous-session success is claimed.
+and then tests requested ports. `--ports 7,8` configures and checks only those
+ports, avoiding a repeated full sweep. Low PTYs are reserved across both boots
+to keep reconnecting user terminals from consuming test data.
+
+The downloaded image has stale record-validity flags 0x00004040 at header
+0x07805016. Firmware ORs genuine checksum failures into that inherited value;
+it never clears the stale port-7 bit. The model now clears only its low sixteen
+per-port bits before validation, allowing firmware to compute actual failures.
+With this handoff correction, the focused two-boot run passed serial ports 7
+and 8 on TCP ports 2007 and 2008, including both transfer directions, isolation,
+DSR and XON/XOFF pause/resume, and reconnection. Its source store is unchanged.
+The latest report records those passes; ports 1–6 passed in commit 630bcdc's
+report. All eight physical ports thus have individual coverage across the runs;
+eight simultaneous serial sessions have not been established. See
+firmware-organization.md for the validation and default-selection addresses.

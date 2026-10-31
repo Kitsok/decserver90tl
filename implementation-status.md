@@ -287,10 +287,12 @@ analysis/telnet-verification.json and network.md. LAT tests remain deferred.
 ## Telnet serial listener coverage
 
 Serial ports 1–6 passed bidirectional markers, port isolation, DSR and XON/XOFF
-pause/resume, and disconnect/reconnect through listeners 2001–2006. Port 7
-refuses TCP connections: its enabled listener maps correctly, but operational
-access remains Local despite saved Remote access. Waiting for writes and
-restarting the copied store did not resolve that SHOW/LIST mismatch. Port 8
-remains untested because the regression stops at the first failure. See
-network.md and analysis/telnet-ports-verification.json. Further live runs were
-stopped at the user's request to avoid excessive testing.
+pause/resume, and disconnect/reconnect through listeners 2001–2006. The port-7
+failure was a stale inherited checksum-failure bit in the downloaded header:
+firmware retained that bit even when the saved port record validated. The reset
+shim now clears the sixteen inherited port flags before firmware validation;
+genuine checksum checks remain intact. A single focused two-boot run then passed
+the same checks on ports 7 and 8 through listeners 2007/2008. Original settings
+are unchanged. All eight physical ports have individual coverage across these
+runs; eight simultaneous serial sessions remain unverified. See network.md,
+firmware-organization.md and analysis/telnet-ports-verification.json.

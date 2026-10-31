@@ -45,6 +45,9 @@ def main():
     parser.add_argument('--address', default='192.0.2.90')
     parser.add_argument('--ports', default='1,2,3,4,5,6,7,8')
     args = parser.parse_args()
+    ports = [int(port) for port in args.ports.split(',')]
+    if not ports or len(set(ports)) != len(ports) or any(port not in range(1, 9) for port in ports):
+        parser.error('--ports must contain distinct serial port numbers from 1 to 8')
     seed = args.nvram_seed / 'ds90tl/configram'
     original = digest(seed)
     report = {'address': args.address, 'ports': [], 'configuration': []}
@@ -91,7 +94,7 @@ def main():
                 assert not re.search(r'Local -\d+-', response), response
                 return response
 
-            for port in range(1, 9):
+            for port in ports:
                 for setting in ('AUTOBAUD DISABLED', 'CHARACTER SIZE 8', 'PARITY NONE',
                                 'SPEED 9600', 'FLOW CONTROL DISABLED'):
                     command(f'CHANGE PORT {port} {setting}')
@@ -147,7 +150,7 @@ def main():
                 return client
 
             with ModemControl(work / 'control.sock') as modem:
-                for port in map(int, args.ports.split(',')):
+                for port in ports:
                     fd = fds[port-1]
                     client = connect(port)
                     print(f'Testing serial port {port}', flush=True)

@@ -628,6 +628,12 @@ void ds90tl_state::machine_reset()
 	// Report healthy ports. 0x00ff incorrectly marks every port unavailable.
 	space.write_dword(0x80500e, 0);
 	space.write_word(0x80501e, 0);
+	// The downloaded image contains stale per-port checksum failures (0x4040).
+	// 07940502 starts with these flags and only sets further failing bits;
+	// 0787a506 then forces defaults for a flagged port even if its record is
+	// valid. Clear the inherited low-16 record-6 flags before validation, not
+	// the computed results. Preserve unrelated server/factory metadata flags.
+	space.write_dword(0x805016, space.read_dword(0x805016) & 0xffff0000);
 	// Supply erased factory fields from this image's own fallback constants.
 	// Forcing header bits 19..21 instead calls 079406de, which ALSO marks
 	// server parameters invalid (bit 18), bypassing a valid saved record.
