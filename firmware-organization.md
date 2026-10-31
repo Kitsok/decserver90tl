@@ -464,3 +464,14 @@ Byte programming, a 10 ms writer-service interval and readback polling suggest
 parallel EEPROM (28C256 class); a compatible DS1230-type battery-backed SRAM
 cannot be excluded. The writer's delay constant is 0x960, or decimal 2400.
 See nvram-device.md for sources and the limits of this inference.
+
+### Runtime NVRAM checkpoints
+
+The custom memory device now observes writes to 0x100000..0x10ffff and marks
+changed data dirty. It polls every 50 ms, requiring queue head 0x0798fb20 to be
+zero, pending bit 0 at 0x0798fa86 to be clear, and 250 ms of write/queue quiet
+before committing an atomic host-file checkpoint. No SET/DEFINE/CHANGE parser
+or firmware handler is intercepted. The original 64 KiB native backing format
+and filename remain compatible; shutdown no longer serializes a partial queue
+through MAME's generic NVRAM device. See settings-storage.md for host durability
+steps, locking, failure policy and successful SIGKILL/restart verification.

@@ -70,7 +70,7 @@ class ConsoleOutput:
                 char = '<CR>' if byte == 13 else repr(chr(byte)) if 32 <= byte < 127 else f'0x{byte:02x}'
                 self.say(f'Diagnostic input: UART {match[1]} {char}')
             return
-        if line.startswith(('DS90 SERIAL ', 'DS90 NETWORK ')):
+        if line.startswith(('DS90 SERIAL ', 'DS90 NETWORK ', 'DS90 STORAGE ')):
             self.say(line.removeprefix('DS90 '))
         elif line.startswith('DS90 BOOT '):
             self.say('Firmware started (MNENG3, 4 MiB RAM)')

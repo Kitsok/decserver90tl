@@ -43,9 +43,11 @@ def main():
             subprocess.run(['git', '-C', str(source), 'apply', str(patch)], check=True)
     destination = source / 'src/mame/dec/decserver90tl.cpp'
     destination.parent.mkdir(exist_ok=True)
-    driver = ROOT/'src/mame/decserver90tl.cpp'
-    if not destination.exists() or destination.read_bytes() != driver.read_bytes():
-        shutil.copyfile(driver, destination)
+    for name in ('decserver90tl.cpp', 'decserver90tl_nvram.h'):
+        driver = ROOT/'src/mame'/name
+        destination = source/'src/mame/dec'/name
+        if not destination.exists() or destination.read_bytes() != driver.read_bytes():
+            shutil.copyfile(driver, destination)
     listing = source / 'src/mame/mame.lst'
     text = subprocess.check_output(['git', '-C', str(source), 'show', 'HEAD:src/mame/mame.lst'], text=True)
     text += '\n@source:dec/decserver90tl.cpp\nds90tl\n'

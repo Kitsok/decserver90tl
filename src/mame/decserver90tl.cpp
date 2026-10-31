@@ -4,7 +4,7 @@
 #include "cpu/m68000/fscpu32.h"
 #include "machine/am79c90.h"
 #include "machine/mc68681.h"
-#include "machine/nvram.h"
+#include "decserver90tl_nvram.h"
 
 #include <algorithm>
 #include <cstdio>
@@ -121,7 +121,7 @@ class ds90tl_state : public driver_device
 public:
 	ds90tl_state(const machine_config &config, device_type type, const char *tag)
 		: driver_device(config, type, tag), m_cpu(*this, "maincpu"),
-		  m_lance(*this, "lance"), m_uart(*this, "uart%u", 0U), m_ram(*this, "ram")
+		  m_lance(*this, "lance"), m_nvram(*this, "configram"), m_uart(*this, "uart%u", 0U), m_ram(*this, "ram")
 	{ }
 	~ds90tl_state() override;
 	void ds90tl(machine_config &config);
@@ -151,6 +151,12 @@ private:
 	u16 dma_r(offs_t offset);
 	void dma_w(offs_t offset, u16 data, u16 mask = ~0);
 	void lance_irq(int state);
+	int nvram_ready()
+	{
+		auto &space = m_cpu->space(AS_PROGRAM);
+		// MNENG3 queue head and pending-work flag, not command handlers.
+		return !space.read_dword(0x0798fb20) && !(space.read_byte(0x0798fa86) & 1);
+	}
 	void record(const char *kind, u32 address, u16 data, u16 mask);
 	void dump_state();
 	TIMER_CALLBACK_MEMBER(observe);
@@ -173,6 +179,7 @@ private:
 	emu_timer *m_serial_timer = nullptr;
 	required_device<ds90_cpu_device> m_cpu;
 	required_device<am7990_device> m_lance;
+	required_device<ds90_nvram_device> m_nvram;
 	required_device_array<mc68681_device, 4> m_uart;
 	required_shared_ptr<u16> m_ram;
 	u16 m_boot[0x1000]{};
@@ -504,7 +511,7 @@ void ds90tl_state::memory_map(address_map &map)
 	map(0x000000, 0x001fff).r(FUNC(ds90tl_state::boot_r));
 	// Provisional erased configuration-store window. Firmware checksum and
 	// readback routines address bytes relative to 0x100c00; size unconfirmed.
-	map(0x100000, 0x10ffff).ram().share("configram");
+	map(0x100000, 0x10ffff).ram().w(m_nvram, FUNC(ds90_nvram_device::write)).share("configram");
 	map(0x200000, 0x200005).r(FUNC(ds90tl_state::identity_r));
 	map(0x300000, 0x300003).rw(m_lance, FUNC(am7990_device::regs_r), FUNC(am7990_device::regs_w));
 	map(0x400000, 0x40001f).rw(FUNC(ds90tl_state::uart_r<0>), FUNC(ds90tl_state::uart_w<0>));
@@ -711,7 +718,8 @@ void ds90tl_state::ds90tl(machine_config &config)
 	AM7990(config, m_lance, 20'000'000);
 	// File-backed approximation only; physical storage and write protocol
 	// are not yet identified. Preserve bytes across resets and invocations.
-	NVRAM(config, "configram", nvram_device::DEFAULT_ALL_1);
+	DS90_NVRAM(config, m_nvram, 0);
+	m_nvram->ready_cb().set(FUNC(ds90tl_state::nvram_ready));
 	m_lance->dma_in().set(FUNC(ds90tl_state::dma_r));
 	m_lance->dma_out().set(FUNC(ds90tl_state::dma_w));
 	m_lance->intr_out().set(FUNC(ds90tl_state::lance_irq));

@@ -248,3 +248,12 @@ The new `network.sh` helper prepares an isolated lab with sudo; the simulator
 runs as your normal user. See [network.md](network.md) for setup, guest IP
 configuration and capture inspection. Networking is opt-in. Packet capture
 defaults to `run/interactive.pcap`, alongside the full text log.
+
+### Configuration checkpoints
+
+Permanent-setting writes now reach `ds90tl/configram` while the simulator runs.
+Wait for `STORAGE checkpoint saved` after firmware finishes a change; this means
+the complete image and its directory have been synced. Files are replaced
+atomically, and the store is locked against a second writer. Pending firmware
+writes on exit retain the previous completed checkpoint. See
+[settings-storage.md](settings-storage.md) for the exact policy and crash tests.

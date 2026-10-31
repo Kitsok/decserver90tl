@@ -41,17 +41,42 @@ its low-level byte writer is at `0x07940c00`. Exact physical storage technology
 and capacity on the real board remain unconfirmed, despite the manual naming
 the permanent store NVRAM.
 
-MAME loads the file before starting firmware. Guest writes update the simulated
-NVRAM in memory. The current backend writes the complete 65,536-byte memory
-image to the host file during **normal simulator shutdown**, not on each
-`DEFINE` or `CHANGE`. Ctrl-C in the interactive launcher requests normal MAME
-exit and saving. Forced termination, a crash or power loss before that save can
-lose changes made during the run. This is a limitation of the current host
-persistence mechanism, not the intended durability of real NVRAM.
+The emulated memory device loads the file before firmware starts. Any changed
+byte in the NVRAM window marks it dirty; no command handler is intercepted.
+The device checks the MNENG3 pending-write queue at 0x0798fb20 and its pending
+flag at 0x0798fa86, and checkpoints after both are idle and writes have been
+quiet for at least **250 simulated milliseconds**. The check runs every 50 ms.
+`DEFINE` and `CHANGE` therefore reach disk while the simulator is still running,
+after firmware programming/checksum work completes. `SET` does not write NVRAM.
+Other firmware NVRAM writes and initial factory provisioning are handled too.
+
+Each checkpoint writes the complete 65,536-byte image to a unique temporary
+file beside `configram`, syncs it, atomically renames it over `configram`, then
+syncs the parent directory. Existing file permission bits are preserved; a new
+store starts with mode 0600. The console prints `STORAGE checkpoint saved` only
+after these steps complete. A crash before a new checkpoint retains the previous
+completed image; the in-progress change can still be lost. Completed checkpoints
+survive forced process termination without requiring a normal-exit save.
+
+On a normal exit, completed dirty work is also saved without waiting for the
+quiet interval. If firmware writes remain pending, the device retains the last
+checkpoint and reports that pending work was not saved. There is no generic
+MAME shutdown writer that can then overwrite it with partial data. The direct
+MAME option `-nonvram_save` disables checkpoints and exit saving when explicitly
+selected; the standard launcher enables persistence.
+
+A stable `configram.lock` file supplies an advisory exclusive writer lock for
+this build. A second writing instance using the same store fails before loading
+or changing it. The lock is released by the OS even on SIGKILL; the empty lock
+file intentionally remains. Checkpoint I/O failures are reported as fatal errors,
+and malformed backing files are rejected without reinitializing or replacing
+them. Old builds without this lock must be stopped before sharing their store
+with a new build.
 
 The file is a raw memory backing image, not JSON, an INI file or firmware.
-MAME's implementation directly serializes the shared host-memory bytes and
-explicitly notes unresolved width/endianness handling. Treat it as opaque;
+The memory device retains the previous MAME format by serializing native shared
+CPU-memory bytes. Cross-host width/endianness portability is not established.
+Treat it as opaque;
 firmware records and checksums make direct text editing inappropriate. The
 original `firmware/MNENG3.SYS` is never rewritten by configuration commands.
 
@@ -61,12 +86,12 @@ interface selection is a launcher option, not a guest database record.
 
 ## Backup and separate instances
 
-Stop the instance normally before backing up or replacing its store, so the
-host file contains the latest completed guest writes. Copying the entire chosen
-NVRAM directory preserves its device file and layout. Starting another instance
-with a different directory gives it independent persistent settings. Do not run
-two instances using the same directory: the last shutdown can overwrite the
-other instance's saved image. The simulator currently has no store-sharing lock.
+After a checkpoint notice, the regular `configram` file can be backed up while
+the instance runs: an atomic replacement never modifies the old inode in place.
+A single-file copy therefore sees a completed checkpoint. The chosen NVRAM
+directory also preserves the device-file layout. Stop the instance before
+restoring/replacing its store, and use a different directory for an independent
+instance. Two instances of this build cannot write the same store concurrently.
 
 A backup of NVRAM does not preserve operational-only `SET` values. It also does
 not replace the firmware image or host bridge setup.
@@ -84,8 +109,8 @@ and used server names to distinguish the databases:
 | `CHANGE SERVER NAME DS90SAVED` | DS90SAVED | DS90SAVED |
 | Clean exit and restart (fixed handoff) | DS90SAVED | DS90SAVED |
 
-The host file remained unchanged while the simulator was running, then changed
-on normal exit. The saved image contained DS90SAVED, and after restart firmware
+The original diagnostic, before runtime checkpoints were implemented, observed
+the host file changing only on normal exit. The saved image contained DS90SAVED, and after restart firmware
 could still read it through LIST. Thus persistence to the host file and loading
 it back into the permanent database work for this tested value.
 
@@ -132,3 +157,30 @@ with a parallel 28C256-class EEPROM the leading candidate. A compatible
 battery-backed SRAM remains possible. The 64 KiB simulator file is deliberately
 unchanged. See [nvram-device.md](nvram-device.md) for the capacity arithmetic,
 write/polling evidence, datasheet comparisons and uncertainty.
+
+## Runtime durability verification
+
+`tools/verify_nvram_runtime.py` uses three boots and a copied initialized store.
+It confirms that SET leaves the backing file unchanged, DEFINE checkpoints
+before exit, DEFINE survives killing the MAME child with SIGKILL while the SET
+value is discarded, CHANGE also checkpoints before SIGKILL, and the final
+restart restores CHANGE in both SHOW and LIST without -602/-603. It also checks
+file-mode preservation and leaves the original seed unchanged.
+
+The separate `tools/verify_nvram_checkpoint.py` component fixture holds the CPU
+in a RAM loop and independently checks each firmware queue guard, checkpoint
+release when idle, rejecting a second writer, preserving the completed image
+on a normal exit with pending writes, refusing malformed files and preserving
+the old checkpoint on a permission-denied write failure. These are memory-device
+checks, not claims that real firmware naturally exercised every failure case.
+
+```sh
+python3 tools/verify_nvram_runtime.py --nvram-seed run/my-decserver
+python3 tools/verify_nvram_checkpoint.py --nvram-seed run/my-decserver
+```
+
+Results are in [analysis/nvram-runtime-verification.json](analysis/nvram-runtime-verification.json)
+and [analysis/nvram-checkpoint-verification.json](analysis/nvram-checkpoint-verification.json).
+The crash test removes only its own stale serial-control socket after killing
+its MAME child, and runs entirely offline. The failure test should be run as a
+normal user so the permission-denied scenario is meaningful.

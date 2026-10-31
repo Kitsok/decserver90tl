@@ -260,3 +260,14 @@ validation alone. Two-boot verification restores the changed server name in
 SHOW and LIST with no -602/-603. Valid, corrupt, pre-populated and fresh-store
 handoff checks pass, along with twelve unit tests. Host-file writes still occur
 on normal exit; exact physical storage hardware remains unconfirmed.
+
+## Runtime NVRAM durability
+
+The memory-mapped configuration device now atomically checkpoints completed
+firmware writes while running, after queue completion and a 250 ms quiet period.
+It syncs the image and directory, preserves file-mode bits, locks out another
+writer, and retains the last completed image on a pending-queue exit or a write
+failure. Legacy files remain compatible. Three-boot firmware checks show DEFINE
+and CHANGE surviving SIGKILL, with operational-only SET discarded; component
+checks cover queue guards, lock contention, malformed files and permission errors.
+The original seed is unchanged. See settings-storage.md and the new NVRAM reports.

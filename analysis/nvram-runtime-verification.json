@@ -1,0 +1,12 @@
+{
+  "set_does_not_checkpoint_operational_only_changes": true,
+  "define_saved_before_exit": true,
+  "existing_file_permissions_preserved": true,
+  "define_restored_after_sigkill_set_value_discarded": true,
+  "change_saved_before_exit": true,
+  "checkpoint_sha256": "8d13705d7d0a85e54efaf9af1688baea5182002d11c3a2d48ea22f1d6052011e",
+  "change_restored_after_sigkill_in_both_databases": true,
+  "startup_warnings_absent": true,
+  "seed_unchanged": true,
+  "original_backing_file_size": 65536
+}

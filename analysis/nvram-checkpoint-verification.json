@@ -1,0 +1,9 @@
+{
+  "second_writer_rejected_before_store_change": true,
+  "flag_and_head_guards_block_partial_checkpoints": true,
+  "idle_queue_releases_atomic_checkpoint": true,
+  "normal_exit_preserves_completed_image_when_queue_pending": true,
+  "unwritable_directory_preserves_previous_checkpoint": true,
+  "malformed_file_rejected_without_overwrite": true,
+  "seed_unchanged": true
+}

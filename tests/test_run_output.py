@@ -19,6 +19,13 @@ class RunOutputTests(unittest.TestCase):
         self.assertEqual(sum('Emulated' in line for line in output), 2)
         self.assertFalse(any('WRITE-INTERNAL' in line for line in output))
 
+    def test_checkpoint_notice_visible_with_default_console(self):
+        output = []
+        console = ConsoleOutput('unlimited', emit=output.append)
+        console.handle('DS90 STORAGE checkpoint saved path=/tmp/configram bytes=65536')
+        self.assertEqual(len(output), 1)
+        self.assertIn('STORAGE checkpoint saved', output[0])
+
     def test_serial_paths_visible_with_default_console(self):
         output = []
         console = ConsoleOutput('unlimited', emit=output.append)

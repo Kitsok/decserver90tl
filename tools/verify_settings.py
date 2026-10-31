@@ -127,8 +127,8 @@ def main():
         finally:
             session.stop()
         report['file_sha256_after_exit'] = digest(store)
-        report['host_file_unchanged_while_running'] = report['file_sha256_before_exit'] == report['initial_file_sha256']
-        report['host_file_changed_after_exit'] = report['file_sha256_after_exit'] != report['initial_file_sha256']
+        report['host_checkpoint_written_while_running'] = report['file_sha256_before_exit'] != report['initial_file_sha256']
+        report['host_file_changed_on_exit'] = report['file_sha256_after_exit'] != report['file_sha256_before_exit']
         session = Session(work, 'restart')
         try:
             session.login()

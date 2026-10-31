@@ -58,3 +58,7 @@ negotiation. Without `--tap`, networking stays offline.
 Configuration command semantics, NVRAM file paths, host save timing and the
 corrected startup handoff are documented in
 [settings-storage.md](settings-storage.md).
+
+Permanent settings now checkpoint atomically during execution, after firmware
+writes finish. The console reports each completed checkpoint; a normal shutdown
+is no longer required to preserve it. See [settings-storage.md](settings-storage.md).
