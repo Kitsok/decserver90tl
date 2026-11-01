@@ -34,6 +34,10 @@ The build targets the local host. Missing system dependencies are reported with
 an installation command; they are not installed automatically. Use `-j N` to
 set parallelism or `--offline` to prohibit fetching. See [BUILD.md](BUILD.md).
 
+For nanovax, use `./buildaarch64.sh`: a container-free AArch64 cross-build with
+a separate Debian 12 sysroot and deployable runtime bundle. See
+[AARCH64-BUILD.md](AARCH64-BUILD.md) for prerequisites and output paths.
+
 Run the analysis tool from any working directory:
 
 ```sh

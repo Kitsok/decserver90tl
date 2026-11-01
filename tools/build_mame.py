@@ -24,12 +24,15 @@ def main():
     parser.add_argument('-j', '--jobs', type=int, default=2)
     parser.add_argument('--skip-machine-layouts', action='store_true',
                         help='Skip unrelated src/mame/layout generation; keep core renderer layouts')
+    parser.add_argument('--source-directory', type=Path, default=ROOT/'.deps/mame')
+    parser.add_argument('--output-directory', type=Path, default=ROOT/'build')
+    parser.add_argument('--make-arg', action='append', default=[], help='Additional Make assignment')
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error('--jobs must be positive')
-    subprocess.run(['pkg-config', '--exists', 'sdl2', 'SDL2_ttf', 'fontconfig', 'egl'], check=True)
-    source = ROOT / '.deps/mame'
-    lock = (ROOT/'.deps/mame-build.lock').open('a+')
+    subprocess.run([os.environ.get('PKG_CONFIG', 'pkg-config'), '--exists', 'sdl2', 'SDL2_ttf', 'fontconfig', 'egl'], check=True)
+    source = args.source_directory.resolve()
+    lock = (source.parent/'mame-build.lock').open('a+')
     try:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
@@ -83,6 +86,7 @@ def main():
         # Command-line Make assignments override the top-level wildcard.
         # CPU/renderer core layouts are separate generated-project tasks.
         flags.append('LAYOUTS=')
+    flags.extend(args.make_arg)
     project = source/'build/projects/sdl/mameds90tl/gmake-linux/precompile.make'
     if project.exists() and re.search(r'^\s*PCH\s*=', project.read_text(), re.MULTILINE):
         # Make does not track option changes as file dependencies. Regenerate
@@ -102,8 +106,8 @@ def main():
         raise
     if status:
         raise SystemExit(status)
-    output = ROOT/'build'
-    output.mkdir(exist_ok=True)
+    output = args.output_directory.resolve()
+    output.mkdir(parents=True, exist_ok=True)
     # A source-filtered MAME build names the executable after SUBTARGET.
     binary = source/'ds90tl'
     # Replace the inode so an existing simulator can keep running its build.
