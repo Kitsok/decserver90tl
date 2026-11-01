@@ -274,3 +274,30 @@ lazy run exceeds 19x real time in this native startup workload. It confirms
 that benchmark throttling is fixed in the production frontend. These numbers
 are not an initialized-server/modem load result or a nanovax measurement.
 Artifacts are on dev under /tmp/ds90-native-benchmark-7x8lov43.
+
+## Updated AArch64 bundle on nanovax
+
+The user supplied the rebuilt bundle. It was extracted and checksum-verified
+under /dev/shm/ds90-performance.zVE9qR/decserver90tl, with no active emulator
+or compiler found before testing. A trace-disabled ten-second offline run
+completed normally in 3.128 wall seconds (3.197x including startup/shutdown).
+Reported temperature rose from 76.2 to 80 C; the end frequency was 600 MHz.
+
+The bounded run.sh initialization/login check then used a separate RAM-only
+store, run/validated-server, and tracing to observe firmware output. The
+60-guest-second erased-store initialization completed in 21.9 wall seconds;
+the 50-second saved-settings boot and FIFO login took 40.9 seconds and reached
+Local> as SIMULATOR. Both returned zero with unchanged firmware and no fatal
+reports. Offline/no-IP listener warnings were expected. During the latter
+run the reported temperature was 83.8 C and frequency 1.2 GHz.
+
+The initialized run averaged only about 1.22x real time, substantially less
+headroom than the programming-delay-dominated startup result. This does not
+establish capacity for seven modems or sustained network load. Tracing was
+enabled in the login check; quiet initialized operation remains to be measured
+if headroom matters. The simulator stopped after both checks. No software was
+built on nanovax by the agent, and these runtime files stayed in RAM.
+
+The user also authorized simvax.decnet.alban as a VMS test peer, accessed by
+Telnet from the notebook for subsequent protocol tests. This does not itself
+validate any DECserver network path; LAT testing was previously deferred.
