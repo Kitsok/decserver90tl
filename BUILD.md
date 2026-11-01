@@ -124,7 +124,8 @@ callbacks. Use `--precise-duart-timers` for an A/B comparison; direct binary
 launches can set `DS90_DUART_LAZY=0`. The new patch requires a rebuild and has
 passed native compilation and short firmware timing/state comparisons, plus
 initialization and scripted-login checks. The standalone benchmark throttle
-fix still requires rebuilding; those speed checks used a GDB workaround. See
+fix also passed a direct native comparison without GDB. AArch64 speed and
+serial/network behavior with lazy timing still require target validation. See
 [patch notes](patches/README.md) and [performance findings](performance.md).
 
 ```sh

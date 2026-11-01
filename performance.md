@@ -261,3 +261,16 @@ The standalone manager now applies options.throttle() in ui_initialize,
 matching the normal frontend's initialization of the video manager. Rebuild
 to validate ordinary unthrottled execution without GDB before relying on
 production benchmark results. Normal interactive mode retains throttling.
+
+## Direct benchmark validation of 8a41c19
+
+After the user rebuilt the throttle fix on dev, two ten-guest-second offline
+runs used the ordinary Python launcher without GDB. Lazy timing completed in
+0.519054 wall seconds; precise timers took 5.351684 seconds. Both exited with
+status zero. All emitted progress records and saved configuration hashes
+matched, including the final 81,896 board ticks and guest_us 0x0093d1fb.
+The end-to-end speedup is 10.31x including process startup/shutdown, and the
+lazy run exceeds 19x real time in this native startup workload. It confirms
+that benchmark throttling is fixed in the production frontend. These numbers
+are not an initialized-server/modem load result or a nanovax measurement.
+Artifacts are on dev under /tmp/ds90-native-benchmark-7x8lov43.
