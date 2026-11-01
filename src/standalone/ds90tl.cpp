@@ -5,6 +5,7 @@
 #include "emuopts.h"
 #include "main.h"
 #include "ui/uimain.h"
+#include "video.h"
 #include "modules/lib/osdobj_common.h"
 
 #include <algorithm>
@@ -36,6 +37,14 @@ public:
 		// inert and does not link any src/frontend/mame UI implementation.
 		m_ui = std::make_unique<ui_manager>(machine);
 		return m_ui.get();
+	}
+
+	void ui_initialize(running_machine &machine) override
+	{
+		// The standard frontend UI applies this option. Our inert UI must
+		// do it explicitly; video_manager otherwise starts throttled even
+		// after SDL's -bench handling has set OPTION_THROTTLE to false.
+		machine.video().set_throttled(m_options.throttle());
 	}
 
 	int execute()

@@ -122,7 +122,9 @@ transitions with no serial-clock or output consumer are evaluated on register
 access instead of scheduling each edge. Active consumers restore precise
 callbacks. Use `--precise-duart-timers` for an A/B comparison; direct binary
 launches can set `DS90_DUART_LAZY=0`. The new patch requires a rebuild and has
-not yet been compiled or validated against running firmware. See
+passed native compilation and short firmware timing/state comparisons, plus
+initialization and scripted-login checks. The standalone benchmark throttle
+fix still requires rebuilding; those speed checks used a GDB workaround. See
 [patch notes](patches/README.md) and [performance findings](performance.md).
 
 ```sh

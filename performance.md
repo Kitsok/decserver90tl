@@ -227,3 +227,37 @@ guest timing/state records; use the default disabled trace for speed. Then
 validate an initialized boot and console before building the AArch64 bundle.
 Keep the programming-delay acceleration independently selectable with
 `--no-delay-acceleration` to isolate its benefit after timer coalescing.
+
+## Native validation after timer coalescing
+
+The user rebuilt 4e5dcf3 on dev. A short traced lazy/precise comparison
+produced identical progress records and stored-state hashes, but both took
+approximately real time. GDB confirmed that lazy mode activated. Source review
+then found a standalone frontend omission: video_manager starts throttled,
+and the normal MAME UI applies options.throttle(). Our inert UI did not, so
+`-bench` changed the option but left runtime throttling enabled. Previous
+near-real-time native measurements therefore do not establish maximum speed.
+This is our frontend integration bug, separate from the upstream timer model.
+
+For a measurement without another build, GDB disabled the throttle flag at
+the first update_throttle call, then removed the breakpoint and continued.
+Ten guest seconds after that point took 0.225339 seconds with lazy timing
+and 5.142196 seconds with precise timers: approximately 22.8x faster in this
+startup workload. Both exited normally, and all emitted progress records and
+stored-state hashes matched. At 10 seconds both reported 81,896 clock ticks
+and guest_us 0x0093d1fb. Artifacts are on dev under
+/tmp/ds90-unthrottled-ab-epay3zp2. This includes a debugger intervention, not
+a standalone production benchmark or an AArch64 capacity measurement.
+
+With the same workaround, one 60-guest-second erased-store initialization
+completed in 1.956133 seconds after the first frame. A subsequent 50-second
+boot using the saved store and diagnostic FIFO login completed in 3.347838
+seconds and reached Local> as SIMULATOR. Both exited normally without firmware
+fatal reports. Offline/no-IP listener warnings were expected. This verifies
+the initialization/restart/login path, not serial-wire or network behavior.
+Artifacts are under /tmp/ds90-lazy-console-xs1jc_36 on dev.
+
+The standalone manager now applies options.throttle() in ui_initialize,
+matching the normal frontend's initialization of the video manager. Rebuild
+to validate ordinary unthrottled execution without GDB before relying on
+production benchmark results. Normal interactive mode retains throttling.
