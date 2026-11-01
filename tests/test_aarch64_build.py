@@ -12,6 +12,16 @@ spec.loader.exec_module(cross)
 
 
 class CrossBuildTests(unittest.TestCase):
+    def test_private_library_paths_stay_inside_target_sysroot(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary).resolve()
+            library = root/'usr/lib/aarch64-linux-gnu/libpulse.so.0'
+            dynamic = '(RUNPATH) Library runpath: [/usr/lib/aarch64-linux-gnu/pulseaudio:$ORIGIN/private:relative:${ORIGIN}/../../../../../outside]'
+            self.assertEqual(cross.runtime_search(library, dynamic, root), [
+                root/'usr/lib/aarch64-linux-gnu/pulseaudio',
+                library.parent/'private',
+            ])
+
     def test_cxx_uses_only_explicit_target_headers_and_runtime_prefix(self):
         with patch.dict(os.environ, {'DS90_CROSS_SYSROOT': '/target', 'DS90_CROSS_CXX': 'cross-g++'}), patch.object(cross.os, 'execvp') as execute:
             cross.compiler('cxx', ['-c', 'test.cpp'])

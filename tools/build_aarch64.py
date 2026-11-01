@@ -194,6 +194,22 @@ def prepare_mame(offline):
     return source
 
 
+def runtime_search(path, dynamic, sysroot):
+    """Interpret target ELF search paths inside the sysroot, never on the host."""
+    directories = []
+    for paths in re.findall(r'\((?:RUNPATH|RPATH)\).*?\[(.*?)\]', dynamic):
+        for entry in paths.split(':'):
+            if '$ORIGIN' in entry or '${ORIGIN}' in entry:
+                candidate = Path(entry.replace('${ORIGIN}', str(path.parent)).replace('$ORIGIN', str(path.parent)))
+            elif entry.startswith('/'):
+                candidate = sysroot/entry.lstrip('/')
+            else:
+                continue
+            if candidate.resolve().is_relative_to(sysroot.resolve()):
+                directories.append(candidate)
+    return directories
+
+
 def bundle(binary, sysroot, full_frontend=False):
     readelf = 'aarch64-linux-gnu-readelf'
     search = [sysroot/'lib/aarch64-linux-gnu', sysroot/'usr/lib/aarch64-linux-gnu',
@@ -219,7 +235,9 @@ def bundle(binary, sysroot, full_frontend=False):
             if any(tuple(map(int, value.split('.'))) > (2, 36)
                    for value in re.findall(r'GLIBC_(\d+(?:\.\d+)+)', versions)):
                 raise SystemExit(f'Target requires glibc newer than nanovax 2.36: {path}')
-            needed = re.findall(r'\(NEEDED\).*?\[(.*?)\]', capture([readelf, '-d', path]))
+            dynamic = capture([readelf, '-d', path])
+            needed = re.findall(r'\(NEEDED\).*?\[(.*?)\]', dynamic)
+            object_search = search + runtime_search(path, dynamic, sysroot)
             if path == binary:
                 match = re.search(r'Requesting program interpreter:\s*(.*?)\]', capture([readelf, '-l', path]))
                 if not match:
@@ -229,7 +247,7 @@ def bundle(binary, sysroot, full_frontend=False):
             for name in needed:
                 if name in library_names:
                     continue
-                original = next((directory/name for directory in search if (directory/name).is_file()), None)
+                original = next((directory/name for directory in object_search if (directory/name).is_file()), None)
                 if original is None or not original.resolve().is_relative_to(sysroot):
                     raise SystemExit(f'Missing target runtime dependency: {name}')
                 shutil.copy2(original, libs/name, follow_symlinks=True)
@@ -290,6 +308,7 @@ def main():
     parser.add_argument('--check', action='store_true', help='Check host tools only, with no downloads or build')
     parser.add_argument('--offline', action='store_true', help='Require the cached sysroot and pinned MAME checkout')
     parser.add_argument('--full-frontend', action='store_true', help='Include the standard MAME/Lua frontend for diagnostics')
+    parser.add_argument('--package-only', action='store_true', help='Package the existing binary and sysroot without building or downloading')
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error('--jobs must be positive')
@@ -308,6 +327,16 @@ def main():
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             raise SystemExit('Another AArch64 build is running')
+        if args.package_only:
+            binary = OUTPUT/'bin/mame-ds90tl'
+            sysroot = WORK/'sysroot'
+            stamp = WORK/'build-configuration.json'
+            if not binary.is_file() or not (sysroot/'nanovax-sysroot.json').is_file() or not stamp.is_file():
+                raise SystemExit('Packaging requires an existing successful build, sysroot and build-configuration.json')
+            configuration = json.loads(stamp.read_text())
+            os.environ['DS90_CROSS_CXX'] = cxx
+            bundle(binary, sysroot, configuration.get('full_frontend', False))
+            return
         sysroot = prepare_sysroot(args.offline)
         for relative in ('usr/lib/gcc/aarch64-linux-gnu/12/libstdc++.a',
                          'usr/lib/gcc/aarch64-linux-gnu/12/libgcc.a',

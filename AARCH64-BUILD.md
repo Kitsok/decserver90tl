@@ -63,6 +63,12 @@ Do not copy compiled .deps trees between architectures or compiler versions.
 
 ## Deployable output
 
+If compilation succeeded but packaging failed, fix the packaging issue and run
+`./buildaarch64.sh --package-only`. This reuses the existing executable and
+sysroot without invoking Make or downloading packages. The frontend mode is
+read from the saved build configuration. Private runtime libraries are found
+using ELF RUNPATH/RPATH entries interpreted inside the target sysroot.
+
 The result is `build/aarch64/decserver90tl-nanovax.tar.gz`. It contains:
 
 - the AArch64 executable and its recursive ELF shared-library dependencies,
