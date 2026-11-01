@@ -65,3 +65,25 @@ was made. Both emulators were left running. Incoming-call readiness is not
 established while registration is disabled; the setup also remains volatile
 across reboot. The earlier outgoing LAT refusal is recorded separately in
 lat-first-session-2026-11-01.md and remains unresolved.
+
+## Courier slowness and candidate fix
+
+The user reported slow command response. A five-second userspace profile of
+the running Courier worker (493 samples) put 56.39% in Python, 29.21% in the
+C5x DSP library and 10.14% in the native supervisor extension. Courier and
+DECserver each consumed approximately one CPU core; nanovax reported 84.6 C
+and 600 MHz. Profiling output remained in /dev/shm/courier-performance.data.
+No modem command, call or restart was made during this inspection.
+
+Courier cefbe4a deliberately excluded serialsim from the native panel-input
+cache, sending port-0x14 reads through Python to keep DTR dynamic. Candidate
+fix 4ce9409 in the Courier repository removes that exclusion, calculates the
+cached bit from the sampled DTR signal rather than attachment, and reuses
+the existing post-poll service refresh before native execution resumes.
+Ringing and explicit port overrides retain the live Python fallback.
+
+One focused local regression passed with compilation disabled. The change
+is Python-only; it has not been applied to the running RAM copy and no speed
+gain is claimed yet. Native library rebuilding is unnecessary, but Courier
+must restart after its Python module is updated. The user requested that the
+live emulator remain available for their call, so it was left untouched.
