@@ -157,6 +157,25 @@ logout and reconnection. Transcripts and packets are saved under run/;
 analysis/telnet-verification.json records the latest result. No DHCP server
 is started. Incoming LAT sessions remain deferred to nanovax.
 
+## Nanovax MOP-console and IP milestone (2026-11-01)
+
+The optimized AArch64 runtime was verified on nanovax's real DEC network,
+using ds90tap on decbr. Manual address 172.20.21.5/24 responds to ping from
+nanovax and the notebook. Its synthetic MAC is 02:90:00:00:00:01.
+
+OpenVMS SIMVAX reached the simulator's own Local> management console with:
+
+```text
+MCR NCP CONNECT VIA QNA-0 PHYSICAL ADDRESS 02-90-00-00-00-01
+```
+
+The logical management console is MOP or Telnet; LAT services expose serial
+ports. No LAT node settings were changed on simvax, and a LAT data session
+remains untested. The simulator was left running from /dev/shm with a RAM-only
+configuration store; this test deployment is not persistent across reboot.
+See [milestone details](analysis/nanovax-mop-console-2026-11-01.md) for setup,
+observed identity, connection sequence, reachability results and limitations.
+
 ## Serial Telnet listener regression
 
 `tools/verify_telnet_ports.py --nvram-seed run/my-decserver` configures a copied
