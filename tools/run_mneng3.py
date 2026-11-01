@@ -22,8 +22,9 @@ def main():
     parser.add_argument('--ethernet-pcap', type=Path, help='Capture TAP packets (default: logfile with .pcap suffix)')
     parser.add_argument('--tap', help='Attach LANCE to this existing, bridged Linux TAP (default: offline)')
     parser.add_argument('--seconds', type=int, default=None)
-    parser.add_argument('--verbose', '-v', action='store_true',
-                        help='Show the full live trace on console (logfile is always complete)')
+    trace_options = parser.add_mutually_exclusive_group()
+    trace_options.add_argument('--verbose', '-v', action='store_true',
+                               help='Enable diagnostic tracing and show the full trace on console')
     parser.add_argument('--log-file', type=Path,
                         help='Raw trace path (default: run/bringup.log)')
     parser.add_argument('--uart-probe-port', type=int, default=0, choices=range(9),
@@ -38,7 +39,15 @@ def main():
                         help='Experimentally substitute unaligned data transfers for ROM exception handling')
     parser.add_argument('--nvram-directory', type=Path,
                         help='Separate persistent store for an isolated boot experiment')
+    trace_options.add_argument('--trace', dest='no_trace', action='store_false',
+                              help='Enable diagnostic tracing and packet capture to files')
+    trace_options.add_argument('--no-trace', action='store_true', default=True,
+                        help='Disable emulator diagnostic tracing and packet capture; keep errors and PTY announcements')
     args = parser.parse_args()
+    if args.verbose:
+        args.no_trace = False
+    if args.no_trace and args.ethernet_pcap:
+        parser.error('--ethernet-pcap requires --trace or --verbose')
     serialsim = {}
     for assignment in args.serialsim:
         port, separator, path = assignment.partition('=')
@@ -75,6 +84,7 @@ def main():
     if not image_link.exists():
         image_link.symlink_to(firmware)
     env = os.environ.copy()
+    env['DS90_TRACE'] = '0' if args.no_trace else '1'
     for port in range(1, 9):
         env.pop(f'DS90_SERIALSIM_{port}', None)
     for port, path in serialsim.items():
@@ -101,7 +111,7 @@ def main():
         command[index:index + 2] = ['-video', 'none', '-sound', 'none', '-throttle', '-seconds_to_run', str(args.seconds)]
     log_path = (args.log_file or run/'bringup.log').resolve()
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    if args.tap:
+    if args.tap and not args.no_trace:
         pcap_path = (args.ethernet_pcap or log_path.with_suffix('.pcap')).resolve()
         if pcap_path == log_path:
             parser.error('Ethernet capture and text log paths must differ')
@@ -112,8 +122,8 @@ def main():
     for port, path in serialsim.items():
         console.say(f'Serial port {port}: serialsim {path} (DTR/DSR through TTY ioctls)')
     console.say(f'Configuration store: {(args.nvram_directory or run/"nvram").resolve()}')
-    console.say(f'Full live trace: {log_path}')
-    console.say(f'Ethernet: TAP {args.tap}, bridge {bridge}; capture: {pcap_path}' if args.tap else 'Ethernet: offline')
+    console.say(f'Diagnostics disabled; errors/startup notices: {log_path}' if args.no_trace else f'Full live trace: {log_path}')
+    console.say(f'Ethernet: TAP {args.tap}, bridge {bridge}; capture: {"disabled" if args.no_trace else pcap_path}' if args.tap else 'Ethernet: offline')
     try:
         # Host MAME cfg must not silently restore a previous network interface.
         # Guest settings remain in the selected persistent NVRAM directory.

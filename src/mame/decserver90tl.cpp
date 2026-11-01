@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 // Experimental MNENG3 / 4 MiB bring-up. No boot ROM or host firmware patches.
 #include "emu.h"
+#include "decserver90tl_trace.h"
 #include "cpu/m68000/fscpu32.h"
 #include "machine/am79c90.h"
 #include "machine/mc68681.h"
@@ -35,7 +36,7 @@ protected:
 		m_alignment_assist = assist && std::string_view(assist) == "1";
 		const char *wait = std::getenv("DS90_RAM_WAIT_CYCLES");
 		m_ram_wait_cycles = wait ? std::clamp(std::atoi(wait), 0, 16) : 0;
-		std::fprintf(stderr, "DS90 CPU rom_alignment_assist=%u ram_wait_cycles=%u\n",
+		DS90_TRACE("DS90 CPU rom_alignment_assist=%u ram_wait_cycles=%u\n",
 			unsigned(m_alignment_assist), m_ram_wait_cycles);
 		auto immediate16 = m_readimm16;
 		m_readimm16 = [this, immediate16](offs_t address) -> u16 {
@@ -61,7 +62,7 @@ protected:
 				const u32 remaining = state_int(M68K_D1);
 				if (remaining == 0x707) m_idle_first_cycle = total_cycles();
 				if (remaining == 1)
-					std::fprintf(stderr, "DS90 IDLE-BUDGET cycles=%llu cpu_hz=%u elapsed_us=%.3f\n",
+					DS90_TRACE("DS90 IDLE-BUDGET cycles=%llu cpu_hz=%u elapsed_us=%.3f\n",
 						static_cast<unsigned long long>(total_cycles() - m_idle_first_cycle), clock(),
 						1e6 * double(total_cycles() - m_idle_first_cycle) / clock());
 			}
@@ -99,7 +100,7 @@ private:
 		if (!m_alignment_assist)
 			fatalerror("DS90 unresolved CPU32 address error: %s pc=%08x address=%08x\n", operation, u32(pc()), u32(address));
 		if (m_alignment_events++ < 16)
-			std::fprintf(stderr, "DS90 ROM-ALIGNMENT-ASSIST %s pc=%08x address=%08x\n", operation, u32(pc()), u32(address));
+			DS90_TRACE("DS90 ROM-ALIGNMENT-ASSIST %s pc=%08x address=%08x\n", operation, u32(pc()), u32(address));
 		return true;
 	}
 	bool m_alignment_assist = false;
@@ -204,11 +205,11 @@ private:
 
 void ds90tl_state::dump_state()
 {
-	std::fprintf(stderr, "DS90 STATE pc=%08x sp=%08x vbr=%08x sr=%04x\n",
+	DS90_TRACE("DS90 STATE pc=%08x sp=%08x vbr=%08x sr=%04x\n",
 		u32(m_cpu->pc()), u32(m_cpu->state_int(M68K_SP)),
 		u32(m_cpu->state_int(M68K_VBR)), u16(m_cpu->state_int(M68K_SR)));
 	for (unsigned i = 0; i < 8; ++i)
-		std::fprintf(stderr, "DS90 STATE d%u=%08x a%u=%08x\n", i,
+		DS90_TRACE("DS90 STATE d%u=%08x a%u=%08x\n", i,
 			u32(m_cpu->state_int(M68K_D0 + i)), i, u32(m_cpu->state_int(M68K_A0 + i)));
 }
 
@@ -216,7 +217,7 @@ void ds90tl_state::record(const char *kind, u32 address, u16 data, u16 mask)
 {
 	if (machine().side_effects_disabled()) return;
 	if (m_events++ < 300)
-		std::fprintf(stderr, "DS90 %s pc=%08x address=%06x data=%04x mask=%04x\n",
+		DS90_TRACE("DS90 %s pc=%08x address=%06x data=%04x mask=%04x\n",
 			kind, u32(m_cpu->pc()), address, data, mask);
 }
 
@@ -255,7 +256,7 @@ u16 ds90tl_state::peripheral_r(offs_t offset, u16 mask)
 			if (m_uart[block]->irq_pending()) value |= 1U << (8 + block);
 		}
 		if (value && m_serial_events++ < 32)
-			std::fprintf(stderr, "DS90 SERIAL-STATUS pc=%08x cisr=%04x\n", u32(m_cpu->pc()), value);
+			DS90_TRACE("DS90 SERIAL-STATUS pc=%08x cisr=%04x\n", u32(m_cpu->pc()), value);
 	}
 	record("READ-INTERNAL", address, value, mask);
 	return value;
@@ -291,7 +292,7 @@ void ds90tl_state::peripheral_w(offs_t offset, u16 data, u16 mask)
 TIMER_CALLBACK_MEMBER(ds90tl_state::clock_tick)
 {
 	if (++m_clock_ticks <= 3)
-		std::fprintf(stderr, "DS90 CLOCK tick=%u pc=%08x sr=%04x vector=%08x\n", m_clock_ticks,
+		DS90_TRACE("DS90 CLOCK tick=%u pc=%08x sr=%04x vector=%08x\n", m_clock_ticks,
 			u32(m_cpu->pc()), u16(m_cpu->state_int(M68K_SR)),
 			m_cpu->space(AS_PROGRAM).read_dword(m_cpu->state_int(M68K_VBR) + 0x78));
 	m_cpu->set_input_line(6, ASSERT_LINE);
@@ -322,7 +323,7 @@ void ds90tl_state::serial_transmit(unsigned port, u8 data)
 {
 	// Called when the DUART actually moves THR to the shift register, after
 	// CTS/DSR gating. A CPU THR write alone is not transmitted output.
-	std::fprintf(stderr, "DS90 UART-TX port=%u byte=%02x char=%c\n",
+	DS90_TRACE("DS90 UART-TX port=%u byte=%02x char=%c\n",
 		port + 1, data, data >= 32 && data < 127 ? data : '.');
 	if (m_pty[port] < 0) return;
 	if (m_serial_output[port].size() >= 65536)
@@ -398,7 +399,7 @@ void ds90tl_state::modem_poll()
 					}
 					m_dsr[port - 1] = value != 0;
 					modem_inputs((port - 1) / 2);
-					std::fprintf(stderr, "DS90 MODEM port=%u DSR=%d\n", port, value);
+					DS90_TRACE("DS90 MODEM port=%u DSR=%d\n", port, value);
 					valid = true;
 				}
 			}
@@ -436,7 +437,7 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::serial_poll)
 		{
 			const u8 byte = pending.front();
 			if (::write(m_pty[port], &byte, 1) != 1) break;
-			std::fprintf(stderr, "DS90 PTY-TX port=%u byte=%02x\n", port + 1, byte);
+			DS90_TRACE("DS90 PTY-TX port=%u byte=%02x\n", port + 1, byte);
 			pending.pop_front();
 		}
 		duart_channel &channel = port & 1 ? *m_uart[port / 2]->m_chanB : *m_uart[port / 2]->m_chanA;
@@ -446,7 +447,7 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::serial_poll)
 			if (::read(m_pty[port], &byte, 1) == 1)
 			{
 				channel.rx_fifo_push(byte, 0);
-				std::fprintf(stderr, "DS90 PTY-RX port=%u byte=%02x\n", port + 1, byte);
+				DS90_TRACE("DS90 PTY-RX port=%u byte=%02x\n", port + 1, byte);
 			}
 		}
 	}
@@ -463,7 +464,7 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::uart_probe)
 		return;
 	}
 	const u8 data = m_probe_data[m_probe_count];
-	std::fprintf(stderr, "DS90 FIFO-INJECT port=%u byte=%02x csr=%02x mr1=%02x mr2=%02x sr=%02x tx_rate=%d\n",
+	DS90_TRACE("DS90 FIFO-INJECT port=%u byte=%02x csr=%02x mr1=%02x mr2=%02x sr=%02x tx_rate=%d\n",
 		m_probe_port, data, channel.get_chan_CSR(), channel.read_MR1(), channel.read_MR2(),
 		channel.read_chan_reg(1), channel.get_tx_rate());
 	// Diagnostic FIFO injection only: bypasses receiver enable, framing,
@@ -484,7 +485,7 @@ template<unsigned Block> u16 ds90tl_state::uart_r(offs_t offset, u16 mask)
 {
 	const u8 value = m_uart[Block]->read(offset);
 	if ((offset == 3 || offset == 11) && !machine().side_effects_disabled())
-		std::fprintf(stderr, "DS90 UART-RX port=%u byte=%02x pc=%08x\n",
+		DS90_TRACE("DS90 UART-RX port=%u byte=%02x pc=%08x\n",
 			Block * 2 + (offset == 11) + 1, value, u32(m_cpu->pc()));
 	record("READ-UART", 0x400000 + Block * 0x20 + offset * 2, value, mask);
 	return u16(value) << 8; // guest uses byte registers at even addresses
@@ -500,7 +501,7 @@ template<unsigned Block> void ds90tl_state::uart_w(offs_t offset, u16 data, u16 
 		duart_channel &channel = offset >= 8 ? *m_uart[Block]->m_chanB : *m_uart[Block]->m_chanA;
 		const u8 before = channel.read_chan_reg(1);
 		if (offset == 3 || offset == 11)
-			std::fprintf(stderr, "DS90 UART-THR port=%u byte=%02x char=%c sr_before=%02x\n",
+			DS90_TRACE("DS90 UART-THR port=%u byte=%02x char=%c sr_before=%02x\n",
 				Block * 2 + (offset == 11) + 1, value, value >= 32 && value < 127 ? value : '.', before);
 		// 2692-family extended commands assert/negate OP0/OP1. The
 		// generic 68681 masks command bit 7 and would misdecode 0x90.
@@ -512,7 +513,7 @@ template<unsigned Block> void ds90tl_state::uart_w(offs_t offset, u16 data, u16 
 		else
 			m_uart[Block]->write(offset, value);
 		if ((offset == 2 || offset == 10) && m_uart_commands[port]++ < 32)
-			std::fprintf(stderr, "DS90 UART-CMD port=%u byte=%02x sr_before=%02x sr_after=%02x pc=%08x\n",
+			DS90_TRACE("DS90 UART-CMD port=%u byte=%02x sr_before=%02x sr_after=%02x pc=%08x\n",
 				port + 1, value, before, channel.read_chan_reg(1), u32(m_cpu->pc()));
 	}
 }
@@ -531,7 +532,7 @@ void ds90tl_state::dma_w(offs_t offset, u16 data, u16 mask)
 void ds90tl_state::lance_irq(int state)
 {
 	// MAME LANCE's callback is active-low.
-	std::fprintf(stderr, "DS90 LANCE-IRQ asserted=%u pc=%08x\n", unsigned(!state), u32(m_cpu->pc()));
+	DS90_TRACE("DS90 LANCE-IRQ asserted=%u pc=%08x\n", unsigned(!state), u32(m_cpu->pc()));
 	m_cpu->set_input_line(3, state ? CLEAR_LINE : ASSERT_LINE);
 }
 
@@ -718,7 +719,7 @@ void ds90tl_state::machine_reset()
 			space.write_byte(0x100c00 + field.offset + i, image[field.source - 0x07805000 + i]);
 		++provisioned;
 	}
-	std::fprintf(stderr, "DS90 NVRAM provisioned_erased_factory_fields=%u\n", provisioned);
+	DS90_TRACE("DS90 NVRAM provisioned_erased_factory_fields=%u\n", provisioned);
 	// Firmware fatal-report callback normally belongs to the inherited ROM.
 	// Preserve its report fields and stop, rather than jumping through zero.
 	m_boot[0x1400 / 2] = 0x60fe;
@@ -729,12 +730,12 @@ void ds90tl_state::machine_reset()
 		m_lance->set_interface(0); // the explicitly selected taptun provider
 		if (m_lance->get_interface() != 0)
 			fatalerror("Cannot attach LANCE to TAP %s; check TAP ownership and permissions\n", tap);
-		std::fprintf(stderr, "DS90 NETWORK attached tap=%s mac=02:90:00:00:00:01\n", tap);
+		DS90_TRACE("DS90 NETWORK attached tap=%s mac=02:90:00:00:00:01\n", tap);
 	}
 	else if (m_lance->get_interface() >= 0)
 		m_lance->set_interface(-1);
 	m_events = m_ticks = m_clock_ticks = 0;
-	std::fprintf(stderr, "DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0\n"
+	DS90_TRACE("DS90 BOOT image=MNENG3 ram=4194304 entry=078713f8 sp=07bff000 vbr=0\n"
 		"DS90 EXPERIMENTAL handoff: synthetic vectors/RAM-size; TPU completion substitution; host network opt-in via TAP\n");
 	m_observer->adjust(attotime::from_msec(1), 0, attotime::from_msec(1));
 }
@@ -748,14 +749,14 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::observe)
 		auto &space = m_cpu->space(AS_PROGRAM);
 		dump_state();
 		for (unsigned i = 0; i < 64; ++i)
-			std::fprintf(stderr, "DS90 REPORT-STACK address=%08x data=%08x\n", sp + i * 4,
+			DS90_TRACE("DS90 REPORT-STACK address=%08x data=%08x\n", sp + i * 4,
 				space.read_dword(sp + i * 4));
 		for (unsigned reg : { M68K_A4, M68K_A5 })
 		{
 			const u32 base = m_cpu->state_int(reg);
 			if ((base & 0xffffff) < 0x800000 || (base & 0xffffff) > 0xbfffc0) continue;
 			for (unsigned i = 0; i < 16; ++i)
-				std::fprintf(stderr, "DS90 OBJECT address=%08x data=%08x\n", base + i * 4,
+				DS90_TRACE("DS90 OBJECT address=%08x data=%08x\n", base + i * 4,
 					space.read_dword(base + i * 4));
 		}
 		fatalerror("DS90 firmware fatal code=%04x caller=%08x parameter=%08x report_sp=%08x\n",
@@ -766,13 +767,13 @@ TIMER_CALLBACK_MEMBER(ds90tl_state::observe)
 	{
 		dump_state();
 		for (unsigned i = 0; i < 32; ++i)
-			std::fprintf(stderr, "DS90 STACK address=%08x data=%08x\n", sp + i * 4,
+			DS90_TRACE("DS90 STACK address=%08x data=%08x\n", sp + i * 4,
 				m_cpu->space(AS_PROGRAM).read_dword(sp + i * 4));
 		fatalerror("DS90 inherited exception vector=%u pc=%08x sp=%08x saved_pc=%08x\n",
 			(pc - 0x1000) / 4, pc, sp, m_cpu->space(AS_PROGRAM).read_dword(sp + 2));
 	}
 	if (++m_ticks <= 10 || m_ticks % 100 == 0)
-		std::fprintf(stderr, "DS90 PROGRESS ms=%u pc=%08x sp=%08x sr=%04x clock_ticks=%u guest_us=%08x\n",
+		DS90_TRACE("DS90 PROGRESS ms=%u pc=%08x sp=%08x sr=%04x clock_ticks=%u guest_us=%08x\n",
 			m_ticks, pc, sp, u16(m_cpu->state_int(M68K_SR)), m_clock_ticks,
 			m_cpu->space(AS_PROGRAM).read_dword(0xfff024));
 }

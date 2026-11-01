@@ -35,7 +35,7 @@ def main():
         work = Path(temporary)
         shutil.copytree(args.nvram_seed, work / 'nvram')
         log = ROOT / 'run/ethernet-verification.log'
-        command = ['python3', str(ROOT / 'tools/run_mneng3.py'), '--interactive',
+        command = ['python3', str(ROOT / 'tools/run_mneng3.py'), '--trace', '--interactive',
                    '--rom-alignment-assist', '--ram-wait-cycles', '1', '--tap', args.tap,
                    '--nvram-directory', str(work / 'nvram'),
                    '--serial-control', str(work / 'control.sock'), '--log-file', str(log)]

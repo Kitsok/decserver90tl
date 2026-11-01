@@ -5,6 +5,7 @@
 #pragma once
 
 #include "emuopts.h"
+#include "decserver90tl_trace.h"
 
 #include <cerrno>
 #include <cstring>
@@ -63,7 +64,7 @@ protected:
 			if (errno != ENOENT) fatalerror("Cannot read NVRAM %s: %s\n", m_path.string(), std::strerror(errno));
 			std::memset(m_storage, 0xff, m_bytes);
 			m_dirty = true;
-			std::fprintf(stderr, "DS90 STORAGE initialized erased store path=%s\n", m_path.c_str());
+			DS90_TRACE("DS90 STORAGE initialized erased store path=%s\n", m_path.c_str());
 		}
 		else
 		{
@@ -80,7 +81,7 @@ protected:
 			::close(fd);
 			if (!valid) fatalerror("NVRAM %s must be a readable %zu-byte regular file; left unchanged\n", m_path.string(), m_bytes);
 			m_mode = status.st_mode & 0777;
-			std::fprintf(stderr, "DS90 STORAGE loaded path=%s bytes=%zu\n", m_path.c_str(), m_bytes);
+			DS90_TRACE("DS90 STORAGE loaded path=%s bytes=%zu\n", m_path.c_str(), m_bytes);
 		}
 		m_timer = timer_alloc(FUNC(ds90_nvram_device::poll), this);
 		m_timer->adjust(attotime::from_msec(50), 0, attotime::from_msec(50));
@@ -92,7 +93,7 @@ protected:
 		// exit. Unlike generic NVRAM, no other writer truncates this file later.
 		if (!m_enabled || !m_dirty || !machine().exit_pending()) return;
 		if (m_ready()) checkpoint();
-		else std::fprintf(stderr, "DS90 STORAGE pending firmware writes; retained last completed checkpoint\n");
+		else DS90_TRACE("DS90 STORAGE pending firmware writes; retained last completed checkpoint\n");
 	}
 
 private:
@@ -134,7 +135,7 @@ private:
 		if (directory >= 0) ::close(directory);
 		if (error) fatalerror("NVRAM directory sync failed for %s: %s\n", m_path.string(), std::strerror(error));
 		m_dirty = false;
-		std::fprintf(stderr, "DS90 STORAGE checkpoint saved path=%s bytes=%zu\n", m_path.c_str(), m_bytes);
+		DS90_TRACE("DS90 STORAGE checkpoint saved path=%s bytes=%zu\n", m_path.c_str(), m_bytes);
 	}
 
 	devcb_read_line m_ready;

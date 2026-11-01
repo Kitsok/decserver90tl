@@ -20,7 +20,7 @@ class Session:
         self.guest = 0
         self.path = None
         self.reserved = os.openpty()
-        self.proc = subprocess.Popen(['python3', str(ROOT / 'tools/run_mneng3.py'), '--interactive', '--rom-alignment-assist', '--ram-wait-cycles', '1', '--nvram-directory', str(work / 'nvram'), '--serial-control', str(work / 'control.sock'), '--log-file', str(ROOT / f'run/settings-{stage}.log'), *runner_args], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        self.proc = subprocess.Popen(['python3', str(ROOT / 'tools/run_mneng3.py'), '--trace', '--interactive', '--rom-alignment-assist', '--ram-wait-cycles', '1', '--nvram-directory', str(work / 'nvram'), '--serial-control', str(work / 'control.sock'), '--log-file', str(ROOT / f'run/settings-{stage}.log'), *runner_args], cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 
         def reader():
             for line in self.proc.stdout:

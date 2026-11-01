@@ -97,6 +97,18 @@ are ignored by this repository.
 
 ## Bounded offline run
 
+Diagnostic tracing is disabled by default, including per-byte/register traces
+and Ethernet packet capture. Errors and serial endpoint announcements remain.
+Use `./run.sh --trace` for a detailed logfile and PCAP, or `--verbose` to also
+display the trace on the console. `--no-trace` explicitly selects the default.
+The Python launcher accepts the same switches. Direct binary launches can
+enable tracing with `DS90_TRACE=1`; unset or `0` disables it. Without tracing,
+console progress and decoded serial text derived from trace records are absent;
+attach to the announced serial PTY for firmware output.
+
+For tests on nanovax, extract and run the bundle under `/tmp` so runtime files,
+configuration checkpoints and any requested captures stay off flash.
+
 ```sh
 python3 tools/run_mneng3.py --seconds 1
 # Explicitly enable the provisional ROM alignment-service substitute:

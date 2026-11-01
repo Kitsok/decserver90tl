@@ -5,14 +5,15 @@ set -euo pipefail
 repo_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 
 usage() {
-    printf 'Usage: %s [--verbose] [--interactive] [--tap NAME] [--serialsim PORT=DEVICE] [nvram-directory]\n' "$0"
+    printf 'Usage: %s [--trace|--verbose|--no-trace] [--interactive] [--tap NAME] [--serialsim PORT=DEVICE] [nvram-directory]\n' "$0"
     printf 'Runs 60 seconds of initialization, then a 50-second diagnostic login.\n'
     printf 'Default store: run/my-decserver. Relative paths are relative to the repository.\n'
     printf 'Use --tap NAME to attach an existing bridged TAP; default is offline.\n'
     printf 'Use --interactive for eight serial PTYs, running until Ctrl-C.\n'
     printf 'Use --serialsim PORT=DEVICE to replace a port with a serialsim pipe TTY; repeatable.\n'
-    printf 'Console: live progress and serial text. Logfiles: full raw trace.\n'
-    printf 'Use --verbose to also show the full trace on console.\n'
+    printf 'Diagnostic tracing and packet capture are disabled by default.\n'
+    printf 'Use --trace for detailed logs; --verbose also shows them on console.\n'
+    printf 'Use --no-trace to disable diagnostic formatting/output and packet capture.\n'
 }
 
 interactive=false
@@ -31,6 +32,8 @@ while (( $# )); do
             if (( $# < 2 )); then printf '%s\n' '--tap requires an interface name' >&2; exit 2; fi
             network_args=(--tap "$2"); shift ;;
         -v|--verbose) console_args=(--verbose) ;;
+        --no-trace) console_args+=(--no-trace) ;;
+        --trace) console_args+=(--trace) ;;
         --) shift; positional+=("$@"); break ;;
         -*) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
         *) positional+=("$1") ;;

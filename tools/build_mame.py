@@ -42,6 +42,12 @@ def main():
     actual = subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip()
     if actual != expected:
         raise SystemExit(f'MAME revision mismatch: expected {expected}, found {actual}')
+    # This follow-up edits code introduced by the TAP patch. Peel it off
+    # before checking base patches, then reapply it in sorted order below.
+    trace_patch = ROOT/'patches/mame-tap-trace-control.patch'
+    if subprocess.run(['git', '-C', str(source), 'apply', '--reverse', '--check', str(trace_patch)],
+                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0:
+        subprocess.run(['git', '-C', str(source), 'apply', '--reverse', str(trace_patch)], check=True)
     for patch in sorted((ROOT/'patches').glob('mame-*.patch')):
         reverse = subprocess.run(['git', '-C', str(source), 'apply', '--reverse', '--check', str(patch)],
                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -50,7 +56,7 @@ def main():
             subprocess.run(['git', '-C', str(source), 'apply', str(patch)], check=True)
     destination = source / 'src/mame/dec/decserver90tl.cpp'
     destination.parent.mkdir(exist_ok=True)
-    for name in ('decserver90tl.cpp', 'decserver90tl_nvram.h'):
+    for name in ('decserver90tl.cpp', 'decserver90tl_nvram.h', 'decserver90tl_trace.h'):
         driver = ROOT/'src/mame'/name
         destination = source/'src/mame/dec'/name
         if not destination.exists() or destination.read_bytes() != driver.read_bytes():

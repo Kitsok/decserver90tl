@@ -1,0 +1,12 @@
+diff --git a/src/osd/modules/netdev/taptun.cpp b/src/osd/modules/netdev/taptun.cpp
+--- a/src/osd/modules/netdev/taptun.cpp
++++ b/src/osd/modules/netdev/taptun.cpp
+@@ -202,7 +202,7 @@
+ 
+ void netdev_tap::capture(void const *buf, int len, const char *direction)
+ {
+-	if (len <= 0) return;
++	if (len <= 0 || !std::getenv("DS90_TRACE") || std::strcmp(std::getenv("DS90_TRACE"), "1")) return;
+ 	const auto *bytes = static_cast<const uint8_t *>(buf);
+ 	if (len >= 14)
+ 		osd_printf_info("DS90 NETWORK-%s bytes=%d dst=%02x:%02x:%02x:%02x:%02x:%02x src=%02x:%02x:%02x:%02x:%02x:%02x type=%02x%02x\n",
