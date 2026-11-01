@@ -87,3 +87,11 @@ is Python-only; it has not been applied to the running RAM copy and no speed
 gain is claimed yet. Native library rebuilding is unnecessary, but Courier
 must restart after its Python module is updated. The user requested that the
 live emulator remain available for their call, so it was left untouched.
+
+After the user updated/rebuilt the nanovax Courier checkout to 4ce9409,
+Courier was stopped normally and its RAM runtime refreshed from that checkout.
+The existing NVRAM and test.ini were retained, with RAM-only rollback copies
+of machine.py and settings.nvram. Courier restarted successfully on B0;
+DECserver PID 3459 remained running throughout. No AT command or telephone
+call was issued during this deployment. Responsiveness after the change is
+not yet measured, and the SIP registration setting remains disabled.
