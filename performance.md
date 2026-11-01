@@ -158,3 +158,42 @@ It shows no speed gain, and the enabled startup flag does not prove that
 iterations were actually batched. Check the fast-path guards and instruction
 budget with a debugger before another optimization or AArch64 rebuild. GDB
 was absent on dev when checked; installation was requested from the user.
+
+## Debugger finding: DUART timer activity prevents batching
+
+After GDB was installed on dev, the existing bd54036 executable was examined
+without rebuilding. Release type information was incomplete for the Musashi
+base class; field offsets were derived from this executable's disassembly,
+not assumed portable between builds or architectures.
+
+The fast-path function is called, and its steady-state guards can pass. In
+twelve consecutive entries, however, its cycle budgets were -1 (initial
+prefetch), then 2, 3, 4, 5, 1, 1, 1, 1, 2, 3, 4. The counter decremented
+normally from 0x95f to 0x955; interrupt level, trace and debugger flags were
+zero. A stop at the batch update confirmed iterations=0 with cost=7 cycles.
+Thus the short comparison did not demonstrate useful batching: these slices
+are shorter than one taken iteration. Changing or ignoring slice boundaries
+would hide the problem by violating the intended timing guarantee.
+
+The existing trace identifies a much stronger performance suspect than the
+8,192 Hz board clock: firmware programs each DUART ACR to 0xe0 and its counter
+preset to 2 (CTUR=0, CTLR=2). Pinned get_ct_rate selects the direct 3,686,400 Hz
+clock for this mode. duart_timer_callback runs every two clocks, toggles its
+half-period and reschedules itself: 1,843,200 callbacks per chip per guest
+second, or 7,372,800 across four chips once configured. These event deadlines
+are consistent with the tiny observed CPU budgets.
+
+The sampled firmware settings select OPCR=0x80, channel CSR=0xcc and IMR=0x11:
+the timer is not routed to OP3, serial TX/RX use fixed baud rates rather than
+counter output (selector 0xd), and counter-ready interrupts are masked. The
+callbacks can still latch ISR counter-ready, and software can read the timer
+count or change routing/masks later. Therefore simply disabling the timer or
+changing its rate is not a correct general fix.
+
+Next candidate: lazy evaluation/coalescing of unobserved counter half-periods,
+retaining readable count, phase, ready-latch timing, interrupt behavior and
+reactivation when a serial/output consumer is selected. This needs a focused
+DUART model change and validation before another performance build. Debugger
+artifacts are on dev under /tmp/ds90-gdb-guards-sw2e9zjv and
+/tmp/ds90-gdb-budget-yp8xqtii. A separate attempt to wait for a nonzero batch
+was bounded at 30 wall seconds; no timing measurements use debugger runs.
