@@ -9,6 +9,7 @@ libsdl2-ttf-dev, libfontconfig-dev and libegl-dev, plus GCC/Make/Python 3.
 import argparse
 import fcntl
 import os
+import re
 from pathlib import Path
 import shutil
 import signal
@@ -76,12 +77,17 @@ def main():
              'OSD=sdl', 'NO_X11=1', 'NO_OPENGL=1', 'USE_QTDEBUG=0',
              'NO_USE_XINPUT=1', 'NO_USE_MIDI=1', 'NO_USE_PORTAUDIO=1',
              'NO_USE_PULSEAUDIO=1', 'NO_USE_PIPEWIRE=1', 'USE_PCAP=0',
-             'USE_TAPTUN=1', 'NOWERROR=1', 'OPTIMIZE=1', 'SYMBOLS=0',
+             'USE_TAPTUN=1', 'NOWERROR=1', 'OPTIMIZE=1', 'SYMBOLS=0', 'PRECOMPILE=0',
              'USE_SYSTEM_LIB_EXPAT=0', 'USE_SYSTEM_LIB_ZLIB=0']
     if args.skip_machine_layouts:
         # Command-line Make assignments override the top-level wildcard.
         # CPU/renderer core layouts are separate generated-project tasks.
         flags.append('LAYOUTS=')
+    project = source/'build/projects/sdl/mameds90tl/gmake-linux/precompile.make'
+    if project.exists() and re.search(r'^\s*PCH\s*=', project.read_text(), re.MULTILINE):
+        # Make does not track option changes as file dependencies. Regenerate
+        # old projects once so PRECOMPILE=0 removes their forced PCH includes.
+        flags.append('REGENIE=1')
     child = subprocess.Popen(['make', f'-j{args.jobs}', *flags], cwd=source, env=env,
                              start_new_session=True, pass_fds=(lock.fileno(),))
     try:
