@@ -21,6 +21,7 @@ No firmware has been loaded onto physical hardware.
 - [Boot-ROM requirements and search results](boot-rom-search.md).
 - [Build instructions](BUILD.md).
 - [Implementation status](implementation-status.md).
+- [Performance investigation](performance.md).
 
 ## Build and run locally
 
