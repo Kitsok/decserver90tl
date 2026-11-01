@@ -140,3 +140,21 @@ batching over counter, budget, upper-register-word and wait-cycle boundaries;
 it also checks the original firmware instruction bytes. These checks passed,
 but do not compile or exercise the C++ adapter. No new performance result or
 firmware validation is claimed until the user rebuilds and target tests run.
+
+## First native execution comparison
+
+The user successfully compiled bd54036 on dev with GCC 13.3.0 for x86_64.
+Two three-simulated-second offline runs used separate erased stores and
+tracing enabled so progress records could be compared. Acceleration enabled
+took 3.613 wall seconds; ordinary delay interpretation took 3.360 seconds.
+Both exited with status zero. All emitted progress records were identical,
+as were saved configuration-file hashes. At 3,000 ms both reported PC
+0x07940c2c, SP 0x079dbf34, SR 0x2500, 24,552 clock ticks and guest_us 0x00290219.
+Artifacts are on dev under /tmp/ds90-delay-ab-as3y7u08.
+
+This supports sampled timing/state equivalence only; it does not establish
+complete architectural-state equivalence or a completed configuration boot.
+It shows no speed gain, and the enabled startup flag does not prove that
+iterations were actually batched. Check the fast-path guards and instruction
+budget with a debugger before another optimization or AArch64 rebuild. GDB
+was absent on dev when checked; installation was requested from the user.
