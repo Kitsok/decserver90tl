@@ -20,6 +20,25 @@ first invocation, even with one machine selected.
 
 ## One-command local build
 
+The default is a project-owned standalone headless frontend. It omits the
+standard MAME frontend, Lua engine/libraries, plugin framework and SQLite.
+The upstream C++ sources are unchanged by this frontend selection. MAME's shared
+core still compiles audio effects, bookkeeping, rendering and other common
+services; its SDL OSD and associated libraries also remain. This is not a
+complete reduction to CPU and device sources alone.
+
+Use `./build.sh --full-frontend` (or `tools/build_mame.py --full-frontend`)
+when running the Lua diagnostic scripts. Both modes produce
+`build/mame-ds90tl`; the last successful build selects the runtime. Standalone
+accepts the core/OSD runtime options used by the launcher and forces video and
+sound off. Lua, plugins, debug UI, HTTP serving and INI loading are rejected
+with an explanation. `-showconfig` prints the available core/OSD options.
+
+The standalone integration has been checked against the pinned source APIs,
+but has not yet been compiled or exercised with firmware. The previously
+validated runtime used the full frontend. Confirm startup on the build
+machine before relying on the standalone binary.
+
 From any working directory, run:
 
 ```sh

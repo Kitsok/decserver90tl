@@ -6,14 +6,16 @@ repo_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 jobs=2
 offline=false
 check_only=false
+frontend_args=()
 
 usage() {
-    printf 'Usage: %s [-j JOBS] [--offline] [--check]\n' "$0"
+    printf 'Usage: %s [-j JOBS] [--offline] [--check] [--full-frontend]\n' "$0"
     printf 'Builds the host-native emulator and its bundled MAME dependencies.\n'
     printf 'Fetches the pinned MAME revision on first use; later builds reuse it.\n'
     printf '  -j, --jobs N  Parallel build jobs (default: 2)\n'
     printf '  --offline     Never fetch dependencies\n'
     printf '  --check       Check prerequisites without fetching or building\n'
+    printf '  --full-frontend  Include the standard MAME/Lua frontend for diagnostics\n'
     printf 'System packages are reported when missing; installation is explicit.\n'
 }
 
@@ -25,6 +27,7 @@ while (( $# )); do
             jobs=$2; shift ;;
         --offline) offline=true ;;
         --check) check_only=true ;;
+        --full-frontend) frontend_args=(--full-frontend) ;;
         *) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
     esac
     shift
@@ -106,5 +109,5 @@ if [[ $actual != "$revision" ]]; then
 fi
 
 printf 'Building DECserver 90TL for %s with %s jobs.\n' "$(uname -m)" "$jobs"
-python3 tools/build_mame.py --jobs "$jobs" --skip-machine-layouts
+python3 tools/build_mame.py --jobs "$jobs" --skip-machine-layouts "${frontend_args[@]}"
 printf '\nBuild complete: %s/build/mame-ds90tl\nRun: %s/run.sh --interactive\n' "$repo_dir" "$repo_dir"

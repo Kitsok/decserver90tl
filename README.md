@@ -24,6 +24,10 @@ No firmware has been loaded onto physical hardware.
 
 ## Build and run locally
 
+Builds default to a standalone headless frontend without MAME's Lua/menu
+frontend. Use `./build.sh --full-frontend` for Lua diagnostics; see
+[build instructions](BUILD.md) for the remaining shared core dependencies.
+
 ```sh
 ./build.sh                 # fetch pinned MAME if needed, then build
 ./build.sh --check         # check prerequisites without building

@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--source-directory', type=Path, default=ROOT/'.deps/mame')
     parser.add_argument('--output-directory', type=Path, default=ROOT/'build')
     parser.add_argument('--make-arg', action='append', default=[], help='Additional Make assignment')
+    parser.add_argument('--full-frontend', action='store_true', help='Keep the standard MAME/Lua frontend for diagnostics')
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error('--jobs must be positive')
@@ -54,6 +55,18 @@ def main():
         destination = source/'src/mame/dec'/name
         if not destination.exists() or destination.read_bytes() != driver.read_bytes():
             shutil.copyfile(driver, destination)
+    standalone_changed = False
+    if not args.full_frontend:
+        for name, relative in (
+            ('ds90tl.cpp', 'src/ds90tl/ds90tl.cpp'),
+            ('ds90tl.lua', 'scripts/target/ds90tl/ds90tl.lua'),
+        ):
+            original = ROOT/'src/standalone'/name
+            destination = source/relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if not destination.exists() or destination.read_bytes() != original.read_bytes():
+                shutil.copyfile(original, destination)
+                standalone_changed = True
     listing = source / 'src/mame/mame.lst'
     text = subprocess.check_output(['git', '-C', str(source), 'show', 'HEAD:src/mame/mame.lst'], text=True)
     text += '\n@source:dec/decserver90tl.cpp\nds90tl\n'
@@ -76,19 +89,24 @@ def main():
     if cpu_script.read_text() != cpu_lua:
         cpu_script.write_text(cpu_lua)
     env = os.environ.copy()
-    flags = ['SUBTARGET=ds90tl', 'SOURCES=src/mame/dec/decserver90tl.cpp',
+    flags = ['SUBTARGET=ds90tl',
              'OSD=sdl', 'NO_X11=1', 'NO_OPENGL=1', 'USE_QTDEBUG=0',
              'NO_USE_XINPUT=1', 'NO_USE_MIDI=1', 'NO_USE_PORTAUDIO=1',
              'NO_USE_PULSEAUDIO=1', 'NO_USE_PIPEWIRE=1', 'USE_PCAP=0',
              'USE_TAPTUN=1', 'NOWERROR=1', 'OPTIMIZE=1', 'SYMBOLS=0', 'PRECOMPILE=0',
              'USE_SYSTEM_LIB_EXPAT=0', 'USE_SYSTEM_LIB_ZLIB=0']
+    if args.full_frontend:
+        flags += ['TARGET=mame', 'SOURCES=src/mame/dec/decserver90tl.cpp']
+    else:
+        flags.append('TARGET=ds90tl')
     if args.skip_machine_layouts:
         # Command-line Make assignments override the top-level wildcard.
         # CPU/renderer core layouts are separate generated-project tasks.
         flags.append('LAYOUTS=')
     flags.extend(args.make_arg)
-    project = source/'build/projects/sdl/mameds90tl/gmake-linux/precompile.make'
-    if project.exists() and re.search(r'^\s*PCH\s*=', project.read_text(), re.MULTILINE):
+    project_name = 'mameds90tl' if args.full_frontend else 'ds90tl'
+    project = source/f'build/projects/sdl/{project_name}/gmake-linux/precompile.make'
+    if standalone_changed or (project.exists() and re.search(r'^\s*PCH\s*=', project.read_text(), re.MULTILINE)):
         # Make does not track option changes as file dependencies. Regenerate
         # old projects once so PRECOMPILE=0 removes their forced PCH includes.
         flags.append('REGENIE=1')
@@ -108,8 +126,8 @@ def main():
         raise SystemExit(status)
     output = args.output_directory.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    # A source-filtered MAME build names the executable after SUBTARGET.
-    binary = source/'ds90tl'
+    # Distinct upstream outputs avoid reusing the other mode's newer binary.
+    binary = source/('ds90tl' if args.full_frontend else 'ds90tl-standalone')
     # Replace the inode so an existing simulator can keep running its build.
     with tempfile.NamedTemporaryFile(dir=output, prefix='.mame-ds90tl-', delete=False) as staging:
         staged = Path(staging.name)

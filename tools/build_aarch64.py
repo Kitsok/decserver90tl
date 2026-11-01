@@ -194,7 +194,7 @@ def prepare_mame(offline):
     return source
 
 
-def bundle(binary, sysroot):
+def bundle(binary, sysroot, full_frontend=False):
     readelf = 'aarch64-linux-gnu-readelf'
     search = [sysroot/'lib/aarch64-linux-gnu', sysroot/'usr/lib/aarch64-linux-gnu',
               sysroot/'lib', sysroot/'usr/lib']
@@ -265,6 +265,7 @@ def bundle(binary, sysroot):
             shutil.copytree(common_licenses, stage/'licenses/common-licenses', symlinks=True)
         (stage/'BUILD-TARGET.json').write_text(json.dumps({
             'architecture': 'aarch64', 'cpu': 'cortex-a53', 'distribution': 'Debian 12',
+            'frontend': 'full' if full_frontend else 'standalone',
             'maximum_glibc': '2.36', 'mame_revision': (ROOT/'mame-revision.txt').read_text().strip(),
             'compiler': capture([os.environ['DS90_CROSS_CXX'], '--version']).splitlines()[0],
             'driver_sha256': hashlib.sha256((ROOT/'src/mame/decserver90tl.cpp').read_bytes()).hexdigest(),
@@ -288,6 +289,7 @@ def main():
     parser.add_argument('-j', '--jobs', type=int, default=2)
     parser.add_argument('--check', action='store_true', help='Check host tools only, with no downloads or build')
     parser.add_argument('--offline', action='store_true', help='Require the cached sysroot and pinned MAME checkout')
+    parser.add_argument('--full-frontend', action='store_true', help='Include the standard MAME/Lua frontend for diagnostics')
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error('--jobs must be positive')
@@ -340,6 +342,7 @@ def main():
                  'STRIP_SYMBOLS=0', 'NOASM=1']
         signature = json.dumps({
             'root': str(ROOT), 'flags': flags,
+            'full_frontend': args.full_frontend,
             'compiler': capture([cxx, '--version']),
             'wrapper_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             'sysroot_sha256': hashlib.sha256((sysroot/'nanovax-sysroot.json').read_bytes()).hexdigest(),
@@ -349,10 +352,12 @@ def main():
             flags.append('REGENIE=1')
         run([sys.executable, ROOT/'tools/build_mame.py', '--jobs', args.jobs,
              '--skip-machine-layouts', '--source-directory', source,
-             '--output-directory', OUTPUT/'bin', *('--make-arg='+flag for flag in flags)], env=env)
+             '--output-directory', OUTPUT/'bin',
+             *(['--full-frontend'] if args.full_frontend else []),
+             *('--make-arg='+flag for flag in flags)], env=env)
         stamp.write_text(signature)
         os.environ['DS90_CROSS_CXX'] = cxx
-        bundle(OUTPUT/'bin/mame-ds90tl', sysroot)
+        bundle(OUTPUT/'bin/mame-ds90tl', sysroot, args.full_frontend)
 
 
 if __name__ == '__main__':

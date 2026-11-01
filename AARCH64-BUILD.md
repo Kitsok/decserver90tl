@@ -37,6 +37,13 @@ architecture settings, APT repositories and installed packages are untouched.
 
 ## Build isolation
 
+The default uses the standalone headless frontend, excluding MAME's standard
+frontend, Lua and SQLite. Shared core services and SDL remain; see [BUILD.md](BUILD.md).
+Pass `./buildaarch64.sh --full-frontend` if Lua diagnostics are needed.
+The selected mode is recorded in `BUILD-TARGET.json` in the runtime bundle.
+Changing modes regenerates the cross-build projects and replaces the same
+output executable and archive after a successful build.
+
 - .deps/aarch64/sysroot contains Debian 12 ARM64 development/runtime packages.
 - .deps/aarch64/mame is a separate checkout of mame-revision.txt, patched with
   the same driver/device changes as the native build.
