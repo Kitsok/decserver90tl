@@ -15,6 +15,7 @@ usage() {
     printf 'Use --trace for detailed logs; --verbose also shows them on console.\n'
     printf 'Use --no-trace to disable diagnostic formatting/output and packet capture.\n'
     printf 'Use --no-delay-acceleration to interpret every programming-delay iteration.\n'
+    printf 'Use --precise-duart-timers to disable lazy counter timing for comparison.\n'
 }
 
 interactive=false
@@ -36,6 +37,7 @@ while (( $# )); do
         --no-trace) console_args+=(--no-trace) ;;
         --trace) console_args+=(--trace) ;;
         --no-delay-acceleration) console_args+=(--no-delay-acceleration) ;;
+        --precise-duart-timers) console_args+=(--precise-duart-timers) ;;
         --) shift; positional+=("$@"); break ;;
         -*) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
         *) positional+=("$1") ;;

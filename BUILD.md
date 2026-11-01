@@ -117,6 +117,14 @@ an interpreter comparison, or set `DS90_DELAY_ACCEL=0` for direct binary runs.
 This path and the streamlined CPU memory callbacks still need compilation
 and firmware A/B validation; the offline arithmetic model is not a runtime test.
 
+Lazy DUART counter timing is also enabled by default. Masked internal timer
+transitions with no serial-clock or output consumer are evaluated on register
+access instead of scheduling each edge. Active consumers restore precise
+callbacks. Use `--precise-duart-timers` for an A/B comparison; direct binary
+launches can set `DS90_DUART_LAZY=0`. The new patch requires a rebuild and has
+not yet been compiled or validated against running firmware. See
+[patch notes](patches/README.md) and [performance findings](performance.md).
+
 ```sh
 python3 tools/run_mneng3.py --seconds 1
 # Explicitly enable the provisional ROM alignment-service substitute:

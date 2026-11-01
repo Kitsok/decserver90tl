@@ -5,6 +5,30 @@ then applies `mame-*.patch` files in name order. It recognizes an already
 applied patch using a reverse applicability check; unexpected patch-context
 changes fail the build rather than being silently overwritten.
 
+## Coalesce unobserved DUART counter transitions
+
+`mame-duart-lazy-counter.patch` adds an opt-in lazy counter implementation.
+The DECserver enables it by default for its four fixed-clock MC68681 devices;
+other MAME machines retain ordinary timer scheduling. MNENG3 sets ACR=0xe0
+and counter preset 2, producing about 7.37 million callbacks/guest second
+across four chips. Its sampled configuration masks counter-ready interrupts,
+leaves OP3 unrouted to the counter and uses fixed serial baud rates.
+
+Only internal timer sources may be deferred. Counter IRQ enable, OP3 counter
+routing, or either serial channel selecting counter clocks restores ordinary
+callbacks at the next preserved half-period deadline. Four-channel variants
+are excluded. Before register reads/writes, elapsed half-periods are evaluated
+to update phase, the ready latch and the readable remaining count. Preset or
+source changes retain the current pending deadline and affect later reloads;
+start commands reset phase/deadline and timer-mode stop commands clear the
+ready latch while counting continues. Lazy state participates in save states.
+
+Use `--precise-duart-timers` with either launcher, or DS90_DUART_LAZY=0 in a
+direct binary invocation, to select the original scheduling for comparison.
+This patch does not change the configured counter frequency or disable active
+serial clocks. Offline event-model and patch-composition checks pass; native
+compilation, firmware timing, serial behavior and speed remain to be validated.
+
 ## Preserve active DUART transfers when baud rates do not change
 
 `mame-duart-preserve-active-serial.patch` changes the MC68681-family

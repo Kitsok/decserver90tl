@@ -197,3 +197,33 @@ DUART model change and validation before another performance build. Debugger
 artifacts are on dev under /tmp/ds90-gdb-guards-sw2e9zjv and
 /tmp/ds90-gdb-budget-yp8xqtii. A separate attempt to wait for a nonzero batch
 was bounded at 30 wall seconds; no timing measurements use debugger runs.
+
+## Lazy DUART implementation ready for rebuild
+
+The project now supplies an opt-in MAME patch that suppresses scheduler
+callbacks for masked, unconsumed internal counter half-periods. DECserver's
+four fixed-clock MC68681 instances opt in. Timer-mode register accesses
+synchronize the deferred phase and ready latch; count reads use the retained
+next-edge deadline. Register writes synchronize under the old configuration
+before changing the preset/source/routing/mask. Enabling any edge consumer
+restores the scheduled callback at the original next deadline. Counter mode,
+external sources and four-channel variants retain ordinary scheduling.
+
+The initial pending edge keeps its previous deadline even when presets or
+source selection change; subsequent reloads use the new period. Long gaps
+are handled in bounded u32-sized batches. Save states retain the lazy flag
+and next-edge time. An explicit start resets phase/deadline; clearing ready
+in timer mode does not stop its progression. No clock frequency is reduced.
+
+Four offline differential model tests cover boundaries, latch clearing,
+preset/source changes, restarts, consumer/IRQ reactivation, state restoration
+and long gaps. The new patch applies to the pinned source alongside the
+existing active-serial correction, and both reverse checks succeed afterward.
+These checks are not native C++ compilation or a firmware/serial regression.
+
+After rebuilding on dev, compare short erased-store runs with the default
+settings and with `--precise-duart-timers`. Use `--trace` only when checking
+guest timing/state records; use the default disabled trace for speed. Then
+validate an initialized boot and console before building the AArch64 bundle.
+Keep the programming-delay acceleration independently selectable with
+`--no-delay-acceleration` to isolate its benefit after timer coalescing.

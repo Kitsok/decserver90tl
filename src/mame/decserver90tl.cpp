@@ -824,6 +824,8 @@ void ds90tl_state::ds90tl(machine_config &config)
 	for (unsigned i = 0; i < 4; ++i)
 		{
 		MC68681(config, m_uart[i], 3'686'400); // exact variant still provisional
+		const char *lazy = std::getenv("DS90_DUART_LAZY");
+		m_uart[i]->set_lazy_timer(!lazy || std::string_view(lazy) != "0");
 		m_uart[i]->outport_cb().set([this, i](u8 pins) { m_output_pins[i] = pins; });
 		m_uart[i]->subdevice<duart_channel>("cha")->byte_tx_cb().set([this, i](u8 data) { serial_transmit(i * 2, data); });
 		m_uart[i]->subdevice<duart_channel>("chb")->byte_tx_cb().set([this, i](u8 data) { serial_transmit(i * 2 + 1, data); });

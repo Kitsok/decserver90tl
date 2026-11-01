@@ -1,0 +1,163 @@
+--- a/src/devices/machine/mc68681.h
++++ b/src/devices/machine/mc68681.h
+@@ -119,6 +119,10 @@
+ 	void set_clocks(const XTAL &clk3, const XTAL &clk4, const XTAL &clk5, const XTAL &clk6) {
+ 		set_clocks(clk3.value(), clk4.value(), clk5.value(), clk6.value());
+ 	}
++
++	// Opt-in for machines with a fixed clock: defer masked, unrouted
++	// internal timer transitions until a register access observes them.
++	void set_lazy_timer(bool enabled) { m_lazy_timer_enabled = enabled; }
+ 
+ 	// API
+ 	virtual uint8_t read(offs_t offset);
+@@ -181,6 +185,12 @@
+ 	/* timer */
+ 	uint8_t half_period;
+ 	emu_timer *duart_timer;
++	bool m_lazy_timer_enabled = false; // configuration, not saved state
++	bool m_ct_lazy = false;
++	attotime m_ct_next = attotime::never;
++
++	void sync_lazy_ct();
++	void update_lazy_ct();
+ 
+ 	bool m_irq_state;
+ 
+--- a/src/devices/machine/mc68681.cpp
++++ b/src/devices/machine/mc68681.cpp
+@@ -239,6 +239,8 @@
+ 	save_item(NAME(IP_last_state));
+ 	save_item(NAME(half_period));
+ 	save_item(NAME(m_irq_state));
++	save_item(NAME(m_ct_lazy));
++	save_item(NAME(m_ct_next));
+ }
+ 
+ void mc68681_device::device_start()
+@@ -274,6 +276,10 @@
+ 
+ void duart_base_device::device_reset()
+ {
++	if (m_lazy_timer_enabled) duart_timer->adjust(attotime::never);
++	m_ct_lazy = false;
++	m_ct_next = attotime::never;
++	half_period = 0;
+ 	ACR = 0;  /* Interrupt Vector Register */
+ 	IMR = 0;  /* Interrupt Mask Register */
+ 	ISR = 0;  /* Interrupt Status Register */
+@@ -487,14 +493,81 @@
+ 
+ uint16_t duart_base_device::get_ct_count()
+ {
++	sync_lazy_ct();
+ 	uint32_t clock = get_ct_rate();
+-	return duart_timer->remaining().as_ticks(clock);
++	return (m_ct_lazy ? m_ct_next - machine().time() : duart_timer->remaining()).as_ticks(clock);
+ }
+ 
+ void duart_base_device::start_ct(int count)
+ {
+ 	uint32_t clock = get_ct_rate();
++	m_ct_lazy = false;
+ 	duart_timer->adjust(attotime::from_ticks(count, clock), 0);
++	update_lazy_ct();
++}
++
++void duart_base_device::sync_lazy_ct()
++{
++	if (!m_ct_lazy) return;
++	const attotime now = machine().time();
++	if (m_ct_next > now) return;
++	// The first pending edge retains its original deadline. Subsequent
++	// reloads use the current preset/source, just like the callback. All
++	// register changes synchronize before modifying either of these.
++	const attotime period = attotime::from_ticks(std::max(CTR.w.l, uint16_t(1)), get_ct_rate());
++	bool ready = false;
++	while (m_ct_next <= now)
++	{
++		const attotime elapsed = now - m_ct_next;
++		uint32_t reloads;
++		if (!elapsed.seconds() && !period.seconds())
++			reloads = uint32_t(std::min(uint64_t(0xffffffffU), uint64_t(elapsed.attoseconds() / period.attoseconds())));
++		else
++		{
++			// Bound multiplication to u32; very long gaps are handled in
++			// chunks without narrowing an unbounded elapsed tick count.
++			uint32_t low = 0, high = 0xffffffffU;
++			while (low < high)
++			{
++				const uint32_t middle = low + uint32_t((uint64_t(high) - low + 1) / 2);
++				if (period * middle <= elapsed) low = middle;
++				else high = middle - 1;
++			}
++			reloads = low;
++		}
++		// reloads+1 edges: any pair crosses a ready edge; a single edge
++		// does so only when the previous half-period was high.
++		ready |= reloads != 0 || half_period != 0;
++		half_period ^= uint8_t((uint64_t(reloads) + 1) & 1);
++		m_ct_next += period * reloads;
++		m_ct_next += period;
++	}
++	if (ready) set_ISR_bits(INT_COUNTER_READY);
++}
++
++void duart_base_device::update_lazy_ct()
++{
++	if (!m_lazy_timer_enabled) return;
++	const uint8_t a = m_chanA->get_chan_CSR(), b = m_chanB->get_chan_CSR();
++	// Internal timer sources only. Masking the ready IRQ is insufficient:
++	// OP3 or either channel can still consume every counter transition.
++	const bool lazy = (ACR & 0x60) == 0x60 && get_ct_rate() != 0
++		&& !(IMR & INT_COUNTER_READY) && (OPCR & 0x0c) != 0x04
++		&& (a & 0x0f) != 0x0d && (a >> 4) != 0x0d
++		&& (b & 0x0f) != 0x0d && (b >> 4) != 0x0d
++		&& !m_chanC && !m_chanD;
++	if (m_ct_lazy && !lazy)
++	{
++		// Callers already synchronized using the old register values.
++		m_ct_lazy = false;
++		duart_timer->adjust(m_ct_next - machine().time());
++	}
++	else if (!m_ct_lazy && lazy && duart_timer->enabled() && !duart_timer->expire().is_never())
++	{
++		m_ct_next = duart_timer->expire();
++		m_ct_lazy = true;
++		duart_timer->adjust(attotime::never);
++	}
+ }
+ 
+ TIMER_CALLBACK_MEMBER(duart_base_device::duart_timer_callback)
+@@ -675,6 +748,7 @@
+ 
+ uint8_t duart_base_device::read(offs_t offset)
+ {
++	sync_lazy_ct();
+ 	uint8_t r = 0xff;
+ 
+ 	offset &= 0xf;
+@@ -946,6 +1020,7 @@
+ 
+ void duart_base_device::write(offs_t offset, uint8_t data)
+ {
++	sync_lazy_ct();
+ 	offset &= 0x0f;
+ 	LOG("%s: Writing 68681 (%s) reg %x (%s) with %02x\n", this->machine().describe_context(), tag(), offset, duart68681_reg_write_names[offset], data);
+ 	switch (offset)
+@@ -977,6 +1052,7 @@
+ 			else
+ 			{
+ 				// Leaving timer mode (TODO: is this correct?)
++				m_ct_lazy = false;
+ 				duart_timer->adjust(attotime::never);
+ 			}
+ 		}
+@@ -1027,6 +1103,7 @@
+ 		write_outport(OPR ^ 0xff);
+ 		break;
+ 	}
++	update_lazy_ct();
+ }
+ 
+ void duart_base_device::ip0_w(int state)
