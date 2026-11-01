@@ -14,6 +14,7 @@ usage() {
     printf 'Diagnostic tracing and packet capture are disabled by default.\n'
     printf 'Use --trace for detailed logs; --verbose also shows them on console.\n'
     printf 'Use --no-trace to disable diagnostic formatting/output and packet capture.\n'
+    printf 'Use --no-delay-acceleration to interpret every programming-delay iteration.\n'
 }
 
 interactive=false
@@ -34,6 +35,7 @@ while (( $# )); do
         -v|--verbose) console_args=(--verbose) ;;
         --no-trace) console_args+=(--no-trace) ;;
         --trace) console_args+=(--trace) ;;
+        --no-delay-acceleration) console_args+=(--no-delay-acceleration) ;;
         --) shift; positional+=("$@"); break ;;
         -*) printf 'Unknown option: %s\n' "$1" >&2; usage >&2; exit 2 ;;
         *) positional+=("$1") ;;

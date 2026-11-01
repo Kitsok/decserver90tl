@@ -36,28 +36,29 @@ protected:
 		m_alignment_assist = assist && std::string_view(assist) == "1";
 		const char *wait = std::getenv("DS90_RAM_WAIT_CYCLES");
 		m_ram_wait_cycles = wait ? std::clamp(std::atoi(wait), 0, 16) : 0;
-		DS90_TRACE("DS90 CPU rom_alignment_assist=%u ram_wait_cycles=%u\n",
-			unsigned(m_alignment_assist), m_ram_wait_cycles);
-		auto immediate16 = m_readimm16;
-		m_readimm16 = [this, immediate16](offs_t address) -> u16 {
+		const char *delay = std::getenv("DS90_DELAY_ACCEL");
+		m_delay_acceleration = !delay || std::string_view(delay) != "0";
+		DS90_TRACE("DS90 CPU rom_alignment_assist=%u ram_wait_cycles=%u delay_acceleration=%u\n",
+			unsigned(m_alignment_assist), m_ram_wait_cycles, unsigned(m_delay_acceleration));
+		// Match pinned init_cpu_fscpu32()/init16 directly: retain the opcode
+		// cache and data-space accessors without a nested std::function call.
+		m_readimm16 = [this](offs_t address) -> u16 {
+			if (m_delay_acceleration && address == delay_pc) accelerate_programming_delay();
 			ram_wait(address, 1);
-			return immediate16(address);
+			return m_oprogram16.read_word(address);
 		};
-		auto read8 = m_read8;
-		m_read8 = [this, read8](offs_t address) -> u8 {
+		m_read8 = [this](offs_t address) -> u8 {
 			ram_wait(address, 1);
-			return read8(address);
+			return m_program16.read_byte(address);
 		};
-		auto read16 = m_read16;
-		m_read16 = [this, read16](offs_t address) -> u16 {
+		m_read16 = [this](offs_t address) -> u16 {
 			ram_wait(address, (address & 1) ? 2 : 1);
 			if (alignment(address, "read16")) return m_program16.read_word_unaligned(address);
-			return read16(address);
+			return m_program16.read_word(address);
 		};
-		auto read32 = m_read32;
-		m_read32 = [this, read32](offs_t address) -> u32 {
+		m_read32 = [this](offs_t address) -> u32 {
 			ram_wait(address, (address & 1) ? 3 : 2);
-			if (address == 0x079ab718 && u32(pc()) == 0x07941626)
+			if (ds90_trace_enabled() && address == 0x079ab718 && m_pc == 0x07941626)
 			{
 				const u32 remaining = state_int(M68K_D1);
 				if (remaining == 0x707) m_idle_first_cycle = total_cycles();
@@ -67,27 +68,54 @@ protected:
 						1e6 * double(total_cycles() - m_idle_first_cycle) / clock());
 			}
 			if (alignment(address, "read32")) return m_program16.read_dword_unaligned(address);
-			return read32(address);
+			return m_program16.read_dword(address);
 		};
-		auto write16 = m_write16;
-		m_write16 = [this, write16](offs_t address, u16 data) {
+		m_write16 = [this](offs_t address, u16 data) {
 			ram_wait(address, (address & 1) ? 2 : 1);
 			if (alignment(address, "write16")) m_program16.write_word_unaligned(address, data);
-			else write16(address, data);
+			else m_program16.write_word(address, data);
 		};
-		auto write32 = m_write32;
-		m_write32 = [this, write32](offs_t address, u32 data) {
+		m_write32 = [this](offs_t address, u32 data) {
 			ram_wait(address, (address & 1) ? 3 : 2);
 			if (alignment(address, "write32")) m_program16.write_dword_unaligned(address, data);
-			else write32(address, data);
+			else m_program16.write_dword(address, data);
 		};
-		auto write8 = m_write8;
-		m_write8 = [this, write8](offs_t address, u8 data) {
+		m_write8 = [this](offs_t address, u8 data) {
 			ram_wait(address, 1);
-			write8(address, data);
+			m_program16.write_word(address & ~1, data | (data << 8), address & 1 ? 0x00ff : 0xff00);
 		};
 	}
 private:
+	static constexpr u32 delay_pc = 0x07940c2c;
+	void accelerate_programming_delay()
+	{
+		// Only batch the steady-state opcode fetch of MNENG3's DBRA D4,-2.
+		// Prefetching also calls m_readimm16: m_pc and m_pref_addr distinguish
+		// that from fetching an opcode. A preceding taken DBRA leaves its
+		// prefetch at PC+4. Never batch an exit iteration, exception or trace.
+		if (m_pc != delay_pc || m_pref_addr != delay_pc + 4 || m_stopped
+			|| m_reset_cycles || m_address_error || m_mmu_tmp_buserror_occurred
+			|| m_nmi_pending || m_int_level > m_int_mask
+			|| m_t1_flag || m_t0_flag || m_tracing || machine().debug_flags)
+			return;
+		if (m_oprogram16.read_word(delay_pc) != 0x51cc
+			|| m_oprogram16.read_word(delay_pc + 2) != 0xfffe)
+			return;
+		const unsigned counter = m_dar[4] & 0xffff;
+		if (!counter || counter > 0x960 || m_icount <= 1) return;
+		// Pinned Musashi: a taken iteration fetches PC, PC+2 and PC+4,
+		// then branches back. All three fetches are in external RAM. Use
+		// the CPU's cycle table, plus the existing per-transfer wait cost.
+		const int cycles = int(m_cyc_instruction[0x51cc])
+			+ int(m_cyc_dbcc_f_noexp) + 3 * m_ram_wait_cycles;
+		if (cycles <= 0) return;
+		const unsigned iterations = std::min(counter, unsigned((m_icount - 1) / cycles));
+		// Leave a positive budget for the ordinary core to execute at least
+		// one instruction, handling terminal DBRA/prefetch and slice overrun.
+		// No scheduler deadline is crossed by the batched iterations.
+		m_dar[4] = (m_dar[4] & 0xffff0000) | (counter - iterations);
+		adjust_icount(-int(iterations * cycles));
+	}
 	void ram_wait(offs_t address, unsigned transfers)
 	{
 		const u32 physical = address & 0xffffff;
@@ -104,6 +132,7 @@ private:
 		return true;
 	}
 	bool m_alignment_assist = false;
+	bool m_delay_acceleration = true;
 	u32 m_alignment_events = 0;
 	u64 m_idle_first_cycle = 0;
 	unsigned m_ram_wait_cycles = 0;

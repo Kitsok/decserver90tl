@@ -286,6 +286,13 @@ already physical byte offsets.
 | 0x07940c22 | Firmware delay loop between programming operations |
 | 0x0798fb20 | Pending-operation list head |
 
+The delay loads D4 with 0x960, then executes `DBRA D4,-2` at 0x07940c2c
+(2,401 iterations including expiration). The simulator now has a targeted
+batching path for taken iterations, retaining guest cycle charges and current
+scheduler boundaries. The final iteration stays in the ordinary CPU core.
+See performance.md for prefetch/timing constraints and pending validation;
+`--no-delay-acceleration` selects ordinary interpretation for comparison.
+
 The store is file-backed in the simulator and separate from MNENG3.SYS.
 Neither all-FF nor all-zero bytes are a reconstructed factory image.
 The earlier record-22 offset 0x0e00 versus size 0x0c00 failure is avoided

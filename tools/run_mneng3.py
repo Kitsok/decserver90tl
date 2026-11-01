@@ -35,6 +35,8 @@ def main():
                         help='Simulated second of first diagnostic FIFO injection')
     parser.add_argument('--ram-wait-cycles', type=int, default=0, choices=range(17),
                         help='Experimental extra CPU cycles per 16-bit external RAM transfer')
+    parser.add_argument('--no-delay-acceleration', action='store_true',
+                        help='Interpret every programming-delay iteration for timing comparisons')
     parser.add_argument('--rom-alignment-assist', action='store_true',
                         help='Experimentally substitute unaligned data transfers for ROM exception handling')
     parser.add_argument('--nvram-directory', type=Path,
@@ -85,6 +87,7 @@ def main():
         image_link.symlink_to(firmware)
     env = os.environ.copy()
     env['DS90_TRACE'] = '0' if args.no_trace else '1'
+    env['DS90_DELAY_ACCEL'] = '0' if args.no_delay_acceleration else '1'
     for port in range(1, 9):
         env.pop(f'DS90_SERIALSIM_{port}', None)
     for port, path in serialsim.items():

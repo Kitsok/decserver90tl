@@ -106,8 +106,16 @@ enable tracing with `DS90_TRACE=1`; unset or `0` disables it. Without tracing,
 console progress and decoded serial text derived from trace records are absent;
 attach to the announced serial PTY for firmware output.
 
-For tests on nanovax, extract and run the bundle under `/tmp` so runtime files,
-configuration checkpoints and any requested captures stay off flash.
+On nanovax, `/tmp` is flash-backed. For short tests without flash writes,
+extract and run the bundle under `/dev/shm`, including configuration storage
+and requested captures. Check available RAM first; do not build MAME there.
+
+Programming-delay acceleration is enabled by default. It batches only taken
+iterations of MNENG3's identified DBRA loop, retaining guest-cycle costs and
+scheduler boundaries. Use `--no-delay-acceleration` with either launcher for
+an interpreter comparison, or set `DS90_DELAY_ACCEL=0` for direct binary runs.
+This path and the streamlined CPU memory callbacks still need compilation
+and firmware A/B validation; the offline arithmetic model is not a runtime test.
 
 ```sh
 python3 tools/run_mneng3.py --seconds 1

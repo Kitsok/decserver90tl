@@ -108,3 +108,35 @@ before implementing changes. Compare erased initialization and a completed
 configuration boot; avoid claiming modem-service capacity from startup alone.
 perf and gdb are now installed. Keep captures in RAM and leave existing DEC
 and telephony services running. Do not compare results during compilation.
+
+## Implemented candidates, pending build and firmware validation
+
+The CPU adapter now installs callbacks that call the pinned CPU32 init16
+accessors directly instead of capturing and invoking the previous callback.
+Instruction fetches retain m_oprogram16's cache; data accesses retain
+m_program16, including the original byte-write mask. Odd accesses retain the
+alignment assist, and transfer wait-cycle charges are unchanged. Idle-budget
+instrumentation is also gated before state inspection when tracing is disabled.
+
+The programming-delay fast path runs only on a steady-state opcode fetch at
+0x07940c2c, with prefetch at PC+4, the expected DBRA/displacement words and a
+counter within the known routine's range. It does not run during debugging,
+CPU tracing, reset/stop, address/bus error or an eligible pending interrupt.
+For each batched taken iteration it charges the CPU32 cycle-table cost plus
+the taken-branch adjustment and three instruction-fetch RAM waits. The three
+fetches follow pinned m68ki_read_imm_16: opcode miss, displacement prefetch,
+then PC+4 prefetch while consuming the displacement. There is no CPU32 cache
+hit optimization in m68ki_ic_readimm16 that would change this fetch count.
+
+Batching leaves a positive current-slice cycle budget and at least one normal
+instruction for the core. It never batches the terminal DBRA iteration: the
+core retains its different cycle cost, prefetch state and loop exit. D4's
+upper word and condition codes are preserved. No instruction bytes are patched
+and guest time is not shortened. `--no-delay-acceleration` disables batching
+independently of tracing; direct binary launches use DS90_DELAY_ACCEL=0.
+
+An offline differential model compares ordinary DBRA/prefetch execution with
+batching over counter, budget, upper-register-word and wait-cycle boundaries;
+it also checks the original firmware instruction bytes. These checks passed,
+but do not compile or exercise the C++ adapter. No new performance result or
+firmware validation is claimed until the user rebuilds and target tests run.
